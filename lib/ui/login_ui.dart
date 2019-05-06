@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_bloc/bloc/login_bloc.dart';
+import 'package:login_bloc/ui/custom_textfield.dart';
 import 'package:login_bloc/ui/home_page_ui.dart';
 
 class LoginUI extends StatefulWidget {
@@ -20,8 +21,8 @@ class _LoginUIState extends State<LoginUI> {
   Widget build(BuildContext context) {
     return StreamBuilder<bool>(
       stream: bloc.isAuthenticated,
-      builder: (context, snapshot) {
-        if (snapshot.hasData && snapshot.data) {
+      builder: (context, authSnapshot) {
+        if (authSnapshot.hasData && authSnapshot.data) {
           return HomePageUI();
         } else {
           return Scaffold(
@@ -41,21 +42,24 @@ class _LoginUIState extends State<LoginUI> {
                       children: <Widget>[
                         StreamBuilder<String>(
                           stream: bloc.email,
-                          builder: (context, snapshot) => TextField(
-                                onChanged: bloc.changeEmail,
-                                keyboardType: TextInputType.emailAddress,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  hintText: "Enter email",
-                                  labelText: "Email",
-                                  errorText: snapshot.error,
-                                ),
-                              ),
+                          builder: (context, emailSnapshot) {
+                            print("Error: ${emailSnapshot.error}");
+
+                            return CustomTextField(
+                              onChange: bloc.changeEmail,
+                              inputType: TextInputType.emailAddress,
+                              label: "Email",
+                              hint: "Enter email",
+                              isRequired: true,
+                              requiredMessage: "The field is required",
+                              errorMessage: emailSnapshot.error,
+                            );
+                          },
                         ),
                         SizedBox(height: 20),
                         StreamBuilder<String>(
                           stream: bloc.password,
-                          builder: (context, snapshot) => TextField(
+                          builder: (context, passwordSnapshot) => TextField(
                                 onChanged: bloc.changePassword,
                                 keyboardType: TextInputType.text,
                                 obscureText: true,
@@ -63,7 +67,7 @@ class _LoginUIState extends State<LoginUI> {
                                   border: OutlineInputBorder(),
                                   hintText: "Enter password",
                                   labelText: "Password",
-                                  errorText: snapshot.error,
+                                  errorText: passwordSnapshot.error,
                                 ),
                               ),
                         ),
