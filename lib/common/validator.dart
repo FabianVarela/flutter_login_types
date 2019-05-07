@@ -3,7 +3,7 @@ import 'dart:async';
 mixin Validator {
   final validateEmail =
       StreamTransformer<String, String>.fromHandlers(handleData: (email, sink) {
-    if (_validateEmail(email))
+    if (email.length > 0 && _validateEmail(email))
       sink.add(email);
     else
       sink.addError("Enter a valid email");
@@ -11,7 +11,7 @@ mixin Validator {
 
   final validatePassword = StreamTransformer<String, String>.fromHandlers(
       handleData: (password, sink) {
-    if (password.length >= 4)
+    if (password.length > 0 && password.length >= 4)
       sink.add(password);
     else
       sink.addError("Password must be at least 4 characters");

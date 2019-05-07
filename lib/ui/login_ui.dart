@@ -10,6 +10,7 @@ class LoginUI extends StatefulWidget {
 
 class _LoginUIState extends State<LoginUI> {
   final bloc = LoginBloc();
+  bool isAuthenticated = false;
 
   @override
   void dispose() {
@@ -25,6 +26,9 @@ class _LoginUIState extends State<LoginUI> {
         if (authSnapshot.hasData && authSnapshot.data) {
           return HomePageUI();
         } else {
+          isAuthenticated = (authSnapshot.hasData && !authSnapshot.data);
+          print("Auth: $isAuthenticated");
+
           return Scaffold(
             appBar: AppBar(
               title: Text("Login with BLoC"),
@@ -42,33 +46,28 @@ class _LoginUIState extends State<LoginUI> {
                       children: <Widget>[
                         StreamBuilder<String>(
                           stream: bloc.email,
-                          builder: (context, emailSnapshot) {
-                            print("Error: ${emailSnapshot.error}");
-
-                            return CustomTextField(
-                              onChange: bloc.changeEmail,
-                              inputType: TextInputType.emailAddress,
-                              label: "Email",
-                              hint: "Enter email",
-                              isRequired: true,
-                              requiredMessage: "The field is required",
-                              errorMessage: emailSnapshot.error,
-                            );
-                          },
+                          builder: (context, emailSnapshot) => CustomTextField(
+                                label: "Email",
+                                hint: "Enter email",
+                                isRequired: true,
+                                requiredMessage: "The email is required",
+                                onChange: bloc.changeEmail,
+                                inputType: TextInputType.emailAddress,
+                                errorText: emailSnapshot.error,
+                              ),
                         ),
                         SizedBox(height: 20),
                         StreamBuilder<String>(
                           stream: bloc.password,
-                          builder: (context, passwordSnapshot) => TextField(
-                                onChanged: bloc.changePassword,
-                                keyboardType: TextInputType.text,
-                                obscureText: true,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  hintText: "Enter password",
-                                  labelText: "Password",
-                                  errorText: passwordSnapshot.error,
-                                ),
+                          builder: (context, passwordSnapshot) =>
+                              CustomTextField(
+                                label: "Password",
+                                hint: "Enter password",
+                                isRequired: true,
+                                requiredMessage: "The password is required",
+                                onChange: bloc.changePassword,
+                                errorText: passwordSnapshot.error,
+                                hasPassword: true,
                               ),
                         ),
                         SizedBox(height: 20),

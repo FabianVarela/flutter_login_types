@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatefulWidget {
   final String label;
   final String hint;
-  final String errorMessage;
   final String requiredMessage;
+  final String errorText;
   final bool isRequired;
   final bool hasPassword;
   final ValueChanged<String> onChange;
@@ -13,12 +13,12 @@ class CustomTextField extends StatefulWidget {
   CustomTextField({
     @required this.label,
     this.hint,
-    this.errorMessage,
+    this.isRequired = false,
     this.requiredMessage,
-    this.isRequired,
-    this.hasPassword,
     this.onChange,
     this.inputType,
+    this.hasPassword = false,
+    this.errorText,
   });
 
   @override
@@ -65,23 +65,22 @@ class _CustomTextFieldState extends State<CustomTextField> {
   }
 
   @override
+  void dispose() {
+    _customFocusNode.dispose();
+    _customTextController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         Container(
           decoration: BoxDecoration(
             border: Border(
-              left: BorderSide(
-                  width: 3,
-                  color: _hasFocus
-                      ? _borderTextFieldFocus
-                      : _hasRequired
-                          ? _borderTextFieldRequired
-                          : _borderTextFieldNormal),
+              left: BorderSide(width: 4, color: _getBorderColor()),
             ),
-            color: _hasRequired
-                ? _backgroundTextFieldRequired
-                : _backgroundTextFieldNormal,
+            color: _getBackgroundColor(),
           ),
           child: Column(
             children: <Widget>[
@@ -107,7 +106,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   obscureText: widget.hasPassword != null && widget.hasPassword,
                   style: TextStyle(color: _foregroundText, fontSize: 15),
                   focusNode: _customFocusNode,
-                  onSubmitted: (value) => print("Value: $value"),
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(0),
                     border: InputBorder.none,
@@ -129,21 +127,48 @@ class _CustomTextFieldState extends State<CustomTextField> {
     );
   }
 
-  Widget _setRequired() {
-    return (_hasRequired)
-        ? Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              widget.requiredMessage,
-              style: TextStyle(color: _requiredColor),
-            ),
-          )
-        : Container();
+  Color _getBorderColor() {
+    if (_hasFocus) return _borderTextFieldFocus;
+
+    if (_hasRequired) return _borderTextFieldRequired;
+
+    if (widget.errorText != null) return _borderTextFieldRequired;
+
+    return _borderTextFieldNormal;
   }
 
-  @override
-  void dispose() {
-    _customFocusNode.dispose();
-    super.dispose();
+  Color _getBackgroundColor() {
+    if (_hasRequired) return _backgroundTextFieldRequired;
+
+    if (widget.errorText != null) return _backgroundTextFieldRequired;
+
+    return _backgroundTextFieldNormal;
+  }
+
+  Widget _setRequired() {
+    if (_hasRequired) return _getRequiredMessage();
+    if (widget.errorText != null) return _getErrorMessage();
+
+    return Container();
+  }
+
+  Widget _getRequiredMessage() {
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Text(
+        widget.requiredMessage,
+        style: TextStyle(color: _requiredColor),
+      ),
+    );
+  }
+
+  Widget _getErrorMessage() {
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Text(
+        widget.errorText,
+        style: TextStyle(color: _requiredColor),
+      ),
+    );
   }
 }
