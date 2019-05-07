@@ -9,7 +9,9 @@ class LoginUI extends StatefulWidget {
 }
 
 class _LoginUIState extends State<LoginUI> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final bloc = LoginBloc();
+
   bool isAuthenticated = false;
 
   @override
@@ -27,9 +29,10 @@ class _LoginUIState extends State<LoginUI> {
           return HomePageUI();
         } else {
           isAuthenticated = (authSnapshot.hasData && !authSnapshot.data);
-          print("Auth: $isAuthenticated");
+          Future.delayed(Duration(milliseconds: 100), _showSnackBar);
 
           return Scaffold(
+            key: _scaffoldKey,
             appBar: AppBar(
               title: Text("Login with BLoC"),
               centerTitle: true,
@@ -116,5 +119,14 @@ class _LoginUIState extends State<LoginUI> {
         }
       },
     );
+  }
+
+  void _showSnackBar() {
+    if (isAuthenticated) {
+      _scaffoldKey.currentState.showSnackBar(SnackBar(
+        content: Text("User or password incorrect."),
+        duration: Duration(seconds: 3),
+      ));
+    }
   }
 }
