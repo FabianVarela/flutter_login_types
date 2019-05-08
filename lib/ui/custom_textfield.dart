@@ -39,14 +39,23 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   final _requiredColor = Color(0xFFFF7171);
 
+  final _activePasswordColor = Color(0xFF5AC7D8);
+  final _inActivePasswordColor = Colors.grey;
+
   bool _hasFocus = false;
   bool _hasRequired = false;
+
+  bool _isVisiblePassword = false;
+  bool _isPasswordActive = false;
+
   FocusNode _customFocusNode = FocusNode();
   TextEditingController _customTextController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+
+    _isVisiblePassword = widget.hasPassword;
 
     _customFocusNode.addListener(() {
       if (_customFocusNode.hasFocus) {
@@ -82,40 +91,60 @@ class _CustomTextFieldState extends State<CustomTextField> {
             ),
             color: _getBackgroundColor(),
           ),
-          child: Column(
+          child: Row(
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(top: 3, left: 8, right: 8, bottom: 6),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    widget.label,
-                    style: TextStyle(color: _foregroundText, fontSize: 12),
-                  ),
+              Expanded(
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding:
+                          EdgeInsets.only(top: 3, left: 8, right: 8, bottom: 6),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          widget.label,
+                          style:
+                              TextStyle(color: _foregroundText, fontSize: 12),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          top: 3, left: 8, right: 8, bottom: 12),
+                      child: TextField(
+                        controller: _customTextController,
+                        cursorColor: _borderTextFieldFocus,
+                        keyboardType: (widget.inputType != null)
+                            ? widget.inputType
+                            : TextInputType.text,
+                        onChanged: widget.onChange,
+                        obscureText: _isVisiblePassword,
+                        style: TextStyle(color: _foregroundText, fontSize: 15),
+                        focusNode: _customFocusNode,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(0),
+                          border: InputBorder.none,
+                          hintStyle: TextStyle(color: _hintTextField),
+                          hintText:
+                              (widget.hint != null && widget.hint.length > 0)
+                                  ? widget.hint
+                                  : "",
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 3, left: 8, right: 8, bottom: 12),
-                child: TextField(
-                  controller: _customTextController,
-                  cursorColor: _borderTextFieldFocus,
-                  keyboardType: (widget.inputType != null)
-                      ? widget.inputType
-                      : TextInputType.text,
-                  onChanged: widget.onChange,
-                  obscureText: widget.hasPassword != null && widget.hasPassword,
-                  style: TextStyle(color: _foregroundText, fontSize: 15),
-                  focusNode: _customFocusNode,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(0),
-                    border: InputBorder.none,
-                    hintStyle: TextStyle(color: _hintTextField),
-                    hintText: (widget.hint != null && widget.hint.length > 0)
-                        ? widget.hint
-                        : "",
-                  ),
-                ),
-              ),
+              (widget.hasPassword)
+                  ? IconButton(
+                      icon: Icon(
+                        Icons.remove_red_eye,
+                        color: _isPasswordActive
+                            ? _activePasswordColor
+                            : _inActivePasswordColor,
+                      ),
+                      onPressed: _visiblePassword)
+                  : Container(),
             ],
           ),
         ),
@@ -129,9 +158,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   Color _getBorderColor() {
     if (_hasFocus) return _borderTextFieldFocus;
-
     if (_hasRequired) return _borderTextFieldRequired;
-
     if (widget.errorText != null) return _borderTextFieldRequired;
 
     return _borderTextFieldNormal;
@@ -139,7 +166,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   Color _getBackgroundColor() {
     if (_hasRequired) return _backgroundTextFieldRequired;
-
     if (widget.errorText != null) return _backgroundTextFieldRequired;
 
     return _backgroundTextFieldNormal;
@@ -150,6 +176,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
     if (widget.errorText != null) return _getErrorMessage();
 
     return Container();
+  }
+
+  void _visiblePassword() {
+    setState(() {
+      _isVisiblePassword = !_isVisiblePassword;
+      _isPasswordActive = !_isPasswordActive;
+    });
   }
 
   Widget _getRequiredMessage() {
