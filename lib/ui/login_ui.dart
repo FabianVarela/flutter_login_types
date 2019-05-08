@@ -10,6 +10,10 @@ class LoginUI extends StatefulWidget {
 
 class _LoginUIState extends State<LoginUI> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  final TextEditingController _textEmailController = TextEditingController();
+  final TextEditingController _textPasswordController = TextEditingController();
+
   final bloc = LoginBloc();
 
   bool isAuthenticated = false;
@@ -51,6 +55,7 @@ class _LoginUIState extends State<LoginUI> {
                           stream: bloc.email,
                           builder: (context, emailSnapshot) => CustomTextField(
                                 label: "Email",
+                                textController: _textEmailController,
                                 hint: "Enter email",
                                 isRequired: true,
                                 requiredMessage: "The email is required",
@@ -71,6 +76,7 @@ class _LoginUIState extends State<LoginUI> {
                                 onChange: bloc.changePassword,
                                 errorText: passwordSnapshot.error,
                                 hasPassword: true,
+                                textController: _textPasswordController,
                               ),
                         ),
                         SizedBox(height: 20),

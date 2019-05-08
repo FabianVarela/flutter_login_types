@@ -7,18 +7,20 @@ class CustomTextField extends StatefulWidget {
   final String errorText;
   final bool isRequired;
   final bool hasPassword;
-  final ValueChanged<String> onChange;
   final TextInputType inputType;
+  final ValueChanged<String> onChange;
+  final TextEditingController textController;
 
   CustomTextField({
     @required this.label,
+    @required this.textController,
     this.hint,
-    this.isRequired = false,
     this.requiredMessage,
-    this.onChange,
-    this.inputType,
-    this.hasPassword = false,
     this.errorText,
+    this.isRequired = false,
+    this.hasPassword = false,
+    this.inputType,
+    this.onChange,
   });
 
   @override
@@ -49,7 +51,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
   bool _isPasswordActive = false;
 
   FocusNode _customFocusNode = FocusNode();
-  TextEditingController _customTextController = TextEditingController();
+
+  //TextEditingController _customTextController = TextEditingController();
 
   @override
   void initState() {
@@ -67,7 +70,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         setState(() {
           _hasFocus = false;
           _hasRequired = ((widget.isRequired != null && widget.isRequired) &&
-              _customTextController.value.text == "");
+              widget.textController.value.text == "");
         });
       }
     });
@@ -76,7 +79,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   void dispose() {
     _customFocusNode.dispose();
-    _customTextController.dispose();
+    widget.textController.dispose();
     super.dispose();
   }
 
@@ -112,7 +115,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       padding: EdgeInsets.only(
                           top: 3, left: 8, right: 8, bottom: 12),
                       child: TextField(
-                        controller: _customTextController,
+                        controller: widget.textController,
                         cursorColor: _borderTextFieldFocus,
                         keyboardType: (widget.inputType != null)
                             ? widget.inputType
