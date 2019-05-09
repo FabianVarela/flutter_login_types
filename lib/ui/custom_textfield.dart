@@ -79,7 +79,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   void dispose() {
     _customFocusNode.dispose();
-    widget.textController.dispose();
     super.dispose();
   }
 
