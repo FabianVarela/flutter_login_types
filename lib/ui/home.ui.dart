@@ -16,9 +16,7 @@ class _HomePageUIState extends State<HomePageUI> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    setState(() {
-      _notification = state;
-    });
+    setState(() => _notification = state);
   }
 
   @override
