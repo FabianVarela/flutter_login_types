@@ -50,7 +50,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   bool _isVisiblePassword = false;
   bool _isPasswordActive = false;
 
-  FocusNode _customFocusNode = FocusNode();
+  final FocusNode _customFocusNode = FocusNode();
 
   //TextEditingController _customTextController = TextEditingController();
 
@@ -70,7 +70,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         setState(() {
           _hasFocus = false;
           _hasRequired = ((widget.isRequired != null && widget.isRequired) &&
-              widget.textController.value.text == "");
+              widget.textController.value.text.isEmpty);
         });
       }
     });
@@ -124,13 +124,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
                         style: TextStyle(color: _foregroundText, fontSize: 15),
                         focusNode: _customFocusNode,
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(0),
+                          contentPadding: EdgeInsets.zero,
                           border: InputBorder.none,
                           hintStyle: TextStyle(color: _hintTextField),
                           hintText:
-                              (widget.hint != null && widget.hint.length > 0)
+                              (widget.hint != null && widget.hint.isNotEmpty)
                                   ? widget.hint
-                                  : "",
+                                  : '',
                         ),
                       ),
                     ),
