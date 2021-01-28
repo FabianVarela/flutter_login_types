@@ -43,6 +43,14 @@ class LoginBloc extends Object with Validator implements BaseBloc {
     }
 
     _loading.sink.add(false);
+    _clean();
+  }
+
+  void _clean() {
+    Future.delayed(
+      Duration(milliseconds: 200),
+      () => _authenticated.sink.add(null),
+    );
   }
 
   @override
