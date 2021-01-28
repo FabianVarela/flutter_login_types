@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_bloc/bloc/login_bloc.dart';
+import 'package:login_bloc/ui/widgets/custom_button.dart';
 import 'package:login_bloc/ui/widgets/custom_textfield.dart';
 import 'package:login_bloc/ui/widgets/loading.dart';
 import 'package:login_bloc/utils/colors.dart';
@@ -110,20 +111,13 @@ class _LoginUIState extends State<LoginUI> {
             children: <Widget>[
               Expanded(
                 flex: 1,
-                child: RaisedButton(
-                  color: CustomColors.lightGreen,
-                  child: Text(
-                    'Log In',
-                    style: TextStyle(
-                      color: CustomColors.white,
-                    ),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  onPressed:
-                      snapshot.hasData ? () => bloc.authenticate() : null,
+                child: CustomButton(
+                  text: 'Iniciar sesión',
+                  onPress: snapshot.hasData ? () => bloc.authenticate() : null,
+                  backgroundColor: CustomColors.lightGreen,
+                  foregroundColor: CustomColors.white,
+                  icon: Icon(Icons.send, color: CustomColors.white),
+                  direction: IconDirection.right,
                 ),
               ),
             ],
