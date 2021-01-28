@@ -22,6 +22,12 @@ class _HomePageUIState extends State<HomePageUI> with WidgetsBindingObserver {
   }
 
   @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (_notification != null) {
       print('App status notification: $_notification');
@@ -29,18 +35,12 @@ class _HomePageUIState extends State<HomePageUI> with WidgetsBindingObserver {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home page"),
+        title: Text('Home page'),
         centerTitle: true,
       ),
       body: Center(
-        child: Text("Welcome"),
+        child: Text('Welcome'),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
   }
 }
