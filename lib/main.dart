@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_bloc/ui/login.ui.dart';
+import 'package:login_bloc/ui/sign_in_options.ui.dart';
 
 import 'ui/home.ui.dart';
 import 'ui/login.ui.dart';
@@ -20,6 +21,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) {
+          return SignInOptionsUI();
+        },
+        '/user_password': (context) {
           return LoginUI();
         },
         '/home': (context) {
