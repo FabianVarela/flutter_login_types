@@ -3,18 +3,20 @@ import 'dart:async';
 mixin Validator {
   final validateEmail =
       StreamTransformer<String, String>.fromHandlers(handleData: (email, sink) {
-    if (email.length > 0 && _validateEmail(email))
+    if (email.isNotEmpty && _validateEmail(email)) {
       sink.add(email);
-    else
-      sink.addError("Enter a valid email");
+    } else {
+      sink.addError('Enter a valid email');
+    }
   });
 
   final validatePassword = StreamTransformer<String, String>.fromHandlers(
       handleData: (password, sink) {
-    if (password.length > 0 && password.length >= 4)
+    if (password.isNotEmpty && password.length >= 4) {
       sink.add(password);
-    else
-      sink.addError("Password must be at least 4 characters");
+    } else {
+      sink.addError('Password must be at least 4 characters');
+    }
   });
 }
 
@@ -22,7 +24,7 @@ bool _validateEmail(String value) {
   var regex =
       "^[a-zA-Z0-9.!#\$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*\$";
 
-  RegExp regExp = RegExp(regex);
+  final regExp = RegExp(regex);
 
   return regExp.hasMatch(value);
 }
