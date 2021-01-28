@@ -19,11 +19,11 @@ class LoginBloc extends Object with Validator implements BaseBloc {
   Stream<String> get password => _password.stream.transform(validatePassword);
 
   Stream<bool> get isValidData =>
-      Observable.combineLatest2(email, password, (e, p) => true);
+      Rx.combineLatest2(email, password, (e, p) => true);
 
-  Observable<bool> get isAuthenticated => _authenticated.stream;
+  Stream<bool> get isAuthenticated => _authenticated.stream;
 
-  Observable<bool> get isLoading => _loading.stream;
+  Stream<bool> get isLoading => _loading.stream;
 
   // Add data to Stream
   Function(String) get changeEmail => _email.sink.add;
@@ -36,10 +36,11 @@ class LoginBloc extends Object with Validator implements BaseBloc {
 
     token = await repository.authenticate(_email.value, _password.value);
 
-    if (token == "MiToken")
+    if (token == 'MiToken') {
       _authenticated.sink.add(true);
-    else
+    } else {
       _authenticated.sink.add(false);
+    }
 
     _loading.sink.add(false);
   }
