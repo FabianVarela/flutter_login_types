@@ -23,9 +23,21 @@ class SignInOptionsUI extends StatelessWidget {
             const SizedBox(height: 30),
             CustomButton(
               text: 'Iniciar con usuario / contraseña',
-              onPress: () => Navigator.of(context).pushNamed('/user_password'),
+              onPress: () => Navigator.of(context).pushNamed(
+                '/login_user_pass',
+              ),
               foregroundColor: CustomColors.darkBlue,
               icon: Icon(Icons.account_circle_outlined),
+            ),
+            const SizedBox(height: 20),
+            CustomButton(
+              text: 'Iniciar con passcode',
+              onPress: () => Navigator.of(context).pushNamed(
+                '/login_passcode',
+              ),
+              backgroundColor: CustomColors.lightBlue,
+              foregroundColor: CustomColors.white,
+              icon: Icon(Icons.sms_outlined, color: CustomColors.white),
             ),
           ],
         ),
