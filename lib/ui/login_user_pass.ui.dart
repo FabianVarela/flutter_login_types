@@ -16,14 +16,14 @@ class _LoginUIState extends State<LoginUI> {
   final TextEditingController _textEmailController = TextEditingController();
   final TextEditingController _textPasswordController = TextEditingController();
 
-  final bloc = LoginBloc();
+  final _bloc = LoginBloc();
 
   @override
   void dispose() {
     _textEmailController.dispose();
     _textPasswordController.dispose();
 
-    bloc.dispose();
+    _bloc.dispose();
     super.dispose();
   }
 
@@ -33,7 +33,7 @@ class _LoginUIState extends State<LoginUI> {
       key: _scaffoldKey,
       resizeToAvoidBottomPadding: true,
       body: StreamBuilder<bool>(
-        stream: bloc.isAuthenticated,
+        stream: _bloc.isAuthenticated,
         builder: (_, AsyncSnapshot<bool> authSnapshot) {
           if (authSnapshot.hasData) {
             if (authSnapshot.data) {
@@ -46,29 +46,41 @@ class _LoginUIState extends State<LoginUI> {
 
           return Stack(
             children: <Widget>[
-              Container(
-                alignment: Alignment.center,
-                height: MediaQuery.of(context).size.height,
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    _setTextfieldEmail(),
-                    SizedBox(height: 20),
-                    _setTextfieldPassword(),
-                    SizedBox(height: 20),
-                    _setButton(),
-                  ],
-                ),
+              Stack(
+                children: <Widget>[
+                  Container(
+                    alignment: Alignment.center,
+                    height: MediaQuery.of(context).size.height,
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        _setTextfieldEmail(),
+                        SizedBox(height: 20),
+                        _setTextfieldPassword(),
+                        SizedBox(height: 20),
+                        _setButton(),
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                    top: 30,
+                    left: 16,
+                    child: IconButton(
+                      icon: Icon(Icons.arrow_back_ios),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ),
+                ],
               ),
               StreamBuilder<bool>(
-                stream: bloc.isLoading,
+                stream: _bloc.isLoading,
                 builder: (context, AsyncSnapshot<bool> snapshot) =>
                     (snapshot.hasData && snapshot.data)
                         ? Loading()
                         : Container(),
-              )
+              ),
             ],
           );
         },
@@ -77,13 +89,13 @@ class _LoginUIState extends State<LoginUI> {
   }
 
   Widget _setTextfieldEmail() => StreamBuilder<String>(
-        stream: bloc.email,
+        stream: _bloc.email,
         builder: (context, emailSnapshot) => CustomTextField(
           textController: _textEmailController,
-          hint: 'Enter email',
+          hint: 'Ingrese correo electrónico',
           isRequired: true,
-          requiredMessage: 'The email is required',
-          onChange: bloc.changeEmail,
+          requiredMessage: 'El correo electrónico es requerido',
+          onChange: _bloc.changeEmail,
           inputType: TextInputType.emailAddress,
           action: TextInputAction.next,
           errorText: emailSnapshot.error,
@@ -91,12 +103,12 @@ class _LoginUIState extends State<LoginUI> {
       );
 
   Widget _setTextfieldPassword() => StreamBuilder<String>(
-        stream: bloc.password,
+        stream: _bloc.password,
         builder: (context, passwordSnapshot) => CustomTextField(
-          hint: 'Enter password',
+          hint: 'Ingrese la contraseña',
           isRequired: true,
-          requiredMessage: 'The password is required',
-          onChange: bloc.changePassword,
+          requiredMessage: 'La contraseña es requerida',
+          onChange: _bloc.changePassword,
           errorText: passwordSnapshot.error,
           hasPassword: true,
           textController: _textPasswordController,
@@ -104,7 +116,7 @@ class _LoginUIState extends State<LoginUI> {
       );
 
   Widget _setButton() => StreamBuilder<bool>(
-        stream: bloc.isValidData,
+        stream: _bloc.isValidData,
         builder: (context, snapshot) => Padding(
           padding: EdgeInsets.symmetric(horizontal: 24),
           child: Row(
@@ -113,7 +125,7 @@ class _LoginUIState extends State<LoginUI> {
                 flex: 1,
                 child: CustomButton(
                   text: 'Iniciar sesión',
-                  onPress: snapshot.hasData ? () => bloc.authenticate() : null,
+                  onPress: snapshot.hasData ? () => _bloc.authenticate() : null,
                   backgroundColor: CustomColors.lightGreen,
                   foregroundColor: CustomColors.white,
                   icon: Icon(Icons.send, color: CustomColors.white),
@@ -128,7 +140,7 @@ class _LoginUIState extends State<LoginUI> {
   void _showSnackBar() {
     _scaffoldKey.currentState.showSnackBar(SnackBar(
       content: Text(
-        'User or password incorrect.',
+        'Usuario o contraseña incorrecta.',
         style: TextStyle(
           color: CustomColors.lightWhite,
         ),
