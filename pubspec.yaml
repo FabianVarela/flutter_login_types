@@ -12,6 +12,7 @@ dependencies:
 
   cupertino_icons: ^1.0.0
   rxdart: ^0.25.0
+  pin_code_fields: ^6.1.0
   google_fonts: ^1.1.1
 
 dev_dependencies:
