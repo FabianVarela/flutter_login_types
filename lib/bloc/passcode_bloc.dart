@@ -3,27 +3,27 @@ import 'package:login_bloc/common/validator.dart';
 import 'package:login_bloc/repository/login_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
-class PasscodeBloc with Validator implements BaseBloc {
+class PasscodeBloc extends BaseBloc with Validator {
   final repository = LoginRepository();
 
   final _page = BehaviorSubject<int>();
 
-  final _phone = BehaviorSubject<String>();
-  final _code = BehaviorSubject<String>();
-
-  final _loading = PublishSubject<bool>();
+  final _phoneSubject = BehaviorSubject<String>();
+  final _codeSubject = BehaviorSubject<String>();
 
   final _verified = PublishSubject<bool>();
   final _authenticated = PublishSubject<bool>();
 
   // Get data from Stream
-  Stream<String> get phone => _phone.stream.transform(validateNumber);
+  Stream<String> get phoneStream =>
+      _phoneSubject.stream.transform(validateNumber);
 
-  Stream<String> get code => _code.stream.transform(validatePassword);
+  Stream<String> get codeStream =>
+      _codeSubject.stream.transform(validatePassword);
 
-  Stream<bool> get isValidPhone => phone.map((String value) => true);
+  Stream<bool> get isValidPhone => phoneStream.map((String value) => true);
 
-  Stream<bool> get isValidPasscode => code.map((String value) => true);
+  Stream<bool> get isValidPasscode => codeStream.map((String value) => true);
 
   Stream<int> get page => _page.stream;
 
@@ -31,20 +31,21 @@ class PasscodeBloc with Validator implements BaseBloc {
 
   Stream<bool> get isAuthenticated => _authenticated.stream;
 
-  Stream<bool> get isLoading => _loading.stream;
-
   // Add data to Stream
-  Function(String) get changePhone => _phone.sink.add;
+  Function(String) get changePhone => _phoneSubject.sink.add;
 
-  Function(String) get changeCode => _code.sink.add;
+  Function(String) get changeCode => _codeSubject.sink.add;
 
   Function(int) get changePage => _page.sink.add;
 
+  // Getter
+  String get phone => _phoneSubject.value;
+
   // Functions
   void verifyPhone() async {
-    _loading.sink.add(true);
+    loading.sink.add(true);
 
-    final token = await repository.verifyPhone(_phone.value);
+    final token = await repository.verifyPhone(_phoneSubject.value);
 
     if (token.isEmpty) {
       _verified.sink.add(true);
@@ -53,14 +54,14 @@ class PasscodeBloc with Validator implements BaseBloc {
       _verified.sink.add(false);
     }
 
-    _loading.sink.add(false);
-    _clean(_verified);
+    loading.sink.add(false);
+    clean(_verified);
   }
 
   void verifyCode() async {
-    _loading.sink.add(true);
+    loading.sink.add(true);
 
-    final token = await repository.verifyCode(_code.value);
+    final token = await repository.verifyCode(_codeSubject.value);
 
     if (token == 'MiToken') {
       _authenticated.sink.add(true);
@@ -69,20 +70,16 @@ class PasscodeBloc with Validator implements BaseBloc {
       _authenticated.sink.add(false);
     }
 
-    _loading.sink.add(false);
-    _clean(_authenticated);
-  }
-
-  void _clean(Subject subject) {
-    Future.delayed(Duration(milliseconds: 200), () => subject.sink.add(null));
+    loading.sink.add(false);
+    clean(_authenticated);
   }
 
   @override
   void dispose() {
-    _phone.close();
-    _code.close();
+    _phoneSubject.close();
+    _codeSubject.close();
 
-    _loading.close();
     _authenticated.close();
+    loading.close();
   }
 }

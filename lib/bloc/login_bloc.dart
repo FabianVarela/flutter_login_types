@@ -3,13 +3,12 @@ import 'package:login_bloc/repository/login_repository.dart';
 import 'package:login_bloc/common/validator.dart';
 import 'package:rxdart/rxdart.dart';
 
-class LoginBloc with Validator implements BaseBloc {
+class LoginBloc extends BaseBloc with Validator {
   final repository = LoginRepository();
 
   final _emailSubject = BehaviorSubject<String>();
   final _passwordSubject = BehaviorSubject<String>();
 
-  final _loading = PublishSubject<bool>();
   final _authenticated = PublishSubject<bool>();
 
   // Get data from Stream
@@ -24,8 +23,6 @@ class LoginBloc with Validator implements BaseBloc {
 
   Stream<bool> get isAuthenticated => _authenticated.stream;
 
-  Stream<bool> get isLoading => _loading.stream;
-
   // Add data to Stream
   Function(String) get changeEmail => _emailSubject.sink.add;
 
@@ -38,7 +35,7 @@ class LoginBloc with Validator implements BaseBloc {
 
   // Functions
   void authenticate() async {
-    _loading.sink.add(true);
+    loading.sink.add(true);
 
     final token = await repository.authenticate(
         _emailSubject.value, _passwordSubject.value);
@@ -49,12 +46,8 @@ class LoginBloc with Validator implements BaseBloc {
       _authenticated.sink.add(false);
     }
 
-    _loading.sink.add(false);
-    _clean(_authenticated);
-  }
-
-  void _clean(Subject subject) {
-    Future.delayed(Duration(milliseconds: 200), () => subject.sink.add(null));
+    loading.sink.add(false);
+    clean(_authenticated);
   }
 
   @override
@@ -62,7 +55,7 @@ class LoginBloc with Validator implements BaseBloc {
     _emailSubject.close();
     _passwordSubject.close();
 
-    _loading.close();
     _authenticated.close();
+    loading.close();
   }
 }
