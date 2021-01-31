@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_bloc/ui/login_biometric.ui.dart';
 import 'package:login_bloc/ui/login_passcode.dart';
 import 'package:login_bloc/ui/login_user_pass.ui.dart';
 import 'package:login_bloc/ui/sign_in_options.ui.dart';
@@ -21,10 +22,11 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => SignInOptionsUI(),
-        '/login_user_pass': (context) => LoginUI(),
-        '/login_passcode': (context) => LoginPasscodeUI(),
-        '/home': (context) => HomePageUI(),
+        '/': (_) => SignInOptionsUI(),
+        '/login_user_pass': (_) => LoginUI(),
+        '/login_passcode': (_) => LoginPasscodeUI(),
+        '/login_biometric': (_) => LoginBiometric(),
+        '/home': (_) => HomePageUI(),
       },
     );
   }
