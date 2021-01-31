@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:login_bloc/utils/colors.dart';
 
 class CustomTextField extends StatefulWidget {
+  final TextEditingController textController;
   final String hint;
   final String requiredMessage;
   final String errorText;
@@ -10,10 +11,9 @@ class CustomTextField extends StatefulWidget {
   final TextInputType inputType;
   final TextInputAction action;
   final ValueChanged<String> onChange;
-  final TextEditingController textController;
 
   CustomTextField({
-    @required this.textController,
+    this.textController,
     this.hint,
     this.requiredMessage,
     this.errorText,
@@ -29,6 +29,8 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
+  TextEditingController _textController;
+
   bool _hasFocus = false;
   bool _hasRequired = false;
 
@@ -41,6 +43,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   void initState() {
     super.initState();
 
+    _textController = widget.textController ?? TextEditingController();
     _isVisiblePassword = widget.hasPassword;
 
     _customFocusNode.addListener(() {
@@ -53,7 +56,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         setState(() {
           _hasFocus = false;
           _hasRequired = ((widget.isRequired ?? false) &&
-              widget.textController.value.text.isEmpty);
+              _textController.value.text.isEmpty);
         });
       }
     });
@@ -78,7 +81,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
               child: TextField(
-                controller: widget.textController,
+                controller: _textController,
                 cursorColor: CustomColors.lightGreen,
                 keyboardType: widget.inputType,
                 textInputAction: widget.action,
