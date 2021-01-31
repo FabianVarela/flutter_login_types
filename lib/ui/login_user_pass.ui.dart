@@ -32,6 +32,7 @@ class _LoginUIState extends State<LoginUI> {
     return Scaffold(
       key: _scaffoldKey,
       resizeToAvoidBottomPadding: true,
+      backgroundColor: CustomColors.white,
       body: StreamBuilder<bool>(
         stream: _loginBloc.isAuthenticated,
         builder: (_, AsyncSnapshot<bool> authSnapshot) {
