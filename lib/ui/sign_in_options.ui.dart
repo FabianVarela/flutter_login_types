@@ -6,6 +6,7 @@ class SignInOptionsUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: CustomColors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
@@ -38,6 +39,16 @@ class SignInOptionsUI extends StatelessWidget {
               backgroundColor: CustomColors.lightBlue,
               foregroundColor: CustomColors.white,
               icon: Icon(Icons.sms_outlined, color: CustomColors.white),
+            ),
+            const SizedBox(height: 20),
+            CustomButton(
+              text: 'Iniciar con huella',
+              onPress: () => Navigator.of(context).pushNamed(
+                '/login_biometric',
+              ),
+              backgroundColor: CustomColors.darkPurple,
+              foregroundColor: CustomColors.white,
+              icon: Icon(Icons.fingerprint_outlined, color: CustomColors.white),
             ),
           ],
         ),
