@@ -6,7 +6,7 @@ mixin Validator {
     if (email.isNotEmpty && _validateEmail(email)) {
       sink.add(email);
     } else {
-      sink.addError('Enter a valid email');
+      sink.addError('Ingrese un correo válido');
     }
   });
 
@@ -15,7 +15,7 @@ mixin Validator {
     if (password.isNotEmpty && password.length >= 4) {
       sink.add(password);
     } else {
-      sink.addError('Password must be at least 4 characters');
+      sink.addError('La contraseña debe ser mayor que 4 caracteres');
     }
   });
 
@@ -26,7 +26,7 @@ mixin Validator {
         _validatePhoneNumber(number)) {
       sink.add(number);
     } else {
-      sink.addError('Enter a valid number');
+      sink.addError('Ingrese un número válido');
     }
   });
 }
