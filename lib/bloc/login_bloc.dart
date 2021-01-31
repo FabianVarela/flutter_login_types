@@ -6,34 +6,42 @@ import 'package:rxdart/rxdart.dart';
 class LoginBloc with Validator implements BaseBloc {
   final repository = LoginRepository();
 
-  final _email = BehaviorSubject<String>();
-  final _password = BehaviorSubject<String>();
+  final _emailSubject = BehaviorSubject<String>();
+  final _passwordSubject = BehaviorSubject<String>();
 
   final _loading = PublishSubject<bool>();
   final _authenticated = PublishSubject<bool>();
 
   // Get data from Stream
-  Stream<String> get email => _email.stream.transform(validateEmail);
+  Stream<String> get emailStream =>
+      _emailSubject.stream.transform(validateEmail);
 
-  Stream<String> get password => _password.stream.transform(validatePassword);
+  Stream<String> get passwordStream =>
+      _passwordSubject.stream.transform(validatePassword);
 
   Stream<bool> get isValidData =>
-      Rx.combineLatest2(email, password, (e, p) => true);
+      Rx.combineLatest2(emailStream, passwordStream, (e, p) => true);
 
   Stream<bool> get isAuthenticated => _authenticated.stream;
 
   Stream<bool> get isLoading => _loading.stream;
 
   // Add data to Stream
-  Function(String) get changeEmail => _email.sink.add;
+  Function(String) get changeEmail => _emailSubject.sink.add;
 
-  Function(String) get changePassword => _password.sink.add;
+  Function(String) get changePassword => _passwordSubject.sink.add;
+
+  // Getters
+  String get email => _emailSubject.value;
+
+  String get password => _passwordSubject.value;
 
   // Functions
   void authenticate() async {
     _loading.sink.add(true);
 
-    final token = await repository.authenticate(_email.value, _password.value);
+    final token = await repository.authenticate(
+        _emailSubject.value, _passwordSubject.value);
 
     if (token == 'MiToken') {
       _authenticated.sink.add(true);
@@ -42,20 +50,17 @@ class LoginBloc with Validator implements BaseBloc {
     }
 
     _loading.sink.add(false);
-    _clean();
+    _clean(_authenticated);
   }
 
-  void _clean() {
-    Future.delayed(
-      Duration(milliseconds: 200),
-      () => _authenticated.sink.add(null),
-    );
+  void _clean(Subject subject) {
+    Future.delayed(Duration(milliseconds: 200), () => subject.sink.add(null));
   }
 
   @override
   void dispose() {
-    _email.close();
-    _password.close();
+    _emailSubject.close();
+    _passwordSubject.close();
 
     _loading.close();
     _authenticated.close();
