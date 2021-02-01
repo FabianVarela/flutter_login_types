@@ -21,6 +21,10 @@ class PasscodeBloc extends BaseBloc with Validator {
 
   final _passcodeStatusSubject = BehaviorSubject<PasscodeStatus>();
 
+  PasscodeBloc() {
+    _pageSubject.sink.add(0);
+  }
+
   // Get data from Stream
   Stream<String> get phoneStream =>
       _phoneSubject.stream.transform(validateNumber);
