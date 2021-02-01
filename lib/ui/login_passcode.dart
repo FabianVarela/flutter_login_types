@@ -40,7 +40,6 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
             Stack(
               children: <Widget>[
                 StreamBuilder<int>(
-                  initialData: 0,
                   stream: _passcodeBloc.pageStream,
                   builder: (_, AsyncSnapshot<int> pageSnapshot) {
                     if (_pageController.hasClients && pageSnapshot.hasData) {
