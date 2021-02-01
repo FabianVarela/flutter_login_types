@@ -128,44 +128,38 @@ class _LoginBiometricState extends State<LoginBiometric> {
     );
   }
 
-  Widget _setEmptyMessage() {
-    return Center(
-      child: Text(
-        'Este dispositivo no soporta inicio de sesión mediante biometría',
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          color: CustomColors.darkBlue,
-          fontSize: 25,
+  Widget _setEmptyMessage() => Center(
+        child: Text(
+          'Este dispositivo no soporta inicio de sesión mediante biometría',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: CustomColors.darkBlue,
+            fontSize: 25,
+          ),
         ),
-      ),
-    );
-  }
+      );
 
   void _initBiometric() async {
     await _biometricBloc.checkBiometric();
     await _biometricBloc.getListBiometric();
   }
 
-  void _goToScreen() {
-    Future.delayed(
-      Duration.zero,
-      () => Navigator.of(context)
-          .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false),
-    );
-  }
+  void _goToScreen() => Future.delayed(
+        Duration.zero,
+        () => Navigator.of(context)
+            .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false),
+      );
 
-  void _showSnackBar(String message) {
-    Future.delayed(
-      Duration(milliseconds: 100),
-      () => _scaffoldKey.currentState.showSnackBar(SnackBar(
-        content: Text(
-          message,
-          style: TextStyle(
-            color: CustomColors.lightWhite,
+  void _showSnackBar(String message) => Future.delayed(
+        Duration(milliseconds: 100),
+        () => _scaffoldKey.currentState.showSnackBar(SnackBar(
+          content: Text(
+            message,
+            style: TextStyle(
+              color: CustomColors.lightWhite,
+            ),
           ),
-        ),
-        duration: Duration(seconds: 3),
-      )),
-    );
-  }
+          duration: Duration(seconds: 3),
+        )),
+      );
 }

@@ -120,36 +120,30 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
     }
   }
 
-  void _goToPage(int page) {
-    _pageController.animateToPage(
-      page,
-      curve: Curves.easeOut,
-      duration: Duration(milliseconds: 400),
-    );
-  }
+  void _goToPage(int page) => _pageController.animateToPage(
+        page,
+        curve: Curves.easeOut,
+        duration: Duration(milliseconds: 400),
+      );
 
-  void _showSnackBar(String message) {
-    Future.delayed(
-      Duration(milliseconds: 100),
-      () => _scaffoldKey.currentState.showSnackBar(SnackBar(
-        content: Text(
-          message,
-          style: TextStyle(
-            color: CustomColors.lightWhite,
+  void _showSnackBar(String message) => Future.delayed(
+        Duration(milliseconds: 100),
+        () => _scaffoldKey.currentState.showSnackBar(SnackBar(
+          content: Text(
+            message,
+            style: TextStyle(
+              color: CustomColors.lightWhite,
+            ),
           ),
-        ),
-        duration: Duration(seconds: 3),
-      )),
-    );
-  }
+          duration: Duration(seconds: 3),
+        )),
+      );
 
-  void _goToScreen() {
-    Future.delayed(
-      Duration.zero,
-      () => Navigator.of(context)
-          .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false),
-    );
-  }
+  void _goToScreen() => Future.delayed(
+        Duration.zero,
+        () => Navigator.of(context)
+            .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false),
+      );
 }
 
 class FormPhone extends StatefulWidget {
