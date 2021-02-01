@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:login_bloc/bloc/biometric_bloc.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
 import 'package:login_bloc/utils/colors.dart';
 
@@ -10,51 +10,48 @@ class LoginBiometric extends StatefulWidget {
 }
 
 class _LoginBiometricState extends State<LoginBiometric> {
-  bool _hasBiometricSensors;
-  List<BiometricType> _biometricTypeList;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  String _authMessage = 'No authorized';
-
-  final _authentication = LocalAuthentication();
+  final _biometricBloc = BiometricBloc();
 
   @override
   void initState() {
     super.initState();
-    initBiometric();
+    _initBiometric();
+  }
+
+  @override
+  void dispose() {
+    _biometricBloc.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      backgroundColor: CustomColors.white,
       body: Stack(
         children: <Widget>[
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  _authMessage,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: CustomColors.darkBlue,
-                    fontSize: 20,
+            child: StreamBuilder<bool>(
+              stream: _biometricBloc.hasBiometricStream,
+              builder: (_, AsyncSnapshot<bool> hasBiometricSnapshot) {
+                if (hasBiometricSnapshot.hasData) {
+                  if (hasBiometricSnapshot.data) {
+                    return _setBiometricLoginBody();
+                  } else {
+                    return _setEmptyMessage();
+                  }
+                }
+
+                return Center(
+                  child: CircularProgressIndicator(
+                    backgroundColor: CustomColors.lightGreen,
                   ),
-                ),
-                const SizedBox(height: 30),
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: CustomButton(
-                        text: 'Click para iniciar con huella',
-                        onPress: _authenticate,
-                        backgroundColor: CustomColors.darkPurple,
-                        foregroundColor: CustomColors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                );
+              },
             ),
           ),
           Positioned(
@@ -70,54 +67,105 @@ class _LoginBiometricState extends State<LoginBiometric> {
     );
   }
 
-  void initBiometric() async {
-    await _checkBiometric();
-    await _getListBiometric();
+  Widget _setBiometricLoginBody() {
+    return StreamBuilder<String>(
+      stream: _biometricBloc.messageStream,
+      builder: (_, AsyncSnapshot<String> messageSnapshot) {
+        if (messageSnapshot.hasData) {
+          if (messageSnapshot.data.isNotEmpty) {
+            _showSnackBar(messageSnapshot.data);
+          } else {
+            _goToScreen();
+          }
+        }
+
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Haz click para iniciar',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: CustomColors.darkBlue,
+                fontSize: 20,
+              ),
+            ),
+            const SizedBox(height: 30),
+            StreamBuilder<List<BiometricType>>(
+              initialData: <BiometricType>[],
+              stream: _biometricBloc.biometricListStream,
+              builder: (_, AsyncSnapshot<List<BiometricType>> snapshot) {
+                if (snapshot.data.isNotEmpty) {
+                  return Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: CustomButton(
+                          text: 'Click para iniciar con huella',
+                          onPress: _biometricBloc.authenticate,
+                          backgroundColor: CustomColors.darkPurple,
+                          foregroundColor: CustomColors.white,
+                        ),
+                      ),
+                    ],
+                  );
+                }
+
+                return Center(
+                  child: Text(
+                    'Debes ir a configuración y habilitar la huella o el Face ID',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: CustomColors.darkBlue,
+                      fontSize: 20,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
-  Future<void> _checkBiometric() async {
-    bool hasBiometric;
-
-    try {
-      hasBiometric = await _authentication.canCheckBiometrics;
-    } on PlatformException catch (e) {
-      print(e);
-    }
-
-    setState(() => _hasBiometricSensors = hasBiometric);
-
-    print(_hasBiometricSensors);
+  Widget _setEmptyMessage() {
+    return Center(
+      child: Text(
+        'Este dispositivo no soporta inicio de sesión mediante biometría',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: CustomColors.darkBlue,
+          fontSize: 25,
+        ),
+      ),
+    );
   }
 
-  Future<void> _getListBiometric() async {
-    List<BiometricType> biometricList;
-
-    try {
-      biometricList = await _authentication.getAvailableBiometrics();
-    } on PlatformException catch (e) {
-      print(e);
-    }
-
-    setState(() => _biometricTypeList = biometricList);
-
-    print(_biometricTypeList);
+  void _initBiometric() async {
+    await _biometricBloc.checkBiometric();
+    await _biometricBloc.getListBiometric();
   }
 
-  Future<void> _authenticate() async {
-    var isAuthorized = false;
+  void _goToScreen() {
+    Future.delayed(
+      Duration.zero,
+      () => Navigator.of(context)
+          .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false),
+    );
+  }
 
-    try {
-      isAuthorized = await _authentication.authenticateWithBiometrics(
-        localizedReason: 'Coloca tu huella',
-        useErrorDialogs: true,
-        stickyAuth: true,
-      );
-    } on PlatformException catch (e) {
-      print(e);
-    }
-
-    setState(
-      () => _authMessage = isAuthorized ? 'Authorized' : 'No authorized',
+  void _showSnackBar(String message) {
+    Future.delayed(
+      Duration(milliseconds: 100),
+      () => _scaffoldKey.currentState.showSnackBar(SnackBar(
+        content: Text(
+          message,
+          style: TextStyle(
+            color: CustomColors.lightWhite,
+          ),
+        ),
+        duration: Duration(seconds: 3),
+      )),
     );
   }
 }
