@@ -22,7 +22,6 @@ class BiometricBloc extends BaseBloc {
     try {
       final hasBiometric = await _authentication.canCheckBiometrics;
       _hasBiometricSubject.sink.add(hasBiometric);
-      print(hasBiometric);
     } on PlatformException catch (e) {
       _messageSubject.sink.add(e.message);
       print(e);
@@ -35,7 +34,6 @@ class BiometricBloc extends BaseBloc {
     try {
       final biometricList = await _authentication.getAvailableBiometrics();
       _biometricList.sink.add(biometricList);
-      print(biometricList);
     } on PlatformException catch (e) {
       _messageSubject.sink.add(e.message);
       print(e);
