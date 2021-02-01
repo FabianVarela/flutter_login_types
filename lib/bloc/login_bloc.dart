@@ -4,7 +4,7 @@ import 'package:login_bloc/common/validator.dart';
 import 'package:rxdart/rxdart.dart';
 
 class LoginBloc extends BaseBloc with Validator {
-  final repository = LoginRepository();
+  final _repository = LoginRepository();
 
   final _emailSubject = BehaviorSubject<String>();
   final _passwordSubject = BehaviorSubject<String>();
@@ -37,7 +37,7 @@ class LoginBloc extends BaseBloc with Validator {
   void authenticate() async {
     loading.sink.add(true);
 
-    final token = await repository.authenticate(
+    final token = await _repository.authenticate(
         _emailSubject.value, _passwordSubject.value);
 
     if (token == 'MiToken') {

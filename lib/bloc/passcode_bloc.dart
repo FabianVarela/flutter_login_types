@@ -12,7 +12,7 @@ enum PasscodeStatus {
 }
 
 class PasscodeBloc extends BaseBloc with Validator {
-  final repository = LoginRepository();
+  final _repository = LoginRepository();
 
   final _pageSubject = BehaviorSubject<int>();
 
@@ -57,7 +57,7 @@ class PasscodeBloc extends BaseBloc with Validator {
   void verifyPhone() async {
     loading.sink.add(true);
 
-    final token = await repository.verifyPhone(_phoneSubject.value);
+    final token = await _repository.verifyPhone(_phoneSubject.value);
 
     if (token.isEmpty) {
       _passcodeStatusSubject.sink.add(PasscodeStatus.verified);
@@ -73,7 +73,7 @@ class PasscodeBloc extends BaseBloc with Validator {
   void verifyCode() async {
     loading.sink.add(true);
 
-    final token = await repository.verifyCode(_codeSubject.value);
+    final token = await _repository.verifyCode(_codeSubject.value);
 
     if (token == 'MiToken') {
       _passcodeStatusSubject.sink.add(PasscodeStatus.authenticated);
