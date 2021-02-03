@@ -9,4 +9,7 @@ class LoginRepository {
   Future<String> verifyPhone(String phone) => _client.verifyPhone(phone);
 
   Future<String> verifyCode(String code) => _client.verifyCode(code);
+
+  Future<Map<String, dynamic>> authenticateFacebook() =>
+      _client.authenticateFacebook();
 }
