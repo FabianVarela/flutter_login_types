@@ -14,6 +14,8 @@ PODS:
     - FBSDKCoreKit (~> 9.0.0)
     - FBSDKLoginKit (~> 9.0.0)
     - Flutter
+  - flutter_local_notifications (0.0.1):
+    - Flutter
   - local_auth (0.0.1):
     - Flutter
   - path_provider (0.0.1):
@@ -22,6 +24,7 @@ PODS:
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_facebook_auth (from `.symlinks/plugins/flutter_facebook_auth/ios`)
+  - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - local_auth (from `.symlinks/plugins/local_auth/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
 
@@ -35,6 +38,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_facebook_auth:
     :path: ".symlinks/plugins/flutter_facebook_auth/ios"
+  flutter_local_notifications:
+    :path: ".symlinks/plugins/flutter_local_notifications/ios"
   local_auth:
     :path: ".symlinks/plugins/local_auth/ios"
   path_provider:
@@ -45,6 +50,7 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: e9b6542fdee322333502ab497f628b011dce7d78
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   flutter_facebook_auth: d952ca599c6a76439c54472b0b225004e1b880c4
+  flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
   local_auth: 25938960984c3a7f6e3253e3f8d962fdd16852bd
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
 
