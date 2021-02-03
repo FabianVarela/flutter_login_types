@@ -1,4 +1,5 @@
 import 'package:login_bloc/bloc/base_bloc.dart';
+import 'package:login_bloc/common/notification_service.dart';
 import 'package:login_bloc/common/validator.dart';
 import 'package:login_bloc/repository/login_repository.dart';
 import 'package:rxdart/rxdart.dart';
@@ -62,6 +63,8 @@ class PasscodeBloc extends BaseBloc with Validator {
     if (token.isEmpty) {
       _passcodeStatusSubject.sink.add(PasscodeStatus.verified);
       changePage(1);
+      await NotificationService.getInstance()
+          .showNotification('Login BLoC', 'Tu código es 0000');
     } else {
       _passcodeStatusSubject.sink.add(PasscodeStatus.verifiedError);
     }
