@@ -1,6 +1,6 @@
 # login_bloc
 
-Login with BLoC architecture
+Create a different ways to login using Flutter and BLoC state management with RxDart
 
 ## Getting Started
 
