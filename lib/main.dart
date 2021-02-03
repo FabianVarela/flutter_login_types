@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_bloc/common/notification_service.dart';
 import 'package:login_bloc/ui/login_biometric.ui.dart';
 import 'package:login_bloc/ui/login_passcode.dart';
 import 'package:login_bloc/ui/login_user_pass.ui.dart';
@@ -10,7 +11,18 @@ import 'ui/login_user_pass.ui.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    NotificationService.getInstance().init();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
