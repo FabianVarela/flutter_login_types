@@ -1,3 +1,5 @@
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+
 class LoginClient {
   Future<String> authenticate(String username, String password) async {
     await Future.delayed(Duration(seconds: 3));
@@ -27,5 +29,18 @@ class LoginClient {
     } else {
       return 'Error en autenticarse';
     }
+  }
+
+  Future<Map<String, dynamic>> authenticateFacebook() async {
+    var accessToken = await FacebookAuth.instance.isLogged;
+    if (accessToken == null) {
+      accessToken = await FacebookAuth.instance.login();
+      print(accessToken.toJson());
+    }
+
+    final userData = await FacebookAuth.instance.getUserData();
+    print(userData);
+
+    return userData;
   }
 }
