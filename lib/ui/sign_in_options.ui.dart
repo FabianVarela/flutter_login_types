@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:login_bloc/bloc/facebook_bloc.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
 import 'package:login_bloc/utils/colors.dart';
 
-class SignInOptionsUI extends StatelessWidget {
+class SignInOptionsUI extends StatefulWidget {
+  @override
+  _SignInOptionsUIState createState() => _SignInOptionsUIState();
+}
+
+class _SignInOptionsUIState extends State<SignInOptionsUI> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final _facebookBloc = FacebookBloc();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: CustomColors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -50,9 +61,47 @@ class SignInOptionsUI extends StatelessWidget {
               foregroundColor: CustomColors.white,
               icon: Icon(Icons.fingerprint_outlined, color: CustomColors.white),
             ),
+            const SizedBox(height: 20),
+            StreamBuilder<String>(
+              stream: _facebookBloc.message,
+              builder: (_, AsyncSnapshot<String> messageSnapshot) {
+                if (messageSnapshot.hasData) {
+                  if (messageSnapshot.data.isNotEmpty) {
+                    _showSnackBar(messageSnapshot.data);
+                  } else {
+                    _goToScreen();
+                  }
+                }
+
+                return CustomButton(
+                  text: 'Iniciar con Facebook',
+                  onPress: _facebookBloc.authenticate,
+                  backgroundColor: CustomColors.kingBlue,
+                  foregroundColor: CustomColors.white,
+                  icon: Icon(Icons.face_outlined, color: CustomColors.white),
+                );
+              },
+            ),
           ],
         ),
       ),
     );
   }
+
+  void _showSnackBar(String message) => Future.delayed(
+        Duration(milliseconds: 100),
+        () => _scaffoldKey.currentState.showSnackBar(SnackBar(
+          content: Text(
+            message,
+            style: TextStyle(color: CustomColors.lightWhite),
+          ),
+          duration: Duration(seconds: 3),
+        )),
+      );
+
+  void _goToScreen() => Future.delayed(
+        Duration.zero,
+        () => Navigator.of(context)
+            .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false),
+      );
 }
