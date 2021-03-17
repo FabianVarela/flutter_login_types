@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_bloc/bloc/login_bloc.dart';
+import 'package:login_bloc/common/message_service.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
 import 'package:login_bloc/ui/widgets/custom_textfield.dart';
 import 'package:login_bloc/ui/widgets/loading.dart';
@@ -153,12 +154,6 @@ class _LoginUIState extends State<LoginUI> {
 
   void _showSnackBar(String message) => Future.delayed(
         Duration(milliseconds: 100),
-        () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-            message,
-            style: TextStyle(color: CustomColors.lightWhite),
-          ),
-          duration: Duration(seconds: 3),
-        )),
+        () => MessageService.getInstance().ShowMessage(context, message),
       );
 }

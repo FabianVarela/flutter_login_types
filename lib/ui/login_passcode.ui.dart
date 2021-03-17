@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_bloc/bloc/passcode_bloc.dart';
+import 'package:login_bloc/common/message_service.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
 import 'package:login_bloc/ui/widgets/custom_textfield.dart';
 import 'package:login_bloc/ui/widgets/loading.dart';
@@ -51,17 +52,13 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
                         if (status.hasData) {
                           switch (status.data) {
                             case PasscodeStatus.verifiedError:
-                              _showSnackBar(
-                                'Número de teléfono incorrecto.',
-                              );
+                              _showSnackBar('Número de teléfono incorrecto.');
                               break;
                             case PasscodeStatus.authenticated:
                               _goToScreen();
                               break;
                             case PasscodeStatus.authenticatedError:
-                              _showSnackBar(
-                                'Código de verificación incorrecto.',
-                              );
+                              _showSnackBar('Código incorrecto.');
                               break;
                             default:
                           }
@@ -127,15 +124,7 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
 
   void _showSnackBar(String message) => Future.delayed(
         Duration(milliseconds: 100),
-        () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-            message,
-            style: TextStyle(
-              color: CustomColors.lightWhite,
-            ),
-          ),
-          duration: Duration(seconds: 3),
-        )),
+        () => MessageService.getInstance().ShowMessage(context, message),
       );
 
   void _goToScreen() => Future.delayed(
