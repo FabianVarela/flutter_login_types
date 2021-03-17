@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:login_bloc/utils/colors.dart';
 
 class CustomTextField extends StatefulWidget {
-  final TextEditingController textController;
-  final String hint;
-  final String requiredMessage;
-  final String errorText;
+  final TextEditingController? textController;
+  final String? hint;
+  final String? requiredMessage;
+  final String? errorText;
   final bool isRequired;
   final bool hasPassword;
   final TextInputType inputType;
   final TextInputAction action;
-  final ValueChanged<String> onChange;
+  final ValueChanged<String>? onChange;
 
   CustomTextField({
     this.textController,
@@ -29,7 +29,7 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-  TextEditingController _textController;
+  late TextEditingController _textController;
 
   bool _hasFocus = false;
   bool _hasRequired = false;
@@ -55,8 +55,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
       } else {
         setState(() {
           _hasFocus = false;
-          _hasRequired = ((widget.isRequired ?? false) &&
-              _textController.value.text.isEmpty);
+          _hasRequired =
+              ((widget.isRequired) && _textController.value.text.isEmpty);
         });
       }
     });
@@ -96,7 +96,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   border: InputBorder.none,
                   hintStyle:
                       TextStyle(color: CustomColors.grey.withOpacity(.7)),
-                  hintText: (widget.hint != null && widget.hint.isNotEmpty)
+                  hintText: (widget.hint != null && widget.hint!.isNotEmpty)
                       ? widget.hint
                       : '',
                   suffixIcon: widget.hasPassword
@@ -132,7 +132,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget _getRequiredMessage() => Align(
         alignment: Alignment.topLeft,
         child: Text(
-          widget.requiredMessage,
+          widget.requiredMessage!,
           style: TextStyle(color: CustomColors.lightRed),
         ),
       );
@@ -140,7 +140,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget _getErrorMessage() => Align(
         alignment: Alignment.topLeft,
         child: Text(
-          widget.errorText,
+          widget.errorText!,
           style: TextStyle(color: CustomColors.lightRed),
         ),
       );
