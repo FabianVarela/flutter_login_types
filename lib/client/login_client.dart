@@ -32,10 +32,10 @@ class LoginClient {
   }
 
   Future<Map<String, dynamic>> authenticateFacebook() async {
-    var accessToken = await FacebookAuth.instance.isLogged;
+    var accessToken = await FacebookAuth.instance.accessToken;
     if (accessToken == null) {
       accessToken = await FacebookAuth.instance.login();
-      print(accessToken.toJson());
+      print(accessToken!.toJson());
     }
 
     final userData = await FacebookAuth.instance.getUserData();
