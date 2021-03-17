@@ -6,11 +6,13 @@ class HomePageUI extends StatefulWidget {
 }
 
 class _HomePageUIState extends State<HomePageUI> with WidgetsBindingObserver {
-  AppLifecycleState _notification;
+  late AppLifecycleState? _notification;
 
   @override
   void initState() {
-    WidgetsBinding.instance.addObserver(this);
+    _notification = null;
+
+    WidgetsBinding.instance!.addObserver(this);
     super.initState();
   }
 
@@ -21,7 +23,7 @@ class _HomePageUIState extends State<HomePageUI> with WidgetsBindingObserver {
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
+    WidgetsBinding.instance!.removeObserver(this);
     super.dispose();
   }
 

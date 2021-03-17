@@ -11,8 +11,6 @@ class LoginUI extends StatefulWidget {
 }
 
 class _LoginUIState extends State<LoginUI> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   final TextEditingController _textEmailController = TextEditingController();
   final TextEditingController _textPasswordController = TextEditingController();
 
@@ -30,14 +28,13 @@ class _LoginUIState extends State<LoginUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      resizeToAvoidBottomPadding: true,
+      resizeToAvoidBottomInset: true,
       backgroundColor: CustomColors.white,
       body: StreamBuilder<bool>(
         stream: _loginBloc.isAuthenticated,
         builder: (_, AsyncSnapshot<bool> authSnapshot) {
           if (authSnapshot.hasData) {
-            if (authSnapshot.data) {
+            if (authSnapshot.data!) {
               _goToScreen();
             } else {
               _showSnackBar('Usuario o contraseña incorrecta.');
@@ -56,9 +53,9 @@ class _LoginUIState extends State<LoginUI> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                        _setTextfieldEmail(),
+                        _setTextFieldEmail(),
                         SizedBox(height: 20),
-                        _setTextfieldPassword(),
+                        _setTextFieldPassword(),
                         SizedBox(height: 20),
                         _setButton(),
                       ],
@@ -77,7 +74,7 @@ class _LoginUIState extends State<LoginUI> {
               StreamBuilder<bool>(
                 stream: _loginBloc.isLoading,
                 builder: (context, AsyncSnapshot<bool> loadSnapshot) =>
-                    (loadSnapshot.hasData && loadSnapshot.data)
+                    (loadSnapshot.hasData && loadSnapshot.data!)
                         ? Loading()
                         : Container(),
               ),
@@ -88,7 +85,7 @@ class _LoginUIState extends State<LoginUI> {
     );
   }
 
-  Widget _setTextfieldEmail() => StreamBuilder<String>(
+  Widget _setTextFieldEmail() => StreamBuilder<String>(
       stream: _loginBloc.emailStream,
       builder: (_, AsyncSnapshot<String> emailSnapshot) {
         _textEmailController.value =
@@ -102,11 +99,11 @@ class _LoginUIState extends State<LoginUI> {
           onChange: _loginBloc.changeEmail,
           inputType: TextInputType.emailAddress,
           action: TextInputAction.next,
-          errorText: emailSnapshot.error,
+          errorText: emailSnapshot.error?.toString(),
         );
       });
 
-  Widget _setTextfieldPassword() => StreamBuilder<String>(
+  Widget _setTextFieldPassword() => StreamBuilder<String>(
         stream: _loginBloc.passwordStream,
         builder: (_, AsyncSnapshot<String> passwordSnapshot) {
           _textPasswordController.value = _textPasswordController.value
@@ -118,7 +115,7 @@ class _LoginUIState extends State<LoginUI> {
             isRequired: true,
             requiredMessage: 'La contraseña es requerida',
             onChange: _loginBloc.changePassword,
-            errorText: passwordSnapshot.error,
+            errorText: passwordSnapshot.error?.toString(),
             hasPassword: true,
           );
         },
@@ -149,11 +146,14 @@ class _LoginUIState extends State<LoginUI> {
       );
 
   void _goToScreen() => Future.delayed(
-      Duration.zero, () => Navigator.of(context).pushReplacementNamed('/home'));
+        Duration.zero,
+        () => Navigator.of(context)
+            .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false),
+      );
 
   void _showSnackBar(String message) => Future.delayed(
         Duration(milliseconds: 100),
-        () => _scaffoldKey.currentState.showSnackBar(SnackBar(
+        () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(
             message,
             style: TextStyle(color: CustomColors.lightWhite),

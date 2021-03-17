@@ -12,8 +12,6 @@ class LoginPasscodeUI extends StatefulWidget {
 }
 
 class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   final PageController _pageController = PageController(
     initialPage: 0,
     keepPage: true,
@@ -32,8 +30,7 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
     return WillPopScope(
       onWillPop: _returnPageFromBar,
       child: Scaffold(
-        key: _scaffoldKey,
-        resizeToAvoidBottomPadding: true,
+        resizeToAvoidBottomInset: true,
         backgroundColor: CustomColors.white,
         body: Stack(
           children: <Widget>[
@@ -43,8 +40,8 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
                   stream: _passcodeBloc.pageStream,
                   builder: (_, AsyncSnapshot<int> pageSnapshot) {
                     if (_pageController.hasClients && pageSnapshot.hasData) {
-                      if (_pageController.page.round() != _passcodeBloc.page) {
-                        _goToPage(_passcodeBloc.page);
+                      if (_pageController.page!.round() != _passcodeBloc.page) {
+                        _goToPage(_passcodeBloc.page!);
                       }
                     }
 
@@ -95,7 +92,9 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
             StreamBuilder<bool>(
               stream: _passcodeBloc.isLoading,
               builder: (context, AsyncSnapshot<bool> snapshot) =>
-                  (snapshot.hasData && snapshot.data) ? Loading() : Container(),
+                  (snapshot.hasData && snapshot.data!)
+                      ? Loading()
+                      : Container(),
             ),
           ],
         ),
@@ -128,7 +127,7 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
 
   void _showSnackBar(String message) => Future.delayed(
         Duration(milliseconds: 100),
-        () => _scaffoldKey.currentState.showSnackBar(SnackBar(
+        () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(
             message,
             style: TextStyle(
@@ -147,7 +146,7 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
 }
 
 class FormPhone extends StatefulWidget {
-  const FormPhone({Key key, @required this.bloc}) : super(key: key);
+  const FormPhone({Key? key, required this.bloc}) : super(key: key);
 
   final PasscodeBloc bloc;
 
@@ -192,7 +191,7 @@ class _FormPhoneState extends State<FormPhone> {
             requiredMessage: 'El número de teléfono es requerido',
             onChange: widget.bloc.changePhone,
             inputType: TextInputType.phone,
-            errorText: emailSnapshot.error,
+            errorText: emailSnapshot.error?.toString(),
           );
         },
       );
@@ -226,7 +225,7 @@ class _FormPhoneState extends State<FormPhone> {
 }
 
 class FormPasscode extends StatefulWidget {
-  const FormPasscode({Key key, @required this.bloc}) : super(key: key);
+  const FormPasscode({Key? key, required this.bloc}) : super(key: key);
 
   final PasscodeBloc bloc;
 

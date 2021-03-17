@@ -9,14 +9,11 @@ class SignInOptionsUI extends StatefulWidget {
 }
 
 class _SignInOptionsUIState extends State<SignInOptionsUI> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   final _facebookBloc = FacebookBloc();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       backgroundColor: CustomColors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -66,8 +63,8 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
               stream: _facebookBloc.message,
               builder: (_, AsyncSnapshot<String> messageSnapshot) {
                 if (messageSnapshot.hasData) {
-                  if (messageSnapshot.data.isNotEmpty) {
-                    _showSnackBar(messageSnapshot.data);
+                  if (messageSnapshot.data!.isNotEmpty) {
+                    _showSnackBar(messageSnapshot.data!);
                   } else {
                     _goToScreen();
                   }
@@ -90,7 +87,7 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
 
   void _showSnackBar(String message) => Future.delayed(
         Duration(milliseconds: 100),
-        () => _scaffoldKey.currentState.showSnackBar(SnackBar(
+        () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(
             message,
             style: TextStyle(color: CustomColors.lightWhite),

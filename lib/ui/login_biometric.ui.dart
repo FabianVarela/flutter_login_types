@@ -10,8 +10,6 @@ class LoginBiometric extends StatefulWidget {
 }
 
 class _LoginBiometricState extends State<LoginBiometric> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   final _biometricBloc = BiometricBloc();
 
   @override
@@ -29,7 +27,6 @@ class _LoginBiometricState extends State<LoginBiometric> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       backgroundColor: CustomColors.white,
       body: Stack(
         children: <Widget>[
@@ -39,7 +36,7 @@ class _LoginBiometricState extends State<LoginBiometric> {
               stream: _biometricBloc.hasBiometricStream,
               builder: (_, AsyncSnapshot<bool> hasBiometricSnapshot) {
                 if (hasBiometricSnapshot.hasData) {
-                  if (hasBiometricSnapshot.data) {
+                  if (hasBiometricSnapshot.data!) {
                     return _setBiometricLoginBody();
                   } else {
                     return _setEmptyMessage();
@@ -68,13 +65,15 @@ class _LoginBiometricState extends State<LoginBiometric> {
   }
 
   Widget _setBiometricLoginBody() {
-    return StreamBuilder<String>(
+    return StreamBuilder<String?>(
       stream: _biometricBloc.messageStream,
-      builder: (_, AsyncSnapshot<String> messageSnapshot) {
+      builder: (_, AsyncSnapshot<String?> messageSnapshot) {
         if (messageSnapshot.hasData) {
-          if (messageSnapshot.data.isNotEmpty) {
-            _showSnackBar(messageSnapshot.data);
+          print('has data');
+          if (messageSnapshot.data!.isNotEmpty) {
+            _showSnackBar(messageSnapshot.data!);
           } else {
+            print('has data empty');
             _goToScreen();
           }
         }
@@ -95,7 +94,7 @@ class _LoginBiometricState extends State<LoginBiometric> {
               initialData: <BiometricType>[],
               stream: _biometricBloc.biometricListStream,
               builder: (_, AsyncSnapshot<List<BiometricType>> snapshot) {
-                if (snapshot.data.isNotEmpty) {
+                if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                   return Row(
                     children: <Widget>[
                       Expanded(
@@ -152,7 +151,7 @@ class _LoginBiometricState extends State<LoginBiometric> {
 
   void _showSnackBar(String message) => Future.delayed(
         Duration(milliseconds: 100),
-        () => _scaffoldKey.currentState.showSnackBar(SnackBar(
+        () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(
             message,
             style: TextStyle(
