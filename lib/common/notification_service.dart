@@ -7,7 +7,7 @@ class NotificationService {
 
   static NotificationService getInstance() => _instance;
 
-  FlutterLocalNotificationsPlugin _localNotifications;
+  late FlutterLocalNotificationsPlugin _localNotifications;
 
   void init() {
     _localNotifications = FlutterLocalNotificationsPlugin();
@@ -17,20 +17,20 @@ class NotificationService {
     }
 
     var initSettingsAndroid = AndroidInitializationSettings('login_bloc');
-    var initiSettingsIOS = IOSInitializationSettings();
+    var initSettingsIOS = IOSInitializationSettings();
 
-    var initSetttings = InitializationSettings(
+    var initSettings = InitializationSettings(
       android: initSettingsAndroid,
-      iOS: initiSettingsIOS,
+      iOS: initSettingsIOS,
     );
 
-    _localNotifications.initialize(initSetttings);
+    _localNotifications.initialize(initSettings);
   }
 
   void _requestIOSPermission() {
     _localNotifications
         .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin>()
+            IOSFlutterLocalNotificationsPlugin>()!
         .requestPermissions(alert: false, badge: true, sound: true);
   }
 
