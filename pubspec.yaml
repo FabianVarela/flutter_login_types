@@ -4,24 +4,24 @@ description: Login with BLoC architecture
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.0
-  rxdart: ^0.25.0
-  pinput: ^1.0.0
-  local_auth: ^0.6.3+4
-  flutter_facebook_auth: ^2.0.1
-  flutter_local_notifications: ^4.0.0
-  google_fonts: ^1.1.1
+  cupertino_icons: ^1.0.2
+  rxdart: ^0.26.0
+  pinput: ^1.2.0
+  local_auth: ^1.1.0
+  flutter_facebook_auth: ^3.0.0+1
+  flutter_local_notifications: ^5.0.0-nullsafety.1
+  google_fonts: ^2.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  pedantic: ^1.9.0
+  pedantic: ^1.11.0
 
 flutter:
 
