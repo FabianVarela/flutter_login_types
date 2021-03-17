@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_bloc/common/notification_service.dart';
 import 'package:login_bloc/ui/login_biometric.ui.dart';
-import 'package:login_bloc/ui/login_passcode.dart';
+import 'package:login_bloc/ui/login_passcode.ui.dart';
 import 'package:login_bloc/ui/login_user_pass.ui.dart';
 import 'package:login_bloc/ui/sign_in_options.ui.dart';
 
