@@ -6,13 +6,13 @@ import 'package:rxdart/subjects.dart';
 class BiometricBloc extends BaseBloc {
   final _authentication = LocalAuthentication();
 
-  final _messageSubject = BehaviorSubject<String>();
+  final _messageSubject = BehaviorSubject<String?>();
 
   final _hasBiometricSubject = BehaviorSubject<bool>();
 
   final _biometricList = BehaviorSubject<List<BiometricType>>();
 
-  Stream<String> get messageStream => _messageSubject.stream;
+  Stream<String?> get messageStream => _messageSubject.stream;
 
   Stream<bool> get hasBiometricStream => _hasBiometricSubject.stream;
 
@@ -23,11 +23,11 @@ class BiometricBloc extends BaseBloc {
       final hasBiometric = await _authentication.canCheckBiometrics;
       _hasBiometricSubject.sink.add(hasBiometric);
     } on PlatformException catch (e) {
-      _messageSubject.sink.add(e.message);
+      _messageSubject.sink.add(e.message ?? 'Error to check biometric');
       print(e);
     }
 
-    clean(_messageSubject, value: '');
+    clean(_messageSubject);
   }
 
   Future<void> getListBiometric() async {
@@ -35,7 +35,7 @@ class BiometricBloc extends BaseBloc {
       final biometricList = await _authentication.getAvailableBiometrics();
       _biometricList.sink.add(biometricList);
     } on PlatformException catch (e) {
-      _messageSubject.sink.add(e.message);
+      _messageSubject.sink.add(e.message ?? 'Error to get biometric list');
       print(e);
     }
 
@@ -44,14 +44,14 @@ class BiometricBloc extends BaseBloc {
 
   void authenticate() async {
     try {
-      final isAuthorized = await _authentication.authenticateWithBiometrics(
+      final isAuthorized = await _authentication.authenticate(
         localizedReason: 'Coloca tu huella o cara para iniciar',
         useErrorDialogs: true,
         stickyAuth: true,
       );
       _messageSubject.sink.add(isAuthorized ? '' : 'No autorizado');
     } on PlatformException catch (e) {
-      _messageSubject.sink.addError(e);
+      _messageSubject.sink.addError(e.message ?? 'Error to authenticate');
       print(e);
     }
 

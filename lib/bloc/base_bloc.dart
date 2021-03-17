@@ -6,7 +6,7 @@ abstract class BaseBloc {
   Stream<bool> get isLoading => loading.stream;
 
   void clean(Subject subject, {dynamic value}) {
-    Future.delayed(Duration(milliseconds: 200), () => subject.sink.add(value));
+    Future.delayed(Duration(milliseconds: 300), () => subject.sink.add(value));
   }
 
   void dispose();
