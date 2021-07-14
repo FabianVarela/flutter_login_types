@@ -1,7 +1,10 @@
-include: package:pedantic/analysis_options.yaml
+include: package:very_good_analysis/analysis_options.yaml
 
 analyzer:
   exclude:
     - lib/**.g.dart
-  errors:
-    missing_required_param: error
+
+linter:
+  rules:
+    avoid_print: false
+    public_member_api_docs: false
