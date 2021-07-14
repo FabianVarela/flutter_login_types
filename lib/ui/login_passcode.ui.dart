@@ -8,6 +8,8 @@ import 'package:login_bloc/utils/colors.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
 class LoginPasscodeUI extends StatefulWidget {
+  const LoginPasscodeUI({Key? key}) : super(key: key);
+
   @override
   _LoginPasscodeUIState createState() => _LoginPasscodeUIState();
 }
@@ -66,7 +68,7 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
 
                         return PageView(
                           controller: _pageController,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           children: <Widget>[
                             FormPhone(bloc: _passcodeBloc),
                             FormPasscode(bloc: _passcodeBloc),
@@ -80,7 +82,7 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
                   top: 30,
                   left: 16,
                   child: IconButton(
-                    icon: Icon(Icons.arrow_back_ios),
+                    icon: const Icon(Icons.arrow_back_ios),
                     onPressed: _returnPage,
                   ),
                 ),
@@ -90,8 +92,8 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
               stream: _passcodeBloc.isLoading,
               builder: (context, AsyncSnapshot<bool> snapshot) =>
                   (snapshot.hasData && snapshot.data!)
-                      ? Loading()
-                      : Container(),
+                      ? const Loading()
+                      : const Offstage(),
             ),
           ],
         ),
@@ -119,12 +121,12 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
   void _goToPage(int page) => _pageController.animateToPage(
         page,
         curve: Curves.easeOut,
-        duration: Duration(milliseconds: 400),
+        duration: const Duration(milliseconds: 400),
       );
 
   void _showSnackBar(String message) => Future.delayed(
-        Duration(milliseconds: 100),
-        () => MessageService.getInstance().ShowMessage(context, message),
+        const Duration(milliseconds: 100),
+        () => MessageService.getInstance().showMessage(context, message),
       );
 
   void _goToScreen() => Future.delayed(
@@ -153,7 +155,7 @@ class _FormPhoneState extends State<FormPhone> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(
+          const Text(
             'Digite el número de teléfono',
             textAlign: TextAlign.center,
             style: TextStyle(color: CustomColors.darkBlue, fontSize: 20),
@@ -188,7 +190,7 @@ class _FormPhoneState extends State<FormPhone> {
   Widget _setVerifyButton() => StreamBuilder<bool>(
         stream: widget.bloc.isValidPhone,
         builder: (_, AsyncSnapshot<bool> isValidSnapshot) => Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Row(
             children: <Widget>[
               Expanded(
@@ -200,7 +202,7 @@ class _FormPhoneState extends State<FormPhone> {
                       : null,
                   backgroundColor: CustomColors.lightGreen,
                   foregroundColor: CustomColors.white,
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.verified_outlined,
                     color: CustomColors.white,
                   ),
@@ -236,7 +238,7 @@ class _FormPasscodeState extends State<FormPasscode> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(
+          const Text(
             'Digite el código de verificación',
             textAlign: TextAlign.center,
             style: TextStyle(color: CustomColors.darkBlue, fontSize: 20),

@@ -13,6 +13,10 @@ enum PasscodeStatus {
 }
 
 class PasscodeBloc extends BaseBloc with Validator {
+  PasscodeBloc() {
+    _pageSubject.sink.add(0);
+  }
+
   final _repository = LoginRepository();
 
   final _pageSubject = BehaviorSubject<int>();
@@ -21,10 +25,6 @@ class PasscodeBloc extends BaseBloc with Validator {
   final _codeSubject = BehaviorSubject<String>();
 
   final _passcodeStatusSubject = BehaviorSubject<PasscodeStatus>();
-
-  PasscodeBloc() {
-    _pageSubject.sink.add(0);
-  }
 
   // Get data from Stream
   Stream<String> get phoneStream =>

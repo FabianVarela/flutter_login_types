@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class HomePageUI extends StatefulWidget {
+  const HomePageUI({Key? key}) : super(key: key);
+
   @override
   _HomePageUIState createState() => _HomePageUIState();
 }
@@ -35,10 +37,10 @@ class _HomePageUIState extends State<HomePageUI> with WidgetsBindingObserver {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home page'),
+        title: const Text('Home page'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text('Welcome'),
       ),
     );

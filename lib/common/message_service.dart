@@ -6,13 +6,13 @@ class MessageService {
 
   static MessageService getInstance() => _instance;
 
-  void ShowMessage (BuildContext context, String message) {
+  void showMessage (BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(
         message,
-        style: TextStyle(color: CustomColors.lightWhite),
+        style: const TextStyle(color: CustomColors.lightWhite),
       ),
-      duration: Duration(seconds: 3),
+      duration: const Duration(seconds: 3),
     ));
   }
 }

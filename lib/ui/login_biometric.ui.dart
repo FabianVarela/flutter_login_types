@@ -6,6 +6,8 @@ import 'package:login_bloc/ui/widgets/custom_button.dart';
 import 'package:login_bloc/utils/colors.dart';
 
 class LoginBiometric extends StatefulWidget {
+  const LoginBiometric({Key? key}) : super(key: key);
+
   @override
   _LoginBiometricState createState() => _LoginBiometricState();
 }
@@ -32,7 +34,7 @@ class _LoginBiometricState extends State<LoginBiometric> {
       body: Stack(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: StreamBuilder<bool>(
               stream: _biometricBloc.hasBiometricStream,
               builder: (_, AsyncSnapshot<bool> hasBiometricSnapshot) {
@@ -44,7 +46,7 @@ class _LoginBiometricState extends State<LoginBiometric> {
                   }
                 }
 
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(
                     backgroundColor: CustomColors.lightGreen,
                   ),
@@ -56,7 +58,7 @@ class _LoginBiometricState extends State<LoginBiometric> {
             top: 30,
             left: 16,
             child: IconButton(
-              icon: Icon(Icons.arrow_back_ios),
+              icon: const Icon(Icons.arrow_back_ios),
               onPressed: () => Navigator.of(context).pop(),
             ),
           ),
@@ -82,7 +84,7 @@ class _LoginBiometricState extends State<LoginBiometric> {
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
+            const Text(
               'Haz click para iniciar',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -92,7 +94,7 @@ class _LoginBiometricState extends State<LoginBiometric> {
             ),
             const SizedBox(height: 30),
             StreamBuilder<List<BiometricType>>(
-              initialData: <BiometricType>[],
+              initialData: const <BiometricType>[],
               stream: _biometricBloc.biometricListStream,
               builder: (_, AsyncSnapshot<List<BiometricType>> snapshot) {
                 if (snapshot.hasData && snapshot.data!.isNotEmpty) {
@@ -110,9 +112,10 @@ class _LoginBiometricState extends State<LoginBiometric> {
                   );
                 }
 
-                return Center(
+                return const Center(
                   child: Text(
-                    'Debes ir a configuración y habilitar la huella o el Face ID',
+                    'Debes ir a configuración y habilitar '
+                    'la huella o el Face ID',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: CustomColors.darkBlue,
@@ -128,7 +131,7 @@ class _LoginBiometricState extends State<LoginBiometric> {
     );
   }
 
-  Widget _setEmptyMessage() => Center(
+  Widget _setEmptyMessage() => const Center(
         child: Text(
           'Este dispositivo no soporta inicio de sesión mediante biometría',
           textAlign: TextAlign.center,
@@ -151,7 +154,7 @@ class _LoginBiometricState extends State<LoginBiometric> {
       );
 
   void _showSnackBar(String message) => Future.delayed(
-        Duration(milliseconds: 100),
-        () => MessageService.getInstance().ShowMessage(context, message),
+        const Duration(milliseconds: 100),
+        () => MessageService.getInstance().showMessage(context, message),
       );
 }

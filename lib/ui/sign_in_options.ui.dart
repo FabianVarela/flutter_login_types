@@ -5,6 +5,8 @@ import 'package:login_bloc/ui/widgets/custom_button.dart';
 import 'package:login_bloc/utils/colors.dart';
 
 class SignInOptionsUI extends StatefulWidget {
+  const SignInOptionsUI({Key? key}) : super(key: key);
+
   @override
   _SignInOptionsUIState createState() => _SignInOptionsUIState();
 }
@@ -22,7 +24,7 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Text(
+            const Text(
               'Elige una forma de iniciar sesión',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -37,7 +39,7 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
                 '/login_user_pass',
               ),
               foregroundColor: CustomColors.darkBlue,
-              icon: Icon(Icons.account_circle_outlined),
+              icon: const Icon(Icons.account_circle_outlined),
             ),
             const SizedBox(height: 20),
             CustomButton(
@@ -47,7 +49,7 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
               ),
               backgroundColor: CustomColors.lightBlue,
               foregroundColor: CustomColors.white,
-              icon: Icon(Icons.sms_outlined, color: CustomColors.white),
+              icon: const Icon(Icons.sms_outlined, color: CustomColors.white),
             ),
             const SizedBox(height: 20),
             CustomButton(
@@ -57,7 +59,10 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
               ),
               backgroundColor: CustomColors.darkPurple,
               foregroundColor: CustomColors.white,
-              icon: Icon(Icons.fingerprint_outlined, color: CustomColors.white),
+              icon: const Icon(
+                Icons.fingerprint_outlined,
+                color: CustomColors.white,
+              ),
             ),
             const SizedBox(height: 20),
             StreamBuilder<String>(
@@ -76,7 +81,10 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
                   onPress: _facebookBloc.authenticate,
                   backgroundColor: CustomColors.kingBlue,
                   foregroundColor: CustomColors.white,
-                  icon: Icon(Icons.face_outlined, color: CustomColors.white),
+                  icon: const Icon(
+                    Icons.face_outlined,
+                    color: CustomColors.white,
+                  ),
                 );
               },
             ),
@@ -87,8 +95,8 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
   }
 
   void _showSnackBar(String message) => Future.delayed(
-        Duration(milliseconds: 100),
-        () => MessageService.getInstance().ShowMessage(context, message),
+        const Duration(milliseconds: 100),
+        () => MessageService.getInstance().showMessage(context, message),
       );
 
   void _goToScreen() => Future.delayed(

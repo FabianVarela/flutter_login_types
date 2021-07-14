@@ -16,8 +16,8 @@ class NotificationService {
       _requestIOSPermission();
     }
 
-    var initSettingsAndroid = AndroidInitializationSettings('login_bloc');
-    var initSettingsIOS = IOSInitializationSettings();
+    var initSettingsAndroid = const AndroidInitializationSettings('login_bloc');
+    var initSettingsIOS = const IOSInitializationSettings();
 
     var initSettings = InitializationSettings(
       android: initSettingsAndroid,
@@ -35,7 +35,7 @@ class NotificationService {
   }
 
   Future<void> showNotification(String title, String body) async {
-    var androidChannel = AndroidNotificationDetails(
+    var androidChannel = const AndroidNotificationDetails(
       'channel id',
       'channel name',
       'channel description',
@@ -46,7 +46,7 @@ class NotificationService {
       styleInformation: DefaultStyleInformation(true, true),
     );
 
-    var iosChannel = IOSNotificationDetails(presentSound: true);
+    var iosChannel = const IOSNotificationDetails(presentSound: true);
 
     var platformChannelSpecifics = NotificationDetails(
       android: androidChannel,

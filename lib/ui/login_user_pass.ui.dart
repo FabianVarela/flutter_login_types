@@ -7,6 +7,8 @@ import 'package:login_bloc/ui/widgets/loading.dart';
 import 'package:login_bloc/utils/colors.dart';
 
 class LoginUI extends StatefulWidget {
+  const LoginUI({Key? key}) : super(key: key);
+
   @override
   _LoginUIState createState() => _LoginUIState();
 }
@@ -49,15 +51,15 @@ class _LoginUIState extends State<LoginUI> {
                   Container(
                     alignment: Alignment.center,
                     height: MediaQuery.of(context).size.height,
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
                         _setTextFieldEmail(),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         _setTextFieldPassword(),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         _setButton(),
                       ],
                     ),
@@ -66,7 +68,7 @@ class _LoginUIState extends State<LoginUI> {
                     top: 30,
                     left: 16,
                     child: IconButton(
-                      icon: Icon(Icons.arrow_back_ios),
+                      icon: const Icon(Icons.arrow_back_ios),
                       onPressed: () => Navigator.of(context).pop(),
                     ),
                   ),
@@ -76,8 +78,8 @@ class _LoginUIState extends State<LoginUI> {
                 stream: _loginBloc.isLoading,
                 builder: (context, AsyncSnapshot<bool> loadSnapshot) =>
                     (loadSnapshot.hasData && loadSnapshot.data!)
-                        ? Loading()
-                        : Container(),
+                        ? const Loading()
+                        : const Offstage(),
               ),
             ],
           );
@@ -125,19 +127,18 @@ class _LoginUIState extends State<LoginUI> {
   Widget _setButton() => StreamBuilder<bool>(
         stream: _loginBloc.isValidData,
         builder: (_, AsyncSnapshot<bool> isValidSnapshot) => Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Row(
             children: <Widget>[
               Expanded(
                 flex: 1,
                 child: CustomButton(
                   text: 'Iniciar sesión',
-                  onPress: isValidSnapshot.hasData
-                      ? () => _loginBloc.authenticate()
-                      : null,
+                  onPress:
+                      isValidSnapshot.hasData ? _loginBloc.authenticate : null,
                   backgroundColor: CustomColors.lightGreen,
                   foregroundColor: CustomColors.white,
-                  icon: Icon(Icons.send, color: CustomColors.white),
+                  icon: const Icon(Icons.send, color: CustomColors.white),
                   direction: IconDirection.right,
                 ),
               ),
@@ -153,7 +154,7 @@ class _LoginUIState extends State<LoginUI> {
       );
 
   void _showSnackBar(String message) => Future.delayed(
-        Duration(milliseconds: 100),
-        () => MessageService.getInstance().ShowMessage(context, message),
+        const Duration(milliseconds: 100),
+        () => MessageService.getInstance().showMessage(context, message),
       );
 }

@@ -2,7 +2,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class LoginClient {
   Future<String> authenticate(String username, String password) async {
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 3));
 
     if (username == 'prueba@prueba.com' && password == 'password') {
       return 'MiToken';
@@ -12,7 +12,7 @@ class LoginClient {
   }
 
   Future<String> verifyPhone(String phoneNumber) async {
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 3));
 
     if (phoneNumber == '3004567890') {
       return '';
@@ -22,7 +22,7 @@ class LoginClient {
   }
 
   Future<String> verifyCode(String code) async {
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 3));
 
     if (code == '0000') {
       return 'MiToken';

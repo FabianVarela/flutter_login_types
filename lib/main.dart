@@ -9,9 +9,11 @@ import 'package:login_bloc/ui/sign_in_options.ui.dart';
 import 'ui/home.ui.dart';
 import 'ui/login_user_pass.ui.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -34,11 +36,11 @@ class _MyAppState extends State<MyApp> {
       ),
       initialRoute: '/',
       routes: {
-        '/': (_) => SignInOptionsUI(),
-        '/login_user_pass': (_) => LoginUI(),
-        '/login_passcode': (_) => LoginPasscodeUI(),
-        '/login_biometric': (_) => LoginBiometric(),
-        '/home': (_) => HomePageUI(),
+        '/': (_) => const SignInOptionsUI(),
+        '/login_user_pass': (_) => const LoginUI(),
+        '/login_passcode': (_) => const LoginPasscodeUI(),
+        '/login_biometric': (_) => const LoginBiometric(),
+        '/home': (_) => const HomePageUI(),
       },
     );
   }

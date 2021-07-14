@@ -2,17 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:login_bloc/utils/colors.dart';
 
 class CustomTextField extends StatefulWidget {
-  final TextEditingController? textController;
-  final String? hint;
-  final String? requiredMessage;
-  final String? errorText;
-  final bool isRequired;
-  final bool hasPassword;
-  final TextInputType inputType;
-  final TextInputAction action;
-  final ValueChanged<String>? onChange;
-
-  CustomTextField({
+  const CustomTextField({
+    Key? key,
     this.textController,
     this.hint,
     this.requiredMessage,
@@ -22,7 +13,17 @@ class CustomTextField extends StatefulWidget {
     this.inputType = TextInputType.text,
     this.action = TextInputAction.done,
     this.onChange,
-  });
+  }) : super(key: key);
+
+  final TextEditingController? textController;
+  final String? hint;
+  final String? requiredMessage;
+  final String? errorText;
+  final bool isRequired;
+  final bool hasPassword;
+  final TextInputType inputType;
+  final TextInputAction action;
+  final ValueChanged<String>? onChange;
 
   @override
   _CustomTextFieldState createState() => _CustomTextFieldState();
@@ -87,7 +88,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 textInputAction: widget.action,
                 onChanged: widget.onChange,
                 obscureText: _isVisiblePassword,
-                style: TextStyle(color: CustomColors.darkBlue, fontSize: 15),
+                style: const TextStyle(
+                  color: CustomColors.darkBlue,
+                  fontSize: 15,
+                ),
                 focusNode: _customFocusNode,
                 decoration: InputDecoration(
                   contentPadding: widget.hasPassword
@@ -133,7 +137,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         alignment: Alignment.topLeft,
         child: Text(
           widget.requiredMessage!,
-          style: TextStyle(color: CustomColors.lightRed),
+          style: const TextStyle(color: CustomColors.lightRed),
         ),
       );
 
@@ -141,7 +145,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         alignment: Alignment.topLeft,
         child: Text(
           widget.errorText!,
-          style: TextStyle(color: CustomColors.lightRed),
+          style: const TextStyle(color: CustomColors.lightRed),
         ),
       );
 
