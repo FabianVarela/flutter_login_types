@@ -53,9 +53,9 @@
 		</dict>
 	</array>
 	<key>FacebookAppID</key>
-	<string>489332794607008</string>
+	<string>{your-app-id}</string>
 	<key>FacebookDisplayName</key>
-	<string>RecipesSiber</string>
+	<string>{your-app-name}</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
