@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:login_bloc/bloc/biometric_bloc.dart';
 import 'package:login_bloc/common/message_service.dart';
+import 'package:login_bloc/common/routes.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
 import 'package:login_bloc/utils/colors.dart';
 
@@ -150,9 +151,7 @@ class _LoginBiometricState extends State<LoginBiometric> {
   void _goToScreen() => Future.delayed(
         Duration.zero,
         () => Navigator.of(context).pushNamedAndRemoveUntil(
-          '/home',
-          (Route<dynamic> route) => false,
-        ),
+            Routes.home, (Route<dynamic> route) => false),
       );
 
   void _showSnackBar(String message) => Future.delayed(

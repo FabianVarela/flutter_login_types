@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_bloc/common/notification_service.dart';
+import 'package:login_bloc/common/routes.dart';
 import 'package:login_bloc/ui/login_biometric.ui.dart';
 import 'package:login_bloc/ui/login_passcode.ui.dart';
 import 'package:login_bloc/ui/login_user_pass.ui.dart';
@@ -38,13 +39,13 @@ class _MyAppState extends State<MyApp> {
       locale: const Locale('en'),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      initialRoute: '/',
+      initialRoute: Routes.signInOptions,
       routes: {
-        '/': (_) => const SignInOptionsUI(),
-        '/login_user_pass': (_) => const LoginUI(),
-        '/login_passcode': (_) => const LoginPasscodeUI(),
-        '/login_biometric': (_) => const LoginBiometric(),
-        '/home': (_) => const HomePageUI(),
+        Routes.signInOptions: (_) => const SignInOptionsUI(),
+        Routes.signInUserPass: (_) => const LoginUI(),
+        Routes.signInPasscode: (_) => const LoginPasscodeUI(),
+        Routes.signInBiometric: (_) => const LoginBiometric(),
+        Routes.home: (_) => const HomePageUI(),
       },
     );
   }

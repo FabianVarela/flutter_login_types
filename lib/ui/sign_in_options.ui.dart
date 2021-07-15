@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:login_bloc/bloc/facebook_bloc.dart';
 import 'package:login_bloc/common/message_service.dart';
+import 'package:login_bloc/common/routes.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
 import 'package:login_bloc/utils/colors.dart';
 
@@ -39,7 +40,7 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
             CustomButton(
               text: localizations.signInText(localizations.signInUserPassword),
               onPress: () => Navigator.of(context).pushNamed(
-                '/login_user_pass',
+                Routes.signInUserPass,
               ),
               backgroundColor: CustomColors.white.withOpacity(.6),
               foregroundColor: CustomColors.darkBlue,
@@ -49,7 +50,7 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
             CustomButton(
               text: localizations.signInText(localizations.signInPasscode),
               onPress: () => Navigator.of(context).pushNamed(
-                '/login_passcode',
+                Routes.signInPasscode,
               ),
               backgroundColor: CustomColors.lightBlue,
               foregroundColor: CustomColors.white,
@@ -59,7 +60,7 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
             CustomButton(
               text: localizations.signInText(localizations.signInFingerPrint),
               onPress: () => Navigator.of(context).pushNamed(
-                '/login_biometric',
+                Routes.signInBiometric,
               ),
               backgroundColor: CustomColors.darkPurple,
               foregroundColor: CustomColors.white,
@@ -105,7 +106,7 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
 
   void _goToScreen() => Future.delayed(
         Duration.zero,
-        () => Navigator.of(context)
-            .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false),
+        () => Navigator.of(context).pushNamedAndRemoveUntil(
+            Routes.home, (Route<dynamic> route) => false),
       );
 }
