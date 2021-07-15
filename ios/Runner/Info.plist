@@ -48,7 +48,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-			<string>fb489332794607008</string>
+			<string>fb{your-app-id}</string>
 			</array>
 		</dict>
 	</array>
