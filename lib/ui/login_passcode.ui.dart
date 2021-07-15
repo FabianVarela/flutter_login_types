@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:login_bloc/bloc/passcode_bloc.dart';
 import 'package:login_bloc/common/message_service.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
@@ -30,6 +31,8 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return WillPopScope(
       onWillPop: _returnPageFromBar,
       child: Scaffold(
@@ -41,7 +44,7 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
               children: <Widget>[
                 StreamBuilder<int>(
                   stream: _passcodeBloc.pageStream,
-                  builder: (_, AsyncSnapshot<int> pageSnapshot) {
+                  builder: (_, pageSnapshot) {
                     if (_pageController.hasClients && pageSnapshot.hasData) {
                       if (_pageController.page!.round() != _passcodeBloc.page) {
                         _goToPage(_passcodeBloc.page!);
@@ -50,17 +53,17 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
 
                     return StreamBuilder<PasscodeStatus>(
                       stream: _passcodeBloc.passcodeStatusStream,
-                      builder: (_, AsyncSnapshot<PasscodeStatus> status) {
-                        if (status.hasData) {
-                          switch (status.data) {
+                      builder: (_, statusSnapshot) {
+                        if (statusSnapshot.hasData) {
+                          switch (statusSnapshot.data) {
                             case PasscodeStatus.verifiedError:
-                              _showSnackBar('Número de teléfono incorrecto.');
+                              _showSnackBar(localizations.phoneNumberIncorrect);
                               break;
                             case PasscodeStatus.authenticated:
                               _goToScreen();
                               break;
                             case PasscodeStatus.authenticatedError:
-                              _showSnackBar('Código incorrecto.');
+                              _showSnackBar(localizations.passcodeIncorrect);
                               break;
                             default:
                           }
@@ -131,37 +134,36 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
 
   void _goToScreen() => Future.delayed(
         Duration.zero,
-        () => Navigator.of(context)
-            .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false),
+        () => Navigator.of(context).pushNamedAndRemoveUntil(
+          '/home',
+          (Route<dynamic> route) => false,
+        ),
       );
 }
 
-class FormPhone extends StatefulWidget {
+class FormPhone extends StatelessWidget {
   const FormPhone({Key? key, required this.bloc}) : super(key: key);
 
   final PasscodeBloc bloc;
 
-  @override
-  _FormPhoneState createState() => _FormPhoneState();
-}
-
-class _FormPhoneState extends State<FormPhone> {
-  final TextEditingController _phoneController = TextEditingController();
+  TextEditingController get _phoneController => TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          const Text(
-            'Digite el número de teléfono',
+          Text(
+            localizations.phoneNumberTitle,
             textAlign: TextAlign.center,
-            style: TextStyle(color: CustomColors.darkBlue, fontSize: 20),
+            style: const TextStyle(color: CustomColors.darkBlue, fontSize: 20),
           ),
           const SizedBox(height: 50),
-          _setTextfieldPhone(),
+          _setTextFieldPhone(),
           const SizedBox(height: 20),
           _setVerifyButton(),
         ],
@@ -169,18 +171,20 @@ class _FormPhoneState extends State<FormPhone> {
     );
   }
 
-  Widget _setTextfieldPhone() => StreamBuilder<String>(
-        stream: widget.bloc.phoneStream,
-        builder: (_, AsyncSnapshot<String> emailSnapshot) {
+  Widget _setTextFieldPhone() => StreamBuilder<String>(
+        stream: bloc.phoneStream,
+        builder: (context, emailSnapshot) {
+          final localizations = AppLocalizations.of(context)!;
+
           _phoneController.value =
-              _phoneController.value.copyWith(text: widget.bloc.phone);
+              _phoneController.value.copyWith(text: bloc.phone);
 
           return CustomTextField(
             textController: _phoneController,
-            hint: 'Ingrese número telefónico',
+            hint: localizations.phoneNumberPlaceholder,
             isRequired: true,
-            requiredMessage: 'El número de teléfono es requerido',
-            onChange: widget.bloc.changePhone,
+            requiredMessage: localizations.phoneNumberRequired,
+            onChange: bloc.changePhone,
             inputType: TextInputType.phone,
             errorText: emailSnapshot.error?.toString(),
           );
@@ -188,67 +192,66 @@ class _FormPhoneState extends State<FormPhone> {
       );
 
   Widget _setVerifyButton() => StreamBuilder<bool>(
-        stream: widget.bloc.isValidPhone,
-        builder: (_, AsyncSnapshot<bool> isValidSnapshot) => Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: CustomButton(
-                  text: 'Verificar',
-                  onPress: isValidSnapshot.hasData
-                      ? () => widget.bloc.verifyPhone()
-                      : null,
-                  backgroundColor: CustomColors.lightGreen,
-                  foregroundColor: CustomColors.white,
-                  icon: const Icon(
-                    Icons.verified_outlined,
-                    color: CustomColors.white,
+        stream: bloc.isValidPhone,
+        builder: (context, isValidSnapshot) {
+          final localizations = AppLocalizations.of(context)!;
+
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: CustomButton(
+                    text: localizations.verifyButtonText,
+                    onPress: isValidSnapshot.hasData ? bloc.verifyPhone : null,
+                    backgroundColor: CustomColors.lightGreen,
+                    foregroundColor: CustomColors.white,
+                    icon: const Icon(
+                      Icons.verified_outlined,
+                      color: CustomColors.white,
+                    ),
+                    direction: IconDirection.right,
                   ),
-                  direction: IconDirection.right,
                 ),
-              ),
-            ],
-          ),
-        ),
+              ],
+            ),
+          );
+        },
       );
 }
 
-class FormPasscode extends StatefulWidget {
+class FormPasscode extends StatelessWidget {
   const FormPasscode({Key? key, required this.bloc}) : super(key: key);
 
   final PasscodeBloc bloc;
 
-  @override
-  _FormPasscodeState createState() => _FormPasscodeState();
-}
-
-class _FormPasscodeState extends State<FormPasscode> {
-  final TextEditingController _codeController = TextEditingController();
-
-  final _decoration = BoxDecoration(
-    border: Border.all(color: CustomColors.darkPurple),
-  );
+  TextEditingController get _codeController => TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
+    final _decoration = BoxDecoration(
+      border: Border.all(color: CustomColors.darkPurple),
+    );
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          const Text(
-            'Digite el código de verificación',
+          Text(
+            localizations.passcodeTitle,
             textAlign: TextAlign.center,
-            style: TextStyle(color: CustomColors.darkBlue, fontSize: 20),
+            style: const TextStyle(color: CustomColors.darkBlue, fontSize: 20),
           ),
           const SizedBox(height: 50),
           PinPut(
             fieldsCount: 4,
             controller: _codeController,
-            onChanged: widget.bloc.changeCode,
-            onSubmit: (_) => widget.bloc.verifyCode(),
+            onChanged: bloc.changeCode,
+            onSubmit: (_) => bloc.verifyCode(),
             submittedFieldDecoration: _decoration.copyWith(
               borderRadius: BorderRadius.circular(20),
             ),

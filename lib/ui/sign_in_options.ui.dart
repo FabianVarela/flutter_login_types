@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:login_bloc/bloc/facebook_bloc.dart';
 import 'package:login_bloc/common/message_service.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
@@ -16,6 +17,8 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: CustomColors.white,
       body: Padding(
@@ -24,26 +27,27 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            const Text(
-              'Elige una forma de iniciar sesión',
+            Text(
+              localizations.signInOptionText,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 color: CustomColors.darkBlue,
                 fontSize: 20,
               ),
             ),
             const SizedBox(height: 30),
             CustomButton(
-              text: 'Iniciar con usuario / contraseña',
+              text: localizations.signInText(localizations.signInUserPassword),
               onPress: () => Navigator.of(context).pushNamed(
                 '/login_user_pass',
               ),
+              backgroundColor: CustomColors.white.withOpacity(.6),
               foregroundColor: CustomColors.darkBlue,
               icon: const Icon(Icons.account_circle_outlined),
             ),
             const SizedBox(height: 20),
             CustomButton(
-              text: 'Iniciar con passcode',
+              text: localizations.signInText(localizations.signInPasscode),
               onPress: () => Navigator.of(context).pushNamed(
                 '/login_passcode',
               ),
@@ -53,7 +57,7 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
             ),
             const SizedBox(height: 20),
             CustomButton(
-              text: 'Iniciar con huella',
+              text: localizations.signInText(localizations.signInFingerPrint),
               onPress: () => Navigator.of(context).pushNamed(
                 '/login_biometric',
               ),
@@ -77,7 +81,7 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
                 }
 
                 return CustomButton(
-                  text: 'Iniciar con Facebook',
+                  text: localizations.signInText(localizations.signInFacebook),
                   onPress: _facebookBloc.authenticate,
                   backgroundColor: CustomColors.kingBlue,
                   foregroundColor: CustomColors.white,

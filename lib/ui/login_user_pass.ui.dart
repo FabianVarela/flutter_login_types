@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:login_bloc/bloc/login_bloc.dart';
 import 'package:login_bloc/common/message_service.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
@@ -30,17 +31,19 @@ class _LoginUIState extends State<LoginUI> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: CustomColors.white,
       body: StreamBuilder<bool>(
         stream: _loginBloc.isAuthenticated,
-        builder: (_, AsyncSnapshot<bool> authSnapshot) {
+        builder: (_, authSnapshot) {
           if (authSnapshot.hasData) {
             if (authSnapshot.data!) {
               _goToScreen();
             } else {
-              _showSnackBar('Usuario o contraseña incorrecta.');
+              _showSnackBar(localizations.userPasswordIncorrectMessage);
             }
           }
 
@@ -76,7 +79,7 @@ class _LoginUIState extends State<LoginUI> {
               ),
               StreamBuilder<bool>(
                 stream: _loginBloc.isLoading,
-                builder: (context, AsyncSnapshot<bool> loadSnapshot) =>
+                builder: (_, loadSnapshot) =>
                     (loadSnapshot.hasData && loadSnapshot.data!)
                         ? const Loading()
                         : const Offstage(),
@@ -90,15 +93,17 @@ class _LoginUIState extends State<LoginUI> {
 
   Widget _setTextFieldEmail() => StreamBuilder<String>(
       stream: _loginBloc.emailStream,
-      builder: (_, AsyncSnapshot<String> emailSnapshot) {
+      builder: (context, emailSnapshot) {
+        final localizations = AppLocalizations.of(context)!;
+
         _textEmailController.value =
             _textEmailController.value.copyWith(text: _loginBloc.email ?? '');
 
         return CustomTextField(
           textController: _textEmailController,
-          hint: 'Ingrese correo electrónico',
+          hint: localizations.emailPlaceholder,
           isRequired: true,
-          requiredMessage: 'El correo electrónico es requerido',
+          requiredMessage: localizations.emailRequiredMessage,
           onChange: _loginBloc.changeEmail,
           inputType: TextInputType.emailAddress,
           action: TextInputAction.next,
@@ -108,15 +113,17 @@ class _LoginUIState extends State<LoginUI> {
 
   Widget _setTextFieldPassword() => StreamBuilder<String>(
         stream: _loginBloc.passwordStream,
-        builder: (_, AsyncSnapshot<String> passwordSnapshot) {
+        builder: (context, passwordSnapshot) {
+          final localizations = AppLocalizations.of(context)!;
+
           _textPasswordController.value = _textPasswordController.value
               .copyWith(text: _loginBloc.password ?? '');
 
           return CustomTextField(
             textController: _textPasswordController,
-            hint: 'Ingrese la contraseña',
+            hint: localizations.passwordPlaceholder,
             isRequired: true,
-            requiredMessage: 'La contraseña es requerida',
+            requiredMessage: localizations.passwordRequiredMessage,
             onChange: _loginBloc.changePassword,
             errorText: passwordSnapshot.error?.toString(),
             hasPassword: true,
@@ -126,25 +133,30 @@ class _LoginUIState extends State<LoginUI> {
 
   Widget _setButton() => StreamBuilder<bool>(
         stream: _loginBloc.isValidData,
-        builder: (_, AsyncSnapshot<bool> isValidSnapshot) => Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: CustomButton(
-                  text: 'Iniciar sesión',
-                  onPress:
-                      isValidSnapshot.hasData ? _loginBloc.authenticate : null,
-                  backgroundColor: CustomColors.lightGreen,
-                  foregroundColor: CustomColors.white,
-                  icon: const Icon(Icons.send, color: CustomColors.white),
-                  direction: IconDirection.right,
+        builder: (context, isValidSnapshot) {
+          final localizations = AppLocalizations.of(context)!;
+
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: CustomButton(
+                    text: localizations.signInButton,
+                    onPress: isValidSnapshot.hasData
+                        ? _loginBloc.authenticate
+                        : null,
+                    backgroundColor: CustomColors.lightGreen,
+                    foregroundColor: CustomColors.white,
+                    icon: const Icon(Icons.send, color: CustomColors.white),
+                    direction: IconDirection.right,
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ),
+              ],
+            ),
+          );
+        },
       );
 
   void _goToScreen() => Future.delayed(
