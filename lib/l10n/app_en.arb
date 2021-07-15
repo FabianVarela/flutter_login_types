@@ -1,0 +1,108 @@
+{
+  "signInOptionText": "Chose sign in options",
+  "@signInOptionText": {
+    "description": "Sign in option title"
+  },
+  "signInText": "Sign in with {option}",
+  "@signInText": {
+    "description": "Sign in with parameter text",
+    "placeholders": {
+      "option": {
+        "type": "String",
+        "example": "Facebook"
+      }
+    }
+  },
+  "signInUserPassword": "User / password",
+  "@signInUserPassword": {
+    "description": "Sign in user/password text"
+  },
+  "signInPasscode": "Passcode",
+  "@signInPasscode": {
+    "description": "Sign in with passcode text"
+  },
+  "signInFingerPrint": "Fingerprint",
+  "@signInFingerPrint": {
+    "description": "Sign in with fingerprint text"
+  },
+  "signInFacebook": "Facebook",
+  "@signInFacebook": {
+    "description": "Sign in with facebook text"
+  },
+  "emailPlaceholder": "Enter email",
+  "@emailPlaceholder": {
+    "description": "Email text field placeholder"
+  },
+  "emailRequiredMessage": "Email is required",
+  "@emailRequiredMessage": {
+    "description": "Message if email is required"
+  },
+  "passwordPlaceholder": "Enter password",
+  "@passwordPlaceholder": {
+    "description": "Password text field placeholder"
+  },
+  "passwordRequiredMessage": "Password is required",
+  "@passwordRequiredMessage": {
+    "description": "Message if password is required"
+  },
+  "signInButton": "Sign In",
+  "@signInButton": {
+    "description": "Sign in button text"
+  },
+  "userPasswordIncorrectMessage": "User or password incorrect.",
+  "@userPasswordIncorrectMessage": {
+    "description": "Message when user or password are incorrect"
+  },
+  "phoneNumberTitle": "Digit phone number",
+  "@phoneNumberTitle": {
+    "description": "Phone number screen title"
+  },
+  "phoneNumberPlaceholder": "Enter phone number",
+  "@phoneNumberPlaceholder": {
+    "description": "phone number text field placeholder"
+  },
+  "phoneNumberRequired": "Phone number is required",
+  "@phoneNumberRequired": {
+    "description": "Message if phone number is required"
+  },
+  "verifyButtonText": "Verify",
+  "@verifyButtonText": {
+    "description": "Verify button text"
+  },
+  "passcodeTitle": "Digit verification code",
+  "@passcodeTitle": {
+    "description": "Passcode screen title"
+  },
+  "phoneNumberIncorrect": "Phone number is incorrect.",
+  "@phoneNumberIncorrect": {
+    "description": "Message when phone number is incorrect"
+  },
+  "passcodeIncorrect": "Passcode is incorrect.",
+  "@passcodeIncorrect": {
+    "description": "Message when passcode is incorrect"
+  },
+  "biometricTitle": "Click to start",
+  "@biometricTitle": {
+    "description": "Biometric screen title"
+  },
+  "biometricButtonText": "Click to start with fingerprint",
+  "@biometricButtonText": {
+    "description": "Biometric button text"
+  },
+  "biometricEnabledText": "You must go to settings and \nenable fingerprint or face ID",
+  "@biometricEnabledText": {
+    "description": "Message when biometric is disabled in device"
+  },
+  "biometricNoSupportedText": "This device no support sign in by fingerprint",
+  "@biometricNoSupportedText": {
+    "description": "Message when biometric is not supported in this device"
+  },
+  "homeTitle": "Home page",
+  "@homeTitle": {
+    "description": "Home app bar title"
+  },
+  "homeText": "Welcome",
+  "@homeText": {
+    "description": "Home text in page"
+  }
+}
