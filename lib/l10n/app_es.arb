@@ -1,4 +1,6 @@
 {
+  "@@locale": "es",
+  "appName": "Login con Bloc",
   "signInOptionText": "Elige una forma de iniciar sesión",
   "signInText": "Iniciar sesión con {option}",
   "@signInText": {

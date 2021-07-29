@@ -1,4 +1,9 @@
 {
+  "@@locale": "en",
+  "appName": "Login with Bloc",
+  "@appName": {
+    "description": "App title"
+  },
   "signInOptionText": "Chose sign in options",
   "@signInOptionText": {
     "description": "Sign in option title"
