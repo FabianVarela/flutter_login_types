@@ -29,6 +29,18 @@
   "@signInFacebook": {
     "description": "Sign in with facebook text"
   },
+  "signInFacebookInProgress": "In progress, please wait",
+  "@signInFacebookInProgress": {
+    "description": "Sign in with facebook in progress text message"
+  },
+  "signInFacebookCancelled": "Cancelled by the user",
+  "@signInFacebookCancelled": {
+    "description": "Sign in with facebook cancelled text message"
+  },
+  "signInFacebookError": "Error to sign in with Facebook",
+  "@signInFacebookError": {
+    "description": "Sign in with facebook error text message"
+  },
   "emailPlaceholder": "Enter email",
   "@emailPlaceholder": {
     "description": "Email text field placeholder"
@@ -97,6 +109,14 @@
   "@biometricNoSupportedText": {
     "description": "Message when biometric is not supported in this device"
   },
+  "biometricReason": "Set fingerprint or face id to start",
+  "@biometricReason": {
+    "description": "Message when biometric show dialog"
+  },
+  "biometricError": "No authorized",
+  "@biometricError": {
+    "description": "Biometric message when user is not authorized"
+  },
   "homeTitle": "Home page",
   "@homeTitle": {
     "description": "Home app bar title"
@@ -104,5 +124,35 @@
   "homeText": "Welcome",
   "@homeText": {
     "description": "Home text in page"
+  },
+  "emptyValidation": "Text field is empty",
+  "@emptyValidation": {
+    "description": "Message in text field when is empty"
+  },
+  "emailValidation": "Enter a valid email",
+  "@emailValidation": {
+    "description": "Message in text field when email is invalid"
+  },
+  "passwordValidation": "The password is greater than 4 characters",
+  "@passwordValidation": {
+    "description": "Message in text field when password is invalid"
+  },
+  "numberValidation": "Enter a valid number",
+  "@numberValidation": {
+    "description": "Message in text field when text is not numeric"
+  },
+  "notificationTitle": "Login with BloC",
+  "@notificationTitle": {
+    "description": "Notification title when send a code"
+  },
+  "notificationMessage": "Your code is {code}",
+  "@notificationMessage": {
+    "description": "Notification text when send a code",
+    "placeholders": {
+      "code": {
+        "type": "String",
+        "example": "0000"
+      }
+    }
   }
 }

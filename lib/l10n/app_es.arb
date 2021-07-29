@@ -13,6 +13,9 @@
   "signInPasscode": "Passcode",
   "signInFingerPrint": "Huella",
   "signInFacebook": "Facebook",
+  "signInFacebookInProgress": "En progreso, por favor espere",
+  "signInFacebookCancelled": "Cancelado por el usuario",
+  "signInFacebookError": "Error al iniciar sesión con Facebook",
   "emailPlaceholder": "Ingrese correo electrónico",
   "emailRequiredMessage": "El correo electrónico es requerido",
   "passwordPlaceholder": "Ingrese la contraseña",
@@ -30,6 +33,22 @@
   "biometricButtonText": "Click para iniciar con huella",
   "biometricEnabledText": "Debes ir a configuración y habilitar \nla huella o el Face ID",
   "biometricNoSupportedText": "Este dispositivo no soporta inicio de sesión mediante biometría",
+  "biometricReason": "Coloca tu huella o cara para iniciar",
+  "biometricError": "No autorizado",
   "homeTitle": "Página de inicio",
-  "homeText": "Bienvenido"
+  "homeText": "Bienvenido",
+  "emptyValidation": "El campo de texto se encuentra vacío",
+  "emailValidation": "Ingrese un correo válido",
+  "passwordValidation": "La contraseña debe ser mayor que 4 caracteres",
+  "numberValidation": "Ingrese un número válido",
+  "notificationTitle": "Inicio de sesión con BloC",
+  "notificationMessage": "Tu código es {code}",
+  "@notificationMessage": {
+    "placeholders": {
+      "code": {
+        "type": "String",
+        "example": "0000"
+      }
+    }
+  }
 }
