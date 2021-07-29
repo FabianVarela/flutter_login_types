@@ -1,34 +1,40 @@
 import 'dart:async';
 
+import 'package:login_bloc/common/model/text_field_validator.dart';
+
 mixin Validator {
-  final validateEmail =
-      StreamTransformer<String, String>.fromHandlers(handleData: (email, sink) {
-    if (email.isNotEmpty && _validateEmail(email)) {
-      sink.add(email);
-    } else {
-      sink.addError('Ingrese un correo válido');
-    }
-  });
+  final checkEmail = StreamTransformer<String, TextFieldValidator>.fromHandlers(
+    handleData: (email, sink) {
+      if (email.isNotEmpty && _validateEmail(email)) {
+        sink.add(TextFieldValidator(text: email));
+      } else {
+        sink.addError(TextFieldValidator(validator: TextValidator.email));
+      }
+    },
+  );
 
-  final validatePassword = StreamTransformer<String, String>.fromHandlers(
-      handleData: (password, sink) {
-    if (password.isNotEmpty && password.length >= 4) {
-      sink.add(password);
-    } else {
-      sink.addError('La contraseña debe ser mayor que 4 caracteres');
-    }
-  });
+  final checkPass = StreamTransformer<String, TextFieldValidator>.fromHandlers(
+    handleData: (password, sink) {
+      if (password.isNotEmpty && password.length >= 4) {
+        sink.add(TextFieldValidator(text: password));
+      } else {
+        sink.addError(TextFieldValidator(validator: TextValidator.password));
+      }
+    },
+  );
 
-  final validateNumber = StreamTransformer<String, String>.fromHandlers(
-      handleData: (number, sink) {
-    if (number.isNotEmpty &&
-        _validateNumber(number) &&
-        _validatePhoneNumber(number)) {
-      sink.add(number);
-    } else {
-      sink.addError('Ingrese un número válido');
-    }
-  });
+  final checkNum = StreamTransformer<String, TextFieldValidator>.fromHandlers(
+    handleData: (number, sink) {
+      final isNumber = _validateNumber(number);
+      final isPhoneNumber = _validatePhoneNumber(number);
+
+      if (number.isNotEmpty && isNumber && isPhoneNumber) {
+        sink.add(TextFieldValidator(text: number));
+      } else {
+        sink.addError(TextFieldValidator(validator: TextValidator.numeric));
+      }
+    },
+  );
 }
 
 bool _validateEmail(String value) => _isMatch(
