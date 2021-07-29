@@ -32,14 +32,23 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.teal,
-        textTheme: GoogleFonts.notoSansTextTheme(
-          Theme.of(context).textTheme,
-        ),
+        textTheme: GoogleFonts.notoSansTextTheme(Theme.of(context).textTheme),
       ),
-      locale: const Locale('en'),
+      // locale: null,
+      // locale: const Locale('en'),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       initialRoute: Routes.signInOptions,
+      localeResolutionCallback: (locale, supportedLocales) {
+        print('Locale: $locale · Locales: $supportedLocales');
+        for (final currentLocale in supportedLocales) {
+          if (currentLocale.languageCode == locale?.languageCode) {
+            return currentLocale;
+          }
+        }
+        return supportedLocales.first;
+      },
+      onGenerateTitle: (context) => AppLocalizations.of(context)!.appName,
       routes: {
         Routes.signInOptions: (_) => const SignInOptionsUI(),
         Routes.signInUserPass: (_) => const LoginUI(),
