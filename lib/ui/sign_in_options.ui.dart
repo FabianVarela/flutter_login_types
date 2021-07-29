@@ -3,8 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:login_bloc/bloc/facebook_bloc.dart';
 import 'package:login_bloc/common/message_service.dart';
 import 'package:login_bloc/common/routes.dart';
+import 'package:login_bloc/ui/common/colors.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
-import 'package:login_bloc/utils/colors.dart';
 
 class SignInOptionsUI extends StatefulWidget {
   const SignInOptionsUI({Key? key}) : super(key: key);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login_bloc/utils/colors.dart';
+import 'package:login_bloc/ui/common/colors.dart';
 
 class MessageService {
   static final MessageService _instance = MessageService();

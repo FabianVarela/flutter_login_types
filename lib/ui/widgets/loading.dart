@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login_bloc/utils/colors.dart';
+import 'package:login_bloc/ui/common/colors.dart';
 
 class Loading extends StatelessWidget {
   const Loading({Key? key}) : super(key: key);

@@ -9,8 +9,8 @@ import 'package:login_bloc/common/routes.dart';
 import 'package:login_bloc/common/utils.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
 import 'package:login_bloc/ui/widgets/custom_textfield.dart';
+import 'package:login_bloc/ui/common/colors.dart';
 import 'package:login_bloc/ui/widgets/loading.dart';
-import 'package:login_bloc/utils/colors.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
 class LoginPasscodeUI extends StatefulWidget {
