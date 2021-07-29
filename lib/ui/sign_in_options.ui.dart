@@ -39,9 +39,7 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
             const SizedBox(height: 30),
             CustomButton(
               text: localizations.signInText(localizations.signInUserPassword),
-              onPress: () => Navigator.of(context).pushNamed(
-                Routes.signInUserPass,
-              ),
+              onPress: () => _pushScreen(Routes.signInUserPass),
               backgroundColor: CustomColors.white.withOpacity(.6),
               foregroundColor: CustomColors.darkBlue,
               icon: const Icon(Icons.account_circle_outlined),
@@ -49,9 +47,7 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
             const SizedBox(height: 20),
             CustomButton(
               text: localizations.signInText(localizations.signInPasscode),
-              onPress: () => Navigator.of(context).pushNamed(
-                Routes.signInPasscode,
-              ),
+              onPress: () => _pushScreen(Routes.signInPasscode),
               backgroundColor: CustomColors.lightBlue,
               foregroundColor: CustomColors.white,
               icon: const Icon(Icons.sms_outlined, color: CustomColors.white),
@@ -59,9 +55,7 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
             const SizedBox(height: 20),
             CustomButton(
               text: localizations.signInText(localizations.signInFingerPrint),
-              onPress: () => Navigator.of(context).pushNamed(
-                Routes.signInBiometric,
-              ),
+              onPress: () => _pushScreen(Routes.signInBiometric),
               backgroundColor: CustomColors.darkPurple,
               foregroundColor: CustomColors.white,
               icon: const Icon(
@@ -70,28 +64,20 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
               ),
             ),
             const SizedBox(height: 20),
-            StreamBuilder<String>(
-              stream: _facebookBloc.message,
-              builder: (_, AsyncSnapshot<String> messageSnapshot) {
-                if (messageSnapshot.hasData) {
-                  if (messageSnapshot.data!.isNotEmpty) {
-                    _showSnackBar(messageSnapshot.data!);
-                  } else {
-                    _goToScreen();
-                  }
-                }
+            CustomButton(
+              text: localizations.signInText(localizations.signInFacebook),
+              onPress: () async {
+                final result = await _facebookBloc.authenticate();
 
-                return CustomButton(
-                  text: localizations.signInText(localizations.signInFacebook),
-                  onPress: _facebookBloc.authenticate,
-                  backgroundColor: CustomColors.kingBlue,
-                  foregroundColor: CustomColors.white,
-                  icon: const Icon(
-                    Icons.face_outlined,
-                    color: CustomColors.white,
-                  ),
-                );
+                if (result != null) {
+                  _showSnackBar(result);
+                } else {
+                  await _goToHomeScreen();
+                }
               },
+              backgroundColor: CustomColors.kingBlue,
+              foregroundColor: CustomColors.white,
+              icon: const Icon(Icons.face_outlined, color: CustomColors.white),
             ),
           ],
         ),
@@ -99,14 +85,28 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
     );
   }
 
-  void _showSnackBar(String message) => Future.delayed(
-        const Duration(milliseconds: 100),
-        () => MessageService.getInstance().showMessage(context, message),
-      );
+  void _showSnackBar(FacebookState state) {
+    final localizations = AppLocalizations.of(context)!;
+    final String? message;
 
-  void _goToScreen() => Future.delayed(
-        Duration.zero,
-        () => Navigator.of(context).pushNamedAndRemoveUntil(
-            Routes.home, (Route<dynamic> route) => false),
-      );
+    switch (state) {
+      case FacebookState.inProgress:
+        message = localizations.signInFacebookInProgress;
+        break;
+      case FacebookState.cancelled:
+        message = localizations.signInFacebookCancelled;
+        break;
+      case FacebookState.error:
+        message = localizations.signInFacebookError;
+        break;
+    }
+
+    MessageService.getInstance().showMessage(context, message);
+  }
+
+  Future<void> _goToHomeScreen() async => await Navigator.of(context)
+      .pushNamedAndRemoveUntil(Routes.home, (Route<dynamic> route) => false);
+
+  Future<void> _pushScreen(String routeName) async =>
+      await Navigator.of(context).pushNamed(routeName);
 }

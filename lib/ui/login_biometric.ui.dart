@@ -31,6 +31,8 @@ class _LoginBiometricState extends State<LoginBiometric> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: CustomColors.white,
       body: Stack(
@@ -38,22 +40,17 @@ class _LoginBiometricState extends State<LoginBiometric> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: StreamBuilder<bool>(
+              initialData: false,
               stream: _biometricBloc.hasBiometricStream,
-              builder: (_, hasBiometricSnapshot) {
-                if (hasBiometricSnapshot.hasData) {
-                  if (hasBiometricSnapshot.data!) {
-                    return _setBiometricLoginBody();
-                  } else {
-                    return _setEmptyMessage();
-                  }
-                }
-
-                return const Center(
-                  child: CircularProgressIndicator(
-                    backgroundColor: CustomColors.lightGreen,
-                  ),
-                );
-              },
+              builder: (_, snapshot) => snapshot.data!
+                  ? BiometricBody(
+                      bloc: _biometricBloc,
+                      onGoToScreen: _goToScreen,
+                      onSendMessage: _showSnackBar,
+                    )
+                  : TextMessage(
+                      message: localizations.biometricNoSupportedText,
+                    ),
             ),
           ),
           Positioned(
@@ -69,93 +66,94 @@ class _LoginBiometricState extends State<LoginBiometric> {
     );
   }
 
-  Widget _setBiometricLoginBody() {
-    return StreamBuilder<String?>(
-      stream: _biometricBloc.messageStream,
-      builder: (context, messageSnapshot) {
-        final localizations = AppLocalizations.of(context)!;
-
-        if (messageSnapshot.hasData) {
-          if (messageSnapshot.data!.isNotEmpty) {
-            _showSnackBar(messageSnapshot.data!);
-          } else {
-            _goToScreen();
-          }
-        }
-
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              localizations.biometricTitle,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: CustomColors.darkBlue,
-                fontSize: 20,
-              ),
-            ),
-            const SizedBox(height: 30),
-            StreamBuilder<List<BiometricType>>(
-              initialData: const <BiometricType>[],
-              stream: _biometricBloc.biometricListStream,
-              builder: (_, bioSnapshot) {
-                if (bioSnapshot.hasData && bioSnapshot.data!.isNotEmpty) {
-                  return Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: CustomButton(
-                          text: localizations.biometricButtonText,
-                          onPress: _biometricBloc.authenticate,
-                          backgroundColor: CustomColors.darkPurple,
-                          foregroundColor: CustomColors.white,
-                        ),
-                      ),
-                    ],
-                  );
-                }
-
-                return Center(
-                  child: Text(
-                    localizations.biometricEnabledText,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: CustomColors.darkBlue,
-                      fontSize: 20,
-                    ),
-                  ),
-                );
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  Widget _setEmptyMessage() => Center(
-        child: Text(
-          AppLocalizations.of(context)!.biometricNoSupportedText,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            color: CustomColors.darkBlue,
-            fontSize: 25,
-          ),
-        ),
-      );
-
   void _initBiometric() async {
     await _biometricBloc.checkBiometric();
     await _biometricBloc.getListBiometric();
   }
 
-  void _goToScreen() => Future.delayed(
-        Duration.zero,
-        () => Navigator.of(context).pushNamedAndRemoveUntil(
-            Routes.home, (Route<dynamic> route) => false),
-      );
+  void _showSnackBar(String message) =>
+      MessageService.getInstance().showMessage(context, message);
 
-  void _showSnackBar(String message) => Future.delayed(
-        const Duration(milliseconds: 100),
-        () => MessageService.getInstance().showMessage(context, message),
-      );
+  Future<void> _goToScreen() async => await Navigator.of(context)
+      .pushNamedAndRemoveUntil(Routes.home, (Route<dynamic> route) => false);
+}
+
+class BiometricBody extends StatelessWidget {
+  const BiometricBody({
+    Key? key,
+    required this.bloc,
+    required this.onSendMessage,
+    required this.onGoToScreen,
+  }) : super(key: key);
+
+  final BiometricBloc bloc;
+  final ValueSetter<String> onSendMessage;
+  final VoidCallback onGoToScreen;
+
+  @override
+  Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(
+          localizations.biometricTitle,
+          textAlign: TextAlign.center,
+          style: const TextStyle(color: CustomColors.darkBlue, fontSize: 20),
+        ),
+        const SizedBox(height: 30),
+        StreamBuilder<List<BiometricType>>(
+          initialData: const <BiometricType>[],
+          stream: bloc.biometricListStream,
+          builder: (_, snapshot) {
+            if (snapshot.data!.isNotEmpty) {
+              return Row(
+                children: <Widget>[
+                  Expanded(
+                    child: CustomButton(
+                      text: localizations.biometricButtonText,
+                      onPress: () => _onPressButton(context),
+                      backgroundColor: CustomColors.darkPurple,
+                      foregroundColor: CustomColors.white,
+                    ),
+                  ),
+                ],
+              );
+            }
+
+            return TextMessage(message: localizations.biometricEnabledText);
+          },
+        ),
+      ],
+    );
+  }
+
+  void _onPressButton(BuildContext context) async {
+    final localizations = AppLocalizations.of(context)!;
+    final result = await bloc.authenticate(localizations.biometricReason);
+
+    if (result) {
+      onGoToScreen();
+    } else {
+      onSendMessage(localizations.biometricError);
+    }
+  }
+}
+
+class TextMessage extends StatelessWidget {
+  const TextMessage({Key? key, required this.message}) : super(key: key);
+
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        message,
+        textAlign: TextAlign.center,
+        style: const TextStyle(color: CustomColors.darkBlue, fontSize: 25),
+      ),
+    );
+  }
 }
