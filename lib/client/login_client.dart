@@ -1,34 +1,22 @@
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class LoginClient {
-  Future<String> authenticate(String username, String password) async {
+  Future<String?> authenticate(String username, String password) async {
     await Future.delayed(const Duration(seconds: 3));
 
-    if (username == 'prueba@prueba.com' && password == 'password') {
-      return 'MiToken';
-    } else {
-      return 'Error en autenticarse';
-    }
+    return username == 'prueba@prueba.com' && password == 'password'
+        ? 'MiToken'
+        : null;
   }
 
-  Future<String> verifyPhone(String phoneNumber) async {
+  Future<String?> verifyPhone(String phoneNumber) async {
     await Future.delayed(const Duration(seconds: 3));
-
-    if (phoneNumber == '3004567890') {
-      return '';
-    } else {
-      return 'Error en verificar';
-    }
+    return phoneNumber == '3004567890' ? '' : null;
   }
 
-  Future<String> verifyCode(String code) async {
+  Future<String?> verifyCode(String code) async {
     await Future.delayed(const Duration(seconds: 3));
-
-    if (code == '0000') {
-      return 'MiToken';
-    } else {
-      return 'Error en autenticarse';
-    }
+    return code == '0000' ? 'MiToken' : null;
   }
 
   Future<Map<String, dynamic>> authenticateFacebook() async {
