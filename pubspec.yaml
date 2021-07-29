@@ -15,6 +15,7 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   rxdart: ^0.26.0
+  flutter_hooks: ^0.18.0
   pinput: ^1.2.0
   local_auth: ^1.1.0
   flutter_facebook_auth: ^3.0.0+1
