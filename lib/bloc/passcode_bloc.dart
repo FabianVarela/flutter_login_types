@@ -45,7 +45,7 @@ class PasscodeBloc extends BaseBloc with Validator {
     final token = await _repository.verifyPhone(_phoneSubject.value!);
     loading.sink.add(false);
 
-    return token.isEmpty;
+    return token != null && token.isEmpty;
   }
 
   Future<bool> verifyCode() async {
@@ -53,7 +53,7 @@ class PasscodeBloc extends BaseBloc with Validator {
     final token = await _repository.verifyCode(_codeSubject.value!);
     loading.sink.add(false);
 
-    return token == 'MiToken';
+    return token != null && token == 'MiToken';
   }
 
   @override

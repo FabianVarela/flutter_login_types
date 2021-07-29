@@ -39,7 +39,7 @@ class LoginBloc extends BaseBloc with Validator {
         _emailSubject.value!, _passwordSubject.value!);
 
     loading.sink.add(false);
-    return token == 'MiToken';
+    return token != null && token == 'MiToken';
   }
 
   @override
