@@ -1,42 +1,38 @@
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:login_bloc/bloc/base_bloc.dart';
 import 'package:login_bloc/repository/login_repository.dart';
-import 'package:rxdart/subjects.dart';
+
+enum FacebookState { inProgress, cancelled, error }
 
 class FacebookBloc extends BaseBloc {
   final _repository = LoginRepository();
 
-  final _message = BehaviorSubject<String>();
-
-  Stream<String> get message => _message.stream;
-
-  void authenticate() async {
+  Future<FacebookState?> authenticate() async {
+    FacebookState? result;
     loading.sink.add(true);
 
     try {
       await _repository.authenticateFacebook();
-      _message.sink.add('');
     } on FacebookAuthException catch (e) {
       switch (e.errorCode) {
         case FacebookAuthErrorCode.OPERATION_IN_PROGRESS:
-          _message.sink.add('En progreso, por favor espere');
+          result = FacebookState.inProgress;
           break;
         case FacebookAuthErrorCode.CANCELLED:
-          _message.sink.add('Cancelado');
+          result = FacebookState.cancelled;
           break;
         case FacebookAuthErrorCode.FAILED:
-          _message.sink.add('Error al iniciar sesión');
+          result = FacebookState.error;
           break;
       }
     }
 
     loading.sink.add(false);
-    clean(_message);
+    return result;
   }
 
   @override
   void dispose() {
-    _message.close();
     loading.close();
   }
 }

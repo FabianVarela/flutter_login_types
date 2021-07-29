@@ -6,13 +6,9 @@ import 'package:rxdart/subjects.dart';
 class BiometricBloc extends BaseBloc {
   final _authentication = LocalAuthentication();
 
-  final _messageSubject = BehaviorSubject<String?>();
-
   final _hasBiometricSubject = BehaviorSubject<bool>();
 
   final _biometricList = BehaviorSubject<List<BiometricType>>();
-
-  Stream<String?> get messageStream => _messageSubject.stream;
 
   Stream<bool> get hasBiometricStream => _hasBiometricSubject.stream;
 
@@ -23,11 +19,9 @@ class BiometricBloc extends BaseBloc {
       final hasBiometric = await _authentication.canCheckBiometrics;
       _hasBiometricSubject.sink.add(hasBiometric);
     } on PlatformException catch (e) {
-      _messageSubject.sink.add(e.message ?? 'Error to check biometric');
       print(e);
+      _hasBiometricSubject.sink.add(false);
     }
-
-    clean(_messageSubject);
   }
 
   Future<void> getListBiometric() async {
@@ -35,32 +29,27 @@ class BiometricBloc extends BaseBloc {
       final biometricList = await _authentication.getAvailableBiometrics();
       _biometricList.sink.add(biometricList);
     } on PlatformException catch (e) {
-      _messageSubject.sink.add(e.message ?? 'Error to get biometric list');
       print(e);
+      _biometricList.sink.add([]);
     }
-
-    clean(_messageSubject);
   }
 
-  void authenticate() async {
+  Future<bool> authenticate(String reason) async {
     try {
       final isAuthorized = await _authentication.authenticate(
-        localizedReason: 'Coloca tu huella o cara para iniciar',
+        localizedReason: reason,
         useErrorDialogs: true,
         stickyAuth: true,
       );
-      _messageSubject.sink.add(isAuthorized ? '' : 'No autorizado');
+      return isAuthorized;
     } on PlatformException catch (e) {
-      _messageSubject.sink.addError(e.message ?? 'Error to authenticate');
       print(e);
+      return false;
     }
-
-    clean(_messageSubject);
   }
 
   @override
   void dispose() {
-    _messageSubject.close();
     _hasBiometricSubject.close();
     _biometricList.close();
   }
