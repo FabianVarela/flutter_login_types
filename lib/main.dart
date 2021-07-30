@@ -41,10 +41,13 @@ class _MyAppState extends State<MyApp> {
       initialRoute: Routes.signInOptions,
       localeResolutionCallback: (locale, supportedLocales) {
         print('Locale: $locale · Locales: $supportedLocales');
+        if (locale == null) return supportedLocales.first;
+
         for (final currentLocale in supportedLocales) {
-          if (currentLocale.languageCode == locale?.languageCode) {
-            return currentLocale;
-          }
+          final isLanguage = currentLocale.languageCode == locale.languageCode;
+          final isCountry = currentLocale.countryCode == locale.countryCode;
+
+          if (isLanguage || isCountry) return currentLocale;
         }
         return supportedLocales.first;
       },
