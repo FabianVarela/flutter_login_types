@@ -52,5 +52,8 @@
         "example": "0000"
       }
     }
-  }
+  },
+  "changeLanguageTitle": "Cambiar idioma",
+  "englishLanguage": "Inglés",
+  "spanishLanguage": "Español"
 }

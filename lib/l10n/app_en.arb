@@ -159,5 +159,17 @@
         "example": "0000"
       }
     }
+  },
+  "changeLanguageTitle": "Change language",
+  "@changeLanguageTitle": {
+    "description": "Change language title"
+  },
+  "englishLanguage": "English",
+  "@englishLanguage": {
+    "description": "Change language first option text"
+  },
+  "spanishLanguage": "Spanish",
+  "@spanishLanguage": {
+    "description": "Change language second option text"
   }
 }
