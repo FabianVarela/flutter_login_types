@@ -54,3 +54,5 @@ class BiometricBloc extends BaseBloc {
     _biometricList.close();
   }
 }
+
+final biometricBloc = BiometricBloc();

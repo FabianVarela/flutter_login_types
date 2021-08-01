@@ -50,3 +50,5 @@ class LoginBloc extends BaseBloc with Validator {
     loading.close();
   }
 }
+
+final loginBloc = LoginBloc();

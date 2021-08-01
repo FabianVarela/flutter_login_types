@@ -36,3 +36,5 @@ class FacebookBloc extends BaseBloc {
     loading.close();
   }
 }
+
+final facebookBloc = FacebookBloc();

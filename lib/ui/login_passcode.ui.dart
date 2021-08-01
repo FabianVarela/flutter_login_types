@@ -26,11 +26,9 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
     keepPage: true,
   );
 
-  final _passcodeBloc = PasscodeBloc();
-
   @override
   void dispose() {
-    _passcodeBloc.dispose();
+    passcodeBloc.dispose();
     super.dispose();
   }
 
@@ -46,11 +44,11 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
             Stack(
               children: <Widget>[
                 StreamBuilder<int>(
-                  stream: _passcodeBloc.pageStream,
+                  stream: passcodeBloc.pageStream,
                   builder: (_, pageSnapshot) {
                     if (_pageController.hasClients && pageSnapshot.hasData) {
-                      if (_pageController.page!.round() != _passcodeBloc.page) {
-                        _goToPage(_passcodeBloc.page!);
+                      if (_pageController.page!.round() != passcodeBloc.page) {
+                        _goToPage(passcodeBloc.page!);
                       }
                     }
 
@@ -59,11 +57,11 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
                       physics: const NeverScrollableScrollPhysics(),
                       children: <Widget>[
                         FormPhone(
-                          bloc: _passcodeBloc,
+                          bloc: passcodeBloc,
                           onSendMessage: _showSnackBar,
                         ),
                         FormPasscode(
-                          bloc: _passcodeBloc,
+                          bloc: passcodeBloc,
                           onGoToScreen: _goToScreen,
                           onSendMessage: _showSnackBar,
                         ),
@@ -83,7 +81,7 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
             ),
             StreamBuilder<bool>(
               initialData: false,
-              stream: _passcodeBloc.isLoading,
+              stream: passcodeBloc.isLoading,
               builder: (context, AsyncSnapshot<bool> snapshot) => Offstage(
                 offstage: !snapshot.data!,
                 child: const Loading(),
@@ -96,17 +94,17 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
   }
 
   Future<bool> _returnPageFromBar() {
-    if (_passcodeBloc.page == 0) return Future<bool>.value(true);
+    if (passcodeBloc.page == 0) return Future<bool>.value(true);
 
-    _passcodeBloc.changePage(0);
+    passcodeBloc.changePage(0);
     return Future<bool>.value(false);
   }
 
   void _returnPage() {
-    if (_passcodeBloc.page == 0) {
+    if (passcodeBloc.page == 0) {
       Navigator.of(context).pop();
     } else {
-      _passcodeBloc.changePage(0);
+      passcodeBloc.changePage(0);
     }
   }
 

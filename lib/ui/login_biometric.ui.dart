@@ -15,8 +15,6 @@ class LoginBiometric extends StatefulWidget {
 }
 
 class _LoginBiometricState extends State<LoginBiometric> {
-  final _biometricBloc = BiometricBloc();
-
   @override
   void initState() {
     super.initState();
@@ -25,7 +23,7 @@ class _LoginBiometricState extends State<LoginBiometric> {
 
   @override
   void dispose() {
-    _biometricBloc.dispose();
+    biometricBloc.dispose();
     super.dispose();
   }
 
@@ -41,10 +39,10 @@ class _LoginBiometricState extends State<LoginBiometric> {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: StreamBuilder<bool>(
               initialData: false,
-              stream: _biometricBloc.hasBiometricStream,
+              stream: biometricBloc.hasBiometricStream,
               builder: (_, snapshot) => snapshot.data!
                   ? BiometricBody(
-                      bloc: _biometricBloc,
+                      bloc: biometricBloc,
                       onGoToScreen: _goToScreen,
                       onSendMessage: _showSnackBar,
                     )
@@ -67,8 +65,8 @@ class _LoginBiometricState extends State<LoginBiometric> {
   }
 
   void _initBiometric() async {
-    await _biometricBloc.checkBiometric();
-    await _biometricBloc.getListBiometric();
+    await biometricBloc.checkBiometric();
+    await biometricBloc.getListBiometric();
   }
 
   void _showSnackBar(String message) =>

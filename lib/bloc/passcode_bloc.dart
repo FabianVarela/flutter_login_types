@@ -63,3 +63,5 @@ class PasscodeBloc extends BaseBloc with Validator {
     loading.close();
   }
 }
+
+final passcodeBloc = PasscodeBloc();

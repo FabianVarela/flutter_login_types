@@ -14,8 +14,6 @@ class SignInOptionsUI extends StatefulWidget {
 }
 
 class _SignInOptionsUIState extends State<SignInOptionsUI> {
-  final _facebookBloc = FacebookBloc();
-
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
@@ -67,7 +65,7 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
             CustomButton(
               text: localizations.signInText(localizations.signInFacebook),
               onPress: () async {
-                final result = await _facebookBloc.authenticate();
+                final result = await facebookBloc.authenticate();
 
                 if (result != null) {
                   _showSnackBar(result);

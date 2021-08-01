@@ -21,11 +21,9 @@ class LoginUI extends StatefulWidget {
 }
 
 class _LoginUIState extends State<LoginUI> {
-  final _loginBloc = LoginBloc();
-
   @override
   void dispose() {
-    _loginBloc.dispose();
+    loginBloc.dispose();
     super.dispose();
   }
 
@@ -46,12 +44,12 @@ class _LoginUIState extends State<LoginUI> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    TextFieldEmail(bloc: _loginBloc),
+                    TextFieldEmail(bloc: loginBloc),
                     const SizedBox(height: 20),
-                    TextFieldPassword(bloc: _loginBloc),
+                    TextFieldPassword(bloc: loginBloc),
                     const SizedBox(height: 20),
                     SubmitButton(
-                      bloc: _loginBloc,
+                      bloc: loginBloc,
                       onSendMessage: _showSnackBar,
                       onGoToScreen: _goToHomeScreen,
                     ),
@@ -70,7 +68,7 @@ class _LoginUIState extends State<LoginUI> {
           ),
           StreamBuilder<bool>(
             initialData: false,
-            stream: _loginBloc.isLoading,
+            stream: loginBloc.isLoading,
             builder: (_, loadSnapshot) => Offstage(
               offstage: !loadSnapshot.data!,
               child: const Loading(),
