@@ -1,18 +1,20 @@
 PODS:
-  - FBSDKCoreKit (9.0.0):
-    - FBSDKCoreKit/Basics (= 9.0.0)
-    - FBSDKCoreKit/Core (= 9.0.0)
-  - FBSDKCoreKit/Basics (9.0.0)
-  - FBSDKCoreKit/Core (9.0.0):
-    - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (9.0.0):
-    - FBSDKLoginKit/Login (= 9.0.0)
-  - FBSDKLoginKit/Login (9.0.0):
-    - FBSDKCoreKit (~> 9.0.0)
+  - FBSDKCoreKit (11.0.1):
+    - FBSDKCoreKit/Core (= 11.0.1)
+  - FBSDKCoreKit/Core (11.0.1):
+    - FBSDKCoreKit_Basics (~> 11.0.1)
+  - FBSDKCoreKit_Basics (11.0.1):
+    - FBSDKCoreKit_Basics/Basics (= 11.0.1)
+  - FBSDKCoreKit_Basics/Basics (11.0.1)
+  - FBSDKLoginKit (11.0.1):
+    - FBSDKLoginKit/Login (= 11.0.1)
+  - FBSDKLoginKit/Login (11.0.1):
+    - FBSDKCoreKit (~> 11.0.1)
+    - FBSDKCoreKit_Basics (~> 11.0.1)
   - Flutter (1.0.0)
-  - flutter_facebook_auth (1.0.0):
-    - FBSDKCoreKit (~> 9.0.0)
-    - FBSDKLoginKit (~> 9.0.0)
+  - flutter_facebook_auth (2.0.0):
+    - FBSDKCoreKit (~> 11.0.0)
+    - FBSDKLoginKit (~> 11.0.0)
     - Flutter
   - flutter_local_notifications (0.0.1):
     - Flutter
@@ -34,6 +36,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - FBSDKCoreKit
+    - FBSDKCoreKit_Basics
     - FBSDKLoginKit
 
 EXTERNAL SOURCES:
@@ -51,10 +54,11 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences/ios"
 
 SPEC CHECKSUMS:
-  FBSDKCoreKit: ac6cc500b8e104bb9a4dd20b1527b5d199123c2e
-  FBSDKLoginKit: e9b6542fdee322333502ab497f628b011dce7d78
+  FBSDKCoreKit: 38c9e29a3f1436362acacff6486d3a28628c288f
+  FBSDKCoreKit_Basics: 06780a4a12e16596bde8406add02c6aa1bf38616
+  FBSDKLoginKit: 8243e04c590c38b85c69fcf09d1234514d2475c3
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
-  flutter_facebook_auth: d952ca599c6a76439c54472b0b225004e1b880c4
+  flutter_facebook_auth: abc044072738b7baa90d80583dabdb1211614f0d
   flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
   local_auth: 25938960984c3a7f6e3253e3f8d962fdd16852bd
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
