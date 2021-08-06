@@ -64,7 +64,7 @@ class _LoginBiometricState extends State<LoginBiometric> {
     );
   }
 
-  void _initBiometric() async {
+  Future<void> _initBiometric() async {
     await biometricBloc.checkBiometric();
     await biometricBloc.getListBiometric();
   }
@@ -72,7 +72,7 @@ class _LoginBiometricState extends State<LoginBiometric> {
   void _showSnackBar(String message) =>
       MessageService.getInstance().showMessage(context, message);
 
-  Future<void> _goToScreen() async => await Navigator.of(context)
+  Future<void> _goToScreen() => Navigator.of(context)
       .pushNamedAndRemoveUntil(Routes.home, (Route<dynamic> route) => false);
 }
 
@@ -127,7 +127,7 @@ class BiometricBody extends StatelessWidget {
     );
   }
 
-  void _onPressButton(BuildContext context) async {
+  Future<void> _onPressButton(BuildContext context) async {
     final localizations = AppLocalizations.of(context)!;
     final result = await bloc.authenticate(localizations.biometricReason);
 

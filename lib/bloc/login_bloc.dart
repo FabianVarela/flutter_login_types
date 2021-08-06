@@ -28,15 +28,15 @@ class LoginBloc extends BaseBloc with Validator {
 
   Function(String) get changePassword => _passwordSubject.sink.add;
 
-  String? get email => _emailSubject.value;
+  String? get email => _emailSubject.valueOrNull;
 
-  String? get password => _passwordSubject.value;
+  String? get password => _passwordSubject.valueOrNull;
 
   Future<bool> authenticate() async {
     loading.sink.add(true);
 
     final token = await _repository.authenticate(
-        _emailSubject.value!, _passwordSubject.value!);
+        _emailSubject.value, _passwordSubject.value);
 
     loading.sink.add(false);
     return token != null && token == 'MiToken';

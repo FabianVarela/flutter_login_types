@@ -4,13 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:login_bloc/bloc/language_bloc.dart';
 import 'package:login_bloc/common/notification_service.dart';
 import 'package:login_bloc/common/routes.dart';
+import 'package:login_bloc/ui/home.ui.dart';
 import 'package:login_bloc/ui/login_biometric.ui.dart';
 import 'package:login_bloc/ui/login_passcode.ui.dart';
 import 'package:login_bloc/ui/login_user_pass.ui.dart';
 import 'package:login_bloc/ui/sign_in_options.ui.dart';
-
-import 'ui/home.ui.dart';
-import 'ui/login_user_pass.ui.dart';
 
 void main() => runApp(const MyApp());
 

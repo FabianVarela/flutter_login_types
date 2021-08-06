@@ -36,13 +36,13 @@ class PasscodeBloc extends BaseBloc with Validator {
 
   Function(int) get changePage => _pageSubject.sink.add;
 
-  String? get phone => _phoneSubject.value;
+  String? get phone => _phoneSubject.valueOrNull;
 
   int? get page => _pageSubject.value;
 
   Future<bool> verifyPhone() async {
     loading.sink.add(true);
-    final token = await _repository.verifyPhone(_phoneSubject.value!);
+    final token = await _repository.verifyPhone(_phoneSubject.value);
     loading.sink.add(false);
 
     return token != null && token.isEmpty;
@@ -50,7 +50,7 @@ class PasscodeBloc extends BaseBloc with Validator {
 
   Future<bool> verifyCode() async {
     loading.sink.add(true);
-    final token = await _repository.verifyCode(_codeSubject.value!);
+    final token = await _repository.verifyCode(_codeSubject.value);
     loading.sink.add(false);
 
     return token != null && token == 'MiToken';

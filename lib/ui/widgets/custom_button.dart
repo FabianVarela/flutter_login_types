@@ -37,7 +37,6 @@ class CustomButton extends StatelessWidget {
         children: <Widget>[
           if (icon != null && direction == IconDirection.left)
             Expanded(
-              flex: 1,
               child: Padding(
                 padding: const EdgeInsets.only(right: 5),
                 child: icon,
@@ -58,7 +57,6 @@ class CustomButton extends StatelessWidget {
           ),
           if (icon != null && direction == IconDirection.right)
             Expanded(
-              flex: 1,
               child: Padding(
                 padding: const EdgeInsets.only(right: 5),
                 child: icon,

@@ -21,10 +21,7 @@ class LoginPasscodeUI extends StatefulWidget {
 }
 
 class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
-  final PageController _pageController = PageController(
-    initialPage: 0,
-    keepPage: true,
-  );
+  final PageController _pageController = PageController();
 
   @override
   void dispose() {
@@ -114,7 +111,7 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
   void _showSnackBar(String message) =>
       MessageService.getInstance().showMessage(context, message);
 
-  Future<void> _goToScreen() async => await Navigator.of(context)
+  Future<void> _goToScreen() => Navigator.of(context)
       .pushNamedAndRemoveUntil(Routes.home, (Route<dynamic> route) => false);
 }
 
@@ -156,7 +153,7 @@ class FormPhone extends HookWidget {
                 inputType: TextInputType.phone,
                 errorText: snapshot.hasError
                     ? Utils.getTextValidator(context,
-                        (snapshot.error as TextFieldValidator).validator)
+                        (snapshot.error as TextFieldValidator?)!.validator)
                     : null,
               );
             },
@@ -172,7 +169,6 @@ class FormPhone extends HookWidget {
                 child: Row(
                   children: <Widget>[
                     Expanded(
-                      flex: 1,
                       child: CustomButton(
                         text: localizations.verifyButtonText,
                         onPress: isValidSnapshot.hasData
@@ -197,7 +193,7 @@ class FormPhone extends HookWidget {
     );
   }
 
-  void _onPressButton(BuildContext context) async {
+  Future<void> _onPressButton(BuildContext context) async {
     final localizations = AppLocalizations.of(context)!;
     final result = await bloc.verifyPhone();
 
@@ -265,7 +261,7 @@ class FormPasscode extends HookWidget {
     );
   }
 
-  void _onSubmitPin(BuildContext context) async {
+  Future<void> _onSubmitPin(BuildContext context) async {
     final localizations = AppLocalizations.of(context)!;
     final result = await bloc.verifyCode();
 

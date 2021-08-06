@@ -16,10 +16,10 @@ class NotificationService {
       _requestIOSPermission();
     }
 
-    var initSettingsAndroid = const AndroidInitializationSettings('login_bloc');
-    var initSettingsIOS = const IOSInitializationSettings();
+    const initSettingsAndroid = AndroidInitializationSettings('login_bloc');
+    const initSettingsIOS = IOSInitializationSettings();
 
-    var initSettings = InitializationSettings(
+    const initSettings = InitializationSettings(
       android: initSettingsAndroid,
       iOS: initSettingsIOS,
     );
@@ -31,24 +31,23 @@ class NotificationService {
     _localNotifications
         .resolvePlatformSpecificImplementation<
             IOSFlutterLocalNotificationsPlugin>()!
-        .requestPermissions(alert: false, badge: true, sound: true);
+        .requestPermissions(badge: true, sound: true);
   }
 
   Future<void> showNotification(String title, String body) async {
-    var androidChannel = const AndroidNotificationDetails(
+    const androidChannel = AndroidNotificationDetails(
       'channel id',
       'channel name',
       'channel description',
       importance: Importance.max,
       priority: Priority.high,
-      playSound: true,
       timeoutAfter: 5000,
       styleInformation: DefaultStyleInformation(true, true),
     );
 
-    var iosChannel = const IOSNotificationDetails(presentSound: true);
+    const iosChannel = IOSNotificationDetails(presentSound: true);
 
-    var platformChannelSpecifics = NotificationDetails(
+    const platformChannelSpecifics = NotificationDetails(
       android: androidChannel,
       iOS: iosChannel,
     );

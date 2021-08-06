@@ -42,7 +42,6 @@ class _LoginUIState extends State<LoginUI> {
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     TextFieldEmail(bloc: loginBloc),
                     const SizedBox(height: 20),
@@ -84,7 +83,7 @@ class _LoginUIState extends State<LoginUI> {
         () => MessageService.getInstance().showMessage(context, message),
       );
 
-  Future<void> _goToHomeScreen() async => await Navigator.of(context)
+  Future<void> _goToHomeScreen() => Navigator.of(context)
       .pushNamedAndRemoveUntil(Routes.home, (Route<dynamic> route) => false);
 }
 
@@ -114,7 +113,7 @@ class TextFieldEmail extends HookWidget {
           action: TextInputAction.next,
           errorText: snapshot.hasError
               ? Utils.getTextValidator(
-                  context, (snapshot.error as TextFieldValidator).validator)
+                  context, (snapshot.error as TextFieldValidator?)!.validator)
               : null,
         );
       },
@@ -146,7 +145,7 @@ class TextFieldPassword extends HookWidget {
           onChange: bloc.changePassword,
           errorText: snapshot.hasError
               ? Utils.getTextValidator(
-                  context, (snapshot.error as TextFieldValidator).validator)
+                  context, (snapshot.error as TextFieldValidator?)!.validator)
               : null,
           hasPassword: true,
         );
@@ -179,7 +178,6 @@ class SubmitButton extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Expanded(
-                flex: 1,
                 child: CustomButton(
                   text: localizations.signInButton,
                   onPress: isValidSnapshot.hasData
@@ -198,7 +196,7 @@ class SubmitButton extends StatelessWidget {
     );
   }
 
-  void _onPressButton(BuildContext context) async {
+  Future<void> _onPressButton(BuildContext context) async {
     final localizations = AppLocalizations.of(context)!;
 
     final result = await bloc.authenticate();

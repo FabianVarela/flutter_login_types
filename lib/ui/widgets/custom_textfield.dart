@@ -57,7 +57,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         setState(() {
           _hasFocus = false;
           _hasRequired =
-              ((widget.isRequired) && _textController.value.text.isEmpty);
+              (widget.isRequired) && _textController.value.text.isEmpty;
         });
       }
     });

@@ -10,14 +10,14 @@ class LanguageBloc extends BaseBloc {
 
   Stream<Locale?> get localeStream => _localeSubject.stream.distinct();
 
-  void getLanguage() async {
+  Future<void> getLanguage() async {
     final language = await _repository.getLanguage();
     if (language != null) {
       _localeSubject.sink.add(Locale(language));
     }
   }
 
-  void setLanguage(String language) async {
+  Future<void> setLanguage(String language) async {
     await _repository.setLanguage(language);
     _localeSubject.sink.add(Locale(language));
   }

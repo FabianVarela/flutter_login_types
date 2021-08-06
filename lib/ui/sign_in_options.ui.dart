@@ -102,9 +102,9 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
     MessageService.getInstance().showMessage(context, message);
   }
 
-  Future<void> _goToHomeScreen() async => await Navigator.of(context)
+  Future<void> _goToHomeScreen() => Navigator.of(context)
       .pushNamedAndRemoveUntil(Routes.home, (Route<dynamic> route) => false);
 
-  Future<void> _pushScreen(String routeName) async =>
-      await Navigator.of(context).pushNamed(routeName);
+  Future<void> _pushScreen(String routeName) =>
+      Navigator.of(context).pushNamed(routeName);
 }
