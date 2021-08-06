@@ -11,18 +11,20 @@ class FacebookBloc extends BaseBloc {
     FacebookState? result;
     loading.sink.add(true);
 
-    try {
-      await _repository.authenticateFacebook();
-    } on FacebookAuthException catch (e) {
-      switch (e.errorCode) {
-        case FacebookAuthErrorCode.OPERATION_IN_PROGRESS:
-          result = FacebookState.inProgress;
-          break;
-        case FacebookAuthErrorCode.CANCELLED:
+    final facebookResult = await _repository.authenticateFacebook();
+
+    if (facebookResult.containsKey('status')) {
+      switch (facebookResult['status'] as LoginStatus) {
+        case LoginStatus.cancelled:
           result = FacebookState.cancelled;
           break;
-        case FacebookAuthErrorCode.FAILED:
+        case LoginStatus.failed:
           result = FacebookState.error;
+          break;
+        case LoginStatus.operationInProgress:
+          result = FacebookState.inProgress;
+          break;
+        default:
           break;
       }
     }
