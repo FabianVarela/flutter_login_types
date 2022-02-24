@@ -38,8 +38,9 @@ mixin Validator {
 }
 
 bool _validateEmail(String value) => _isMatch(
-    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-    value);
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+      value,
+    );
 
 bool _validateNumber(String value) => _isMatch(r'^[0-9]+$', value);
 

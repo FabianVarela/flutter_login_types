@@ -7,9 +7,9 @@ import 'package:login_bloc/common/model/text_field_validator.dart';
 import 'package:login_bloc/common/notification_service.dart';
 import 'package:login_bloc/common/routes.dart';
 import 'package:login_bloc/common/utils.dart';
+import 'package:login_bloc/ui/common/colors.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
 import 'package:login_bloc/ui/widgets/custom_textfield.dart';
-import 'package:login_bloc/ui/common/colors.dart';
 import 'package:login_bloc/ui/widgets/loading.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
@@ -105,8 +105,11 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
     }
   }
 
-  void _goToPage(int page) => _pageController.animateToPage(page,
-      curve: Curves.easeOut, duration: const Duration(milliseconds: 400));
+  void _goToPage(int page) => _pageController.animateToPage(
+        page,
+        curve: Curves.easeOut,
+        duration: const Duration(milliseconds: 400),
+      );
 
   void _showSnackBar(String message) =>
       MessageService.getInstance().showMessage(context, message);
@@ -152,8 +155,10 @@ class FormPhone extends HookWidget {
                 onChange: bloc.changePhone,
                 inputType: TextInputType.phone,
                 errorText: snapshot.hasError
-                    ? Utils.getTextValidator(context,
-                        (snapshot.error as TextFieldValidator?)!.validator)
+                    ? Utils.getTextValidator(
+                        context,
+                        (snapshot.error as TextFieldValidator?)!.validator,
+                      )
                     : null,
               );
             },

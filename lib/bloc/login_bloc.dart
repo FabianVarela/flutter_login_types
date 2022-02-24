@@ -1,7 +1,7 @@
 import 'package:login_bloc/bloc/base_bloc.dart';
 import 'package:login_bloc/common/model/text_field_validator.dart';
-import 'package:login_bloc/repository/login_repository.dart';
 import 'package:login_bloc/common/validator.dart';
+import 'package:login_bloc/repository/login_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class LoginBloc extends BaseBloc with Validator {
@@ -36,7 +36,9 @@ class LoginBloc extends BaseBloc with Validator {
     loading.sink.add(true);
 
     final token = await _repository.authenticate(
-        _emailSubject.value, _passwordSubject.value);
+      _emailSubject.value,
+      _passwordSubject.value,
+    );
 
     loading.sink.add(false);
     return token != null && token == 'MiToken';

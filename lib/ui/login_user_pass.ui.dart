@@ -8,9 +8,9 @@ import 'package:login_bloc/common/message_service.dart';
 import 'package:login_bloc/common/model/text_field_validator.dart';
 import 'package:login_bloc/common/routes.dart';
 import 'package:login_bloc/common/utils.dart';
+import 'package:login_bloc/ui/common/colors.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
 import 'package:login_bloc/ui/widgets/custom_textfield.dart';
-import 'package:login_bloc/ui/common/colors.dart';
 import 'package:login_bloc/ui/widgets/loading.dart';
 
 class LoginUI extends StatefulWidget {
@@ -113,7 +113,9 @@ class TextFieldEmail extends HookWidget {
           action: TextInputAction.next,
           errorText: snapshot.hasError
               ? Utils.getTextValidator(
-                  context, (snapshot.error as TextFieldValidator?)!.validator)
+                  context,
+                  (snapshot.error as TextFieldValidator?)!.validator,
+                )
               : null,
         );
       },
@@ -145,7 +147,9 @@ class TextFieldPassword extends HookWidget {
           onChange: bloc.changePassword,
           errorText: snapshot.hasError
               ? Utils.getTextValidator(
-                  context, (snapshot.error as TextFieldValidator?)!.validator)
+                  context,
+                  (snapshot.error as TextFieldValidator?)!.validator,
+                )
               : null,
           hasPassword: true,
         );

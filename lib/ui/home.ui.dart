@@ -60,10 +60,12 @@ class _HomePageUIState extends State<HomePageUI> with WidgetsBindingObserver {
                   onChanged: (locale) =>
                       languageBloc.setLanguage(locale!.languageCode),
                   items: AppLocalizations.supportedLocales
-                      .map((locale) => DropdownMenuItem(
-                            value: locale,
-                            child: Text(_getText(locale.languageCode)),
-                          ))
+                      .map(
+                        (locale) => DropdownMenuItem(
+                          value: locale,
+                          child: Text(_getText(locale.languageCode)),
+                        ),
+                      )
                       .toList(),
                 );
               },
