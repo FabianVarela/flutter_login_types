@@ -4,13 +4,15 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Login Bloc</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
-    <key>CFBundleLocalizations</key>
+	<key>CFBundleLocalizations</key>
     <array>
         <string>en</string>
         <string>es</string>
@@ -47,26 +49,26 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSFaceIDUsageDescription</key>
-	<string>Why is my app authenticating using face id?</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-			<string>fb{your-app-id}</string>
-			</array>
-		</dict>
-	</array>
-	<key>FacebookAppID</key>
-	<string>{your-app-id}</string>
-	<key>FacebookDisplayName</key>
-	<string>{your-app-name}</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>fbapi</string>
-		<string>fb-messenger-share-api</string>
-		<string>fbauth2</string>
-		<string>fbshareextension</string>
-	</array>
+    <string>Why is my app authenticating using face id?</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+            <string>fb{your-app-id}</string>
+            </array>
+        </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>{your-app-id}</string>
+    <key>FacebookDisplayName</key>
+    <string>{your-app-name}</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbapi</string>
+        <string>fb-messenger-share-api</string>
+        <string>fbauth2</string>
+        <string>fbshareextension</string>
+    </array>
 </dict>
 </plist>
