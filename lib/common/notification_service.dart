@@ -38,7 +38,7 @@ class NotificationService {
     const androidChannel = AndroidNotificationDetails(
       'channel id',
       'channel name',
-      'channel description',
+      channelDescription: 'channel description',
       importance: Importance.max,
       priority: Priority.high,
       timeoutAfter: 5000,
