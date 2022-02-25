@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:login_bloc/bloc/language_bloc.dart';
 import 'package:login_bloc/common/notification_service.dart';
 import 'package:login_bloc/common/routes.dart';
+import 'package:login_bloc/ui/firebase_auth.ui.dart';
 import 'package:login_bloc/ui/home.ui.dart';
 import 'package:login_bloc/ui/login_biometric.ui.dart';
 import 'package:login_bloc/ui/login_passcode.ui.dart';
@@ -68,6 +69,7 @@ class _MyAppState extends State<MyApp> {
             Routes.signInUserPass: (_) => const LoginUI(),
             Routes.signInPasscode: (_) => const LoginPasscodeUI(),
             Routes.signInBiometric: (_) => const LoginBiometric(),
+            Routes.firebaseAuth: (_) => const FirebaseAuthUI(),
             Routes.home: (_) => const HomePageUI(),
           },
         );
