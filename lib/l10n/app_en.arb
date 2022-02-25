@@ -34,6 +34,10 @@
   "@signInFacebook": {
     "description": "Sign in with facebook text"
   },
+  "signInFirebase": "Firebase UI",
+  "@signInFirebase": {
+    "description": "Sign in with firebase UI text"
+  },
   "signInFacebookInProgress": "In progress, please wait",
   "@signInFacebookInProgress": {
     "description": "Sign in with facebook in progress text message"

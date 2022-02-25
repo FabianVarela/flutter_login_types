@@ -15,6 +15,7 @@
   "signInPasscode": "Passcode",
   "signInFingerPrint": "Huella",
   "signInFacebook": "Facebook",
+  "signInFirebase": "Firebase UI",
   "signInFacebookInProgress": "En progreso, por favor espere",
   "signInFacebookCancelled": "Cancelado por el usuario",
   "signInFacebookError": "Error al iniciar sesión con Facebook",
