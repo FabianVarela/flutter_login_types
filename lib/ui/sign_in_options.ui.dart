@@ -77,6 +77,17 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
               foregroundColor: CustomColors.white,
               icon: const Icon(Icons.face_outlined, color: CustomColors.white),
             ),
+            const SizedBox(height: 20),
+            CustomButton(
+              text: localizations.signInText(localizations.signInFirebase),
+              onPress: () => _pushScreen(Routes.firebaseAuth),
+              backgroundColor: CustomColors.darkYellow,
+              foregroundColor: CustomColors.white,
+              icon: const Icon(
+                Icons.local_fire_department_outlined,
+                color: CustomColors.white,
+              ),
+            ),
           ],
         ),
       ),
