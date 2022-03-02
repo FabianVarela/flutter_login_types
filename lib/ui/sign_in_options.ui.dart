@@ -6,14 +6,9 @@ import 'package:login_bloc/common/routes.dart';
 import 'package:login_bloc/ui/common/colors.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
 
-class SignInOptionsUI extends StatefulWidget {
+class SignInOptionsUI extends StatelessWidget {
   const SignInOptionsUI({Key? key}) : super(key: key);
 
-  @override
-  _SignInOptionsUIState createState() => _SignInOptionsUIState();
-}
-
-class _SignInOptionsUIState extends State<SignInOptionsUI> {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
@@ -37,7 +32,7 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
             const SizedBox(height: 30),
             CustomButton(
               text: localizations.signInText(localizations.signInUserPassword),
-              onPress: () => _pushScreen(Routes.signInUserPass),
+              onPress: () => _pushScreen(context, Routes.signInUserPass),
               backgroundColor: CustomColors.white.withOpacity(.6),
               foregroundColor: CustomColors.darkBlue,
               icon: const Icon(Icons.account_circle_outlined),
@@ -45,7 +40,7 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
             const SizedBox(height: 20),
             CustomButton(
               text: localizations.signInText(localizations.signInPasscode),
-              onPress: () => _pushScreen(Routes.signInPasscode),
+              onPress: () => _pushScreen(context, Routes.signInPasscode),
               backgroundColor: CustomColors.lightBlue,
               foregroundColor: CustomColors.white,
               icon: const Icon(Icons.sms_outlined, color: CustomColors.white),
@@ -53,7 +48,7 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
             const SizedBox(height: 20),
             CustomButton(
               text: localizations.signInText(localizations.signInFingerPrint),
-              onPress: () => _pushScreen(Routes.signInBiometric),
+              onPress: () => _pushScreen(context, Routes.signInBiometric),
               backgroundColor: CustomColors.darkPurple,
               foregroundColor: CustomColors.white,
               icon: const Icon(
@@ -68,9 +63,9 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
                 final result = await facebookBloc.authenticate();
 
                 if (result != null) {
-                  _showSnackBar(result);
+                  _showSnackBar(context, result);
                 } else {
-                  await _goToHomeScreen();
+                  await _goToHomeScreen(context);
                 }
               },
               backgroundColor: CustomColors.kingBlue,
@@ -80,7 +75,7 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
             const SizedBox(height: 20),
             CustomButton(
               text: localizations.signInText(localizations.signInFirebase),
-              onPress: () => _pushScreen(Routes.firebaseAuth),
+              onPress: () => _pushScreen(context, Routes.firebaseAuth),
               backgroundColor: CustomColors.darkYellow,
               foregroundColor: CustomColors.white,
               icon: const Icon(
@@ -94,7 +89,7 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
     );
   }
 
-  void _showSnackBar(FacebookState state) {
+  void _showSnackBar(BuildContext context, FacebookState state) {
     final localizations = AppLocalizations.of(context)!;
     final String? message;
 
@@ -113,9 +108,9 @@ class _SignInOptionsUIState extends State<SignInOptionsUI> {
     MessageService.getInstance().showMessage(context, message);
   }
 
-  Future<void> _goToHomeScreen() => Navigator.of(context)
+  Future<void> _goToHomeScreen(BuildContext context) => Navigator.of(context)
       .pushNamedAndRemoveUntil(Routes.home, (Route<dynamic> route) => false);
 
-  Future<void> _pushScreen(String routeName) =>
+  Future<void> _pushScreen(BuildContext context, String routeName) =>
       Navigator.of(context).pushNamed(routeName);
 }
