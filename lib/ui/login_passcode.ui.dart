@@ -11,81 +11,79 @@ import 'package:login_bloc/ui/common/colors.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
 import 'package:login_bloc/ui/widgets/custom_textfield.dart';
 import 'package:login_bloc/ui/widgets/loading.dart';
-import 'package:pinput/pin_put/pin_put.dart';
+import 'package:pinput/pinput.dart';
 
-class LoginPasscodeUI extends StatefulWidget {
+class LoginPasscodeUI extends HookWidget {
   const LoginPasscodeUI({Key? key}) : super(key: key);
 
   @override
-  _LoginPasscodeUIState createState() => _LoginPasscodeUIState();
-}
-
-class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
-  final PageController _pageController = PageController();
-
-  @override
-  void dispose() {
-    passcodeBloc.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final pageController = usePageController();
+
+    useEffect(
+      () {
+        return passcodeBloc.dispose;
+      },
+      const [],
+    );
+
     return WillPopScope(
       onWillPop: _returnPageFromBar,
-      child: Scaffold(
-        resizeToAvoidBottomInset: true,
-        backgroundColor: CustomColors.white,
-        body: Stack(
-          children: <Widget>[
-            Stack(
-              children: <Widget>[
-                StreamBuilder<int>(
-                  stream: passcodeBloc.pageStream,
-                  builder: (_, pageSnapshot) {
-                    if (_pageController.hasClients && pageSnapshot.hasData) {
-                      if (_pageController.page!.round() != passcodeBloc.page) {
-                        _goToPage(passcodeBloc.page!);
-                      }
-                    }
-
-                    return PageView(
-                      controller: _pageController,
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: <Widget>[
-                        FormPhone(
-                          bloc: passcodeBloc,
-                          onSendMessage: _showSnackBar,
-                        ),
-                        FormPasscode(
-                          bloc: passcodeBloc,
-                          onGoToScreen: _goToScreen,
-                          onSendMessage: _showSnackBar,
-                        ),
-                      ],
-                    );
-                  },
-                ),
-                Positioned(
-                  top: 30,
-                  left: 16,
-                  child: IconButton(
-                    icon: const Icon(Icons.arrow_back_ios),
-                    onPressed: _returnPage,
-                  ),
-                ),
-              ],
-            ),
-            StreamBuilder<bool>(
-              initialData: false,
-              stream: passcodeBloc.isLoading,
-              builder: (context, AsyncSnapshot<bool> snapshot) => Offstage(
-                offstage: !snapshot.data!,
-                child: const Loading(),
+      child: Stack(
+        children: <Widget>[
+          Scaffold(
+            appBar: AppBar(
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              foregroundColor: Colors.black,
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back_ios),
+                onPressed: () => _returnPage(context),
               ),
             ),
-          ],
-        ),
+            extendBodyBehindAppBar: true,
+            resizeToAvoidBottomInset: true,
+            backgroundColor: CustomColors.white,
+            body: StreamBuilder<int>(
+              stream: passcodeBloc.pageStream,
+              builder: (_, pageSnapshot) {
+                if (pageController.hasClients && pageSnapshot.hasData) {
+                  if (pageController.page!.round() != passcodeBloc.page) {
+                    pageController.animateToPage(
+                      passcodeBloc.page!,
+                      curve: Curves.easeOut,
+                      duration: const Duration(milliseconds: 400),
+                    );
+                  }
+                }
+
+                return PageView(
+                  controller: pageController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: <Widget>[
+                    _FormPhone(
+                      bloc: passcodeBloc,
+                      onSendMessage: (value) => _showSnackBar(context, value),
+                    ),
+                    _FormPasscode(
+                      bloc: passcodeBloc,
+                      onGoToScreen: () => _goToScreen(context),
+                      onSendMessage: (value) => _showSnackBar(context, value),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+          StreamBuilder<bool>(
+            initialData: false,
+            stream: passcodeBloc.isLoading,
+            builder: (context, AsyncSnapshot<bool> snapshot) => Offstage(
+              offstage: !snapshot.data!,
+              child: const Loading(),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -97,7 +95,7 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
     return Future<bool>.value(false);
   }
 
-  void _returnPage() {
+  void _returnPage(BuildContext context) {
     if (passcodeBloc.page == 0) {
       Navigator.of(context).pop();
     } else {
@@ -105,21 +103,15 @@ class _LoginPasscodeUIState extends State<LoginPasscodeUI> {
     }
   }
 
-  void _goToPage(int page) => _pageController.animateToPage(
-        page,
-        curve: Curves.easeOut,
-        duration: const Duration(milliseconds: 400),
-      );
-
-  void _showSnackBar(String message) =>
+  void _showSnackBar(BuildContext context, String message) =>
       MessageService.getInstance().showMessage(context, message);
 
-  Future<void> _goToScreen() => Navigator.of(context)
+  Future<void> _goToScreen(BuildContext context) => Navigator.of(context)
       .pushNamedAndRemoveUntil(Routes.home, (Route<dynamic> route) => false);
 }
 
-class FormPhone extends HookWidget {
-  const FormPhone({Key? key, required this.bloc, required this.onSendMessage})
+class _FormPhone extends HookWidget {
+  const _FormPhone({Key? key, required this.bloc, required this.onSendMessage})
       : super(key: key);
 
   final PasscodeBloc bloc;
@@ -214,8 +206,8 @@ class FormPhone extends HookWidget {
   }
 }
 
-class FormPasscode extends HookWidget {
-  const FormPasscode({
+class _FormPasscode extends HookWidget {
+  const _FormPasscode({
     Key? key,
     required this.bloc,
     required this.onSendMessage,
@@ -246,11 +238,13 @@ class FormPasscode extends HookWidget {
             style: const TextStyle(color: CustomColors.darkBlue, fontSize: 20),
           ),
           const SizedBox(height: 50),
-          PinPut(
-            fieldsCount: 4,
+          Pinput(
             controller: controller,
-            onChanged: bloc.changeCode,
-            onSubmit: (_) => _onSubmitPin(context),
+            onCompleted: (val) {
+              bloc.changeCode(val);
+              _onSubmitPin(context);
+            },
+            /*
             submittedFieldDecoration: _decoration.copyWith(
               borderRadius: BorderRadius.circular(20),
             ),
@@ -260,6 +254,7 @@ class FormPasscode extends HookWidget {
             followingFieldDecoration: _decoration.copyWith(
               borderRadius: BorderRadius.circular(5),
             ),
+            */
           ),
         ],
       ),
