@@ -223,10 +223,6 @@ class _FormPasscode extends HookWidget {
     final localizations = AppLocalizations.of(context)!;
     final controller = useTextEditingController();
 
-    final _decoration = BoxDecoration(
-      border: Border.all(color: CustomColors.darkPurple),
-    );
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
@@ -244,17 +240,6 @@ class _FormPasscode extends HookWidget {
               bloc.changeCode(val);
               _onSubmitPin(context);
             },
-            /*
-            submittedFieldDecoration: _decoration.copyWith(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            selectedFieldDecoration: _decoration.copyWith(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            followingFieldDecoration: _decoration.copyWith(
-              borderRadius: BorderRadius.circular(5),
-            ),
-            */
           ),
         ],
       ),
