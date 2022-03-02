@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:login_bloc/bloc/passcode_bloc.dart';
 import 'package:login_bloc/common/message_service.dart';
@@ -7,6 +6,7 @@ import 'package:login_bloc/common/model/text_field_validator.dart';
 import 'package:login_bloc/common/notification_service.dart';
 import 'package:login_bloc/common/routes.dart';
 import 'package:login_bloc/common/utils.dart';
+import 'package:login_bloc/l10n/l10n.dart';
 import 'package:login_bloc/ui/common/colors.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
 import 'package:login_bloc/ui/widgets/custom_textfield.dart';
@@ -119,7 +119,7 @@ class _FormPhone extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final localization = context.localizations;
     final controller = useTextEditingController();
 
     return Padding(
@@ -128,7 +128,7 @@ class _FormPhone extends HookWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            localizations.phoneNumberTitle,
+            localization.phoneNumberTitle,
             textAlign: TextAlign.center,
             style: const TextStyle(color: CustomColors.darkBlue, fontSize: 20),
           ),
@@ -136,14 +136,14 @@ class _FormPhone extends HookWidget {
           StreamBuilder<TextFieldValidator>(
             stream: bloc.phoneStream,
             builder: (_, snapshot) {
-              final localizations = AppLocalizations.of(context)!;
+              final localization = context.localizations;
               controller.value = controller.value.copyWith(text: bloc.phone);
 
               return CustomTextField(
                 textController: controller,
-                hint: localizations.phoneNumberPlaceholder,
+                hint: localization.phoneNumberPlaceholder,
                 isRequired: true,
-                requiredMessage: localizations.phoneNumberRequired,
+                requiredMessage: localization.phoneNumberRequired,
                 onChange: bloc.changePhone,
                 inputType: TextInputType.phone,
                 errorText: snapshot.hasError
@@ -159,7 +159,7 @@ class _FormPhone extends HookWidget {
           StreamBuilder<bool>(
             stream: bloc.isValidPhone,
             builder: (_, isValidSnapshot) {
-              final localizations = AppLocalizations.of(context)!;
+              final localization = context.localizations;
 
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -167,7 +167,7 @@ class _FormPhone extends HookWidget {
                   children: <Widget>[
                     Expanded(
                       child: CustomButton(
-                        text: localizations.verifyButtonText,
+                        text: localization.verifyButtonText,
                         onPress: isValidSnapshot.hasData
                             ? () => _onPressButton(context)
                             : null,
@@ -191,17 +191,17 @@ class _FormPhone extends HookWidget {
   }
 
   Future<void> _onPressButton(BuildContext context) async {
-    final localizations = AppLocalizations.of(context)!;
+    final localization = context.localizations;
     final result = await bloc.verifyPhone();
 
     if (result) {
       bloc.changePage(1);
       await NotificationService.getInstance().showNotification(
-        localizations.notificationTitle,
-        localizations.notificationMessage('0000'),
+        localization.notificationTitle,
+        localization.notificationMessage('0000'),
       );
     } else {
-      onSendMessage(localizations.phoneNumberIncorrect);
+      onSendMessage(localization.phoneNumberIncorrect);
     }
   }
 }
@@ -220,7 +220,7 @@ class _FormPasscode extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final localization = context.localizations;
     final controller = useTextEditingController();
 
     return Padding(
@@ -229,7 +229,7 @@ class _FormPasscode extends HookWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            localizations.passcodeTitle,
+            localization.passcodeTitle,
             textAlign: TextAlign.center,
             style: const TextStyle(color: CustomColors.darkBlue, fontSize: 20),
           ),
@@ -247,13 +247,13 @@ class _FormPasscode extends HookWidget {
   }
 
   Future<void> _onSubmitPin(BuildContext context) async {
-    final localizations = AppLocalizations.of(context)!;
+    final localization = context.localizations;
     final result = await bloc.verifyCode();
 
     if (result) {
       onGoToScreen();
     } else {
-      onSendMessage(localizations.passcodeIncorrect);
+      onSendMessage(localization.passcodeIncorrect);
     }
   }
 }

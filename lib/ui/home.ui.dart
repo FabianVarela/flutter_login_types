@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:login_bloc/bloc/language_bloc.dart';
+import 'package:login_bloc/l10n/l10n.dart';
 
 class HomePageUI extends StatefulWidget {
   const HomePageUI({Key? key}) : super(key: key);
@@ -33,7 +33,7 @@ class _HomePageUIState extends State<HomePageUI> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final localization = context.localizations;
 
     if (_notification != null) {
       print('App status notification: $_notification');
@@ -41,7 +41,7 @@ class _HomePageUIState extends State<HomePageUI> with WidgetsBindingObserver {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(localizations.homeTitle),
+        title: Text(localization.homeTitle),
         centerTitle: true,
       ),
       body: SizedBox(
@@ -49,13 +49,13 @@ class _HomePageUIState extends State<HomePageUI> with WidgetsBindingObserver {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(localizations.homeText),
+            Text(localization.homeText),
             const SizedBox(height: 30),
             StreamBuilder<Locale?>(
               stream: languageBloc.localeStream,
               builder: (_, snapshot) {
                 return DropdownButton<Locale>(
-                  hint: Text(localizations.changeLanguageTitle),
+                  hint: Text(localization.changeLanguageTitle),
                   value: snapshot.data,
                   onChanged: (locale) =>
                       languageBloc.setLanguage(locale!.languageCode),
@@ -77,14 +77,14 @@ class _HomePageUIState extends State<HomePageUI> with WidgetsBindingObserver {
   }
 
   String _getText(String lang) {
-    final localizations = AppLocalizations.of(context)!;
+    final localization = context.localizations;
 
     switch (lang) {
       case 'es':
-        return localizations.spanishLanguage;
+        return localization.spanishLanguage;
       case 'en':
       default:
-        return localizations.englishLanguage;
+        return localization.englishLanguage;
     }
   }
 }

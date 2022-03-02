@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_bloc/bloc/language_bloc.dart';
 import 'package:login_bloc/common/notification_service.dart';
 import 'package:login_bloc/common/routes.dart';
+import 'package:login_bloc/l10n/l10n.dart';
 import 'package:login_bloc/ui/firebase_auth.ui.dart';
 import 'package:login_bloc/ui/home.ui.dart';
 import 'package:login_bloc/ui/login_biometric.ui.dart';
@@ -69,7 +69,7 @@ class _MyAppState extends State<MyApp> {
             }
             return supportedLocales.first;
           },
-          onGenerateTitle: (context) => AppLocalizations.of(context)!.appName,
+          onGenerateTitle: (context) => context.localizations.appName,
           routes: {
             Routes.signInOptions: (_) => const SignInOptionsUI(),
             Routes.signInUserPass: (_) => const LoginUI(),

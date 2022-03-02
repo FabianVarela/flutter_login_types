@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:login_bloc/bloc/biometric_bloc.dart';
 import 'package:login_bloc/common/message_service.dart';
 import 'package:login_bloc/common/routes.dart';
+import 'package:login_bloc/l10n/l10n.dart';
 import 'package:login_bloc/ui/common/colors.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
 
@@ -13,7 +13,7 @@ class LoginBiometric extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final localization = context.localizations;
 
     useEffect(
       () {
@@ -42,7 +42,7 @@ class LoginBiometric extends HookWidget {
                   onGoToScreen: () => _goToScreen(context),
                   onSendMessage: (value) => _showSnackBar(context, value),
                 )
-              : _TextMessage(message: localizations.biometricNoSupportedText),
+              : _TextMessage(message: localization.biometricNoSupportedText),
         ),
       ),
     );
@@ -74,13 +74,13 @@ class _BiometricBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final localization = context.localizations;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(
-          localizations.biometricTitle,
+          localization.biometricTitle,
           textAlign: TextAlign.center,
           style: const TextStyle(color: CustomColors.darkBlue, fontSize: 20),
         ),
@@ -94,7 +94,7 @@ class _BiometricBody extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                     child: CustomButton(
-                      text: localizations.biometricButtonText,
+                      text: localization.biometricButtonText,
                       onPress: () => _onPressButton(context),
                       backgroundColor: CustomColors.darkPurple,
                       foregroundColor: CustomColors.white,
@@ -104,7 +104,7 @@ class _BiometricBody extends StatelessWidget {
               );
             }
 
-            return _TextMessage(message: localizations.biometricEnabledText);
+            return _TextMessage(message: localization.biometricEnabledText);
           },
         ),
       ],
@@ -112,13 +112,13 @@ class _BiometricBody extends StatelessWidget {
   }
 
   Future<void> _onPressButton(BuildContext context) async {
-    final localizations = AppLocalizations.of(context)!;
-    final result = await bloc.authenticate(localizations.biometricReason);
+    final localization = context.localizations;
+    final result = await bloc.authenticate(localization.biometricReason);
 
     if (result) {
       onGoToScreen();
     } else {
-      onSendMessage(localizations.biometricError);
+      onSendMessage(localization.biometricError);
     }
   }
 }

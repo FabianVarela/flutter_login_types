@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:login_bloc/bloc/facebook_bloc.dart';
 import 'package:login_bloc/common/message_service.dart';
 import 'package:login_bloc/common/routes.dart';
+import 'package:login_bloc/l10n/l10n.dart';
 import 'package:login_bloc/ui/common/colors.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
 
@@ -11,7 +11,7 @@ class SignInOptionsUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final localization = context.localizations;
 
     return Scaffold(
       backgroundColor: CustomColors.white,
@@ -22,7 +22,7 @@ class SignInOptionsUI extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Text(
-              localizations.signInOptionText,
+              localization.signInOptionText,
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: CustomColors.darkBlue,
@@ -31,7 +31,7 @@ class SignInOptionsUI extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             CustomButton(
-              text: localizations.signInText(localizations.signInUserPassword),
+              text: localization.signInText(localization.signInUserPassword),
               onPress: () => _pushScreen(context, Routes.signInUserPass),
               backgroundColor: CustomColors.white.withOpacity(.6),
               foregroundColor: CustomColors.darkBlue,
@@ -39,7 +39,7 @@ class SignInOptionsUI extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             CustomButton(
-              text: localizations.signInText(localizations.signInPasscode),
+              text: localization.signInText(localization.signInPasscode),
               onPress: () => _pushScreen(context, Routes.signInPasscode),
               backgroundColor: CustomColors.lightBlue,
               foregroundColor: CustomColors.white,
@@ -47,7 +47,7 @@ class SignInOptionsUI extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             CustomButton(
-              text: localizations.signInText(localizations.signInFingerPrint),
+              text: localization.signInText(localization.signInFingerPrint),
               onPress: () => _pushScreen(context, Routes.signInBiometric),
               backgroundColor: CustomColors.darkPurple,
               foregroundColor: CustomColors.white,
@@ -58,7 +58,7 @@ class SignInOptionsUI extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             CustomButton(
-              text: localizations.signInText(localizations.signInFacebook),
+              text: localization.signInText(localization.signInFacebook),
               onPress: () async {
                 final result = await facebookBloc.authenticate();
 
@@ -74,7 +74,7 @@ class SignInOptionsUI extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             CustomButton(
-              text: localizations.signInText(localizations.signInFirebase),
+              text: localization.signInText(localization.signInFirebase),
               onPress: () => _pushScreen(context, Routes.firebaseAuth),
               backgroundColor: CustomColors.darkYellow,
               foregroundColor: CustomColors.white,
@@ -90,18 +90,18 @@ class SignInOptionsUI extends StatelessWidget {
   }
 
   void _showSnackBar(BuildContext context, FacebookState state) {
-    final localizations = AppLocalizations.of(context)!;
+    final localization = context.localizations;
     final String? message;
 
     switch (state) {
       case FacebookState.inProgress:
-        message = localizations.signInFacebookInProgress;
+        message = localization.signInFacebookInProgress;
         break;
       case FacebookState.cancelled:
-        message = localizations.signInFacebookCancelled;
+        message = localization.signInFacebookCancelled;
         break;
       case FacebookState.error:
-        message = localizations.signInFacebookError;
+        message = localization.signInFacebookError;
         break;
     }
 

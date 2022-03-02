@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:login_bloc/bloc/login_bloc.dart';
 import 'package:login_bloc/common/message_service.dart';
 import 'package:login_bloc/common/model/text_field_validator.dart';
 import 'package:login_bloc/common/routes.dart';
 import 'package:login_bloc/common/utils.dart';
+import 'package:login_bloc/l10n/l10n.dart';
 import 'package:login_bloc/ui/common/colors.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
 import 'package:login_bloc/ui/widgets/custom_textfield.dart';
@@ -87,15 +87,15 @@ class _TextFieldEmail extends HookWidget {
     return StreamBuilder<TextFieldValidator>(
       stream: bloc.emailStream,
       builder: (_, snapshot) {
-        final localizations = AppLocalizations.of(context)!;
+        final localization = context.localizations;
 
         controller.value = controller.value.copyWith(text: bloc.email ?? '');
 
         return CustomTextField(
           textController: controller,
-          hint: localizations.emailPlaceholder,
+          hint: localization.emailPlaceholder,
           isRequired: true,
-          requiredMessage: localizations.emailRequiredMessage,
+          requiredMessage: localization.emailRequiredMessage,
           onChange: bloc.changeEmail,
           inputType: TextInputType.emailAddress,
           action: TextInputAction.next,
@@ -123,15 +123,15 @@ class _TextFieldPassword extends HookWidget {
     return StreamBuilder<TextFieldValidator>(
       stream: bloc.passwordStream,
       builder: (_, snapshot) {
-        final localizations = AppLocalizations.of(context)!;
+        final localization = context.localizations;
 
         controller.value = controller.value.copyWith(text: bloc.password ?? '');
 
         return CustomTextField(
           textController: controller,
-          hint: localizations.passwordPlaceholder,
+          hint: localization.passwordPlaceholder,
           isRequired: true,
-          requiredMessage: localizations.passwordRequiredMessage,
+          requiredMessage: localization.passwordRequiredMessage,
           onChange: bloc.changePassword,
           errorText: snapshot.hasError
               ? Utils.getTextValidator(
@@ -163,7 +163,7 @@ class _SubmitButton extends StatelessWidget {
     return StreamBuilder<bool>(
       stream: bloc.isValidData,
       builder: (_, isValidSnapshot) {
-        final localizations = AppLocalizations.of(context)!;
+        final localization = context.localizations;
 
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -171,7 +171,7 @@ class _SubmitButton extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: CustomButton(
-                  text: localizations.signInButton,
+                  text: localization.signInButton,
                   onPress: isValidSnapshot.hasData
                       ? () => _onPressButton(context)
                       : null,
@@ -189,13 +189,13 @@ class _SubmitButton extends StatelessWidget {
   }
 
   Future<void> _onPressButton(BuildContext context) async {
-    final localizations = AppLocalizations.of(context)!;
+    final localization = context.localizations;
 
     final result = await bloc.authenticate();
     if (result) {
       onGoToScreen();
     } else {
-      onSendMessage(localizations.userPasswordIncorrectMessage);
+      onSendMessage(localization.userPasswordIncorrectMessage);
     }
   }
 }
