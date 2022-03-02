@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:login_bloc/bloc/biometric_bloc.dart';
 import 'package:login_bloc/common/message_service.dart';
@@ -7,59 +8,42 @@ import 'package:login_bloc/common/routes.dart';
 import 'package:login_bloc/ui/common/colors.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
 
-class LoginBiometric extends StatefulWidget {
+class LoginBiometric extends HookWidget {
   const LoginBiometric({Key? key}) : super(key: key);
-
-  @override
-  _LoginBiometricState createState() => _LoginBiometricState();
-}
-
-class _LoginBiometricState extends State<LoginBiometric> {
-  @override
-  void initState() {
-    super.initState();
-    _initBiometric();
-  }
-
-  @override
-  void dispose() {
-    biometricBloc.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
 
+    useEffect(
+      () {
+        Future.microtask(_initBiometric);
+        return biometricBloc.dispose;
+      },
+      const [],
+    );
+
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.black,
+      ),
       backgroundColor: CustomColors.white,
-      body: Stack(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: StreamBuilder<bool>(
-              initialData: false,
-              stream: biometricBloc.hasBiometricStream,
-              builder: (_, snapshot) => snapshot.data!
-                  ? BiometricBody(
-                      bloc: biometricBloc,
-                      onGoToScreen: _goToScreen,
-                      onSendMessage: _showSnackBar,
-                    )
-                  : TextMessage(
-                      message: localizations.biometricNoSupportedText,
-                    ),
-            ),
-          ),
-          Positioned(
-            top: 30,
-            left: 16,
-            child: IconButton(
-              icon: const Icon(Icons.arrow_back_ios),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-          ),
-        ],
+      extendBodyBehindAppBar: true,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: StreamBuilder<bool>(
+          initialData: false,
+          stream: biometricBloc.hasBiometricStream,
+          builder: (_, snapshot) => snapshot.data!
+              ? _BiometricBody(
+                  bloc: biometricBloc,
+                  onGoToScreen: () => _goToScreen(context),
+                  onSendMessage: (value) => _showSnackBar(context, value),
+                )
+              : _TextMessage(message: localizations.biometricNoSupportedText),
+        ),
       ),
     );
   }
@@ -69,15 +53,15 @@ class _LoginBiometricState extends State<LoginBiometric> {
     await biometricBloc.getListBiometric();
   }
 
-  void _showSnackBar(String message) =>
+  void _showSnackBar(BuildContext context, String message) =>
       MessageService.getInstance().showMessage(context, message);
 
-  Future<void> _goToScreen() => Navigator.of(context)
+  Future<void> _goToScreen(BuildContext context) => Navigator.of(context)
       .pushNamedAndRemoveUntil(Routes.home, (Route<dynamic> route) => false);
 }
 
-class BiometricBody extends StatelessWidget {
-  const BiometricBody({
+class _BiometricBody extends StatelessWidget {
+  const _BiometricBody({
     Key? key,
     required this.bloc,
     required this.onSendMessage,
@@ -120,7 +104,7 @@ class BiometricBody extends StatelessWidget {
               );
             }
 
-            return TextMessage(message: localizations.biometricEnabledText);
+            return _TextMessage(message: localizations.biometricEnabledText);
           },
         ),
       ],
@@ -139,19 +123,17 @@ class BiometricBody extends StatelessWidget {
   }
 }
 
-class TextMessage extends StatelessWidget {
-  const TextMessage({Key? key, required this.message}) : super(key: key);
+class _TextMessage extends StatelessWidget {
+  const _TextMessage({Key? key, required this.message}) : super(key: key);
 
   final String message;
 
   @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        message,
-        textAlign: TextAlign.center,
-        style: const TextStyle(color: CustomColors.darkBlue, fontSize: 25),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => Center(
+        child: Text(
+          message,
+          textAlign: TextAlign.center,
+          style: const TextStyle(color: CustomColors.darkBlue, fontSize: 25),
+        ),
+      );
 }
