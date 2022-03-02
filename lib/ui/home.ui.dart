@@ -53,22 +53,18 @@ class _HomePageUIState extends State<HomePageUI> with WidgetsBindingObserver {
             const SizedBox(height: 30),
             StreamBuilder<Locale?>(
               stream: languageBloc.localeStream,
-              builder: (_, snapshot) {
-                return DropdownButton<Locale>(
-                  hint: Text(localization.changeLanguageTitle),
-                  value: snapshot.data,
-                  onChanged: (locale) =>
-                      languageBloc.setLanguage(locale!.languageCode),
-                  items: AppLocalizations.supportedLocales
-                      .map(
-                        (locale) => DropdownMenuItem(
-                          value: locale,
-                          child: Text(_getText(locale.languageCode)),
-                        ),
-                      )
-                      .toList(),
-                );
-              },
+              builder: (_, snapshot) => DropdownButton<Locale>(
+                hint: Text(localization.changeLanguageTitle),
+                value: snapshot.data,
+                onChanged: (l) => languageBloc.setLanguage(l!.languageCode),
+                items: <DropdownMenuItem<Locale>>[
+                  for (final item in AppLocalizations.supportedLocales)
+                    DropdownMenuItem(
+                      value: item,
+                      child: Text(_getText(item.languageCode)),
+                    )
+                ],
+              ),
             ),
           ],
         ),
