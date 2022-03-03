@@ -175,5 +175,9 @@
   "spanishLanguage": "Spanish",
   "@spanishLanguage": {
     "description": "Change language second option text"
-  }
+  },
+  "firebaseSubtitleSignIn": "Welcome to FlutterFire UI! Please sign in to continue.",
+  "firebaseSubtitleSignUp": "Welcome to FlutterFire UI! Please create an account to continue.",
+  "firebaseFooterSignIn": "By signing in, you agree to our terms and conditions.",
+  "firebaseFooterSignUp": "By signing up, you agree to our terms and conditions."
 }
