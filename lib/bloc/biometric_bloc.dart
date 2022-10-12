@@ -38,7 +38,7 @@ class BiometricBloc extends BaseBloc {
     try {
       final isAuthorized = await _authentication.authenticate(
         localizedReason: reason,
-        stickyAuth: true,
+        options: const AuthenticationOptions(stickyAuth: true),
       );
       return isAuthorized;
     } on PlatformException catch (e) {

@@ -17,7 +17,7 @@ class NotificationService {
     }
 
     const initSettingsAndroid = AndroidInitializationSettings('login_bloc');
-    const initSettingsIOS = IOSInitializationSettings();
+    const initSettingsIOS = DarwinInitializationSettings();
 
     const initSettings = InitializationSettings(
       android: initSettingsAndroid,
@@ -45,7 +45,7 @@ class NotificationService {
       styleInformation: DefaultStyleInformation(true, true),
     );
 
-    const iosChannel = IOSNotificationDetails(presentSound: true);
+    const iosChannel = DarwinNotificationDetails(presentSound: true);
 
     const platformChannelSpecifics = NotificationDetails(
       android: androidChannel,
