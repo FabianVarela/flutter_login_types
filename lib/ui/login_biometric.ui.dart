@@ -9,7 +9,7 @@ import 'package:login_bloc/ui/common/colors.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
 
 class LoginBiometric extends HookWidget {
-  const LoginBiometric({Key? key}) : super(key: key);
+  const LoginBiometric({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -62,11 +62,10 @@ class LoginBiometric extends HookWidget {
 
 class _BiometricBody extends StatelessWidget {
   const _BiometricBody({
-    Key? key,
     required this.bloc,
     required this.onSendMessage,
     required this.onGoToScreen,
-  }) : super(key: key);
+  });
 
   final BiometricBloc bloc;
   final ValueSetter<String> onSendMessage;
@@ -124,7 +123,7 @@ class _BiometricBody extends StatelessWidget {
 }
 
 class _TextMessage extends StatelessWidget {
-  const _TextMessage({Key? key, required this.message}) : super(key: key);
+  const _TextMessage({required this.message});
 
   final String message;
 

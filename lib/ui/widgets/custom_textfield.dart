@@ -3,7 +3,7 @@ import 'package:login_bloc/ui/common/colors.dart';
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
-    Key? key,
+    super.key,
     this.textController,
     this.hint,
     this.requiredMessage,
@@ -13,7 +13,7 @@ class CustomTextField extends StatefulWidget {
     this.inputType = TextInputType.text,
     this.action = TextInputAction.done,
     this.onChange,
-  }) : super(key: key);
+  });
 
   final TextEditingController? textController;
   final String? hint;
@@ -72,7 +72,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) => Column(
         children: <Widget>[
-          Container(
+          DecoratedBox(
             decoration: BoxDecoration(
               border: Border(
                 left: BorderSide(width: 4, color: _getBorderColor()),

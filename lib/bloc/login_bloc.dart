@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:login_bloc/bloc/base_bloc.dart';
 import 'package:login_bloc/common/model/text_field_validator.dart';
 import 'package:login_bloc/common/validator.dart';
@@ -24,9 +25,9 @@ class LoginBloc extends BaseBloc with Validator {
         },
       );
 
-  Function(String) get changeEmail => _emailSubject.sink.add;
+  ValueSetter<String> get changeEmail => _emailSubject.sink.add;
 
-  Function(String) get changePassword => _passwordSubject.sink.add;
+  ValueSetter<String> get changePassword => _passwordSubject.sink.add;
 
   String? get email => _emailSubject.valueOrNull;
 

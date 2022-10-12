@@ -4,7 +4,7 @@ import 'package:flutterfire_ui/auth.dart';
 import 'package:login_bloc/l10n/l10n.dart';
 
 class FirebaseAuthUI extends StatelessWidget {
-  const FirebaseAuthUI({Key? key}) : super(key: key);
+  const FirebaseAuthUI({super.key});
 
   @override
   Widget build(BuildContext context) {

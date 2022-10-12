@@ -14,7 +14,7 @@ import 'package:login_bloc/ui/widgets/custom_textfield.dart';
 import 'package:login_bloc/ui/widgets/loading.dart';
 
 class LoginUI extends HookWidget {
-  const LoginUI({Key? key}) : super(key: key);
+  const LoginUI({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class LoginUI extends HookWidget {
 }
 
 class _TextFieldEmail extends HookWidget {
-  const _TextFieldEmail({Key? key, required this.bloc}) : super(key: key);
+  const _TextFieldEmail({required this.bloc});
 
   final LoginBloc bloc;
 
@@ -112,7 +112,7 @@ class _TextFieldEmail extends HookWidget {
 }
 
 class _TextFieldPassword extends HookWidget {
-  const _TextFieldPassword({Key? key, required this.bloc}) : super(key: key);
+  const _TextFieldPassword({required this.bloc});
 
   final LoginBloc bloc;
 
@@ -148,11 +148,10 @@ class _TextFieldPassword extends HookWidget {
 
 class _SubmitButton extends StatelessWidget {
   const _SubmitButton({
-    Key? key,
     required this.bloc,
     required this.onSendMessage,
     required this.onGoToScreen,
-  }) : super(key: key);
+  });
 
   final LoginBloc bloc;
   final ValueSetter<String> onSendMessage;

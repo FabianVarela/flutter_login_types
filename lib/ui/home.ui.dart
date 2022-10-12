@@ -3,7 +3,7 @@ import 'package:login_bloc/bloc/language_bloc.dart';
 import 'package:login_bloc/l10n/l10n.dart';
 
 class HomePageUI extends StatefulWidget {
-  const HomePageUI({Key? key}) : super(key: key);
+  const HomePageUI({super.key});
 
   @override
   _HomePageUIState createState() => _HomePageUIState();
@@ -16,7 +16,7 @@ class _HomePageUIState extends State<HomePageUI> with WidgetsBindingObserver {
   void initState() {
     _notification = null;
 
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
   }
 
@@ -27,7 +27,7 @@ class _HomePageUIState extends State<HomePageUI> with WidgetsBindingObserver {
 
   @override
   void dispose() {
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 

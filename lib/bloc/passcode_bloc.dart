@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:login_bloc/bloc/base_bloc.dart';
 import 'package:login_bloc/common/model/text_field_validator.dart';
 import 'package:login_bloc/common/validator.dart';
@@ -30,11 +31,11 @@ class PasscodeBloc extends BaseBloc with Validator {
 
   Stream<int> get pageStream => _pageSubject.stream;
 
-  Function(String) get changePhone => _phoneSubject.sink.add;
+  ValueSetter<String> get changePhone => _phoneSubject.sink.add;
 
-  Function(String) get changeCode => _codeSubject.sink.add;
+  ValueSetter<String> get changeCode => _codeSubject.sink.add;
 
-  Function(int) get changePage => _pageSubject.sink.add;
+  ValueSetter<int> get changePage => _pageSubject.sink.add;
 
   String? get phone => _phoneSubject.valueOrNull;
 

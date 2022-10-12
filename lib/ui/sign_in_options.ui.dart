@@ -7,7 +7,7 @@ import 'package:login_bloc/ui/common/colors.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
 
 class SignInOptionsUI extends StatelessWidget {
-  const SignInOptionsUI({Key? key}) : super(key: key);
+  const SignInOptionsUI({super.key});
 
   @override
   Widget build(BuildContext context) {

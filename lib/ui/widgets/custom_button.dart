@@ -7,17 +7,17 @@ enum IconDirection {
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
-    Key? key,
+    super.key,
     required this.text,
     this.onPress,
     this.backgroundColor = Colors.white,
     this.foregroundColor = Colors.black,
     this.icon,
     this.direction = IconDirection.left,
-  }) : super(key: key);
+  });
 
   final String text;
-  final Function()? onPress;
+  final VoidCallback? onPress;
   final Color backgroundColor;
   final Color foregroundColor;
   final Widget? icon;
@@ -27,7 +27,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        primary: backgroundColor,
+        backgroundColor: backgroundColor,
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),

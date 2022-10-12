@@ -14,7 +14,7 @@ import 'package:login_bloc/ui/widgets/loading.dart';
 import 'package:pinput/pinput.dart';
 
 class LoginPasscodeUI extends HookWidget {
-  const LoginPasscodeUI({Key? key}) : super(key: key);
+  const LoginPasscodeUI({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -111,8 +111,7 @@ class LoginPasscodeUI extends HookWidget {
 }
 
 class _FormPhone extends HookWidget {
-  const _FormPhone({Key? key, required this.bloc, required this.onSendMessage})
-      : super(key: key);
+  const _FormPhone({required this.bloc, required this.onSendMessage});
 
   final PasscodeBloc bloc;
   final ValueSetter<String> onSendMessage;
@@ -208,11 +207,10 @@ class _FormPhone extends HookWidget {
 
 class _FormPasscode extends HookWidget {
   const _FormPasscode({
-    Key? key,
     required this.bloc,
     required this.onSendMessage,
     required this.onGoToScreen,
-  }) : super(key: key);
+  });
 
   final PasscodeBloc bloc;
   final ValueSetter<String> onSendMessage;
