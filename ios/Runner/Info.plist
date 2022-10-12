@@ -61,6 +61,8 @@
     </array>
     <key>FacebookAppID</key>
     <string>{your-app-id}</string>
+    <key>FacebookClientToken</key>
+    <string>{your-client-token}</string>
     <key>FacebookDisplayName</key>
     <string>{your-app-name}</string>
     <key>LSApplicationQueriesSchemes</key>
