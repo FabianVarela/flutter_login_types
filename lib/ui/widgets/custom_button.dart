@@ -58,7 +58,7 @@ class CustomButton extends StatelessWidget {
           if (icon != null && direction == IconDirection.right)
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(right: 5),
+                padding: const EdgeInsets.only(left: 5),
                 child: icon,
               ),
             ),
