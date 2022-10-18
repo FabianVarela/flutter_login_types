@@ -35,7 +35,10 @@ class SignInOptionsUI extends StatelessWidget {
               onPress: () => _pushScreen(context, Routes.signInUserPass),
               backgroundColor: CustomColors.white.withOpacity(.6),
               foregroundColor: CustomColors.darkBlue,
-              icon: const Icon(Icons.account_circle_outlined),
+              icon: const Icon(
+                Icons.account_circle_outlined,
+                color: CustomColors.darkBlue,
+              ),
             ),
             const SizedBox(height: 20),
             CustomButton(
