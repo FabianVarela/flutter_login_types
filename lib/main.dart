@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:login_bloc/bloc/language_bloc.dart';
 import 'package:login_bloc/common/notification_service.dart';
 import 'package:login_bloc/common/routes.dart';
+import 'package:login_bloc/firebase_options.dart';
 import 'package:login_bloc/l10n/l10n.dart';
 import 'package:login_bloc/ui/firebase_auth.ui.dart';
 import 'package:login_bloc/ui/home.ui.dart';
@@ -14,7 +15,7 @@ import 'package:login_bloc/ui/sign_in_options.ui.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(const MyApp());
 }
