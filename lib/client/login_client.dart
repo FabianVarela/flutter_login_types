@@ -30,11 +30,6 @@ class LoginClient {
       }
     }
 
-    print(accessToken!.toJson());
-
-    final userData = await FacebookAuth.instance.getUserData();
-    print(userData);
-
-    return userData;
+    return FacebookAuth.instance.getUserData();
   }
 }
