@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:login_bloc/bloc/biometric_bloc.dart';
 import 'package:login_bloc/common/message_service.dart';
-import 'package:login_bloc/common/routes.dart';
 import 'package:login_bloc/l10n/l10n.dart';
 import 'package:login_bloc/ui/common/colors.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
@@ -39,7 +39,7 @@ class LoginBiometric extends HookWidget {
           builder: (_, snapshot) => snapshot.data!
               ? _BiometricBody(
                   bloc: biometricBloc,
-                  onGoToScreen: () => _goToScreen(context),
+                  onGoToScreen: () => context.go('/home'),
                   onSendMessage: (value) => _showSnackBar(context, value),
                 )
               : _TextMessage(message: localization.biometricNoSupportedText),
@@ -55,9 +55,6 @@ class LoginBiometric extends HookWidget {
 
   void _showSnackBar(BuildContext context, String message) =>
       MessageService.getInstance().showMessage(context, message);
-
-  Future<void> _goToScreen(BuildContext context) => Navigator.of(context)
-      .pushNamedAndRemoveUntil(Routes.home, (Route<dynamic> route) => false);
 }
 
 class _BiometricBody extends StatelessWidget {

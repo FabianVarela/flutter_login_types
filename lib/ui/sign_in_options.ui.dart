@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:login_bloc/bloc/facebook_bloc.dart';
 import 'package:login_bloc/common/message_service.dart';
-import 'package:login_bloc/common/routes.dart';
 import 'package:login_bloc/l10n/l10n.dart';
 import 'package:login_bloc/ui/common/colors.dart';
 import 'package:login_bloc/ui/widgets/custom_button.dart';
@@ -32,7 +32,7 @@ class SignInOptionsUI extends StatelessWidget {
             const SizedBox(height: 30),
             CustomButton(
               text: localization.signInText(localization.signInUserPassword),
-              onPress: () => _pushScreen(context, Routes.signInUserPass),
+              onPress: () => _goScreen(context, '/login_user_pass'),
               backgroundColor: CustomColors.white.withOpacity(.6),
               foregroundColor: CustomColors.darkBlue,
               icon: const Icon(
@@ -43,7 +43,7 @@ class SignInOptionsUI extends StatelessWidget {
             const SizedBox(height: 20),
             CustomButton(
               text: localization.signInText(localization.signInPasscode),
-              onPress: () => _pushScreen(context, Routes.signInPasscode),
+              onPress: () => _goScreen(context, '/login_passcode'),
               backgroundColor: CustomColors.lightBlue,
               foregroundColor: CustomColors.white,
               icon: const Icon(Icons.sms_outlined, color: CustomColors.white),
@@ -51,7 +51,7 @@ class SignInOptionsUI extends StatelessWidget {
             const SizedBox(height: 20),
             CustomButton(
               text: localization.signInText(localization.signInFingerPrint),
-              onPress: () => _pushScreen(context, Routes.signInBiometric),
+              onPress: () => _goScreen(context, '/login_biometric'),
               backgroundColor: CustomColors.darkPurple,
               foregroundColor: CustomColors.white,
               icon: const Icon(
@@ -68,7 +68,7 @@ class SignInOptionsUI extends StatelessWidget {
                 if (result != null) {
                   _showSnackBar(context, result);
                 } else {
-                  await _goToHomeScreen(context);
+                  _goScreen(context, '/home');
                 }
               },
               backgroundColor: CustomColors.kingBlue,
@@ -78,7 +78,7 @@ class SignInOptionsUI extends StatelessWidget {
             const SizedBox(height: 20),
             CustomButton(
               text: localization.signInText(localization.signInFirebase),
-              onPress: () => _pushScreen(context, Routes.firebaseAuth),
+              onPress: () => _goScreen(context, '/firebase_auth'),
               backgroundColor: CustomColors.darkYellow,
               foregroundColor: CustomColors.white,
               icon: const Icon(
@@ -111,9 +111,5 @@ class SignInOptionsUI extends StatelessWidget {
     MessageService.getInstance().showMessage(context, message);
   }
 
-  Future<void> _goToHomeScreen(BuildContext context) => Navigator.of(context)
-      .pushNamedAndRemoveUntil(Routes.home, (Route<dynamic> route) => false);
-
-  Future<void> _pushScreen(BuildContext context, String routeName) =>
-      Navigator.of(context).pushNamed(routeName);
+  void _goScreen(BuildContext context, String route) => context.go(route);
 }

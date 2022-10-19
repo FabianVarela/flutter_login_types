@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:login_bloc/bloc/passcode_bloc.dart';
 import 'package:login_bloc/common/message_service.dart';
 import 'package:login_bloc/common/model/text_field_validator.dart';
 import 'package:login_bloc/common/notification_service.dart';
-import 'package:login_bloc/common/routes.dart';
 import 'package:login_bloc/common/utils.dart';
 import 'package:login_bloc/l10n/l10n.dart';
 import 'package:login_bloc/ui/common/colors.dart';
@@ -28,7 +28,12 @@ class LoginPasscodeUI extends HookWidget {
     );
 
     return WillPopScope(
-      onWillPop: _returnPageFromBar,
+      onWillPop: () async {
+        if (passcodeBloc.page == 0) return true;
+
+        passcodeBloc.changePage(0);
+        return false;
+      },
       child: Stack(
         children: <Widget>[
           Scaffold(
@@ -36,10 +41,6 @@ class LoginPasscodeUI extends HookWidget {
               elevation: 0,
               backgroundColor: Colors.transparent,
               foregroundColor: Colors.black,
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back_ios),
-                onPressed: () => _returnPage(context),
-              ),
             ),
             extendBodyBehindAppBar: true,
             resizeToAvoidBottomInset: true,
@@ -67,7 +68,7 @@ class LoginPasscodeUI extends HookWidget {
                     ),
                     _FormPasscode(
                       bloc: passcodeBloc,
-                      onGoToScreen: () => _goToScreen(context),
+                      onGoToScreen: () => context.go('/home'),
                       onSendMessage: (value) => _showSnackBar(context, value),
                     ),
                   ],
@@ -88,26 +89,8 @@ class LoginPasscodeUI extends HookWidget {
     );
   }
 
-  Future<bool> _returnPageFromBar() {
-    if (passcodeBloc.page == 0) return Future<bool>.value(true);
-
-    passcodeBloc.changePage(0);
-    return Future<bool>.value(false);
-  }
-
-  void _returnPage(BuildContext context) {
-    if (passcodeBloc.page == 0) {
-      Navigator.of(context).pop();
-    } else {
-      passcodeBloc.changePage(0);
-    }
-  }
-
   void _showSnackBar(BuildContext context, String message) =>
       MessageService.getInstance().showMessage(context, message);
-
-  Future<void> _goToScreen(BuildContext context) => Navigator.of(context)
-      .pushNamedAndRemoveUntil(Routes.home, (Route<dynamic> route) => false);
 }
 
 class _FormPhone extends HookWidget {
