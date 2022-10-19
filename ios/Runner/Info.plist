@@ -56,6 +56,7 @@
             <key>CFBundleURLSchemes</key>
             <array>
                 <string>fb{your-app-id}</string>
+                <string>{your-google-user-content}</string>
             </array>
         </dict>
     </array>
