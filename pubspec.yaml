@@ -8,16 +8,16 @@ environment:
 
 dependencies:
   cupertino_icons: ^1.0.5
-  firebase_auth: ^3.11.2
-  firebase_core: ^1.24.0
+  firebase_auth: ^4.1.1
+  firebase_core: ^2.1.1
   flutter:
     sdk: flutter
   flutter_facebook_auth: ^4.4.1+1
   flutter_hooks: ^0.18.5+1
-  flutter_local_notifications: ^12.0.2
+  flutter_local_notifications: ^12.0.3
   flutter_localizations:
     sdk: flutter
-  flutterfire_ui: ^0.4.3+14
+  flutterfire_ui: ^0.4.3+19
   go_router: ^5.1.3
   google_fonts: ^3.0.1
   google_sign_in: ^5.4.2
