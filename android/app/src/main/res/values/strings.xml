@@ -1,4 +1,4 @@
 <resources>
     <string name="facebook_app_id">{your-app-id}</string>
-    <string name="facebook_client_token">fb{your-app-id}</string>
+    <string name="facebook_client_token">{your-client-token}</string>
 </resources>
