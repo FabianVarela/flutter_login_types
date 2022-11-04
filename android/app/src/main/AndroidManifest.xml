@@ -8,7 +8,7 @@
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:label="login_bloc"
+        android:label="Flutter Login Types"
         android:showWhenLocked="true"
         android:turnScreenOn="true">
         <activity
