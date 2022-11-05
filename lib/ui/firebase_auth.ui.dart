@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:flutterfire_ui/auth.dart';
-import 'package:login_bloc/l10n/l10n.dart';
 
 class FirebaseAuthUI extends StatelessWidget {
   const FirebaseAuthUI({super.key});

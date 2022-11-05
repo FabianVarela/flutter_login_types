@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login_types/bloc/facebook_bloc.dart';
+import 'package:flutter_login_types/common/message_service.dart';
+import 'package:flutter_login_types/l10n/l10n.dart';
+import 'package:flutter_login_types/ui/common/colors.dart';
+import 'package:flutter_login_types/ui/widgets/custom_button.dart';
 import 'package:go_router/go_router.dart';
-import 'package:login_bloc/bloc/facebook_bloc.dart';
-import 'package:login_bloc/common/message_service.dart';
-import 'package:login_bloc/l10n/l10n.dart';
-import 'package:login_bloc/ui/common/colors.dart';
-import 'package:login_bloc/ui/widgets/custom_button.dart';
 
 class SignInOptionsUI extends StatelessWidget {
   const SignInOptionsUI({super.key});

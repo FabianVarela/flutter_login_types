@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:login_bloc/app.dart';
-import 'package:login_bloc/bootstrap.dart';
-import 'package:login_bloc/firebase_options.dart';
+import 'package:flutter_login_types/app.dart';
+import 'package:flutter_login_types/bootstrap.dart';
+import 'package:flutter_login_types/firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

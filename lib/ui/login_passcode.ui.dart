@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_login_types/bloc/passcode_bloc.dart';
+import 'package:flutter_login_types/common/message_service.dart';
+import 'package:flutter_login_types/common/model/text_field_validator.dart';
+import 'package:flutter_login_types/common/notification_service.dart';
+import 'package:flutter_login_types/common/utils.dart';
+import 'package:flutter_login_types/l10n/l10n.dart';
+import 'package:flutter_login_types/ui/common/colors.dart';
+import 'package:flutter_login_types/ui/widgets/custom_button.dart';
+import 'package:flutter_login_types/ui/widgets/custom_textfield.dart';
+import 'package:flutter_login_types/ui/widgets/loading.dart';
 import 'package:go_router/go_router.dart';
-import 'package:login_bloc/bloc/passcode_bloc.dart';
-import 'package:login_bloc/common/message_service.dart';
-import 'package:login_bloc/common/model/text_field_validator.dart';
-import 'package:login_bloc/common/notification_service.dart';
-import 'package:login_bloc/common/utils.dart';
-import 'package:login_bloc/l10n/l10n.dart';
-import 'package:login_bloc/ui/common/colors.dart';
-import 'package:login_bloc/ui/widgets/custom_button.dart';
-import 'package:login_bloc/ui/widgets/custom_textfield.dart';
-import 'package:login_bloc/ui/widgets/loading.dart';
 import 'package:pinput/pinput.dart';
 
 class LoginPasscodeUI extends HookWidget {

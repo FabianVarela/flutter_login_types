@@ -16,12 +16,9 @@ class NotificationService {
       _requestIOSPermission();
     }
 
-    const initSettingsAndroid = AndroidInitializationSettings('login_bloc');
-    const initSettingsIOS = DarwinInitializationSettings();
-
     const initSettings = InitializationSettings(
-      android: initSettingsAndroid,
-      iOS: initSettingsIOS,
+      android: AndroidInitializationSettings('flutter_login_types'),
+      iOS: DarwinInitializationSettings(),
     );
 
     _localNotifications.initialize(initSettings);

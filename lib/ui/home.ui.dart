@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login_bloc/bloc/language_bloc.dart';
-import 'package:login_bloc/l10n/l10n.dart';
+import 'package:flutter_login_types/bloc/language_bloc.dart';
+import 'package:flutter_login_types/l10n/l10n.dart';
 
 class HomePageUI extends StatefulWidget {
   const HomePageUI({super.key});

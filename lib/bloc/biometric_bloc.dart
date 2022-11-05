@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
+import 'package:flutter_login_types/bloc/base_bloc.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:login_bloc/bloc/base_bloc.dart';
 import 'package:rxdart/subjects.dart';
 
 class BiometricBloc extends BaseBloc {

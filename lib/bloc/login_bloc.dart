@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
-import 'package:login_bloc/bloc/base_bloc.dart';
-import 'package:login_bloc/common/model/text_field_validator.dart';
-import 'package:login_bloc/common/validator.dart';
-import 'package:login_bloc/repository/login_repository.dart';
+import 'package:flutter_login_types/bloc/base_bloc.dart';
+import 'package:flutter_login_types/common/model/text_field_validator.dart';
+import 'package:flutter_login_types/common/validator.dart';
+import 'package:flutter_login_types/repository/login_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class LoginBloc extends BaseBloc with Validator {

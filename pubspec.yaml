@@ -1,4 +1,4 @@
-name: login_bloc
+name: flutter_login_types
 description: Login with BLoC architecture
 
 version: 1.0.0+1

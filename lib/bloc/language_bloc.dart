@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login_bloc/bloc/base_bloc.dart';
-import 'package:login_bloc/repository/language_repository.dart';
+import 'package:flutter_login_types/bloc/base_bloc.dart';
+import 'package:flutter_login_types/repository/language_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class LanguageBloc extends BaseBloc {

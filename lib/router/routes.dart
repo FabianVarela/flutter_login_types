@@ -2,13 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_login_types/ui/firebase_auth.ui.dart';
+import 'package:flutter_login_types/ui/home.ui.dart';
+import 'package:flutter_login_types/ui/login_biometric.ui.dart';
+import 'package:flutter_login_types/ui/login_passcode.ui.dart';
+import 'package:flutter_login_types/ui/login_user_pass.ui.dart';
+import 'package:flutter_login_types/ui/sign_in_options.ui.dart';
 import 'package:go_router/go_router.dart';
-import 'package:login_bloc/ui/firebase_auth.ui.dart';
-import 'package:login_bloc/ui/home.ui.dart';
-import 'package:login_bloc/ui/login_biometric.ui.dart';
-import 'package:login_bloc/ui/login_passcode.ui.dart';
-import 'package:login_bloc/ui/login_user_pass.ui.dart';
-import 'package:login_bloc/ui/sign_in_options.ui.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',

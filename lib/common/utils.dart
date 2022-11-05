@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login_bloc/common/model/text_field_validator.dart';
-import 'package:login_bloc/l10n/l10n.dart';
+import 'package:flutter_login_types/common/model/text_field_validator.dart';
+import 'package:flutter_login_types/l10n/l10n.dart';
 
 class Utils {
   static String? getTextValidator(BuildContext ctx, TextValidator? validator) {

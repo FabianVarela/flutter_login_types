@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:login_bloc/common/model/text_field_validator.dart';
+import 'package:flutter_login_types/common/model/text_field_validator.dart';
 
 mixin Validator {
   final checkEmail = StreamTransformer<String, TextFieldValidator>.fromHandlers(

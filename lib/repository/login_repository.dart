@@ -1,4 +1,4 @@
-import 'package:login_bloc/client/login_client.dart';
+import 'package:flutter_login_types/client/login_client.dart';
 
 class LoginRepository {
   final _client = LoginClient();
