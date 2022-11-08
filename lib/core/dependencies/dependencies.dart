@@ -5,10 +5,15 @@ import 'package:flutter_login_types/core/notifiers/language_notifier.dart';
 import 'package:flutter_login_types/core/repository/language_repository.dart';
 import 'package:flutter_login_types/core/repository/login_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
   throw UnimplementedError('You must implement SharedPreferences provider');
+});
+
+final localAuthenticationProvider = Provider<LocalAuthentication>((ref) {
+  throw UnimplementedError('You must implement LocalAuthentication provider');
 });
 
 final preferencesProvider = Provider<Preferences>((_) {

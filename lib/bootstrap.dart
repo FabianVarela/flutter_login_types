@@ -10,6 +10,7 @@ import 'package:flutter_login_types/core/providers/app_provider.dart';
 import 'package:flutter_login_types/core/repository/language_repository.dart';
 import 'package:flutter_login_types/core/repository/login_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> bootstrap(
@@ -27,6 +28,9 @@ Future<void> bootstrap(
   final overrides = <Override>[
     sharedPreferencesProvider.overrideWithValue(
       await SharedPreferences.getInstance(),
+    ),
+    localAuthenticationProvider.overrideWith(
+      (ref) => ref.watch(appProvider.localAuthentication),
     ),
     preferencesProvider.overrideWith(
       (ref) => ref.watch(appProvider.preferences),
@@ -52,14 +56,15 @@ Future<void> bootstrap(
 
 AppProvider configureAppProvider() {
   return AppProvider(
-    preferences: Provider<Preferences>(
+    localAuthentication: Provider((_) => LocalAuthentication()),
+    preferences: Provider(
       (ref) => Preferences(ref.watch(sharedPreferencesProvider)),
     ),
-    loginClient: Provider<LoginClient>((_) => LoginClient()),
-    languageRepository: Provider<LanguageRepository>(
+    loginClient: Provider((_) => LoginClient()),
+    languageRepository: Provider(
       (ref) => LanguageRepository(ref.read(preferencesProvider)),
     ),
-    loginRepository: Provider<LoginRepository>(
+    loginRepository: Provider(
       (ref) => LoginRepository(ref.watch(loginClientProvider)),
     ),
   );
