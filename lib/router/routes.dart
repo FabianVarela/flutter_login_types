@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_login_types/features/fingerprint_login/view/fingerprint_login_view.dart';
 import 'package:flutter_login_types/features/passcode_login/view/passcode_login_view.dart';
 import 'package:flutter_login_types/features/simple_login/view/simple_login_view.dart';
 import 'package:flutter_login_types/ui/firebase_auth.ui.dart';
 import 'package:flutter_login_types/ui/home.ui.dart';
-import 'package:flutter_login_types/ui/login_biometric.ui.dart';
 import 'package:flutter_login_types/ui/sign_in_options.ui.dart';
 import 'package:go_router/go_router.dart';
 
@@ -34,7 +34,7 @@ final appRouter = GoRouter(
         GoRoute(
           path: 'login_biometric',
           pageBuilder: (_, state) {
-            return _setPageRoute(state.pageKey, const LoginBiometric());
+            return _setPageRoute(state.pageKey, const FingerPrintLoginView());
           },
         ),
         GoRoute(
