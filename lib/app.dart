@@ -1,61 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_types/bloc/language_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_login_types/common/notification_service.dart';
+import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:flutter_login_types/router/routes.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class LoginApp extends StatefulWidget {
+class LoginApp extends HookConsumerWidget {
   const LoginApp({super.key});
 
   @override
-  _LoginAppState createState() => _LoginAppState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final language = ref.watch(languageNotifierProvider);
 
-class _LoginAppState extends State<LoginApp> {
-  @override
-  void initState() {
-    super.initState();
+    useEffect(
+      () {
+        NotificationService.getInstance().init();
+        ref.read(languageNotifierProvider.notifier).getLanguage();
 
-    NotificationService.getInstance().init();
-    languageBloc.getLanguage();
-  }
-
-  @override
-  void dispose() {
-    languageBloc.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<Locale?>(
-      stream: languageBloc.localeStream,
-      builder: (_, snapshot) {
-        return MaterialApp.router(
-          routerConfig: appRouter,
-          theme: ThemeData(
-            primarySwatch: Colors.teal,
-            textTheme: GoogleFonts.notoSansTextTheme(
-              Theme.of(context).textTheme,
-            ),
-          ),
-          locale: snapshot.data,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          localeResolutionCallback: (locale, supportedLocales) {
-            if (locale == null) return supportedLocales.first;
-
-            for (final currentLocale in supportedLocales) {
-              if (currentLocale.languageCode == locale.languageCode) {
-                return currentLocale;
-              }
-            }
-            return supportedLocales.first;
-          },
-          onGenerateTitle: (context) => context.localizations.appName,
-        );
+        return null;
       },
+      const [],
+    );
+
+    return MaterialApp.router(
+      routerConfig: appRouter,
+      theme: ThemeData(
+        primarySwatch: Colors.teal,
+        textTheme: GoogleFonts.notoSansTextTheme(Theme.of(context).textTheme),
+      ),
+      locale: language,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      localeResolutionCallback: (locale, supportedLocales) {
+        if (locale == null) return supportedLocales.first;
+
+        for (final currentLocale in supportedLocales) {
+          if (currentLocale.languageCode == locale.languageCode) {
+            return currentLocale;
+          }
+        }
+        return supportedLocales.first;
+      },
+      onGenerateTitle: (context) => context.localizations.appName,
     );
   }
 }
