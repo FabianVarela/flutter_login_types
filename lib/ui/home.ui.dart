@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_types/bloc/language_bloc.dart';
+import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class HomePageUI extends StatefulWidget {
+class HomePageUI extends ConsumerStatefulWidget {
   const HomePageUI({super.key});
 
   @override
   _HomePageUIState createState() => _HomePageUIState();
 }
 
-class _HomePageUIState extends State<HomePageUI> with WidgetsBindingObserver {
+class _HomePageUIState extends ConsumerState<HomePageUI>
+    with WidgetsBindingObserver {
   late AppLifecycleState? _notification;
 
   @override
@@ -33,15 +35,12 @@ class _HomePageUIState extends State<HomePageUI> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    final localization = context.localizations;
-
-    if (_notification != null) {
-      print('App status notification: $_notification');
-    }
+    if (_notification != null) print('App status notification: $_notification');
+    final language = ref.watch(languageNotifierProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(localization.homeTitle),
+        title: Text(context.localizations.homeTitle),
         centerTitle: true,
       ),
       body: SizedBox(
@@ -49,22 +48,21 @@ class _HomePageUIState extends State<HomePageUI> with WidgetsBindingObserver {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(localization.homeText),
+            Text(context.localizations.homeText),
             const SizedBox(height: 30),
-            StreamBuilder<Locale?>(
-              stream: languageBloc.localeStream,
-              builder: (_, snapshot) => DropdownButton<Locale>(
-                hint: Text(localization.changeLanguageTitle),
-                value: snapshot.data,
-                onChanged: (l) => languageBloc.setLanguage(l!.languageCode),
-                items: <DropdownMenuItem<Locale>>[
-                  for (final item in AppLocalizations.supportedLocales)
-                    DropdownMenuItem(
-                      value: item,
-                      child: Text(_getText(item.languageCode)),
-                    )
-                ],
-              ),
+            DropdownButton<Locale>(
+              hint: Text(context.localizations.changeLanguageTitle),
+              value: language,
+              onChanged: (language) => ref
+                  .read(languageNotifierProvider.notifier)
+                  .setLanguage(language!.languageCode),
+              items: <DropdownMenuItem<Locale>>[
+                for (final item in AppLocalizations.supportedLocales)
+                  DropdownMenuItem(
+                    value: item,
+                    child: Text(_getText(item.languageCode)),
+                  )
+              ],
             ),
           ],
         ),
