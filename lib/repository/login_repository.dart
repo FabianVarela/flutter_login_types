@@ -1,7 +1,9 @@
 import 'package:flutter_login_types/client/login_client.dart';
 
 class LoginRepository {
-  final _client = LoginClient();
+  LoginRepository(this._client);
+
+  final LoginClient _client;
 
   Future<String?> authenticate(String username, String password) =>
       _client.authenticate(username, password);
