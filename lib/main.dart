@@ -8,5 +8,5 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await bootstrap(() => const LoginApp());
+  await bootstrap(appProvider: configureAppProvider(), () => const LoginApp());
 }
