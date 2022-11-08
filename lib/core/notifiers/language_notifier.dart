@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_types/repository/language_repository.dart';
+import 'package:flutter_login_types/core/repository/language_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class LanguageNotifier extends StateNotifier<Locale?> {

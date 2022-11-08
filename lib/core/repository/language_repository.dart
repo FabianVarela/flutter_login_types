@@ -1,4 +1,4 @@
-import 'package:flutter_login_types/client/preferences.dart';
+import 'package:flutter_login_types/core/client/preferences.dart';
 
 class LanguageRepository {
   LanguageRepository(this._preferences);

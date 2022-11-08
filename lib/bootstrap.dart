@@ -3,12 +3,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_login_types/client/login_client.dart';
-import 'package:flutter_login_types/client/preferences.dart';
+import 'package:flutter_login_types/core/client/login_client.dart';
+import 'package:flutter_login_types/core/client/preferences.dart';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:flutter_login_types/core/providers/app_provider.dart';
-import 'package:flutter_login_types/repository/language_repository.dart';
-import 'package:flutter_login_types/repository/login_repository.dart';
+import 'package:flutter_login_types/core/repository/language_repository.dart';
+import 'package:flutter_login_types/core/repository/login_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -56,7 +56,7 @@ AppProvider configureAppProvider() {
       (ref) => Preferences(ref.watch(sharedPreferencesProvider)),
     ),
     loginClient: Provider<LoginClient>((_) => LoginClient()),
-    languageRepository: Provider(
+    languageRepository: Provider<LanguageRepository>(
       (ref) => LanguageRepository(ref.read(preferencesProvider)),
     ),
     loginRepository: Provider<LoginRepository>(

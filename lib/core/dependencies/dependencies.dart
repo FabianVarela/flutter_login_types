@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_types/client/login_client.dart';
-import 'package:flutter_login_types/client/preferences.dart';
+import 'package:flutter_login_types/core/client/login_client.dart';
+import 'package:flutter_login_types/core/client/preferences.dart';
 import 'package:flutter_login_types/core/notifiers/language_notifier.dart';
-import 'package:flutter_login_types/repository/language_repository.dart';
-import 'package:flutter_login_types/repository/login_repository.dart';
+import 'package:flutter_login_types/core/repository/language_repository.dart';
+import 'package:flutter_login_types/core/repository/login_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
