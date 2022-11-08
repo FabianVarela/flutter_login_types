@@ -1,7 +1,9 @@
 import 'package:flutter_login_types/client/preferences.dart';
 
 class LanguageRepository {
-  final _preferences = Preferences();
+  LanguageRepository(this._preferences);
+
+  final Preferences _preferences;
 
   Future<String?> getLanguage() => _preferences.getLanguage();
 
