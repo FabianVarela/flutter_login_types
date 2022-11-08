@@ -70,19 +70,13 @@ class _BiometricBody extends ConsumerWidget {
         const SizedBox(height: 30),
         biometricList.when(
           data: (data) => data.isNotEmpty
-              ? Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: CustomButton(
-                        text: localization.biometricButtonText,
-                        onPress: () => ref
-                            .read(localAuthNotifierProvider.notifier)
-                            .authenticate(localization.biometricReason),
-                        backgroundColor: CustomColors.darkPurple,
-                        foregroundColor: CustomColors.white,
-                      ),
-                    ),
-                  ],
+              ? CustomButton(
+                  text: localization.biometricButtonText,
+                  onPress: () => ref
+                      .read(localAuthNotifierProvider.notifier)
+                      .authenticate(localization.biometricReason),
+                  backgroundColor: CustomColors.darkPurple,
+                  foregroundColor: CustomColors.white,
                 )
               : _TextMessage(message: localization.biometricEnabledText),
           loading: () => const Center(child: CircularProgressIndicator()),
