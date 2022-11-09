@@ -75,9 +75,18 @@ class _CustomTextFieldState extends State<CustomTextField> {
           DecoratedBox(
             decoration: BoxDecoration(
               border: Border(
-                left: BorderSide(width: 4, color: _getBorderColor()),
+                left: BorderSide(
+                  width: 4,
+                  color: _hasFocus
+                      ? CustomColors.lightGreen
+                      : (_hasRequired || widget.errorText != null)
+                          ? CustomColors.lightRed
+                          : CustomColors.darkBlue,
+                ),
               ),
-              color: _getBackgroundColor(),
+              color: (_hasRequired || widget.errorText != null)
+                  ? CustomColors.lightRed.withOpacity(.3)
+                  : CustomColors.lightWhite,
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
@@ -122,31 +131,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(6, 3, 0, 7),
-            child: _setRequired(),
+            child: _ErrorMessage(
+              message: _hasRequired
+                  ? widget.requiredMessage!
+                  : widget.errorText != null
+                      ? widget.errorText!
+                      : null,
+            ),
           ),
         ],
-      );
-
-  Widget _setRequired() => _hasRequired
-      ? _getRequiredMessage()
-      : widget.errorText != null
-          ? _getErrorMessage()
-          : Container();
-
-  Widget _getRequiredMessage() => Align(
-        alignment: Alignment.topLeft,
-        child: Text(
-          widget.requiredMessage!,
-          style: const TextStyle(color: CustomColors.lightRed),
-        ),
-      );
-
-  Widget _getErrorMessage() => Align(
-        alignment: Alignment.topLeft,
-        child: Text(
-          widget.errorText!,
-          style: const TextStyle(color: CustomColors.lightRed),
-        ),
       );
 
   void _visiblePassword() {
@@ -155,18 +148,23 @@ class _CustomTextFieldState extends State<CustomTextField> {
       _isPasswordActive = !_isPasswordActive;
     });
   }
+}
 
-  Color _getBorderColor() => _hasFocus
-      ? CustomColors.lightGreen
-      : _hasRequired
-          ? CustomColors.lightRed
-          : widget.errorText != null
-              ? CustomColors.lightRed
-              : CustomColors.darkBlue;
+class _ErrorMessage extends StatelessWidget {
+  const _ErrorMessage({this.message});
 
-  Color _getBackgroundColor() => _hasRequired
-      ? CustomColors.lightRed.withOpacity(.3)
-      : widget.errorText != null
-          ? CustomColors.lightRed.withOpacity(.3)
-          : CustomColors.lightWhite;
+  final String? message;
+
+  @override
+  Widget build(BuildContext context) {
+    return message != null
+        ? Align(
+            alignment: Alignment.topLeft,
+            child: Text(
+              message!,
+              style: const TextStyle(color: CustomColors.lightRed),
+            ),
+          )
+        : const Offstage();
+  }
 }
