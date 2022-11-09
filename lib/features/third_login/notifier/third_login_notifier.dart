@@ -2,37 +2,34 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_login_types/core/repository/login_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-enum FacebookLoginResult { none, loading, progress, success, cancelled, error }
+enum ThirdLoginResult { none, loading, progress, success, cancelled, error }
 
-class FacebookLoginNotifier extends StateNotifier<FacebookLoginResult> {
-  FacebookLoginNotifier(
-    this._repository, [
-    super.state = FacebookLoginResult.none,
-  ]);
+class ThirdLoginNotifier extends StateNotifier<ThirdLoginResult> {
+  ThirdLoginNotifier(this._repository, [super.state = ThirdLoginResult.none]);
 
   final LoginRepository _repository;
 
   Future<void> authenticate() async {
-    state = FacebookLoginResult.loading;
+    state = ThirdLoginResult.loading;
 
     final facebookResult = await _repository.authenticateFacebook();
     if (facebookResult.containsKey('status')) {
       switch (facebookResult['status'] as LoginStatus) {
         case LoginStatus.success:
-          state = FacebookLoginResult.success;
+          state = ThirdLoginResult.success;
           break;
         case LoginStatus.cancelled:
-          state = FacebookLoginResult.cancelled;
+          state = ThirdLoginResult.cancelled;
           break;
         case LoginStatus.failed:
-          state = FacebookLoginResult.error;
+          state = ThirdLoginResult.error;
           break;
         case LoginStatus.operationInProgress:
-          state = FacebookLoginResult.progress;
+          state = ThirdLoginResult.progress;
           break;
       }
     } else {
-      state = FacebookLoginResult.error;
+      state = ThirdLoginResult.error;
     }
   }
 }
