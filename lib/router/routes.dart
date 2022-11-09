@@ -3,11 +3,10 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_types/features/fingerprint_login/view/fingerprint_login_view.dart';
+import 'package:flutter_login_types/features/login_options/view/login_options_view.dart';
 import 'package:flutter_login_types/features/passcode_login/view/passcode_login_view.dart';
 import 'package:flutter_login_types/features/simple_login/view/simple_login_view.dart';
-import 'package:flutter_login_types/ui/firebase_auth.ui.dart';
 import 'package:flutter_login_types/ui/home.ui.dart';
-import 'package:flutter_login_types/ui/sign_in_options.ui.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
@@ -16,7 +15,7 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/',
       pageBuilder: (_, state) {
-        return _setPageRoute(state.pageKey, const SignInOptionsUI());
+        return _setPageRoute(state.pageKey, const LoginOptionsView());
       },
       routes: <GoRoute>[
         GoRoute(
@@ -35,12 +34,6 @@ final appRouter = GoRouter(
           path: 'login_biometric',
           pageBuilder: (_, state) {
             return _setPageRoute(state.pageKey, const FingerPrintLoginView());
-          },
-        ),
-        GoRoute(
-          path: 'firebase_auth',
-          pageBuilder: (_, state) {
-            return _setPageRoute(state.pageKey, const FirebaseAuthUI());
           },
         ),
       ],
