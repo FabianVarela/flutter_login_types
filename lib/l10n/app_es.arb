@@ -14,7 +14,7 @@
   "signInUserPassword": "Usuario / contraseña",
   "signInPasscode": "Passcode",
   "signInFingerPrint": "Huella",
-  "signInThird": "con Terceros",
+  "signInThird": "Terceros",
   "signInFacebook": "Facebook",
   "signInFacebookInProgress": "En progreso, por favor espere",
   "signInFacebookCancelled": "Cancelado por el usuario",
