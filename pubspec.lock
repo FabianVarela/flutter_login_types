@@ -803,6 +803,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  twitter_login:
+    dependency: "direct main"
+    description:
+      name: twitter_login
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.2.3"
   typed_data:
     dependency: transitive
     description:
