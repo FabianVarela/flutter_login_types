@@ -7,6 +7,7 @@ import 'package:flutter_login_types/features/home/view/home_view.dart';
 import 'package:flutter_login_types/features/login_options/view/login_options_view.dart';
 import 'package:flutter_login_types/features/passcode_login/view/passcode_login_view.dart';
 import 'package:flutter_login_types/features/simple_login/view/simple_login_view.dart';
+import 'package:flutter_login_types/features/third_login/view/third_login_view.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
@@ -34,6 +35,12 @@ final appRouter = GoRouter(
           path: 'login_biometric',
           pageBuilder: (_, state) {
             return _setPageRoute(state.pageKey, const FingerPrintLoginView());
+          },
+        ),
+        GoRoute(
+          path: 'third_login',
+          pageBuilder: (_, state) {
+            return _setPageRoute(state.pageKey, const ThirdLoginView());
           },
         ),
       ],
