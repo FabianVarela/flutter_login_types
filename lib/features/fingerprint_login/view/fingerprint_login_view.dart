@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_types/common/message_service.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
+import 'package:flutter_login_types/core/widgets/custom_message.dart';
 import 'package:flutter_login_types/features/fingerprint_login/dependency.dart';
 import 'package:flutter_login_types/features/fingerprint_login/notifier/fingerprint_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
@@ -20,10 +20,7 @@ class FingerPrintLoginView extends HookConsumerWidget {
       if (next == LocalAuthOption.granted) {
         context.go('/home');
       } else if (next == LocalAuthOption.denied) {
-        MessageService.getInstance().showMessage(
-          context,
-          localization.biometricError,
-        );
+        CustomMessage.show(context, localization.biometricError);
       }
     });
 

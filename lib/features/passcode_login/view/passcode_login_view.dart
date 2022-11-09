@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_login_types/common/message_service.dart';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
+import 'package:flutter_login_types/core/widgets/custom_message.dart';
 import 'package:flutter_login_types/core/widgets/custom_textfield.dart';
 import 'package:flutter_login_types/core/widgets/loading.dart';
 import 'package:flutter_login_types/features/passcode_login/dependency.dart';
@@ -51,9 +51,9 @@ class PasscodeLoginView extends HookConsumerWidget {
         }
       } else if (next.isError) {
         if (next.phaseError == PasscodeLoginPhase.passcode) {
-          _showSnackBar(context, localization.passcodeIncorrect);
+          CustomMessage.show(context, localization.passcodeIncorrect);
         } else if (next.phaseError == PasscodeLoginPhase.phone) {
-          _showSnackBar(context, localization.phoneNumberIncorrect);
+          CustomMessage.show(context, localization.phoneNumberIncorrect);
         }
       }
     });
@@ -90,9 +90,6 @@ class PasscodeLoginView extends HookConsumerWidget {
       ),
     );
   }
-
-  void _showSnackBar(BuildContext context, String message) =>
-      MessageService.getInstance().showMessage(context, message);
 }
 
 class _TextFieldPhone extends HookConsumerWidget {

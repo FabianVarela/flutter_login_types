@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_types/common/message_service.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
+import 'package:flutter_login_types/core/widgets/custom_message.dart';
 import 'package:flutter_login_types/features/login_options/dependency.dart';
 import 'package:flutter_login_types/features/login_options/notifier/facebook_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
@@ -72,9 +72,7 @@ class LoginOptionsView extends ConsumerWidget {
         break;
     }
 
-    if (message != null) {
-      MessageService.getInstance().showMessage(context, message);
-    }
+    if (message != null) CustomMessage.show(context, message);
   }
 }
 

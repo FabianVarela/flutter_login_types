@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_login_types/common/message_service.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
+import 'package:flutter_login_types/core/widgets/custom_message.dart';
 import 'package:flutter_login_types/core/widgets/custom_textfield.dart';
 import 'package:flutter_login_types/core/widgets/loading.dart';
 import 'package:flutter_login_types/features/simple_login/dependency.dart';
@@ -19,16 +19,14 @@ class SimpleLoginView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final localization = context.localizations;
     final loginState = ref.watch(simpleLoginNotifierProvider);
 
     ref.listen(simpleLoginNotifierProvider, (_, next) {
       if (next.isSuccess) {
         context.go('/home');
       } else if (next.isError) {
-        MessageService.getInstance().showMessage(
-          context,
-          context.localizations.userPasswordIncorrectMessage,
-        );
+        CustomMessage.show(context, localization.userPasswordIncorrectMessage);
       }
     });
 
