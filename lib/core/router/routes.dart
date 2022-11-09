@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_types/features/fingerprint_login/view/fingerprint_login_view.dart';
+import 'package:flutter_login_types/features/home/view/home_view.dart';
 import 'package:flutter_login_types/features/login_options/view/login_options_view.dart';
 import 'package:flutter_login_types/features/passcode_login/view/passcode_login_view.dart';
 import 'package:flutter_login_types/features/simple_login/view/simple_login_view.dart';
-import 'package:flutter_login_types/ui/home.ui.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
@@ -41,7 +41,7 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/home',
       pageBuilder: (_, state) {
-        return _setPageRoute(state.pageKey, const HomePageUI());
+        return _setPageRoute(state.pageKey, const HomeView());
       },
     ),
   ],
