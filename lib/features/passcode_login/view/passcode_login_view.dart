@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_login_types/common/message_service.dart';
-import 'package:flutter_login_types/common/notification_service.dart';
+import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:flutter_login_types/features/passcode_login/dependency.dart';
 import 'package:flutter_login_types/features/passcode_login/forms/passcode_login_form.dart';
 import 'package:flutter_login_types/features/passcode_login/forms/passcode_login_form_notifier.dart';
@@ -44,10 +44,10 @@ class PasscodeLoginView extends HookConsumerWidget {
           context.go('/home');
         } else if (next.phaseSuccess == PasscodeLoginPhase.phone) {
           pageValue.value = 1;
-          await NotificationService.getInstance().showNotification(
-            localization.notificationTitle,
-            localization.notificationMessage('0000'),
-          );
+          await ref.read(notificationServiceProvider).showNotification(
+                localization.notificationTitle,
+                localization.notificationMessage('0000'),
+              );
         }
       } else if (next.isError) {
         if (next.phaseError == PasscodeLoginPhase.passcode) {

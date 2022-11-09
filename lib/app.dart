@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_login_types/common/notification_service.dart';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:flutter_login_types/core/router/routes.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
@@ -16,7 +15,7 @@ class LoginApp extends HookConsumerWidget {
 
     useEffect(
       () {
-        NotificationService.getInstance().init();
+        ref.read(notificationServiceProvider).init();
         ref.read(languageNotifierProvider.notifier).getLanguage();
 
         return null;
