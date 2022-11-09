@@ -1,20 +1,8 @@
-# Flutter · Login BLoC
+# Flutter · Login Types
 
-Create a different ways to login using Flutter and BLoC pattern state management with RxDart
+Create a different ways to login using Flutter Riverpod as state management and dependency injection.
 
 ------
-
-### Firebase · Only for Firebase UI
-
-* You must have a Firebase Project already created.
-* You must install ```firebase tools``` and ```FlutterFire CLI``` on your local machine.
-    * To install ```firebase tools```, could you
-      guide [here](https://firebase.google.com/docs/cli?authuser=0&hl=es#install_the_firebase_cli)
-    * After install ```firebase tools```, you must log in with your Google account.
-    * To install ```FlutterFire CLI```, you must run the command below.
-      ```bash
-      dart pub global activate flutterfire_cli
-      ```
 
 ### Flutter
 
@@ -26,14 +14,6 @@ Create a different ways to login using Flutter and BLoC pattern state management
   file
 * For iOS, you must in the ```ios/Runner/Info.plist``` directory the values for Facebook and Google login set in the
   file.
-* You must run the ```FlutterFire CLI``` command
-  ```bash
-  flutterfire configure --project=<YOUR_PROJECT_ID>
-  ```
-* You must set the **Firebase Auth Client id** as the *Dart Define command* setting the additional run arguments below
-  ```
-  --dart-define CLIENT_ID=<YOUR_FIREBASE_AUTH_CLIENT_ID>
-  ```
 * Run project and enjoy :smile:
 
 ------
@@ -54,16 +34,10 @@ a number with 4 digits.
 
 This scenario recreates the local auth login with the use of fingerprint (Android, iOS) or face id (iOS).
 
-### Facebook
+### Third sign in
 
-This scenario recreates the authentication with third providers like Facebook, Twitter, Microsoft, etc. In this case,
+This scenario recreates the authentication with third providers like Facebook, Google, Apple and Twitter. In this case,
 only use Facebook.
-
-### Firebase Auth UI
-
-This scenario recreates the login using the UI provided by Firebase, using its own screen to log in or sign up. Also, is
-enabled by other providers like Google, Facebook, and Apple. You must enable the Firebase Auth console to use the other
-providers.
 
 ------
 
@@ -71,22 +45,23 @@ providers.
 
 #### Dependencies
 
-- Firebase ([firebase_core](https://pub.dev/packages/firebase_core)
-  , [firebase_auth](https://pub.dev/packages/firebase_auth))
 - Flutter Facebook auth ([flutter_facebook_auth](https://pub.dev/packages/flutter_facebook_auth))
 - Flutter local notifications ([flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications))
-- FlutterFire UI - Auth ([flutterfire_ui](https://pub.dev/packages/flutterfire_ui))
+- Formz ([formz](https://pub.dev/packages/formz))
+- Freezed annotation ([freezed_annotation](https://pub.dev/packages/freezed_annotation))
 - Go Router ([go_router](https://pub.dev/packages/go_router))
-- Hooks ([flutter_hooks](https://pub.dev/packages/flutter_hooks))
 - Google fonts ([google_fonts](https://pub.dev/packages/google_fonts))
 - Google signIn ([google_sign_in](https://pub.dev/packages/google_sign_in))
+- Hooks ([flutter_hooks](https://pub.dev/packages/flutter_hooks))
 - Intl ([intl](https://pub.dev/packages/intl))
 - Local auth ([local_auth](https://pub.dev/packages/local_auth))
 - Pinput ([pinput](https://pub.dev/packages/pinput))
-- RxDart ([rxdart](https://pub.dev/packages/rxdart))
+- Riverpod with Hooks ([hooks_riverpod](https://pub.dev/packages/hooks_riverpod))
 - Shared preferences ([shared_preferences](https://pub.dev/packages/shared_preferences))
 - SignIn with Apple ([sign_in_with_apple](https://pub.dev/packages/sign_in_with_apple))
 
 #### Dev dependencies
 
+- Build runner ([build_runner](https://pub.dev/packages/build_runner))
+- Freezed ([freezed](https://pub.dev/packages/freezed))
 - Very Good Analysis ([very_good_analysis](https://pub.dev/packages/very_good_analysis))
