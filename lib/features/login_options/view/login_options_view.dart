@@ -55,10 +55,7 @@ class _SimpleLoginButton extends StatelessWidget {
       onPress: () => context.go('/login_user_pass'),
       backgroundColor: CustomColors.white.withOpacity(.6),
       foregroundColor: CustomColors.darkBlue,
-      icon: const Icon(
-        Icons.account_circle_outlined,
-        color: CustomColors.darkBlue,
-      ),
+      icon: const Icon(Icons.login, color: CustomColors.darkBlue),
     );
   }
 }
@@ -109,7 +106,10 @@ class _ThirdLoginButton extends StatelessWidget {
       onPress: () => context.go('/third_login'),
       backgroundColor: CustomColors.darkYellow,
       foregroundColor: CustomColors.white,
-      icon: const Icon(Icons.login, color: CustomColors.white),
+      icon: const Icon(
+        Icons.account_circle_outlined,
+        color: CustomColors.white,
+      ),
     );
   }
 }
