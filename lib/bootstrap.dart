@@ -3,12 +3,14 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_login_types/core/client/login_client.dart';
 import 'package:flutter_login_types/core/client/preferences.dart';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:flutter_login_types/core/providers/app_provider.dart';
 import 'package:flutter_login_types/core/repository/language_repository.dart';
 import 'package:flutter_login_types/core/repository/login_repository.dart';
+import 'package:flutter_login_types/core/services/notification_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,6 +37,9 @@ Future<void> bootstrap(
     preferencesProvider.overrideWith(
       (ref) => ref.watch(appProvider.preferences),
     ),
+    localNotificationsProvider.overrideWith(
+      (ref) => ref.watch(appProvider.localNotifications),
+    ),
     loginClientProvider.overrideWith(
       (ref) => ref.watch(appProvider.loginClient),
     ),
@@ -43,6 +48,9 @@ Future<void> bootstrap(
     ),
     loginRepositoryProvider.overrideWith(
       (ref) => ref.watch(appProvider.loginRepository),
+    ),
+    notificationServiceProvider.overrideWith(
+      (ref) => ref.watch(appProvider.notificationService),
     ),
   ];
 
@@ -60,12 +68,16 @@ AppProvider configureAppProvider() {
     preferences: Provider(
       (ref) => Preferences(ref.watch(sharedPreferencesProvider)),
     ),
+    localNotifications: Provider((_) => FlutterLocalNotificationsPlugin()),
     loginClient: Provider((_) => LoginClient()),
     languageRepository: Provider(
       (ref) => LanguageRepository(ref.read(preferencesProvider)),
     ),
     loginRepository: Provider(
       (ref) => LoginRepository(ref.watch(loginClientProvider)),
+    ),
+    notificationService: Provider(
+      (ref) => NotificationService(ref.watch(localNotificationsProvider)),
     ),
   );
 }
