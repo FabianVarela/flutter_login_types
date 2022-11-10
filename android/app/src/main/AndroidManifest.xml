@@ -46,16 +46,6 @@
         <activity
             android:name="com.facebook.sdk.ClientToken"
             android:label="@string/facebook_client_token" />
-
-        <!--
-        Local notifications
-        <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
-            </intent-filter>
-        </receiver>
-        <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
-        -->
     </application>
 
     <queries>
