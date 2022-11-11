@@ -48,7 +48,8 @@ only use Facebook and Apple.
   --dart-define APPLE_REDIRECT_URI=<YOUR_APPLE_REDIRECT_URI>
   ```
 
-<font size="3">*These values you must get on the [Apple Developer Portal](https://developer.apple.com)*</font>
+<font size="3">*These values you must get on the [Apple Developer Portal](https://developer.apple.com)*. Also, you can
+follow [this link](https://pub.dev/packages/sign_in_with_apple#integration)</font>
 
 ------
 
