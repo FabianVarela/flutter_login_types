@@ -1,6 +1,7 @@
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_login_types/core/repository/login_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 enum ThirdLoginResult { none, loading, progress, success, cancelled, error }
 
@@ -9,7 +10,7 @@ class ThirdLoginNotifier extends StateNotifier<ThirdLoginResult> {
 
   final LoginRepository _repository;
 
-  Future<void> authenticate() async {
+  Future<void> authenticateFacebook() async {
     state = ThirdLoginResult.loading;
 
     final facebookResult = await _repository.authenticateFacebook();
@@ -29,6 +30,24 @@ class ThirdLoginNotifier extends StateNotifier<ThirdLoginResult> {
           break;
       }
     } else {
+      state = ThirdLoginResult.error;
+    }
+  }
+
+  Future<void> authenticateApple() async {
+    try {
+      final appleResult = await _repository.authenticateApple();
+      state = appleResult != null
+          ? ThirdLoginResult.success
+          : ThirdLoginResult.error;
+    } on Exception catch (e) {
+      if (e is SignInWithAppleAuthorizationException) {
+        if (e.code == AuthorizationErrorCode.canceled) {
+          state = ThirdLoginResult.cancelled;
+          return;
+        }
+      }
+
       state = ThirdLoginResult.error;
     }
   }
