@@ -17,6 +17,7 @@
   "signInThird": "Terceros",
   "signInFacebook": "Facebook",
   "signInApple": "Apple",
+  "signInGoogle": "Google",
   "signInThirdInProgress": "En progreso, por favor espere",
   "signInThirdCancelled": "Cancelado por el usuario",
   "signInThirdError": "Error al iniciar sesión",
