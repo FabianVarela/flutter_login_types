@@ -51,4 +51,16 @@ class ThirdLoginNotifier extends StateNotifier<ThirdLoginResult> {
       state = ThirdLoginResult.error;
     }
   }
+
+  Future<void> authenticateGoogle() async {
+    try {
+      final credentialId = await _repository.authenticateGoogle();
+
+      state = credentialId != null
+          ? ThirdLoginResult.success
+          : ThirdLoginResult.cancelled;
+    } on Exception catch (_) {
+      state = ThirdLoginResult.error;
+    }
+  }
 }

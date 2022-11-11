@@ -1,4 +1,5 @@
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class LoginClient {
@@ -61,5 +62,19 @@ class LoginClient {
     );
 
     return credential.identityToken;
+  }
+
+  final _googleSignIn = GoogleSignIn(
+    scopes: ['email', 'https://www.googleapis.com/auth/contacts.readonly'],
+    clientId: const String.fromEnvironment('GOOGLE_CLIENT_ID'),
+  );
+
+  Future<String?> authenticateGoogle() async {
+    try {
+      final credential = await _googleSignIn.signIn();
+      return credential?.id;
+    } catch (error) {
+      rethrow;
+    }
   }
 }

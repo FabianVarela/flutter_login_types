@@ -16,4 +16,6 @@ class LoginRepository {
       _client.authenticateFacebook();
 
   Future<String?> authenticateApple() => _client.authenticateApple();
+
+  Future<String?> authenticateGoogle() => _client.authenticateGoogle();
 }
