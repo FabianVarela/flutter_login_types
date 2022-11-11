@@ -14,4 +14,6 @@ class LoginRepository {
 
   Future<Map<String, dynamic>> authenticateFacebook() =>
       _client.authenticateFacebook();
+
+  Future<String?> authenticateApple() => _client.authenticateApple();
 }

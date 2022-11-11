@@ -1,4 +1,5 @@
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class LoginClient {
   Future<String?> authenticate(String username, String password) async {
@@ -32,11 +33,33 @@ class LoginClient {
       } else {
         return result;
       }
+    } else {
+      result['status'] = LoginStatus.success;
     }
 
     return <String, dynamic>{
       ...result,
       ...await FacebookAuth.instance.getUserData(),
     };
+  }
+
+  Future<String?> authenticateApple() async {
+    const clientId = String.fromEnvironment('APPLE_CLIENT_ID');
+    final redirectUri = Uri.parse(
+      const String.fromEnvironment('APPLE_REDIRECT_URI'),
+    );
+
+    final credential = await SignInWithApple.getAppleIDCredential(
+      scopes: <AppleIDAuthorizationScopes>[
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+      webAuthenticationOptions: WebAuthenticationOptions(
+        clientId: clientId,
+        redirectUri: redirectUri,
+      ),
+    );
+
+    return credential.identityToken;
   }
 }
