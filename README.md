@@ -37,7 +37,18 @@ This scenario recreates the local auth login with the use of fingerprint (Androi
 ### Third sign in
 
 This scenario recreates the authentication with third providers like Facebook, Google, Apple and Twitter. In this case,
-only use Facebook.
+only use Facebook and Apple.
+
+#### Setting Apple sign in
+
+* You must set the **Apple Client id** and the **Redirect Url** as the *Dart Define command* setting the additional run
+  arguments below
+  ```
+  --dart-define APPLE_CLIENT_ID=<YOUR_APPLE_CLIENT_ID>
+  --dart-define APPLE_REDIRECT_URI=<YOUR_APPLE_REDIRECT_URI>
+  ```
+
+<font size="3">*These values you must get on the [Apple Developer Portal](https://developer.apple.com)*</font>
 
 ------
 
@@ -59,6 +70,7 @@ only use Facebook.
 - Riverpod with Hooks ([hooks_riverpod](https://pub.dev/packages/hooks_riverpod))
 - Shared preferences ([shared_preferences](https://pub.dev/packages/shared_preferences))
 - SignIn with Apple ([sign_in_with_apple](https://pub.dev/packages/sign_in_with_apple))
+- Twitter login ([twitter_login](https://pub.dev/packages/twitter_login))
 
 #### Dev dependencies
 
