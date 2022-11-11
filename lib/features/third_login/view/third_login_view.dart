@@ -7,6 +7,7 @@ import 'package:flutter_login_types/features/third_login/notifier/third_login_no
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class ThirdLoginView extends ConsumerWidget {
   const ThirdLoginView({super.key});
@@ -36,6 +37,8 @@ class ThirdLoginView extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: const <Widget>[
             _FacebookButton(),
+            SizedBox(height: 20),
+            _AppleButton(),
           ],
         ),
       ),
@@ -48,13 +51,13 @@ class ThirdLoginView extends ConsumerWidget {
 
     switch (state) {
       case ThirdLoginResult.progress:
-        message = localization.signInFacebookInProgress;
+        message = localization.signInThirdInProgress;
         break;
       case ThirdLoginResult.cancelled:
-        message = localization.signInFacebookCancelled;
+        message = localization.signInThirdCancelled;
         break;
       case ThirdLoginResult.error:
-        message = localization.signInFacebookError;
+        message = localization.signInThirdError;
         break;
       default:
         break;
@@ -74,11 +77,37 @@ class _FacebookButton extends ConsumerWidget {
     return CustomButton(
       text: localization.signInText(localization.signInFacebook),
       onPress: () {
-        ref.read(thirdLoginNotifierProvider.notifier).authenticate();
+        ref.read(thirdLoginNotifierProvider.notifier).authenticateFacebook();
       },
       backgroundColor: CustomColors.kingBlue,
       foregroundColor: CustomColors.white,
       icon: const Icon(Icons.face_outlined, color: CustomColors.white),
+    );
+  }
+}
+
+class _AppleButton extends ConsumerWidget {
+  const _AppleButton();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final localization = context.localizations;
+
+    return SignInWithAppleBuilder(
+      builder: (context) => CustomButton(
+        text: localization.signInText(localization.signInApple),
+        onPress: () {
+          ref.read(thirdLoginNotifierProvider.notifier).authenticateApple();
+        },
+        backgroundColor: Colors.black,
+        foregroundColor: CustomColors.white,
+        icon: const Center(
+          child: CustomPaint(
+            size: Size(22, 24),
+            painter: AppleLogoPainter(color: CustomColors.white),
+          ),
+        ),
+      ),
     );
   }
 }
