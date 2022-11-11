@@ -1,6 +1,6 @@
 {
   "@@locale": "es",
-  "appName": "Login con Bloc",
+  "appName": "Tipos de inicio de sesión",
   "signInOptionText": "Elige una forma de iniciar sesión",
   "signInText": "Iniciar sesión con {option}",
   "@signInText": {
@@ -45,7 +45,7 @@
   "emailValidation": "Ingrese un correo válido",
   "passwordValidation": "La contraseña debe ser mayor que 4 caracteres",
   "numberValidation": "Ingrese un número válido",
-  "notificationTitle": "Inicio de sesión con BloC",
+  "notificationTitle": "Tipos de inicio de sesión",
   "notificationMessage": "Tu código es {code}",
   "@notificationMessage": {
     "placeholders": {

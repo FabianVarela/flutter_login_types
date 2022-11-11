@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  "appName": "Login with Bloc",
+  "appName": "Login types",
   "@appName": {
     "description": "App title"
   },
@@ -154,7 +154,7 @@
   "@numberValidation": {
     "description": "Message in text field when text is not numeric"
   },
-  "notificationTitle": "Login with BloC",
+  "notificationTitle": "Login types",
   "@notificationTitle": {
     "description": "Notification title when send a code"
   },
