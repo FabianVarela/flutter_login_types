@@ -38,6 +38,10 @@
   "@signInFacebook": {
     "description": "Sign in with facebook text"
   },
+  "signInApple": "Apple",
+  "@signInApple": {
+    "description": "Sign in with apple text"
+  },
   "signInFacebookInProgress": "In progress, please wait",
   "@signInFacebookInProgress": {
     "description": "Sign in with facebook in progress text message"

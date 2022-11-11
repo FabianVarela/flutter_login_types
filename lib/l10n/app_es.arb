@@ -16,6 +16,7 @@
   "signInFingerPrint": "Huella",
   "signInThird": "Terceros",
   "signInFacebook": "Facebook",
+  "signInApple": "Apple",
   "signInFacebookInProgress": "En progreso, por favor espere",
   "signInFacebookCancelled": "Cancelado por el usuario",
   "signInFacebookError": "Error al iniciar sesión con Facebook",
