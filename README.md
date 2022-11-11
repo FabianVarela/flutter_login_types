@@ -39,6 +39,19 @@ This scenario recreates the local auth login with the use of fingerprint (Androi
 This scenario recreates the authentication with third providers like Facebook, Google, Apple and Twitter. In this case,
 only use Facebook and Apple.
 
+#### Setting Google sign in
+
+* If you want to set the GoogleServices files
+  follow [this link](https://pub.dev/packages/google_sign_in#platform-integration)
+* If not, you must set the **Google Client id** on the *Info.plist file*. Also, set the *Dart Define command* setting
+  the additional run arguments below
+  ```
+  --dart-define APPLE_REDIRECT_URI=<YOUR_APPLE_REDIRECT_URI>
+  ```
+
+<font size="3">*These values you must get on
+the [Google Console](https://console.cloud.google.com/apis/dashboard?project=to-do-app-6da92)*.</font>
+
 #### Setting Apple sign in
 
 * You must set the **Apple Client id** and the **Redirect Url** as the *Dart Define command* setting the additional run
@@ -48,8 +61,8 @@ only use Facebook and Apple.
   --dart-define APPLE_REDIRECT_URI=<YOUR_APPLE_REDIRECT_URI>
   ```
 
-<font size="3">*These values you must get on the [Apple Developer Portal](https://developer.apple.com)*. Also, you can
-follow [this link](https://pub.dev/packages/sign_in_with_apple#integration)</font>
+<font size="3">*These values you must get on the [Apple Developer Portal](https://developer.apple.com). Also, you can
+follow [this link](https://pub.dev/packages/sign_in_with_apple#integration)*</font>
 
 ------
 
