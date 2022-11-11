@@ -36,6 +36,8 @@ class ThirdLoginView extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: const <Widget>[
+            _GoogleButton(),
+            SizedBox(height: 20),
             _FacebookButton(),
             SizedBox(height: 20),
             _AppleButton(),
@@ -64,6 +66,25 @@ class ThirdLoginView extends ConsumerWidget {
     }
 
     if (message != null) CustomMessage.show(context, message);
+  }
+}
+
+class _GoogleButton extends ConsumerWidget {
+  const _GoogleButton();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final localization = context.localizations;
+
+    return CustomButton(
+      text: localization.signInText(localization.signInGoogle),
+      onPress: () {
+        ref.read(thirdLoginNotifierProvider.notifier).authenticateGoogle();
+      },
+      backgroundColor: CustomColors.grey.withOpacity(.4),
+      foregroundColor: CustomColors.white,
+      icon: const Icon(Icons.g_mobiledata_outlined, color: CustomColors.white),
+    );
   }
 }
 
