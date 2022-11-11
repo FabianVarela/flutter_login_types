@@ -42,17 +42,17 @@
   "@signInApple": {
     "description": "Sign in with apple text"
   },
-  "signInFacebookInProgress": "In progress, please wait",
-  "@signInFacebookInProgress": {
-    "description": "Sign in with facebook in progress text message"
+  "signInThirdInProgress": "In progress, please wait",
+  "@signInThirdInProgress": {
+    "description": "Sign in with third in progress text message"
   },
-  "signInFacebookCancelled": "Cancelled by the user",
-  "@signInFacebookCancelled": {
-    "description": "Sign in with facebook cancelled text message"
+  "signInThirdCancelled": "Cancelled by the user",
+  "@signInThirdCancelled": {
+    "description": "Sign in with third cancelled text message"
   },
-  "signInFacebookError": "Error to sign in with Facebook",
-  "@signInFacebookError": {
-    "description": "Sign in with facebook error text message"
+  "signInThirdError": "Error to sign in",
+  "@signInThirdError": {
+    "description": "Sign in with third error text message"
   },
   "emailPlaceholder": "Enter email",
   "@emailPlaceholder": {
