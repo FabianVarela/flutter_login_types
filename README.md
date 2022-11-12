@@ -41,7 +41,7 @@ This scenario recreates the authentication with third providers like Facebook, G
 
 * If you want to set the GoogleServices files
   follow [this link](https://pub.dev/packages/google_sign_in#platform-integration)
-* If not, you must set the **Google Client id** on the *Info.plist file*. Also, set the *Dart Define command* setting
+* If not, you must set the **Google client id** on the *Info.plist file*. Also, set the *Dart Define command* setting
   the additional run arguments below
   ```
   --dart-define GOOGLE_CLIENT_ID=<YOUR_GOOGLE_CLIENT_ID>
@@ -52,7 +52,7 @@ the [Google Console](https://console.cloud.google.com/apis/dashboard?project=to-
 
 #### Setting Apple sign in
 
-* You must set the **Apple Client id** and the **Redirect Url** as the *Dart Define command* setting the additional run
+* You must set the **Apple client id** and the **redirect url** as the *Dart Define command* setting the additional run
   arguments below
   ```
   --dart-define APPLE_CLIENT_ID=<YOUR_APPLE_CLIENT_ID>
@@ -62,9 +62,18 @@ the [Google Console](https://console.cloud.google.com/apis/dashboard?project=to-
 <font size="3">*These values you must get on the [Apple Developer Portal](https://developer.apple.com). Also, you can
 follow [this link](https://pub.dev/packages/sign_in_with_apple#integration)*</font>
 
+#### Setting Facebook sign in
+
+* You must set the **app id** and the **client token**. For android, you must in
+  the ```android/src/main/res/strings.xml``` file and for iOS, you must in the ```ios/Runner/Info.plist``` file.
+
+<font size="3">*These values you must get on the [Facebook Developers](https://developers.facebook.com). Also, you can
+follow [this link for Android](https://facebook.meedu.app/docs/5.x.x/android)
+and [this link for iOS](https://facebook.meedu.app/docs/5.x.x/ios)*</font>
+
 #### Setting Twitter sign in
 
-* You must set the **Twitter API Key**, **Twitter Api Secret** and the **Redirect Url** as the *Dart Define command*
+* You must set the **Twitter api key**, **Twitter api secret** and the **redirect url** in the *Dart Define command*
   setting the additional run arguments below
   ```
   --dart-define TWITTER_API_KEY=<YOUR_TWITTER_API_KEY>
