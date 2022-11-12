@@ -11,4 +11,5 @@ class CustomColors {
   static const Color kingBlue = Color(0xFF3C67D6);
   static const Color darkPurple = Color(0xFF65376A);
   static const Color darkYellow = Color(0xFFE78835);
+  static const Color lightKingBlue = Color(0xFF67C1F9);
 }
