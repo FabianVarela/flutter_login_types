@@ -12,10 +12,13 @@ class LoginRepository {
 
   Future<String?> verifyCode(String code) => _client.verifyCode(code);
 
-  Future<Map<String, dynamic>> authenticateFacebook() =>
-      _client.authenticateFacebook();
+  Future<String?> authenticateGoogle() => _client.authenticateGoogle();
 
   Future<String?> authenticateApple() => _client.authenticateApple();
 
-  Future<String?> authenticateGoogle() => _client.authenticateGoogle();
+  Future<Map<String, dynamic>> authenticateFacebook() =>
+      _client.authenticateFacebook();
+
+  Future<Map<String, dynamic>> authenticateTwitter() =>
+      _client.authenticateTwitter();
 }

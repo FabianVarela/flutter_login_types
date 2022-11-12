@@ -1,6 +1,7 @@
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:twitter_login/twitter_login.dart';
 
 class LoginClient {
   Future<String?> authenticate(String username, String password) async {
@@ -19,6 +20,40 @@ class LoginClient {
   Future<String?> verifyCode(String code) async {
     await Future<void>.delayed(const Duration(seconds: 3));
     return code == '0000' ? 'MiToken' : null;
+  }
+
+  Future<String?> authenticateGoogle() async {
+    try {
+      final googleSignIn = GoogleSignIn(
+        scopes: ['email', 'https://www.googleapis.com/auth/contacts.readonly'],
+        clientId: const String.fromEnvironment('GOOGLE_CLIENT_ID'),
+      );
+
+      final credential = await googleSignIn.signIn();
+      return credential?.id;
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<String?> authenticateApple() async {
+    const clientId = String.fromEnvironment('APPLE_CLIENT_ID');
+    final redirectUri = Uri.parse(
+      const String.fromEnvironment('APPLE_REDIRECT_URI'),
+    );
+
+    final credential = await SignInWithApple.getAppleIDCredential(
+      scopes: <AppleIDAuthorizationScopes>[
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+      webAuthenticationOptions: WebAuthenticationOptions(
+        clientId: clientId,
+        redirectUri: redirectUri,
+      ),
+    );
+
+    return credential.identityToken;
   }
 
   Future<Map<String, dynamic>> authenticateFacebook() async {
@@ -44,37 +79,17 @@ class LoginClient {
     };
   }
 
-  Future<String?> authenticateApple() async {
-    const clientId = String.fromEnvironment('APPLE_CLIENT_ID');
-    final redirectUri = Uri.parse(
-      const String.fromEnvironment('APPLE_REDIRECT_URI'),
+  Future<Map<String, dynamic>> authenticateTwitter() async {
+    final twitterLogin = TwitterLogin(
+      apiKey: const String.fromEnvironment('TWITTER_API_KEY'),
+      apiSecretKey: const String.fromEnvironment('TWITTER_API_SECRET'),
+      redirectURI: const String.fromEnvironment('TWITTER_REDIRECT_URI'),
     );
 
-    final credential = await SignInWithApple.getAppleIDCredential(
-      scopes: <AppleIDAuthorizationScopes>[
-        AppleIDAuthorizationScopes.email,
-        AppleIDAuthorizationScopes.fullName,
-      ],
-      webAuthenticationOptions: WebAuthenticationOptions(
-        clientId: clientId,
-        redirectUri: redirectUri,
-      ),
-    );
-
-    return credential.identityToken;
-  }
-
-  final _googleSignIn = GoogleSignIn(
-    scopes: ['email', 'https://www.googleapis.com/auth/contacts.readonly'],
-    clientId: const String.fromEnvironment('GOOGLE_CLIENT_ID'),
-  );
-
-  Future<String?> authenticateGoogle() async {
-    try {
-      final credential = await _googleSignIn.signIn();
-      return credential?.id;
-    } catch (error) {
-      rethrow;
-    }
+    final authResult = await twitterLogin.login();
+    return <String, dynamic>{
+      'status': authResult.status,
+      'token': authResult.authToken,
+    };
   }
 }

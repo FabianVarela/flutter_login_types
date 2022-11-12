@@ -2,6 +2,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_login_types/core/repository/login_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:twitter_login/twitter_login.dart';
 
 enum ThirdLoginResult { none, loading, progress, success, cancelled, error }
 
@@ -9,6 +10,39 @@ class ThirdLoginNotifier extends StateNotifier<ThirdLoginResult> {
   ThirdLoginNotifier(this._repository, [super.state = ThirdLoginResult.none]);
 
   final LoginRepository _repository;
+
+  Future<void> authenticateGoogle() async {
+    state = ThirdLoginResult.loading;
+
+    try {
+      final googleResult = await _repository.authenticateGoogle();
+      state = googleResult != null
+          ? ThirdLoginResult.success
+          : ThirdLoginResult.cancelled;
+    } on Exception catch (_) {
+      state = ThirdLoginResult.error;
+    }
+  }
+
+  Future<void> authenticateApple() async {
+    state = ThirdLoginResult.loading;
+
+    try {
+      final appleResult = await _repository.authenticateApple();
+      state = appleResult != null
+          ? ThirdLoginResult.success
+          : ThirdLoginResult.error;
+    } on Exception catch (e) {
+      if (e is SignInWithAppleAuthorizationException) {
+        if (e.code == AuthorizationErrorCode.canceled) {
+          state = ThirdLoginResult.cancelled;
+          return;
+        }
+      }
+
+      state = ThirdLoginResult.error;
+    }
+  }
 
   Future<void> authenticateFacebook() async {
     state = ThirdLoginResult.loading;
@@ -34,31 +68,22 @@ class ThirdLoginNotifier extends StateNotifier<ThirdLoginResult> {
     }
   }
 
-  Future<void> authenticateApple() async {
+  Future<void> authenticateTwitter() async {
     try {
-      final appleResult = await _repository.authenticateApple();
-      state = appleResult != null
-          ? ThirdLoginResult.success
-          : ThirdLoginResult.error;
-    } on Exception catch (e) {
-      if (e is SignInWithAppleAuthorizationException) {
-        if (e.code == AuthorizationErrorCode.canceled) {
+      state = ThirdLoginResult.loading;
+
+      final twitterResult = await _repository.authenticateTwitter();
+      switch (twitterResult['status'] as TwitterLoginStatus) {
+        case TwitterLoginStatus.loggedIn:
+          state = ThirdLoginResult.success;
+          break;
+        case TwitterLoginStatus.cancelledByUser:
           state = ThirdLoginResult.cancelled;
-          return;
-        }
+          break;
+        case TwitterLoginStatus.error:
+          state = ThirdLoginResult.error;
+          break;
       }
-
-      state = ThirdLoginResult.error;
-    }
-  }
-
-  Future<void> authenticateGoogle() async {
-    try {
-      final credentialId = await _repository.authenticateGoogle();
-
-      state = credentialId != null
-          ? ThirdLoginResult.success
-          : ThirdLoginResult.cancelled;
     } on Exception catch (_) {
       state = ThirdLoginResult.error;
     }
