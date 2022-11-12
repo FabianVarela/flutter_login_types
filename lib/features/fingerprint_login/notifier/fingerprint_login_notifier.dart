@@ -3,9 +3,14 @@ import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:local_auth/local_auth.dart';
 
-final hasBiometricProvider = FutureProvider.autoDispose<bool>(
-  (ref) => ref.watch(localAuthenticationProvider).canCheckBiometrics,
-);
+final hasBiometricProvider = FutureProvider.autoDispose<bool>((ref) async {
+  final localAuth = ref.watch(localAuthenticationProvider);
+
+  final canAuthBiometrics = await localAuth.canCheckBiometrics;
+  final isDeviceSupported = await localAuth.isDeviceSupported();
+
+  return canAuthBiometrics || isDeviceSupported;
+});
 
 final listBiometricProvider = FutureProvider.autoDispose<List<BiometricType>>(
   (ref) => ref.watch(localAuthenticationProvider).getAvailableBiometrics(),
