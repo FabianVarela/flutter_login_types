@@ -46,6 +46,10 @@
   "@signInGoogle": {
     "description": "Sign in with google text"
   },
+  "signInTwitter": "Twitter",
+  "@signInTwitter": {
+    "description": "Sign in with twitter text"
+  },
   "signInThirdInProgress": "In progress, please wait",
   "@signInThirdInProgress": {
     "description": "Sign in with third in progress text message"
