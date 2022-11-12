@@ -35,6 +35,8 @@ This scenario recreates the local auth login with the use of fingerprint (Androi
 
 This scenario recreates the authentication with third providers like Facebook, Google, Apple and Twitter.
 
+------
+
 ## Setting Third logins
 
 #### Setting Google sign in
