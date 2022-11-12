@@ -1,4 +1,5 @@
 <resources>
     <string name="facebook_app_id">{your-app-id}</string>
     <string name="facebook_client_token">{your-client-token}</string>
+    <string name="twitter_callback_url">{your-callback-url}</string>
 </resources>

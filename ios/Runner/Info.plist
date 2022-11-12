@@ -34,6 +34,7 @@
 			<array>
 				<string>fb{your-app-id}</string>
 				<string>{your-google-user-content}</string>
+				<string>{your-twitter-callback-url}</string>
 			</array>
 		</dict>
 	</array>
