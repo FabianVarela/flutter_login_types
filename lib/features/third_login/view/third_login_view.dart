@@ -38,9 +38,11 @@ class ThirdLoginView extends ConsumerWidget {
           children: const <Widget>[
             _GoogleButton(),
             SizedBox(height: 20),
+            _AppleButton(),
+            SizedBox(height: 20),
             _FacebookButton(),
             SizedBox(height: 20),
-            _AppleButton(),
+            _TwitterButton(),
           ],
         ),
       ),
@@ -88,25 +90,6 @@ class _GoogleButton extends ConsumerWidget {
   }
 }
 
-class _FacebookButton extends ConsumerWidget {
-  const _FacebookButton();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final localization = context.localizations;
-
-    return CustomButton(
-      text: localization.signInText(localization.signInFacebook),
-      onPress: () {
-        ref.read(thirdLoginNotifierProvider.notifier).authenticateFacebook();
-      },
-      backgroundColor: CustomColors.kingBlue,
-      foregroundColor: CustomColors.white,
-      icon: const Icon(Icons.face_outlined, color: CustomColors.white),
-    );
-  }
-}
-
 class _AppleButton extends ConsumerWidget {
   const _AppleButton();
 
@@ -128,6 +111,47 @@ class _AppleButton extends ConsumerWidget {
             painter: AppleLogoPainter(color: CustomColors.white),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _FacebookButton extends ConsumerWidget {
+  const _FacebookButton();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final localization = context.localizations;
+
+    return CustomButton(
+      text: localization.signInText(localization.signInFacebook),
+      onPress: () {
+        ref.read(thirdLoginNotifierProvider.notifier).authenticateFacebook();
+      },
+      backgroundColor: CustomColors.kingBlue,
+      foregroundColor: CustomColors.white,
+      icon: const Icon(Icons.face_outlined, color: CustomColors.white),
+    );
+  }
+}
+
+class _TwitterButton extends ConsumerWidget {
+  const _TwitterButton();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final localization = context.localizations;
+
+    return CustomButton(
+      text: localization.signInText(localization.signInTwitter),
+      onPress: () {
+        ref.read(thirdLoginNotifierProvider.notifier).authenticateTwitter();
+      },
+      backgroundColor: CustomColors.lightKingBlue,
+      foregroundColor: CustomColors.white,
+      icon: const Icon(
+        Icons.check_circle_outline_outlined,
+        color: CustomColors.white,
       ),
     );
   }
