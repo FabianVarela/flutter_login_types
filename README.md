@@ -10,10 +10,7 @@ Create a different ways to login using Flutter Riverpod as state management and 
 * If you want to rename the bundles for each platform, you must do the steps below.
     * For Android, you must rename the bundle id on ```app/build.gradle```.
     * For iOS in XCode IDE, you select ```Runner``` and change the 'Bundle Identifier' text.
-* For Android, you must in the ```android/src/main/res/strings.xml``` directory the values for Facebook login set in the
-  file
-* For iOS, you must in the ```ios/Runner/Info.plist``` directory the values for Facebook and Google login set in the
-  file.
+* You must follow the instructions for setting each third login in the steps follow [this link](#setting-third-logins).
 * Run project and enjoy :smile:
 
 ------
@@ -36,8 +33,9 @@ This scenario recreates the local auth login with the use of fingerprint (Androi
 
 ### Third sign in
 
-This scenario recreates the authentication with third providers like Facebook, Google, Apple and Twitter. In this case,
-only use Facebook and Apple.
+This scenario recreates the authentication with third providers like Facebook, Google, Apple and Twitter.
+
+## Setting Third logins
 
 #### Setting Google sign in
 
@@ -46,7 +44,7 @@ only use Facebook and Apple.
 * If not, you must set the **Google Client id** on the *Info.plist file*. Also, set the *Dart Define command* setting
   the additional run arguments below
   ```
-  --dart-define APPLE_REDIRECT_URI=<YOUR_APPLE_REDIRECT_URI>
+  --dart-define GOOGLE_CLIENT_ID=<YOUR_GOOGLE_CLIENT_ID>
   ```
 
 <font size="3">*These values you must get on
@@ -63,6 +61,19 @@ the [Google Console](https://console.cloud.google.com/apis/dashboard?project=to-
 
 <font size="3">*These values you must get on the [Apple Developer Portal](https://developer.apple.com). Also, you can
 follow [this link](https://pub.dev/packages/sign_in_with_apple#integration)*</font>
+
+#### Setting Twitter sign in
+
+* You must set the **Twitter API Key**, **Twitter Api Secret** and the **Redirect Url** as the *Dart Define command*
+  setting the additional run arguments below
+  ```
+  --dart-define TWITTER_API_KEY=<YOUR_TWITTER_API_KEY>
+  --dart-define TWITTER_API_SECRET=<YOUR_TWITTER_API_SECRET>
+  --dart-define TWITTER_REDIRECT_URI=<YOUR_TWITTER_REDIRECT_URI>
+  ```
+
+<font size="3">*These values you must get on the [Twitter Developer](https://developer.twitter.com). Also, you can
+follow [this link](https://pub.dev/packages/twitter_login#twitter-configuration)*</font>
 
 ------
 
