@@ -12,12 +12,12 @@ dependencies:
     sdk: flutter
   flutter_facebook_auth: ^4.4.1+1
   flutter_hooks: ^0.18.5+1
-  flutter_local_notifications: ^12.0.3
+  flutter_local_notifications: ^12.0.4
   flutter_localizations:
     sdk: flutter
   formz: ^0.4.1
   freezed_annotation: ^2.2.0
-  go_router: ^5.1.6
+  go_router: ^5.2.0
   google_fonts: ^3.0.1
   google_sign_in: ^5.4.2
   hooks_riverpod: ^2.1.1
