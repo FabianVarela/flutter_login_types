@@ -86,7 +86,11 @@ and [this link for iOS](https://facebook.meedu.app/docs/5.x.x/ios)*</font>
 <font size="3">*These values you must get on the [Twitter Developer](https://developer.twitter.com). Also, you can
 follow [this link](https://pub.dev/packages/twitter_login#twitter-configuration)*</font>
 
-#### Setting Azure with Flutter app auth
+------
+
+## Setting Auth providers
+
+### Setting Azure AD B2C
 
 * You must set the Azure **tenant name**, **tenant id**, **policy name**, **client id** and the **redirect url** in the
   *Dart Define command* setting the additional run arguments below
