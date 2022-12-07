@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login_types/features/fingerprint_login/view/fingerprint_login_view.dart';
 import 'package:flutter_login_types/features/home/view/home_view.dart';
 import 'package:flutter_login_types/features/login_options/view/login_options_view.dart';
+import 'package:flutter_login_types/features/mechanism_login/view/mechanism_login_view.dart';
 import 'package:flutter_login_types/features/passcode_login/view/passcode_login_view.dart';
 import 'package:flutter_login_types/features/simple_login/view/simple_login_view.dart';
 import 'package:flutter_login_types/features/third_login/view/third_login_view.dart';
@@ -41,6 +42,12 @@ final appRouter = GoRouter(
           path: 'third_login',
           pageBuilder: (_, state) {
             return _setPageRoute(state.pageKey, const ThirdLoginView());
+          },
+        ),
+        GoRoute(
+          path: 'mechanism_login',
+          pageBuilder: (_, state) {
+            return _setPageRoute(state.pageKey, const MechanismLoginView());
           },
         ),
       ],
