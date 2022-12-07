@@ -86,6 +86,24 @@ and [this link for iOS](https://facebook.meedu.app/docs/5.x.x/ios)*</font>
 <font size="3">*These values you must get on the [Twitter Developer](https://developer.twitter.com). Also, you can
 follow [this link](https://pub.dev/packages/twitter_login#twitter-configuration)*</font>
 
+#### Setting Azure with Flutter app auth
+
+* You must set the Azure **tenant name**, **tenant id**, **policy name**, **client id** and the **redirect url** in the
+  *Dart Define command* setting the additional run arguments below
+  ```
+  --dart-define AZURE_TENANT_NAME=<YOUR_AZURE_TENANT_NAME>
+  --dart-define AZURE_TENANT_ID=<YOUR_AZURE_TENANT_ID>
+  --dart-define AZURE_POLICY_NAME=<YOUR_AZURE_POLICY_NAME>
+  --dart-define AZURE_CLIENT_ID=<YOUR_AZURE_CLIENT_ID>
+  --dart-define AZURE_REDIRECT_URL=<YOUR_AZURE_REDIRECT_URL>
+  ```
+
+<font size="3">To get these values, you must follow these links:
+
+* [To create the Azure B2C tenant](https://learn.microsoft.com/en-us/azure/active-directory-b2c/tutorial-create-tenant?WT.mc_id=Portal-Microsoft_AAD_B2CAdmin)
+* [To create the Azure AD B2C application](https://learn.microsoft.com/en-us/azure/healthcare-apis/register-application)
+* [To create the user flow](https://learn.microsoft.com/en-us/azure/active-directory-b2c/tutorial-create-user-flows?pivots=b2c-user-flow)</font>
+
 ------
 
 ### Used packages
@@ -94,6 +112,7 @@ follow [this link](https://pub.dev/packages/twitter_login#twitter-configuration)
 
 - Flutter Facebook auth ([flutter_facebook_auth](https://pub.dev/packages/flutter_facebook_auth))
 - Flutter local notifications ([flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications))
+- Flutter app auth ([flutter_appauth](https://pub.dev/packages/flutter_appauth))
 - Formz ([formz](https://pub.dev/packages/formz))
 - Freezed annotation ([freezed_annotation](https://pub.dev/packages/freezed_annotation))
 - Go Router ([go_router](https://pub.dev/packages/go_router))
