@@ -36,6 +36,8 @@ class LoginOptionsView extends StatelessWidget {
             _FingerprintButton(),
             SizedBox(height: 20),
             _ThirdLoginButton(),
+            SizedBox(height: 20),
+            _MechanismLoginButton(),
           ],
         ),
       ),
@@ -110,6 +112,23 @@ class _ThirdLoginButton extends StatelessWidget {
         Icons.account_circle_outlined,
         color: CustomColors.white,
       ),
+    );
+  }
+}
+
+class _MechanismLoginButton extends StatelessWidget {
+  const _MechanismLoginButton();
+
+  @override
+  Widget build(BuildContext context) {
+    final localization = context.localizations;
+
+    return CustomButton(
+      text: localization.signInText(localization.signInOtherMechanism),
+      onPress: () => context.go('/mechanism_login'),
+      backgroundColor: CustomColors.lightRed,
+      foregroundColor: CustomColors.white,
+      icon: const Icon(Icons.account_balance, color: CustomColors.white),
     );
   }
 }
