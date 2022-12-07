@@ -98,7 +98,7 @@ class LoginClient {
     };
   }
 
-  Future<Map<String, dynamic>> authenticateAzure() async {
+  Future<Map<String, dynamic>> authenticateAzure({String? lang}) async {
     try {
       const tenantName = String.fromEnvironment('AZURE_TENANT_NAME');
       const tenantId = String.fromEnvironment('AZURE_TENANT_ID');
@@ -112,12 +112,14 @@ class LoginClient {
         '/$tenantId/$policyName/v2.0/.well-known/openid-configuration',
       );
 
+      final params = lang != null ? <String, String>{'lang': lang} : null;
       final result = await _appAuth.authorizeAndExchangeCode(
         AuthorizationTokenRequest(
           clientId,
           redirectURL,
           discoveryUrl: discoveryURL.toString(),
           scopes: <String>['openid', 'profile', 'email', 'offline_access'],
+          additionalParameters: params,
         ),
       );
 
