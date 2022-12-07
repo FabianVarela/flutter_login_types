@@ -50,6 +50,11 @@ android {
         versionName flutterVersionName
 
         multiDexEnabled true
+
+        def stringsFile = android.sourceSets.main.res.sourceFiles.find { it.name.equals 'strings.xml' }
+        def scheme = new XmlParser().parse(stringsFile).string.find { it.@name.equals 'app_auth_scheme' }.text()
+
+        manifestPlaceholders += ['appAuthRedirectScheme': "$scheme"]
     }
 
     buildTypes {
