@@ -50,6 +50,14 @@
   "@signInTwitter": {
     "description": "Sign in with twitter text"
   },
+  "signInOtherMechanism": "other mechanism",
+  "@signInOtherMechanism": {
+    "description": "Sign in with other mechanism text"
+  },
+  "signInAzureAd": "Azure AD",
+  "@signInAzureAd": {
+    "description": "Sign in with azure ad text"
+  },
   "signInThirdInProgress": "In progress, please wait",
   "@signInThirdInProgress": {
     "description": "Sign in with third in progress text message"
@@ -187,21 +195,5 @@
   "spanishLanguage": "Spanish",
   "@spanishLanguage": {
     "description": "Change language second option text"
-  },
-  "firebaseSubtitleSignIn": "Welcome to FlutterFire UI! Please sign in to continue.",
-  "@firebaseSubtitleSignIn": {
-    "description": "Firebase Auth UI subtitle text when show sign in"
-  },
-  "firebaseSubtitleSignUp": "Welcome to FlutterFire UI! Please create an account to continue.",
-  "@firebaseSubtitleSignUp": {
-    "description": "Firebase Auth UI subtitle text when show sign up"
-  },
-  "firebaseFooterSignIn": "By signing in, you agree to our terms and conditions.",
-  "@firebaseFooterSignIn": {
-    "description": "Firebase Auth UI footer text when show sign in"
-  },
-  "firebaseFooterSignUp": "By signing up, you agree to our terms and conditions.",
-  "@firebaseFooterSignUp": {
-    "description": "Firebase Auth UI footer text when show sign up"
   }
 }

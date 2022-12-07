@@ -19,6 +19,8 @@
   "signInApple": "Apple",
   "signInGoogle": "Google",
   "signInTwitter": "Twitter",
+  "signInOtherMechanism": "otro mecanísmo",
+  "signInAzureAd": "el DA de Azure",
   "signInThirdInProgress": "En progreso, por favor espere",
   "signInThirdCancelled": "Cancelado por el usuario",
   "signInThirdError": "Error al iniciar sesión",
@@ -59,9 +61,5 @@
   },
   "changeLanguageTitle": "Cambiar idioma",
   "englishLanguage": "Inglés",
-  "spanishLanguage": "Español",
-  "firebaseSubtitleSignIn": "Bienvenido a FlutterFire UI! Por favor inicie sesión para continuar.",
-  "firebaseSubtitleSignUp": "Bienvenido a FlutterFire UI! Por favor crea una cuenta para continuar.",
-  "firebaseFooterSignIn": "Para iniciar sesión, debes estar de acuerdo con los términos y condiciones.",
-  "firebaseFooterSignUp": "Para registrarse, debes estar de acuerdo con los términos y condiciones."
+  "spanishLanguage": "Español"
 }
