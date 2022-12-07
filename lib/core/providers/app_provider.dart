@@ -1,3 +1,4 @@
+import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_login_types/core/client/login_client.dart';
 import 'package:flutter_login_types/core/client/preferences.dart';
@@ -12,6 +13,7 @@ class AppProvider {
     required this.localAuthentication,
     required this.preferences,
     required this.localNotifications,
+    required this.flutterAppAuth,
     required this.loginClient,
     required this.languageRepository,
     required this.loginRepository,
@@ -21,6 +23,7 @@ class AppProvider {
   final Provider<LocalAuthentication> localAuthentication;
   final Provider<Preferences> preferences;
   final Provider<FlutterLocalNotificationsPlugin> localNotifications;
+  final Provider<FlutterAppAuth> flutterAppAuth;
   final Provider<LoginClient> loginClient;
   final Provider<LanguageRepository> languageRepository;
   final Provider<LoginRepository> loginRepository;

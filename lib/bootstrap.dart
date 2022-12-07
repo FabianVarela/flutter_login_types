@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_login_types/core/client/login_client.dart';
 import 'package:flutter_login_types/core/client/preferences.dart';
@@ -40,6 +41,9 @@ Future<void> bootstrap(
     localNotificationsProvider.overrideWith(
       (ref) => ref.watch(appProvider.localNotifications),
     ),
+    appAuthProvider.overrideWith(
+      (ref) => ref.watch(appProvider.flutterAppAuth),
+    ),
     loginClientProvider.overrideWith(
       (ref) => ref.watch(appProvider.loginClient),
     ),
@@ -69,7 +73,10 @@ AppProvider configureAppProvider() {
       (ref) => Preferences(ref.watch(sharedPreferencesProvider)),
     ),
     localNotifications: Provider((_) => FlutterLocalNotificationsPlugin()),
-    loginClient: Provider((_) => LoginClient()),
+    flutterAppAuth: Provider((_) => const FlutterAppAuth()),
+    loginClient: Provider(
+      (ref) => LoginClient(ref.read(appAuthProvider)),
+    ),
     languageRepository: Provider(
       (ref) => LanguageRepository(ref.read(preferencesProvider)),
     ),

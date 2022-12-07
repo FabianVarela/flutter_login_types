@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_login_types/core/client/login_client.dart';
 import 'package:flutter_login_types/core/client/preferences.dart';
@@ -26,6 +27,10 @@ final localNotificationsProvider = Provider<FlutterLocalNotificationsPlugin>(
   (_) => throw UnimplementedError(
     'You must implement FlutterLocalNotificationsPlugin provider',
   ),
+);
+
+final appAuthProvider = Provider<FlutterAppAuth>(
+  (_) => throw UnimplementedError('You must implement FlutterAppAuth provider'),
 );
 
 final loginClientProvider = Provider<LoginClient>((_) {
