@@ -21,4 +21,7 @@ class LoginRepository {
 
   Future<Map<String, dynamic>> authenticateTwitter() =>
       _client.authenticateTwitter();
+
+  Future<Map<String, dynamic>> authenticateAzure() =>
+      _client.authenticateAzure();
 }

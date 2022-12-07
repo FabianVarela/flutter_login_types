@@ -1,9 +1,14 @@
+import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:twitter_login/twitter_login.dart';
 
 class LoginClient {
+  LoginClient(this._appAuth);
+
+  final FlutterAppAuth _appAuth;
+
   Future<String?> authenticate(String username, String password) async {
     await Future<void>.delayed(const Duration(seconds: 3));
 
@@ -91,5 +96,42 @@ class LoginClient {
       'status': authResult.status,
       'token': authResult.authToken,
     };
+  }
+
+  Future<Map<String, dynamic>> authenticateAzure() async {
+    try {
+      const tenantName = String.fromEnvironment('AZURE_TENANT_NAME');
+      const tenantId = String.fromEnvironment('AZURE_TENANT_ID');
+      const policyName = String.fromEnvironment('AZURE_POLICY_NAME');
+
+      const clientId = String.fromEnvironment('AZURE_CLIENT_ID');
+      const redirectURL = String.fromEnvironment('AZURE_REDIRECT_URL');
+
+      final discoveryURL = Uri.https(
+        '$tenantName.b2clogin.com',
+        '/$tenantId/$policyName/v2.0/.well-known/openid-configuration',
+      );
+
+      final result = await _appAuth.authorizeAndExchangeCode(
+        AuthorizationTokenRequest(
+          clientId,
+          redirectURL,
+          discoveryUrl: discoveryURL.toString(),
+          scopes: <String>['openid', 'profile', 'email', 'offline_access'],
+        ),
+      );
+
+      if (result != null) {
+        return <String, dynamic>{
+          'idToken': result.idToken,
+          'accessToken': result.accessToken,
+          'refreshToken': result.refreshToken,
+        };
+      }
+
+      throw Exception('Error logging in');
+    } catch (error) {
+      rethrow;
+    }
   }
 }
