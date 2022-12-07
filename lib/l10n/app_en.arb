@@ -146,6 +146,10 @@
   "@biometricError": {
     "description": "Biometric message when user is not authorized"
   },
+  "azureLoginError": "Error logging in with Azure",
+  "@azureLoginError": {
+    "description": "Azure login message when user is not authorized"
+  },
   "homeTitle": "Home page",
   "@homeTitle": {
     "description": "Home app bar title"

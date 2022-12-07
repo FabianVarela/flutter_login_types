@@ -43,6 +43,7 @@
   "biometricNoSupportedText": "Este dispositivo no soporta inicio de sesión mediante biometría",
   "biometricReason": "Coloca tu huella o cara para iniciar",
   "biometricError": "No autorizado",
+  "azureLoginError": "Error al iniciar sesión con Azure",
   "homeTitle": "Página de inicio",
   "homeText": "Bienvenido",
   "emptyValidation": "El campo de texto se encuentra vacío",
