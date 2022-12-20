@@ -35,6 +35,10 @@ This scenario recreates the local auth login with the use of fingerprint (Androi
 
 This scenario recreates the authentication with third providers like Facebook, Google, Apple and Twitter.
 
+### Other mechanism
+
+This scenario recreates the authentication using Azure Active Directory B2C, enabling user/password, third logins, etc.
+
 ------
 
 ## Setting Third logins
