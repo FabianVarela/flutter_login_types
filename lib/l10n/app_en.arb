@@ -58,6 +58,10 @@
   "@signInAzureAd": {
     "description": "Sign in with azure ad text"
   },
+  "signInAuth0": "Auth0",
+  "@signInAuth0": {
+    "description": "Sign in with auth0 text"
+  },
   "signInThirdInProgress": "In progress, please wait",
   "@signInThirdInProgress": {
     "description": "Sign in with third in progress text message"
@@ -149,6 +153,10 @@
   "azureLoginError": "Error logging in with Azure",
   "@azureLoginError": {
     "description": "Azure login message when user is not authorized"
+  },
+  "auth0LoginError": "Error logging in with Auth0",
+  "@auth0LoginError": {
+    "description": "Auth0 login message when user is not authorized"
   },
   "homeTitle": "Home page",
   "@homeTitle": {
