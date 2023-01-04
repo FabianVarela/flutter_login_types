@@ -8,6 +8,7 @@ environment:
   flutter: 3.3.10
 
 dependencies:
+  auth0_flutter: ^1.0.2
   cupertino_icons: ^1.0.5
   flutter:
     sdk: flutter
