@@ -37,7 +37,8 @@ This scenario recreates the authentication with third providers like Facebook, G
 
 ### Other mechanism
 
-This scenario recreates the authentication using Azure Active Directory B2C, enabling user/password, third logins, etc.
+This scenario recreates the authentication using different mechanism like Azure Active Directory B2C and/or Auth0,
+enabling user/password, third logins, etc.
 
 ------
 
@@ -112,12 +113,26 @@ follow [this link](https://pub.dev/packages/twitter_login#twitter-configuration)
 * [To create the Azure AD B2C application](https://learn.microsoft.com/en-us/azure/healthcare-apis/register-application)
 * [To create the user flow](https://learn.microsoft.com/en-us/azure/active-directory-b2c/tutorial-create-user-flows?pivots=b2c-user-flow)</font>
 
+### Setting Auth0
+
+* You must set the Auth0 **domain** and **client id** in the *Dart Define command* setting the additional run arguments
+  below
+  ```
+  --dart-define AUTH0_DOMAIN=<YOUR_AUTH0_DOMAIN>
+  --dart-define AUTH0_CLIENT_ID=<YOUR_AUTH0_CLIENT_ID>
+  ```
+
+<font size="3">You can follow this link to guide:
+
+* [Auth0 with Flutter](https://auth0.com/docs/quickstart/native/flutter/interactive)</font>
+
 ------
 
 ### Used packages
 
 #### Dependencies
 
+- Auth0 Flutter ([auth0_flutter](https://pub.dev/packages/auth0_flutter))
 - Flutter Facebook auth ([flutter_facebook_auth](https://pub.dev/packages/flutter_facebook_auth))
 - Flutter local notifications ([flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications))
 - Flutter app auth ([flutter_appauth](https://pub.dev/packages/flutter_appauth))
