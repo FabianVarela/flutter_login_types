@@ -3,4 +3,6 @@
     <string name="facebook_client_token">{your-client-token}</string>
     <string name="twitter_callback_url">{your-twitter-callback-url}</string>
     <string name="app_auth_scheme">{your-app-auth-scheme}</string>
+    <string name="auth0_domain">{your-auth0-domain}</string>
+    <string name="auth0_scheme">{your-auth0-scheme}</string>
 </resources>
