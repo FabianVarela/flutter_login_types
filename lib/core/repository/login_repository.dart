@@ -24,4 +24,7 @@ class LoginRepository {
 
   Future<Map<String, dynamic>> authenticateAzure({String? lang}) =>
       _client.authenticateAzure(lang: lang);
+
+  Future<Map<String, dynamic>> authenticateAuth0() =>
+      _client.authenticateAuth0();
 }

@@ -1,3 +1,4 @@
+import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -135,5 +136,19 @@ class LoginClient {
     } catch (error) {
       rethrow;
     }
+  }
+
+  Future<Map<String, dynamic>> authenticateAuth0() async {
+    const auth0Domain = String.fromEnvironment('AUTH0_DOMAIN');
+    const auth0ClientId = String.fromEnvironment('AUTH0_CLIENT_ID');
+
+    final auth0 = Auth0(auth0Domain, auth0ClientId);
+    final credentials = await auth0.webAuthentication().login();
+
+    return <String, dynamic>{
+      'idToken': credentials.idToken,
+      'accessToken': credentials.accessToken,
+      'refreshToken': credentials.refreshToken,
+    };
   }
 }
