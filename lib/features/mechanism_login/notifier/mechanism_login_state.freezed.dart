@@ -21,7 +21,7 @@ mixin _$MechanismLoginState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function() error,
+    required TResult Function(MechanismType type) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +29,7 @@ mixin _$MechanismLoginState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
-    TResult? Function()? error,
+    TResult? Function(MechanismType type)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +37,7 @@ mixin _$MechanismLoginState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function()? error,
+    TResult Function(MechanismType type)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -131,7 +131,7 @@ class _$_MechanismLoginStateInitial implements _MechanismLoginStateInitial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function() error,
+    required TResult Function(MechanismType type) error,
   }) {
     return initial();
   }
@@ -142,7 +142,7 @@ class _$_MechanismLoginStateInitial implements _MechanismLoginStateInitial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
-    TResult? Function()? error,
+    TResult? Function(MechanismType type)? error,
   }) {
     return initial?.call();
   }
@@ -153,7 +153,7 @@ class _$_MechanismLoginStateInitial implements _MechanismLoginStateInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function()? error,
+    TResult Function(MechanismType type)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -249,7 +249,7 @@ class _$_MechanismLoginStateLoading implements _MechanismLoginStateLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function() error,
+    required TResult Function(MechanismType type) error,
   }) {
     return loading();
   }
@@ -260,7 +260,7 @@ class _$_MechanismLoginStateLoading implements _MechanismLoginStateLoading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
-    TResult? Function()? error,
+    TResult? Function(MechanismType type)? error,
   }) {
     return loading?.call();
   }
@@ -271,7 +271,7 @@ class _$_MechanismLoginStateLoading implements _MechanismLoginStateLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function()? error,
+    TResult Function(MechanismType type)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -367,7 +367,7 @@ class _$_MechanismLoginStateSuccess implements _MechanismLoginStateSuccess {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function() error,
+    required TResult Function(MechanismType type) error,
   }) {
     return success();
   }
@@ -378,7 +378,7 @@ class _$_MechanismLoginStateSuccess implements _MechanismLoginStateSuccess {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
-    TResult? Function()? error,
+    TResult? Function(MechanismType type)? error,
   }) {
     return success?.call();
   }
@@ -389,7 +389,7 @@ class _$_MechanismLoginStateSuccess implements _MechanismLoginStateSuccess {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function()? error,
+    TResult Function(MechanismType type)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -446,6 +446,8 @@ abstract class _$$_MechanismLoginStateErrorCopyWith<$Res> {
           _$_MechanismLoginStateError value,
           $Res Function(_$_MechanismLoginStateError) then) =
       __$$_MechanismLoginStateErrorCopyWithImpl<$Res>;
+  @useResult
+  $Res call({MechanismType type});
 }
 
 /// @nodoc
@@ -455,27 +457,51 @@ class __$$_MechanismLoginStateErrorCopyWithImpl<$Res>
   __$$_MechanismLoginStateErrorCopyWithImpl(_$_MechanismLoginStateError _value,
       $Res Function(_$_MechanismLoginStateError) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = null,
+  }) {
+    return _then(_$_MechanismLoginStateError(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as MechanismType,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_MechanismLoginStateError implements _MechanismLoginStateError {
-  const _$_MechanismLoginStateError();
+  const _$_MechanismLoginStateError({required this.type});
+
+  @override
+  final MechanismType type;
 
   @override
   String toString() {
-    return 'MechanismLoginState.error()';
+    return 'MechanismLoginState.error(type: $type)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MechanismLoginStateError);
+            other is _$_MechanismLoginStateError &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, type);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_MechanismLoginStateErrorCopyWith<_$_MechanismLoginStateError>
+      get copyWith => __$$_MechanismLoginStateErrorCopyWithImpl<
+          _$_MechanismLoginStateError>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -483,9 +509,9 @@ class _$_MechanismLoginStateError implements _MechanismLoginStateError {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function() error,
+    required TResult Function(MechanismType type) error,
   }) {
-    return error();
+    return error(type);
   }
 
   @override
@@ -494,9 +520,9 @@ class _$_MechanismLoginStateError implements _MechanismLoginStateError {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
-    TResult? Function()? error,
+    TResult? Function(MechanismType type)? error,
   }) {
-    return error?.call();
+    return error?.call(type);
   }
 
   @override
@@ -505,11 +531,11 @@ class _$_MechanismLoginStateError implements _MechanismLoginStateError {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function()? error,
+    TResult Function(MechanismType type)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error();
+      return error(type);
     }
     return orElse();
   }
@@ -553,5 +579,11 @@ class _$_MechanismLoginStateError implements _MechanismLoginStateError {
 }
 
 abstract class _MechanismLoginStateError implements MechanismLoginState {
-  const factory _MechanismLoginStateError() = _$_MechanismLoginStateError;
+  const factory _MechanismLoginStateError({required final MechanismType type}) =
+      _$_MechanismLoginStateError;
+
+  MechanismType get type;
+  @JsonKey(ignore: true)
+  _$$_MechanismLoginStateErrorCopyWith<_$_MechanismLoginStateError>
+      get copyWith => throw _privateConstructorUsedError;
 }

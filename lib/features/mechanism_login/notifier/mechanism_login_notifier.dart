@@ -17,7 +17,18 @@ class MechanismLoginNotifier extends StateNotifier<MechanismLoginState> {
       print(result);
       state = const MechanismLoginState.success();
     } on Exception catch (_) {
-      state = const MechanismLoginState.error();
+      state = const MechanismLoginState.error(type: MechanismType.azure);
+    }
+  }
+
+  Future<void> authenticateAuth0() async {
+    try {
+      state = const MechanismLoginState.loading();
+      final result = await _repository.authenticateAuth0();
+      print(result);
+      state = const MechanismLoginState.success();
+    } on Exception catch (_) {
+      state = const MechanismLoginState.error(type: MechanismType.auth0);
     }
   }
 }
