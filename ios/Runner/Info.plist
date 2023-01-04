@@ -38,6 +38,8 @@
 				<string>{your-google-user-content}</string>
 				<string>{your-twitter-callback-url}</string>
 				<string>{your-app-auth-scheme}</string>
+                <!--Apply for Auth0-->
+                <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 			</array>
 		</dict>
 	</array>
