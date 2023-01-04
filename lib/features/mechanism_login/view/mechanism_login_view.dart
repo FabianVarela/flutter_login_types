@@ -21,7 +21,11 @@ class MechanismLoginView extends HookConsumerWidget {
       if (next.isSuccess) {
         context.go('/home');
       } else if (next.isError) {
-        CustomMessage.show(context, localization.azureLoginError);
+        if (next.mechanismType == MechanismType.azure) {
+          CustomMessage.show(context, localization.azureLoginError);
+        } else if (next.mechanismType == MechanismType.auth0) {
+          CustomMessage.show(context, localization.auth0LoginError);
+        }
       }
     });
 
@@ -46,6 +50,16 @@ class MechanismLoginView extends HookConsumerWidget {
               backgroundColor: CustomColors.kingBlue,
               foregroundColor: CustomColors.white,
               icon: const Icon(Icons.window, color: CustomColors.white),
+            ),
+            const SizedBox(height: 20),
+            CustomButton(
+              text: localization.signInText(localization.signInAuth0),
+              onPress: () => ref
+                  .read(mechanismLoginNotifierProvider.notifier)
+                  .authenticateAuth0(),
+              backgroundColor: CustomColors.lightRed,
+              foregroundColor: CustomColors.white,
+              icon: const Icon(Icons.star, color: CustomColors.white),
             ),
           ],
         ),
