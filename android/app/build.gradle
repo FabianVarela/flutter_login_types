@@ -52,9 +52,15 @@ android {
         multiDexEnabled true
 
         def stringsFile = android.sourceSets.main.res.sourceFiles.find { it.name.equals 'strings.xml' }
-        def scheme = new XmlParser().parse(stringsFile).string.find { it.@name.equals 'app_auth_scheme' }.text()
+        def xmlParserString = new XmlParser().parse(stringsFile)
 
-        manifestPlaceholders += ['appAuthRedirectScheme': "$scheme"]
+        def appAuthScheme = xmlParserString.string.find { it.@name.equals 'app_auth_scheme' }.text()
+        def auth0Domain = xmlParserString.string.find { it.@name.equals 'auth0_domain' }.text()
+        def auth0Scheme = xmlParserString.string.find { it.@name.equals 'auth0_scheme' }.text()
+
+        manifestPlaceholders += [
+                appAuthRedirectScheme: "$appAuthScheme", auth0Domain: "$auth0Domain", auth0Scheme: "$auth0Scheme"
+        ]
     }
 
     buildTypes {
