@@ -7,8 +7,8 @@ enum IconDirection {
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
-    super.key,
     required this.text,
+    super.key,
     this.onPress,
     this.backgroundColor = Colors.white,
     this.foregroundColor = Colors.black,
