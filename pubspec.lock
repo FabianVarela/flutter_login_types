@@ -37,18 +37,18 @@ packages:
     dependency: "direct main"
     description:
       name: auth0_flutter
-      sha256: fa6f9ed5c8650611c033cf8e18f24f4a1d0617c54bf78bc2609f3f65e279f1dd
+      sha256: "2d29c95fd25164c9b9c88beefc19619b213e1c16e1ab067e926005d675cda344"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.2"
+    version: "1.1.0"
   auth0_flutter_platform_interface:
     dependency: transitive
     description:
       name: auth0_flutter_platform_interface
-      sha256: "91244dcf3ba5acfc1823b38e7f1ca4e459d35abdc7d9d9e19f1bccfc241ee41b"
+      sha256: fdd22d22e3f2c45a4db5579f65d358aaed3d4d51eb9994031a497af5dc5e4736
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.1"
+    version: "1.1.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -433,10 +433,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: f48051e213661d03bd846af43bb27c79e3353694358739d6eaf99c54ac295577
+      sha256: b4bb06205ec607278b6fc23db238278417bca84a3905779cc68d1eb7afae37e2
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.10"
+    version: "6.2.0"
   google_fonts:
     dependency: "direct main"
     description:
@@ -793,10 +793,10 @@ packages:
     dependency: "direct main"
     description:
       name: shared_preferences
-      sha256: "5949029e70abe87f75cfe59d17bf5c397619c4b74a099b10116baeb34786fad9"
+      sha256: ee6257848f822b8481691f20c3e6d2bfee2e9eccb2a3d249907fcfb198c55b41
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.17"
+    version: "2.0.18"
   shared_preferences_android:
     dependency: transitive
     description:

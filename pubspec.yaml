@@ -8,7 +8,7 @@ environment:
   flutter: 3.7.0
 
 dependencies:
-  auth0_flutter: ^1.0.2
+  auth0_flutter: ^1.1.0
   flutter:
     sdk: flutter
   flutter_appauth: ^4.2.1
@@ -19,14 +19,14 @@ dependencies:
     sdk: flutter
   formz: ^0.4.1
   freezed_annotation: ^2.2.0
-  go_router: ^6.0.10
+  go_router: ^6.2.0
   google_fonts: ^4.0.3
   google_sign_in: ^6.0.1
   hooks_riverpod: ^2.2.0
   intl: ^0.17.0
   local_auth: ^2.1.5
   pinput: ^2.2.31
-  shared_preferences: ^2.0.17
+  shared_preferences: ^2.0.18
   sign_in_with_apple: ^4.3.0
   twitter_login: ^4.3.1
 
