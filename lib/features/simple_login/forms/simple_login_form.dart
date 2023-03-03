@@ -9,6 +9,7 @@ class EmailInputText extends FormzInput<String, EmailInputValidator> {
 
   @override
   EmailInputValidator? validator(String value) {
+    if (isPure) return null;
     if (value.isEmpty) return EmailInputValidator.empty;
 
     final regex = RegExp(
@@ -29,7 +30,9 @@ class PasswordInputText extends FormzInput<String, PasswordInputValidator> {
 
   @override
   PasswordInputValidator? validator(String value) {
+    if (isPure) return null;
     if (value.isEmpty) return PasswordInputValidator.empty;
+
     if (value.isNotEmpty && value.length < 4) {
       return PasswordInputValidator.invalid;
     }

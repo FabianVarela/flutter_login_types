@@ -10,7 +10,6 @@ import 'package:flutter_login_types/features/simple_login/forms/simple_login_for
 import 'package:flutter_login_types/features/simple_login/forms/simple_login_form_notifier.dart';
 import 'package:flutter_login_types/features/simple_login/notifier/simple_login_state.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
-import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -72,7 +71,7 @@ class _TextFieldEmail extends HookConsumerWidget {
     final emailInput = ref.watch(
       loginFormNotifierProvider.select((form) => form.emailInput),
     );
-    final emailError = emailInput.invalid ? emailInput.error : null;
+    final emailError = emailInput.isNotValid ? emailInput.error : null;
 
     useEffect(
       () {
@@ -112,7 +111,7 @@ class _TextFieldPassword extends HookConsumerWidget {
     final passwordInput = ref.watch(
       loginFormNotifierProvider.select((form) => form.passwordInput),
     );
-    final passwordError = passwordInput.invalid ? passwordInput.error : null;
+    final passwordError = passwordInput.isNotValid ? passwordInput.error : null;
 
     useEffect(
       () {
@@ -147,7 +146,7 @@ class _SubmitButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final localization = context.localizations;
     final isFormValid = ref.watch(
-      loginFormNotifierProvider.select((f) => f.status == FormzStatus.valid),
+      loginFormNotifierProvider.select((f) => f.isValid),
     );
 
     final emailValue = ref.watch(

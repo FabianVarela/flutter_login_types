@@ -14,6 +14,6 @@ class SimpleLoginFormNotifier extends StateNotifier<SimpleLoginForm> {
 }
 
 final loginFormNotifierProvider =
-    StateNotifierProvider<SimpleLoginFormNotifier, SimpleLoginForm>(
+    StateNotifierProvider.autoDispose<SimpleLoginFormNotifier, SimpleLoginForm>(
   (ref) => SimpleLoginFormNotifier(),
 );

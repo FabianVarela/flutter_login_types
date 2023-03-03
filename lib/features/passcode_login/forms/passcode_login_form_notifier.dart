@@ -9,7 +9,7 @@ class PasscodeLoginFormNotifier extends StateNotifier<PasscodeLoginForm> {
   }
 }
 
-final passcodeFormNotifierProvider =
-    StateNotifierProvider<PasscodeLoginFormNotifier, PasscodeLoginForm>(
+final passcodeFormNotifierProvider = StateNotifierProvider.autoDispose<
+    PasscodeLoginFormNotifier, PasscodeLoginForm>(
   (ref) => PasscodeLoginFormNotifier(),
 );

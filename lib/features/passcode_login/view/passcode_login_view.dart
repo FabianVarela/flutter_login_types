@@ -11,7 +11,6 @@ import 'package:flutter_login_types/features/passcode_login/forms/passcode_login
 import 'package:flutter_login_types/features/passcode_login/forms/passcode_login_form_notifier.dart';
 import 'package:flutter_login_types/features/passcode_login/notifier/passcode_login_state.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
-import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pinput/pinput.dart';
@@ -79,10 +78,7 @@ class PasscodeLoginView extends HookConsumerWidget {
             PageView(
               controller: pageController,
               physics: const NeverScrollableScrollPhysics(),
-              children: const <Widget>[
-                _TextFieldPhone(),
-                _TextFieldPasscode(),
-              ],
+              children: const <Widget>[_PhoneForm(), _PasscodeForm()],
             ),
             if (passcodeState.isLoading) const Loading(),
           ],
@@ -92,8 +88,8 @@ class PasscodeLoginView extends HookConsumerWidget {
   }
 }
 
-class _TextFieldPhone extends HookConsumerWidget {
-  const _TextFieldPhone();
+class _PhoneForm extends HookConsumerWidget {
+  const _PhoneForm();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -101,13 +97,13 @@ class _TextFieldPhone extends HookConsumerWidget {
     final controller = useTextEditingController();
 
     final isFormValid = ref.watch(
-      passcodeFormNotifierProvider.select((f) => f.status == FormzStatus.valid),
+      passcodeFormNotifierProvider.select((f) => f.isValid),
     );
 
     final phoneInput = ref.watch(
       passcodeFormNotifierProvider.select((form) => form.phoneInput),
     );
-    final phoneError = phoneInput.invalid ? phoneInput.error : null;
+    final phoneError = phoneInput.isNotValid ? phoneInput.error : null;
 
     useEffect(
       () {
@@ -174,8 +170,8 @@ class _TextFieldPhone extends HookConsumerWidget {
   }
 }
 
-class _TextFieldPasscode extends HookConsumerWidget {
-  const _TextFieldPasscode();
+class _PasscodeForm extends HookConsumerWidget {
+  const _PasscodeForm();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
