@@ -197,10 +197,10 @@ packages:
     dependency: transitive
     description:
       name: facebook_auth_desktop
-      sha256: e2a63178835b2f63f144d558394c8cfcffaaadee35205deace4f8cc28ba9a902
+      sha256: "35ff7b8c62ad37c4bc08eed7d58cf301ab8770a2f4eed46573843ae1e1a1aac3"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.8"
+    version: "0.0.9"
   fake_async:
     dependency: transitive
     description:
@@ -258,10 +258,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_facebook_auth
-      sha256: e74475e4d0d87f34069a42ec6e839872222ca8a65fbb506ec3329b5d595ca75b
+      sha256: "865752fb264e18f5246626d0cc8c1b6b5217cba8fa12f6704204c471695913b9"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.7"
+    version: "5.0.8"
   flutter_facebook_auth_platform_interface:
     dependency: transitive
     description:
@@ -327,34 +327,34 @@ packages:
     dependency: transitive
     description:
       name: flutter_riverpod
-      sha256: "46a27b7a11dc13738054093076f2dc65692ddcd463979b15092accf5681aea20"
+      sha256: "40c0d7d03ccd24fa32ea08dcfc4df9bb92c4c26c9a91938945da3be10ed8ca83"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.3.0"
   flutter_secure_storage:
     dependency: transitive
     description:
       name: flutter_secure_storage
-      sha256: f2afec1f1762c040a349ea2a588e32f442da5d0db3494a52a929a97c9e550bc5
+      sha256: "98352186ee7ad3639ccc77ad7924b773ff6883076ab952437d20f18a61f0a7c5"
       url: "https://pub.dev"
     source: hosted
-    version: "7.0.1"
+    version: "8.0.0"
   flutter_secure_storage_linux:
     dependency: transitive
     description:
       name: flutter_secure_storage_linux
-      sha256: "736436adaf91552433823f51ce22e098c2f0551db06b6596f58597a25b8ea797"
+      sha256: "0912ae29a572230ad52d8a4697e5518d7f0f429052fd51df7e5a7952c7efe2a3"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.2"
+    version: "1.1.3"
   flutter_secure_storage_macos:
     dependency: transitive
     description:
       name: flutter_secure_storage_macos
-      sha256: ff0768a6700ea1d9620e03518e2e25eac86a8bd07ca3556e9617bfa5ace4bd00
+      sha256: "083add01847fc1c80a07a08e1ed6927e9acd9618a35e330239d4422cd2a58c50"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.1"
+    version: "3.0.0"
   flutter_secure_storage_platform_interface:
     dependency: transitive
     description:
@@ -375,10 +375,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_secure_storage_windows
-      sha256: ca89c8059cf439985aa83c59619b3674c7ef6cc2e86943d169a7369d6a69cab5
+      sha256: fc2910ec9b28d60598216c29ea763b3a96c401f0ce1d13cdf69ccb0e5c93c3ee
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.3"
+    version: "2.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -393,10 +393,10 @@ packages:
     dependency: "direct main"
     description:
       name: formz
-      sha256: ed92f501f4a44b1da9137a025007df773b3732147b413c464158ecd997612ab6
+      sha256: "40a8a8487a640c54156b5aed9642e55e84e53772e15d14f60644d05beaa0781b"
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.1"
+    version: "0.5.0+1"
   freezed:
     dependency: "direct dev"
     description:
@@ -505,10 +505,10 @@ packages:
     dependency: "direct main"
     description:
       name: hooks_riverpod
-      sha256: a596bcb1eaf48eae6da1ce8b9e60ec9538ef7d15725e941c3626f29dfcc01d96
+      sha256: "048d5d912b9e5ef9db4d274d201a2bfe4270e5694ff5c6719b593d4ae9c512c7"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.3.0"
   http:
     dependency: transitive
     description:
@@ -785,10 +785,10 @@ packages:
     dependency: transitive
     description:
       name: riverpod
-      sha256: "59a48de9c757aa61aa28e9fd625ffb360d43b6b54606f12536622c55be9e8c4b"
+      sha256: c5aea6c3fed340707f013a023a37ab388bf45611a8a4f7e76b5e9007eb76cd25
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.3.0"
   shared_preferences:
     dependency: "direct main"
     description:
