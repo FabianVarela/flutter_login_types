@@ -21,10 +21,10 @@ dependencies:
   freezed_annotation: ^2.2.0
   go_router: ^6.2.0
   google_fonts: ^4.0.3
-  google_sign_in: ^6.0.1
-  hooks_riverpod: ^2.3.0
+  google_sign_in: ^6.0.2
+  hooks_riverpod: ^2.3.1
   intl: ^0.17.0
-  local_auth: ^2.1.5
+  local_auth: ^2.1.6
   pinput: ^2.2.31
   shared_preferences: ^2.0.18
   sign_in_with_apple: ^4.3.0
