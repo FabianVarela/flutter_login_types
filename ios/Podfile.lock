@@ -135,12 +135,12 @@ SPEC CHECKSUMS:
   JWTDecode: 82480a7173f8a811954e7e14a2b59f688ca4222a
   local_auth_ios: 0d333dde7780f669e66f19d2ff6005f3ea84008d
   path_provider_foundation: 37748e03f12783f9de2cb2c4eadfaa25fe6d4852
-  shared_preferences_foundation: 297b3ebca31b34ec92be11acd7fb0ba932c822ca
+  shared_preferences_foundation: 986fc17f3d3251412d18b0265f9c64113a8c2472
   sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
   SimpleKeychain: 130211269f88f038d7dc5254cf0b1b9ce978c398
   smart_auth: 4bedbc118723912d0e45a07e8ab34039c19e04f2
   twitter_login: 2794db69b7640681171b17b3c2c84ad9dfb4a57f
 
-PODFILE CHECKSUM: 4e8f8b2be68aeea4c0d5beb6ff1e79fface1d048
+PODFILE CHECKSUM: 29db189dd919c3153ef4dc0037b092d26275e7bf
 
 COCOAPODS: 1.11.3
