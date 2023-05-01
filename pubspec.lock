@@ -242,10 +242,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_appauth
-      sha256: bd35afb0b9d1ab3ffd511d622eb52adf1020a5c6d479eac271bfd1a9bb4b8ccb
+      sha256: e2f48b18420d98b579822f1a0cac167179ca9dc3da1b0144399d0ccc7be192c8
       url: "https://pub.dev"
     source: hosted
-    version: "4.2.1+1"
+    version: "5.0.0"
   flutter_appauth_platform_interface:
     dependency: transitive
     description:
@@ -290,26 +290,26 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_local_notifications
-      sha256: "293995f94e120c8afce768981bd1fa9c5d6de67c547568e3b42ae2defdcbb4a0"
+      sha256: "2876372952b65ca7f684e698eba22bda1cf581fa071dd30ba2f01900f507d0d1"
       url: "https://pub.dev"
     source: hosted
-    version: "13.0.0"
+    version: "14.0.0+1"
   flutter_local_notifications_linux:
     dependency: transitive
     description:
       name: flutter_local_notifications_linux
-      sha256: "8f6c1611e0c4a88a382691a97bb3c3feb24cc0c0b54152b8b5fb7ffb837f7fbf"
+      sha256: "909bb95de05a2e793503a2437146285a2f600cd0b3f826e26b870a334d8586d7"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "4.0.0"
   flutter_local_notifications_platform_interface:
     dependency: transitive
     description:
       name: flutter_local_notifications_platform_interface
-      sha256: "5ec1feac5f7f7d9266759488bc5f76416152baba9aa1b26fe572246caa00d1ab"
+      sha256: "63235c42de5b6c99846969a27ad0209c401e6b77b0498939813725b5791c107c"
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.0"
+    version: "7.0.0"
   flutter_localizations:
     dependency: "direct main"
     description: flutter
@@ -327,10 +327,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_riverpod
-      sha256: "812dfbb87af51e73e68ea038bcfd1c732078d6838d3388d03283db7dec0d1e5f"
+      sha256: b83ac5827baadefd331ea1d85110f34645827ea234ccabf53a655f41901a9bf4
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.4"
+    version: "2.3.6"
   flutter_secure_storage:
     dependency: transitive
     description:
@@ -433,18 +433,18 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: "99c7fbd4f73da5268046374576af2f6fef970088038d626c5c689a359479af40"
+      sha256: "73a50070c125c90f9960aad4da9e4a95d94558230727f145ac634528da1e75e3"
       url: "https://pub.dev"
     source: hosted
-    version: "6.5.7"
+    version: "7.0.0"
   google_fonts:
     dependency: "direct main"
     description:
       name: google_fonts
-      sha256: "927573f2e8a8d65c17931e21918ad0ab0666b1b636537de7c4932bdb487b190f"
+      sha256: "6b6f10f0ce3c42f6552d1c70d2c28d764cf22bb487f50f66cca31dcd5194f4d6"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.3"
+    version: "4.0.4"
   google_identity_services_web:
     dependency: transitive
     description:
@@ -505,10 +505,10 @@ packages:
     dependency: "direct main"
     description:
       name: hooks_riverpod
-      sha256: eceb62b7e3a18e6c2831498c3f2ea5b42c0a938c95d0c1eb1b8a7ccdd022accc
+      sha256: be68cf7653fcab798500f9047ac58c3f109287a1595012412f4a0d654a9bb9c5
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.4"
+    version: "2.3.6"
   http:
     dependency: transitive
     description:
@@ -785,10 +785,10 @@ packages:
     dependency: transitive
     description:
       name: riverpod
-      sha256: "77ab3bcd084bb19fa8717a526217787c725d7f5be938404c7839cd760fdf6ae5"
+      sha256: "80e48bebc83010d5e67a11c9514af6b44bbac1ec77b4333c8ea65dbc79e2d8ef"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.4"
+    version: "2.3.6"
   shared_preferences:
     dependency: "direct main"
     description:

@@ -11,18 +11,18 @@ dependencies:
   auth0_flutter: ^1.1.0
   flutter:
     sdk: flutter
-  flutter_appauth: ^4.2.1+1
+  flutter_appauth: ^5.0.0
   flutter_facebook_auth: ^5.0.8
   flutter_hooks: ^0.18.6
-  flutter_local_notifications: ^13.0.0
+  flutter_local_notifications: ^14.0.0+1
   flutter_localizations:
     sdk: flutter
   formz: ^0.6.0
   freezed_annotation: ^2.2.0
-  go_router: ^6.5.7
-  google_fonts: ^4.0.3
+  go_router: ^7.0.0
+  google_fonts: ^4.0.4
   google_sign_in: ^6.1.0
-  hooks_riverpod: ^2.3.4
+  hooks_riverpod: ^2.3.6
   intl: ^0.17.0
   local_auth: ^2.1.6
   pinput: ^2.2.31
