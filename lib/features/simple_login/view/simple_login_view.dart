@@ -42,9 +42,9 @@ class SimpleLoginView extends ConsumerWidget {
           backgroundColor: CustomColors.white,
           body: Container(
             padding: const EdgeInsets.all(16),
-            child: Column(
+            child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const <Widget>[
+              children: <Widget>[
                 _TextFieldEmail(),
                 SizedBox(height: 20),
                 _TextFieldPassword(),

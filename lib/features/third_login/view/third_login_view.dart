@@ -30,12 +30,12 @@ class ThirdLoginView extends ConsumerWidget {
       ),
       backgroundColor: CustomColors.white,
       extendBodyBehindAppBar: true,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+      body: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: const <Widget>[
+          children: <Widget>[
             _GoogleButton(),
             SizedBox(height: 20),
             _AppleButton(),

@@ -23,12 +23,12 @@ class LoginOptionsView extends StatelessWidget {
         ),
       ),
       backgroundColor: CustomColors.white,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+      body: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: const <Widget>[
+          children: <Widget>[
             _SimpleLoginButton(),
             SizedBox(height: 20),
             _PasscodeButton(),
