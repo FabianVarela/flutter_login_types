@@ -134,9 +134,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             child: _ErrorMessage(
               message: _hasRequired
                   ? widget.requiredMessage!
-                  : widget.errorText != null
-                      ? widget.errorText!
-                      : null,
+                  : widget.errorText ?? '',
             ),
           ),
         ],
