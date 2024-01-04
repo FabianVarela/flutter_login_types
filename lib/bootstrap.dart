@@ -59,9 +59,12 @@ Future<void> bootstrap(
   ];
 
   await runZonedGuarded(
-    () async => runApp(
-      ProviderScope(overrides: overrides, child: await builder()),
-    ),
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      runApp(
+        ProviderScope(overrides: overrides, child: await builder()),
+      );
+    },
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
 }
