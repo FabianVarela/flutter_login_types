@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_login_types/app.dart';
 import 'package:flutter_login_types/bootstrap.dart';
 
