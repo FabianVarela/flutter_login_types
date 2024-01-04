@@ -49,16 +49,12 @@ class ThirdLoginNotifier extends StateNotifier<ThirdLoginResult> {
 
     final facebookResult = await _repository.authenticateFacebook();
     if (facebookResult.containsKey('status')) {
-      switch (facebookResult['status'] as LoginStatus) {
-        case LoginStatus.success:
-          state = ThirdLoginResult.success;
-        case LoginStatus.cancelled:
-          state = ThirdLoginResult.cancelled;
-        case LoginStatus.failed:
-          state = ThirdLoginResult.error;
-        case LoginStatus.operationInProgress:
-          state = ThirdLoginResult.progress;
-      }
+      state = switch (facebookResult['status'] as LoginStatus) {
+        LoginStatus.success => ThirdLoginResult.success,
+        LoginStatus.cancelled => ThirdLoginResult.cancelled,
+        LoginStatus.failed => ThirdLoginResult.error,
+        LoginStatus.operationInProgress => ThirdLoginResult.progress,
+      };
     } else {
       state = ThirdLoginResult.error;
     }
@@ -69,14 +65,11 @@ class ThirdLoginNotifier extends StateNotifier<ThirdLoginResult> {
       state = ThirdLoginResult.loading;
 
       final twitterResult = await _repository.authenticateTwitter();
-      switch (twitterResult['status'] as TwitterLoginStatus) {
-        case TwitterLoginStatus.loggedIn:
-          state = ThirdLoginResult.success;
-        case TwitterLoginStatus.cancelledByUser:
-          state = ThirdLoginResult.cancelled;
-        case TwitterLoginStatus.error:
-          state = ThirdLoginResult.error;
-      }
+      state = switch (twitterResult['status'] as TwitterLoginStatus) {
+        TwitterLoginStatus.loggedIn => ThirdLoginResult.success,
+        TwitterLoginStatus.cancelledByUser => ThirdLoginResult.cancelled,
+        TwitterLoginStatus.error => ThirdLoginResult.error,
+      };
     } on Exception catch (_) {
       state = ThirdLoginResult.error;
     }

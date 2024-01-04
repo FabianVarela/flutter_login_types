@@ -51,18 +51,12 @@ class ThirdLoginView extends ConsumerWidget {
 
   void _showSnackBar(BuildContext context, ThirdLoginResult state) {
     final localization = context.localizations;
-    String? message;
-
-    switch (state) {
-      case ThirdLoginResult.progress:
-        message = localization.signInThirdInProgress;
-      case ThirdLoginResult.cancelled:
-        message = localization.signInThirdCancelled;
-      case ThirdLoginResult.error:
-        message = localization.signInThirdError;
-      default:
-        break;
-    }
+    final message = switch (state) {
+      ThirdLoginResult.progress => localization.signInThirdInProgress,
+      ThirdLoginResult.cancelled => localization.signInThirdCancelled,
+      ThirdLoginResult.error => localization.signInThirdError,
+      _ => null,
+    };
 
     if (message != null) CustomMessage.show(context, message);
   }
