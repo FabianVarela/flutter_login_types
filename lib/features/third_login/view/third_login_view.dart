@@ -56,13 +56,10 @@ class ThirdLoginView extends ConsumerWidget {
     switch (state) {
       case ThirdLoginResult.progress:
         message = localization.signInThirdInProgress;
-        break;
       case ThirdLoginResult.cancelled:
         message = localization.signInThirdCancelled;
-        break;
       case ThirdLoginResult.error:
         message = localization.signInThirdError;
-        break;
       default:
         break;
     }

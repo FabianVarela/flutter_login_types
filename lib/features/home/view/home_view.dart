@@ -61,7 +61,7 @@ class _HomePageUIState extends ConsumerState<HomeView>
                   DropdownMenuItem(
                     value: item,
                     child: Text(_getText(item.languageCode)),
-                  )
+                  ),
               ],
             ),
           ],

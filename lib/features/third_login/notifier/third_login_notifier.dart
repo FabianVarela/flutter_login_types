@@ -52,16 +52,12 @@ class ThirdLoginNotifier extends StateNotifier<ThirdLoginResult> {
       switch (facebookResult['status'] as LoginStatus) {
         case LoginStatus.success:
           state = ThirdLoginResult.success;
-          break;
         case LoginStatus.cancelled:
           state = ThirdLoginResult.cancelled;
-          break;
         case LoginStatus.failed:
           state = ThirdLoginResult.error;
-          break;
         case LoginStatus.operationInProgress:
           state = ThirdLoginResult.progress;
-          break;
       }
     } else {
       state = ThirdLoginResult.error;
@@ -76,13 +72,10 @@ class ThirdLoginNotifier extends StateNotifier<ThirdLoginResult> {
       switch (twitterResult['status'] as TwitterLoginStatus) {
         case TwitterLoginStatus.loggedIn:
           state = ThirdLoginResult.success;
-          break;
         case TwitterLoginStatus.cancelledByUser:
           state = ThirdLoginResult.cancelled;
-          break;
         case TwitterLoginStatus.error:
           state = ThirdLoginResult.error;
-          break;
       }
     } on Exception catch (_) {
       state = ThirdLoginResult.error;
