@@ -21,11 +21,11 @@ class MechanismLoginView extends HookConsumerWidget {
       if (next.isSuccess) {
         context.go('/home');
       } else if (next.isError) {
-        if (next.mechanismType == MechanismType.azure) {
-          CustomMessage.show(context, localization.azureLoginError);
-        } else if (next.mechanismType == MechanismType.auth0) {
-          CustomMessage.show(context, localization.auth0LoginError);
-        }
+        final message = switch (next.mechanismType) {
+          MechanismType.azure => localization.azureLoginError,
+          MechanismType.auth0 => localization.auth0LoginError,
+        };
+        CustomMessage.show(context, message);
       }
     });
 

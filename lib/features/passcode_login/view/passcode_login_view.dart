@@ -49,11 +49,11 @@ class PasscodeLoginView extends HookConsumerWidget {
               );
         }
       } else if (next.isError) {
-        if (next.phaseError == PasscodeLoginPhase.passcode) {
-          CustomMessage.show(context, localization.passcodeIncorrect);
-        } else if (next.phaseError == PasscodeLoginPhase.phone) {
-          CustomMessage.show(context, localization.phoneNumberIncorrect);
-        }
+        final message = switch (next.phaseError) {
+          PasscodeLoginPhase.passcode => localization.passcodeIncorrect,
+          PasscodeLoginPhase.phone => localization.phoneNumberIncorrect,
+        };
+        CustomMessage.show(context, message);
       }
     });
 

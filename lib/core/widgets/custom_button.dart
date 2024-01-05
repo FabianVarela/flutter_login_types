@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum IconDirection {
-  right,
-  left,
-}
+enum IconDirection { right, left }
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
