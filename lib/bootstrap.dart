@@ -24,14 +24,7 @@ Future<void> bootstrap(
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
 
-  await SystemChrome.setPreferredOrientations(
-    <DeviceOrientation>[DeviceOrientation.portraitUp],
-  );
-
   final overrides = <Override>[
-    sharedPreferencesProvider.overrideWithValue(
-      await SharedPreferences.getInstance(),
-    ),
     localAuthenticationProvider.overrideWith(
       (ref) => ref.watch(appProvider.localAuthentication),
     ),
@@ -61,8 +54,21 @@ Future<void> bootstrap(
   await runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
+
+      await SystemChrome.setPreferredOrientations(
+        <DeviceOrientation>[DeviceOrientation.portraitUp],
+      );
+
       runApp(
-        ProviderScope(overrides: overrides, child: await builder()),
+        ProviderScope(
+          overrides: [
+            sharedPreferencesProvider.overrideWithValue(
+              await SharedPreferences.getInstance(),
+            ),
+            ...overrides,
+          ],
+          child: await builder(),
+        ),
       );
     },
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
