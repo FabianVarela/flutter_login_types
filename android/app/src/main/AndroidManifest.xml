@@ -8,14 +8,17 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
+        android:enableOnBackInvokedCallback="true"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:label="Flutter Login Types"
         android:showWhenLocked="true"
-        android:turnScreenOn="true">
+        android:turnScreenOn="true"
+        tools:targetApi="tiramisu">
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:enableOnBackInvokedCallback="true"
             android:exported="true"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"
