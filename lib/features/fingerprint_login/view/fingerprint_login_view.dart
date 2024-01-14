@@ -25,11 +25,7 @@ class FingerPrintLoginView extends HookConsumerWidget {
     });
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.black,
-      ),
+      appBar: AppBar(),
       backgroundColor: CustomColors.white,
       extendBodyBehindAppBar: true,
       body: Padding(

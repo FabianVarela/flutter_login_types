@@ -32,11 +32,7 @@ class SimpleLoginView extends ConsumerWidget {
     return Stack(
       children: <Widget>[
         Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            foregroundColor: Colors.black,
-          ),
+          appBar: AppBar(),
           extendBodyBehindAppBar: true,
           resizeToAvoidBottomInset: true,
           backgroundColor: CustomColors.white,

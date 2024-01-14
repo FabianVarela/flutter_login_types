@@ -13,9 +13,6 @@ class LoginOptionsView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.black,
         title: Text(
           localization.signInOptionText,
           textAlign: TextAlign.center,

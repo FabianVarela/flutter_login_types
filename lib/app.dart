@@ -28,6 +28,11 @@ class LoginApp extends HookConsumerWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
         textTheme: GoogleFonts.notoSansTextTheme(Theme.of(context).textTheme),
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          foregroundColor: Colors.black,
+        ),
       ),
       locale: language,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
