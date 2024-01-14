@@ -88,8 +88,8 @@ and [this link for iOS](https://facebook.meedu.app/docs/5.x.x/ios)*</font>
   --dart-define TWITTER_REDIRECT_URI=<YOUR_TWITTER_REDIRECT_URI>
   ```
 
-<font size="3">*These values you must get on the [Twitter Developer](https://developer.twitter.com). Also, you can
-follow [this link](https://pub.dev/packages/twitter_login#twitter-configuration)*</font>
+<font size="3">*These values you must get on the [Twitter Developer](https://developer.twitter.com) or your
+apps [here](https://developer.twitter.com/en/apps/). Also, you can follow [this link](https://pub.dev/packages/twitter_login#twitter-configuration)*</font>
 
 ------
 
