@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_types/features/fingerprint_login/view/fingerprint_login_view.dart';
 import 'package:flutter_login_types/features/home/view/home_view.dart';
@@ -59,6 +60,7 @@ final appRouter = GoRouter(
       },
     ),
   ],
+  debugLogDiagnostics: kDebugMode,
 );
 
 Page<dynamic> _setPageRoute(LocalKey pageKey, Widget child) {
