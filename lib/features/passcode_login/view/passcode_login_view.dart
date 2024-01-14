@@ -57,19 +57,13 @@ class PasscodeLoginView extends HookConsumerWidget {
       }
     });
 
-    return WillPopScope(
-      onWillPop: () async {
-        if (pageValue.value == 0) return true;
-
-        pageValue.value = 0;
-        return false;
+    return PopScope(
+      canPop: pageValue.value == 0,
+      onPopInvoked: (didPop) {
+        if (!didPop) pageValue.value = 0;
       },
       child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          foregroundColor: Colors.black,
-        ),
+        appBar: AppBar(),
         extendBodyBehindAppBar: true,
         resizeToAvoidBottomInset: true,
         backgroundColor: CustomColors.white,
