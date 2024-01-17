@@ -44,14 +44,33 @@ enabling user/password, third logins, etc.
 
 ## Setting Third logins
 
+### Setting `dart-define` file
+
+Before to start, you must create a `JSON` file to set the dart-define variables. Create the JSON file
+with the name `config-keys.json` on the project's root.
+
+```json5
+{
+  // Set your key-values here
+}
+```
+
+* You must set the json file in the *Dart Define command*, setting in the additional run arguments below
+  ```
+  --dart-define-from-file=config-keys.json
+  ```
+
 #### Setting Google sign in
 
 * If you want to set the GoogleServices files
   follow [this link](https://pub.dev/packages/google_sign_in#platform-integration)
 * If not, you must set the **Google client id** on the *Info.plist file*. Also, set the *Dart Define command* setting
   the additional run arguments below
-  ```
-  --dart-define GOOGLE_CLIENT_ID=<YOUR_GOOGLE_CLIENT_ID>
+  ```json5
+  {
+    "GOOGLE_CLIENT_ID": "<YOUR_GOOGLE_CLIENT_ID>",
+    // More keys here...
+  }
   ```
 
 <font size="3">*These values you must get on
@@ -61,9 +80,13 @@ the [Google Console](https://console.cloud.google.com/apis/dashboard?project=to-
 
 * You must set the **Apple client id** and the **redirect url** as the *Dart Define command* setting the additional run
   arguments below
-  ```
-  --dart-define APPLE_CLIENT_ID=<YOUR_APPLE_CLIENT_ID>
-  --dart-define APPLE_REDIRECT_URI=<YOUR_APPLE_REDIRECT_URI>
+  ```json5
+  {
+    // keys already exists...
+    "APPLE_CLIENT_ID": "<YOUR_APPLE_CLIENT_ID>",
+    "APPLE_REDIRECT_URI": "<YOUR_APPLE_REDIRECT_URI>"
+    // More keys here...
+  }
   ```
 
 <font size="3">*These values you must get on the [Apple Developer Portal](https://developer.apple.com). Also, you can
@@ -82,14 +105,19 @@ and [this link for iOS](https://facebook.meedu.app/docs/5.x.x/ios)*</font>
 
 * You must set the **Twitter api key**, **Twitter api secret** and the **redirect url** in the *Dart Define command*
   setting the additional run arguments below
-  ```
-  --dart-define TWITTER_API_KEY=<YOUR_TWITTER_API_KEY>
-  --dart-define TWITTER_API_SECRET=<YOUR_TWITTER_API_SECRET>
-  --dart-define TWITTER_REDIRECT_URI=<YOUR_TWITTER_REDIRECT_URI>
+  ```json5
+  {
+    // keys already exists...
+    "TWITTER_API_KEY": "<YOUR_TWITTER_API_KEY>",
+    "TWITTER_API_SECRET": "<YOUR_TWITTER_API_SECRET>",
+    "TWITTER_REDIRECT_URI": "<YOUR_TWITTER_REDIRECT_URI>"
+    // More keys here...
+  }
   ```
 
 <font size="3">*These values you must get on the [Twitter Developer](https://developer.twitter.com) or your
-apps [here](https://developer.twitter.com/en/apps/). Also, you can follow [this link](https://pub.dev/packages/twitter_login#twitter-configuration)*</font>
+apps [here](https://developer.twitter.com/en/apps/). Also, you can
+follow [this link](https://pub.dev/packages/twitter_login#twitter-configuration)*</font>
 
 ------
 
@@ -99,12 +127,14 @@ apps [here](https://developer.twitter.com/en/apps/). Also, you can follow [this 
 
 * You must set the Azure **tenant name**, **tenant id**, **policy name**, **client id** and the **redirect url** in the
   *Dart Define command* setting the additional run arguments below
-  ```
-  --dart-define AZURE_TENANT_NAME=<YOUR_AZURE_TENANT_NAME>
-  --dart-define AZURE_TENANT_ID=<YOUR_AZURE_TENANT_ID>
-  --dart-define AZURE_POLICY_NAME=<YOUR_AZURE_POLICY_NAME>
-  --dart-define AZURE_CLIENT_ID=<YOUR_AZURE_CLIENT_ID>
-  --dart-define AZURE_REDIRECT_URL=<YOUR_AZURE_REDIRECT_URL>
+  ```json5
+  {
+    "AZURE_TENANT_NAME": "<YOUR_AZURE_TENANT_NAME>",
+    "AZURE_TENANT_ID": "<YOUR_AZURE_TENANT_ID>",
+    "AZURE_POLICY_NAME": "<YOUR_AZURE_POLICY_NAME>",
+    "AZURE_CLIENT_ID": "<YOUR_AZURE_CLIENT_ID>",
+    "AZURE_REDIRECT_URL": "<YOUR_AZURE_REDIRECT_URL>"
+  }
   ```
 
 <font size="3">To get these values, you must follow these links:
@@ -117,9 +147,12 @@ apps [here](https://developer.twitter.com/en/apps/). Also, you can follow [this 
 
 * You must set the Auth0 **domain** and **client id** in the *Dart Define command* setting the additional run arguments
   below
-  ```
-  --dart-define AUTH0_DOMAIN=<YOUR_AUTH0_DOMAIN>
-  --dart-define AUTH0_CLIENT_ID=<YOUR_AUTH0_CLIENT_ID>
+  ```json5
+  {
+    // keys already exists...
+    "AUTH0_DOMAIN": "<YOUR_AUTH0_DOMAIN>",
+    "AUTH0_CLIENT_ID": "<YOUR_AUTH0_CLIENT_ID>"
+  }
   ```
 
 <font size="3">You can follow this link to guide:
