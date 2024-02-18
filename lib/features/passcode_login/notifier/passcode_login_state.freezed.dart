@@ -12,7 +12,7 @@ part of 'passcode_login_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PasscodeLoginState {
@@ -87,27 +87,28 @@ class _$PasscodeLoginStateCopyWithImpl<$Res, $Val extends PasscodeLoginState>
 }
 
 /// @nodoc
-abstract class _$$_PasscodeLoginStateInitialCopyWith<$Res> {
-  factory _$$_PasscodeLoginStateInitialCopyWith(
-          _$_PasscodeLoginStateInitial value,
-          $Res Function(_$_PasscodeLoginStateInitial) then) =
-      __$$_PasscodeLoginStateInitialCopyWithImpl<$Res>;
+abstract class _$$PasscodeLoginStateInitialImplCopyWith<$Res> {
+  factory _$$PasscodeLoginStateInitialImplCopyWith(
+          _$PasscodeLoginStateInitialImpl value,
+          $Res Function(_$PasscodeLoginStateInitialImpl) then) =
+      __$$PasscodeLoginStateInitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_PasscodeLoginStateInitialCopyWithImpl<$Res>
-    extends _$PasscodeLoginStateCopyWithImpl<$Res, _$_PasscodeLoginStateInitial>
-    implements _$$_PasscodeLoginStateInitialCopyWith<$Res> {
-  __$$_PasscodeLoginStateInitialCopyWithImpl(
-      _$_PasscodeLoginStateInitial _value,
-      $Res Function(_$_PasscodeLoginStateInitial) _then)
+class __$$PasscodeLoginStateInitialImplCopyWithImpl<$Res>
+    extends _$PasscodeLoginStateCopyWithImpl<$Res,
+        _$PasscodeLoginStateInitialImpl>
+    implements _$$PasscodeLoginStateInitialImplCopyWith<$Res> {
+  __$$PasscodeLoginStateInitialImplCopyWithImpl(
+      _$PasscodeLoginStateInitialImpl _value,
+      $Res Function(_$PasscodeLoginStateInitialImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_PasscodeLoginStateInitial implements _PasscodeLoginStateInitial {
-  const _$_PasscodeLoginStateInitial();
+class _$PasscodeLoginStateInitialImpl implements _PasscodeLoginStateInitial {
+  const _$PasscodeLoginStateInitialImpl();
 
   @override
   String toString() {
@@ -115,10 +116,10 @@ class _$_PasscodeLoginStateInitial implements _PasscodeLoginStateInitial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PasscodeLoginStateInitial);
+            other is _$PasscodeLoginStateInitialImpl);
   }
 
   @override
@@ -200,31 +201,32 @@ class _$_PasscodeLoginStateInitial implements _PasscodeLoginStateInitial {
 }
 
 abstract class _PasscodeLoginStateInitial implements PasscodeLoginState {
-  const factory _PasscodeLoginStateInitial() = _$_PasscodeLoginStateInitial;
+  const factory _PasscodeLoginStateInitial() = _$PasscodeLoginStateInitialImpl;
 }
 
 /// @nodoc
-abstract class _$$_PasscodeLoginStateLoadingCopyWith<$Res> {
-  factory _$$_PasscodeLoginStateLoadingCopyWith(
-          _$_PasscodeLoginStateLoading value,
-          $Res Function(_$_PasscodeLoginStateLoading) then) =
-      __$$_PasscodeLoginStateLoadingCopyWithImpl<$Res>;
+abstract class _$$PasscodeLoginStateLoadingImplCopyWith<$Res> {
+  factory _$$PasscodeLoginStateLoadingImplCopyWith(
+          _$PasscodeLoginStateLoadingImpl value,
+          $Res Function(_$PasscodeLoginStateLoadingImpl) then) =
+      __$$PasscodeLoginStateLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_PasscodeLoginStateLoadingCopyWithImpl<$Res>
-    extends _$PasscodeLoginStateCopyWithImpl<$Res, _$_PasscodeLoginStateLoading>
-    implements _$$_PasscodeLoginStateLoadingCopyWith<$Res> {
-  __$$_PasscodeLoginStateLoadingCopyWithImpl(
-      _$_PasscodeLoginStateLoading _value,
-      $Res Function(_$_PasscodeLoginStateLoading) _then)
+class __$$PasscodeLoginStateLoadingImplCopyWithImpl<$Res>
+    extends _$PasscodeLoginStateCopyWithImpl<$Res,
+        _$PasscodeLoginStateLoadingImpl>
+    implements _$$PasscodeLoginStateLoadingImplCopyWith<$Res> {
+  __$$PasscodeLoginStateLoadingImplCopyWithImpl(
+      _$PasscodeLoginStateLoadingImpl _value,
+      $Res Function(_$PasscodeLoginStateLoadingImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_PasscodeLoginStateLoading implements _PasscodeLoginStateLoading {
-  const _$_PasscodeLoginStateLoading();
+class _$PasscodeLoginStateLoadingImpl implements _PasscodeLoginStateLoading {
+  const _$PasscodeLoginStateLoadingImpl();
 
   @override
   String toString() {
@@ -232,10 +234,10 @@ class _$_PasscodeLoginStateLoading implements _PasscodeLoginStateLoading {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PasscodeLoginStateLoading);
+            other is _$PasscodeLoginStateLoadingImpl);
   }
 
   @override
@@ -317,26 +319,27 @@ class _$_PasscodeLoginStateLoading implements _PasscodeLoginStateLoading {
 }
 
 abstract class _PasscodeLoginStateLoading implements PasscodeLoginState {
-  const factory _PasscodeLoginStateLoading() = _$_PasscodeLoginStateLoading;
+  const factory _PasscodeLoginStateLoading() = _$PasscodeLoginStateLoadingImpl;
 }
 
 /// @nodoc
-abstract class _$$_PasscodeLoginStateSuccessCopyWith<$Res> {
-  factory _$$_PasscodeLoginStateSuccessCopyWith(
-          _$_PasscodeLoginStateSuccess value,
-          $Res Function(_$_PasscodeLoginStateSuccess) then) =
-      __$$_PasscodeLoginStateSuccessCopyWithImpl<$Res>;
+abstract class _$$PasscodeLoginStateSuccessImplCopyWith<$Res> {
+  factory _$$PasscodeLoginStateSuccessImplCopyWith(
+          _$PasscodeLoginStateSuccessImpl value,
+          $Res Function(_$PasscodeLoginStateSuccessImpl) then) =
+      __$$PasscodeLoginStateSuccessImplCopyWithImpl<$Res>;
   @useResult
   $Res call({PasscodeLoginPhase phase});
 }
 
 /// @nodoc
-class __$$_PasscodeLoginStateSuccessCopyWithImpl<$Res>
-    extends _$PasscodeLoginStateCopyWithImpl<$Res, _$_PasscodeLoginStateSuccess>
-    implements _$$_PasscodeLoginStateSuccessCopyWith<$Res> {
-  __$$_PasscodeLoginStateSuccessCopyWithImpl(
-      _$_PasscodeLoginStateSuccess _value,
-      $Res Function(_$_PasscodeLoginStateSuccess) _then)
+class __$$PasscodeLoginStateSuccessImplCopyWithImpl<$Res>
+    extends _$PasscodeLoginStateCopyWithImpl<$Res,
+        _$PasscodeLoginStateSuccessImpl>
+    implements _$$PasscodeLoginStateSuccessImplCopyWith<$Res> {
+  __$$PasscodeLoginStateSuccessImplCopyWithImpl(
+      _$PasscodeLoginStateSuccessImpl _value,
+      $Res Function(_$PasscodeLoginStateSuccessImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -344,7 +347,7 @@ class __$$_PasscodeLoginStateSuccessCopyWithImpl<$Res>
   $Res call({
     Object? phase = null,
   }) {
-    return _then(_$_PasscodeLoginStateSuccess(
+    return _then(_$PasscodeLoginStateSuccessImpl(
       phase: null == phase
           ? _value.phase
           : phase // ignore: cast_nullable_to_non_nullable
@@ -355,8 +358,8 @@ class __$$_PasscodeLoginStateSuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PasscodeLoginStateSuccess implements _PasscodeLoginStateSuccess {
-  const _$_PasscodeLoginStateSuccess({required this.phase});
+class _$PasscodeLoginStateSuccessImpl implements _PasscodeLoginStateSuccess {
+  const _$PasscodeLoginStateSuccessImpl({required this.phase});
 
   @override
   final PasscodeLoginPhase phase;
@@ -367,10 +370,10 @@ class _$_PasscodeLoginStateSuccess implements _PasscodeLoginStateSuccess {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PasscodeLoginStateSuccess &&
+            other is _$PasscodeLoginStateSuccessImpl &&
             (identical(other.phase, phase) || other.phase == phase));
   }
 
@@ -380,9 +383,9 @@ class _$_PasscodeLoginStateSuccess implements _PasscodeLoginStateSuccess {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PasscodeLoginStateSuccessCopyWith<_$_PasscodeLoginStateSuccess>
-      get copyWith => __$$_PasscodeLoginStateSuccessCopyWithImpl<
-          _$_PasscodeLoginStateSuccess>(this, _$identity);
+  _$$PasscodeLoginStateSuccessImplCopyWith<_$PasscodeLoginStateSuccessImpl>
+      get copyWith => __$$PasscodeLoginStateSuccessImplCopyWithImpl<
+          _$PasscodeLoginStateSuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -461,29 +464,33 @@ class _$_PasscodeLoginStateSuccess implements _PasscodeLoginStateSuccess {
 
 abstract class _PasscodeLoginStateSuccess implements PasscodeLoginState {
   const factory _PasscodeLoginStateSuccess(
-      {required final PasscodeLoginPhase phase}) = _$_PasscodeLoginStateSuccess;
+          {required final PasscodeLoginPhase phase}) =
+      _$PasscodeLoginStateSuccessImpl;
 
   PasscodeLoginPhase get phase;
   @JsonKey(ignore: true)
-  _$$_PasscodeLoginStateSuccessCopyWith<_$_PasscodeLoginStateSuccess>
+  _$$PasscodeLoginStateSuccessImplCopyWith<_$PasscodeLoginStateSuccessImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_PasscodeLoginStateErrorCopyWith<$Res> {
-  factory _$$_PasscodeLoginStateErrorCopyWith(_$_PasscodeLoginStateError value,
-          $Res Function(_$_PasscodeLoginStateError) then) =
-      __$$_PasscodeLoginStateErrorCopyWithImpl<$Res>;
+abstract class _$$PasscodeLoginStateErrorImplCopyWith<$Res> {
+  factory _$$PasscodeLoginStateErrorImplCopyWith(
+          _$PasscodeLoginStateErrorImpl value,
+          $Res Function(_$PasscodeLoginStateErrorImpl) then) =
+      __$$PasscodeLoginStateErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({PasscodeLoginPhase phase});
 }
 
 /// @nodoc
-class __$$_PasscodeLoginStateErrorCopyWithImpl<$Res>
-    extends _$PasscodeLoginStateCopyWithImpl<$Res, _$_PasscodeLoginStateError>
-    implements _$$_PasscodeLoginStateErrorCopyWith<$Res> {
-  __$$_PasscodeLoginStateErrorCopyWithImpl(_$_PasscodeLoginStateError _value,
-      $Res Function(_$_PasscodeLoginStateError) _then)
+class __$$PasscodeLoginStateErrorImplCopyWithImpl<$Res>
+    extends _$PasscodeLoginStateCopyWithImpl<$Res,
+        _$PasscodeLoginStateErrorImpl>
+    implements _$$PasscodeLoginStateErrorImplCopyWith<$Res> {
+  __$$PasscodeLoginStateErrorImplCopyWithImpl(
+      _$PasscodeLoginStateErrorImpl _value,
+      $Res Function(_$PasscodeLoginStateErrorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -491,7 +498,7 @@ class __$$_PasscodeLoginStateErrorCopyWithImpl<$Res>
   $Res call({
     Object? phase = null,
   }) {
-    return _then(_$_PasscodeLoginStateError(
+    return _then(_$PasscodeLoginStateErrorImpl(
       phase: null == phase
           ? _value.phase
           : phase // ignore: cast_nullable_to_non_nullable
@@ -502,8 +509,8 @@ class __$$_PasscodeLoginStateErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PasscodeLoginStateError implements _PasscodeLoginStateError {
-  const _$_PasscodeLoginStateError({required this.phase});
+class _$PasscodeLoginStateErrorImpl implements _PasscodeLoginStateError {
+  const _$PasscodeLoginStateErrorImpl({required this.phase});
 
   @override
   final PasscodeLoginPhase phase;
@@ -514,10 +521,10 @@ class _$_PasscodeLoginStateError implements _PasscodeLoginStateError {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PasscodeLoginStateError &&
+            other is _$PasscodeLoginStateErrorImpl &&
             (identical(other.phase, phase) || other.phase == phase));
   }
 
@@ -527,10 +534,9 @@ class _$_PasscodeLoginStateError implements _PasscodeLoginStateError {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PasscodeLoginStateErrorCopyWith<_$_PasscodeLoginStateError>
-      get copyWith =>
-          __$$_PasscodeLoginStateErrorCopyWithImpl<_$_PasscodeLoginStateError>(
-              this, _$identity);
+  _$$PasscodeLoginStateErrorImplCopyWith<_$PasscodeLoginStateErrorImpl>
+      get copyWith => __$$PasscodeLoginStateErrorImplCopyWithImpl<
+          _$PasscodeLoginStateErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -609,10 +615,11 @@ class _$_PasscodeLoginStateError implements _PasscodeLoginStateError {
 
 abstract class _PasscodeLoginStateError implements PasscodeLoginState {
   const factory _PasscodeLoginStateError(
-      {required final PasscodeLoginPhase phase}) = _$_PasscodeLoginStateError;
+          {required final PasscodeLoginPhase phase}) =
+      _$PasscodeLoginStateErrorImpl;
 
   PasscodeLoginPhase get phase;
   @JsonKey(ignore: true)
-  _$$_PasscodeLoginStateErrorCopyWith<_$_PasscodeLoginStateError>
+  _$$PasscodeLoginStateErrorImplCopyWith<_$PasscodeLoginStateErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

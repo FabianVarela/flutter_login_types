@@ -12,7 +12,7 @@ part of 'simple_login_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SimpleLoginState {
@@ -87,25 +87,27 @@ class _$SimpleLoginStateCopyWithImpl<$Res, $Val extends SimpleLoginState>
 }
 
 /// @nodoc
-abstract class _$$_SimpleLoginStateIntialCopyWith<$Res> {
-  factory _$$_SimpleLoginStateIntialCopyWith(_$_SimpleLoginStateIntial value,
-          $Res Function(_$_SimpleLoginStateIntial) then) =
-      __$$_SimpleLoginStateIntialCopyWithImpl<$Res>;
+abstract class _$$SimpleLoginStateIntialImplCopyWith<$Res> {
+  factory _$$SimpleLoginStateIntialImplCopyWith(
+          _$SimpleLoginStateIntialImpl value,
+          $Res Function(_$SimpleLoginStateIntialImpl) then) =
+      __$$SimpleLoginStateIntialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_SimpleLoginStateIntialCopyWithImpl<$Res>
-    extends _$SimpleLoginStateCopyWithImpl<$Res, _$_SimpleLoginStateIntial>
-    implements _$$_SimpleLoginStateIntialCopyWith<$Res> {
-  __$$_SimpleLoginStateIntialCopyWithImpl(_$_SimpleLoginStateIntial _value,
-      $Res Function(_$_SimpleLoginStateIntial) _then)
+class __$$SimpleLoginStateIntialImplCopyWithImpl<$Res>
+    extends _$SimpleLoginStateCopyWithImpl<$Res, _$SimpleLoginStateIntialImpl>
+    implements _$$SimpleLoginStateIntialImplCopyWith<$Res> {
+  __$$SimpleLoginStateIntialImplCopyWithImpl(
+      _$SimpleLoginStateIntialImpl _value,
+      $Res Function(_$SimpleLoginStateIntialImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_SimpleLoginStateIntial implements _SimpleLoginStateIntial {
-  const _$_SimpleLoginStateIntial();
+class _$SimpleLoginStateIntialImpl implements _SimpleLoginStateIntial {
+  const _$SimpleLoginStateIntialImpl();
 
   @override
   String toString() {
@@ -113,10 +115,10 @@ class _$_SimpleLoginStateIntial implements _SimpleLoginStateIntial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SimpleLoginStateIntial);
+            other is _$SimpleLoginStateIntialImpl);
   }
 
   @override
@@ -198,29 +200,31 @@ class _$_SimpleLoginStateIntial implements _SimpleLoginStateIntial {
 }
 
 abstract class _SimpleLoginStateIntial implements SimpleLoginState {
-  const factory _SimpleLoginStateIntial() = _$_SimpleLoginStateIntial;
+  const factory _SimpleLoginStateIntial() = _$SimpleLoginStateIntialImpl;
 }
 
 /// @nodoc
-abstract class _$$_SimpleLoginStateLoadingCopyWith<$Res> {
-  factory _$$_SimpleLoginStateLoadingCopyWith(_$_SimpleLoginStateLoading value,
-          $Res Function(_$_SimpleLoginStateLoading) then) =
-      __$$_SimpleLoginStateLoadingCopyWithImpl<$Res>;
+abstract class _$$SimpleLoginStateLoadingImplCopyWith<$Res> {
+  factory _$$SimpleLoginStateLoadingImplCopyWith(
+          _$SimpleLoginStateLoadingImpl value,
+          $Res Function(_$SimpleLoginStateLoadingImpl) then) =
+      __$$SimpleLoginStateLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_SimpleLoginStateLoadingCopyWithImpl<$Res>
-    extends _$SimpleLoginStateCopyWithImpl<$Res, _$_SimpleLoginStateLoading>
-    implements _$$_SimpleLoginStateLoadingCopyWith<$Res> {
-  __$$_SimpleLoginStateLoadingCopyWithImpl(_$_SimpleLoginStateLoading _value,
-      $Res Function(_$_SimpleLoginStateLoading) _then)
+class __$$SimpleLoginStateLoadingImplCopyWithImpl<$Res>
+    extends _$SimpleLoginStateCopyWithImpl<$Res, _$SimpleLoginStateLoadingImpl>
+    implements _$$SimpleLoginStateLoadingImplCopyWith<$Res> {
+  __$$SimpleLoginStateLoadingImplCopyWithImpl(
+      _$SimpleLoginStateLoadingImpl _value,
+      $Res Function(_$SimpleLoginStateLoadingImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_SimpleLoginStateLoading implements _SimpleLoginStateLoading {
-  const _$_SimpleLoginStateLoading();
+class _$SimpleLoginStateLoadingImpl implements _SimpleLoginStateLoading {
+  const _$SimpleLoginStateLoadingImpl();
 
   @override
   String toString() {
@@ -228,10 +232,10 @@ class _$_SimpleLoginStateLoading implements _SimpleLoginStateLoading {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SimpleLoginStateLoading);
+            other is _$SimpleLoginStateLoadingImpl);
   }
 
   @override
@@ -313,29 +317,31 @@ class _$_SimpleLoginStateLoading implements _SimpleLoginStateLoading {
 }
 
 abstract class _SimpleLoginStateLoading implements SimpleLoginState {
-  const factory _SimpleLoginStateLoading() = _$_SimpleLoginStateLoading;
+  const factory _SimpleLoginStateLoading() = _$SimpleLoginStateLoadingImpl;
 }
 
 /// @nodoc
-abstract class _$$_SimpleLoginStateSuccessCopyWith<$Res> {
-  factory _$$_SimpleLoginStateSuccessCopyWith(_$_SimpleLoginStateSuccess value,
-          $Res Function(_$_SimpleLoginStateSuccess) then) =
-      __$$_SimpleLoginStateSuccessCopyWithImpl<$Res>;
+abstract class _$$SimpleLoginStateSuccessImplCopyWith<$Res> {
+  factory _$$SimpleLoginStateSuccessImplCopyWith(
+          _$SimpleLoginStateSuccessImpl value,
+          $Res Function(_$SimpleLoginStateSuccessImpl) then) =
+      __$$SimpleLoginStateSuccessImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_SimpleLoginStateSuccessCopyWithImpl<$Res>
-    extends _$SimpleLoginStateCopyWithImpl<$Res, _$_SimpleLoginStateSuccess>
-    implements _$$_SimpleLoginStateSuccessCopyWith<$Res> {
-  __$$_SimpleLoginStateSuccessCopyWithImpl(_$_SimpleLoginStateSuccess _value,
-      $Res Function(_$_SimpleLoginStateSuccess) _then)
+class __$$SimpleLoginStateSuccessImplCopyWithImpl<$Res>
+    extends _$SimpleLoginStateCopyWithImpl<$Res, _$SimpleLoginStateSuccessImpl>
+    implements _$$SimpleLoginStateSuccessImplCopyWith<$Res> {
+  __$$SimpleLoginStateSuccessImplCopyWithImpl(
+      _$SimpleLoginStateSuccessImpl _value,
+      $Res Function(_$SimpleLoginStateSuccessImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_SimpleLoginStateSuccess implements _SimpleLoginStateSuccess {
-  const _$_SimpleLoginStateSuccess();
+class _$SimpleLoginStateSuccessImpl implements _SimpleLoginStateSuccess {
+  const _$SimpleLoginStateSuccessImpl();
 
   @override
   String toString() {
@@ -343,10 +349,10 @@ class _$_SimpleLoginStateSuccess implements _SimpleLoginStateSuccess {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SimpleLoginStateSuccess);
+            other is _$SimpleLoginStateSuccessImpl);
   }
 
   @override
@@ -428,29 +434,30 @@ class _$_SimpleLoginStateSuccess implements _SimpleLoginStateSuccess {
 }
 
 abstract class _SimpleLoginStateSuccess implements SimpleLoginState {
-  const factory _SimpleLoginStateSuccess() = _$_SimpleLoginStateSuccess;
+  const factory _SimpleLoginStateSuccess() = _$SimpleLoginStateSuccessImpl;
 }
 
 /// @nodoc
-abstract class _$$_SimpleLoginStateErrorCopyWith<$Res> {
-  factory _$$_SimpleLoginStateErrorCopyWith(_$_SimpleLoginStateError value,
-          $Res Function(_$_SimpleLoginStateError) then) =
-      __$$_SimpleLoginStateErrorCopyWithImpl<$Res>;
+abstract class _$$SimpleLoginStateErrorImplCopyWith<$Res> {
+  factory _$$SimpleLoginStateErrorImplCopyWith(
+          _$SimpleLoginStateErrorImpl value,
+          $Res Function(_$SimpleLoginStateErrorImpl) then) =
+      __$$SimpleLoginStateErrorImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_SimpleLoginStateErrorCopyWithImpl<$Res>
-    extends _$SimpleLoginStateCopyWithImpl<$Res, _$_SimpleLoginStateError>
-    implements _$$_SimpleLoginStateErrorCopyWith<$Res> {
-  __$$_SimpleLoginStateErrorCopyWithImpl(_$_SimpleLoginStateError _value,
-      $Res Function(_$_SimpleLoginStateError) _then)
+class __$$SimpleLoginStateErrorImplCopyWithImpl<$Res>
+    extends _$SimpleLoginStateCopyWithImpl<$Res, _$SimpleLoginStateErrorImpl>
+    implements _$$SimpleLoginStateErrorImplCopyWith<$Res> {
+  __$$SimpleLoginStateErrorImplCopyWithImpl(_$SimpleLoginStateErrorImpl _value,
+      $Res Function(_$SimpleLoginStateErrorImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_SimpleLoginStateError implements _SimpleLoginStateError {
-  const _$_SimpleLoginStateError();
+class _$SimpleLoginStateErrorImpl implements _SimpleLoginStateError {
+  const _$SimpleLoginStateErrorImpl();
 
   @override
   String toString() {
@@ -458,9 +465,10 @@ class _$_SimpleLoginStateError implements _SimpleLoginStateError {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_SimpleLoginStateError);
+        (other.runtimeType == runtimeType &&
+            other is _$SimpleLoginStateErrorImpl);
   }
 
   @override
@@ -542,5 +550,5 @@ class _$_SimpleLoginStateError implements _SimpleLoginStateError {
 }
 
 abstract class _SimpleLoginStateError implements SimpleLoginState {
-  const factory _SimpleLoginStateError() = _$_SimpleLoginStateError;
+  const factory _SimpleLoginStateError() = _$SimpleLoginStateErrorImpl;
 }

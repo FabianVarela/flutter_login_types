@@ -12,7 +12,7 @@ part of 'mechanism_login_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MechanismLoginState {
@@ -87,28 +87,28 @@ class _$MechanismLoginStateCopyWithImpl<$Res, $Val extends MechanismLoginState>
 }
 
 /// @nodoc
-abstract class _$$_MechanismLoginStateInitialCopyWith<$Res> {
-  factory _$$_MechanismLoginStateInitialCopyWith(
-          _$_MechanismLoginStateInitial value,
-          $Res Function(_$_MechanismLoginStateInitial) then) =
-      __$$_MechanismLoginStateInitialCopyWithImpl<$Res>;
+abstract class _$$MechanismLoginStateInitialImplCopyWith<$Res> {
+  factory _$$MechanismLoginStateInitialImplCopyWith(
+          _$MechanismLoginStateInitialImpl value,
+          $Res Function(_$MechanismLoginStateInitialImpl) then) =
+      __$$MechanismLoginStateInitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_MechanismLoginStateInitialCopyWithImpl<$Res>
+class __$$MechanismLoginStateInitialImplCopyWithImpl<$Res>
     extends _$MechanismLoginStateCopyWithImpl<$Res,
-        _$_MechanismLoginStateInitial>
-    implements _$$_MechanismLoginStateInitialCopyWith<$Res> {
-  __$$_MechanismLoginStateInitialCopyWithImpl(
-      _$_MechanismLoginStateInitial _value,
-      $Res Function(_$_MechanismLoginStateInitial) _then)
+        _$MechanismLoginStateInitialImpl>
+    implements _$$MechanismLoginStateInitialImplCopyWith<$Res> {
+  __$$MechanismLoginStateInitialImplCopyWithImpl(
+      _$MechanismLoginStateInitialImpl _value,
+      $Res Function(_$MechanismLoginStateInitialImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_MechanismLoginStateInitial implements _MechanismLoginStateInitial {
-  const _$_MechanismLoginStateInitial();
+class _$MechanismLoginStateInitialImpl implements _MechanismLoginStateInitial {
+  const _$MechanismLoginStateInitialImpl();
 
   @override
   String toString() {
@@ -116,10 +116,10 @@ class _$_MechanismLoginStateInitial implements _MechanismLoginStateInitial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MechanismLoginStateInitial);
+            other is _$MechanismLoginStateInitialImpl);
   }
 
   @override
@@ -201,32 +201,33 @@ class _$_MechanismLoginStateInitial implements _MechanismLoginStateInitial {
 }
 
 abstract class _MechanismLoginStateInitial implements MechanismLoginState {
-  const factory _MechanismLoginStateInitial() = _$_MechanismLoginStateInitial;
+  const factory _MechanismLoginStateInitial() =
+      _$MechanismLoginStateInitialImpl;
 }
 
 /// @nodoc
-abstract class _$$_MechanismLoginStateLoadingCopyWith<$Res> {
-  factory _$$_MechanismLoginStateLoadingCopyWith(
-          _$_MechanismLoginStateLoading value,
-          $Res Function(_$_MechanismLoginStateLoading) then) =
-      __$$_MechanismLoginStateLoadingCopyWithImpl<$Res>;
+abstract class _$$MechanismLoginStateLoadingImplCopyWith<$Res> {
+  factory _$$MechanismLoginStateLoadingImplCopyWith(
+          _$MechanismLoginStateLoadingImpl value,
+          $Res Function(_$MechanismLoginStateLoadingImpl) then) =
+      __$$MechanismLoginStateLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_MechanismLoginStateLoadingCopyWithImpl<$Res>
+class __$$MechanismLoginStateLoadingImplCopyWithImpl<$Res>
     extends _$MechanismLoginStateCopyWithImpl<$Res,
-        _$_MechanismLoginStateLoading>
-    implements _$$_MechanismLoginStateLoadingCopyWith<$Res> {
-  __$$_MechanismLoginStateLoadingCopyWithImpl(
-      _$_MechanismLoginStateLoading _value,
-      $Res Function(_$_MechanismLoginStateLoading) _then)
+        _$MechanismLoginStateLoadingImpl>
+    implements _$$MechanismLoginStateLoadingImplCopyWith<$Res> {
+  __$$MechanismLoginStateLoadingImplCopyWithImpl(
+      _$MechanismLoginStateLoadingImpl _value,
+      $Res Function(_$MechanismLoginStateLoadingImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_MechanismLoginStateLoading implements _MechanismLoginStateLoading {
-  const _$_MechanismLoginStateLoading();
+class _$MechanismLoginStateLoadingImpl implements _MechanismLoginStateLoading {
+  const _$MechanismLoginStateLoadingImpl();
 
   @override
   String toString() {
@@ -234,10 +235,10 @@ class _$_MechanismLoginStateLoading implements _MechanismLoginStateLoading {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MechanismLoginStateLoading);
+            other is _$MechanismLoginStateLoadingImpl);
   }
 
   @override
@@ -319,32 +320,33 @@ class _$_MechanismLoginStateLoading implements _MechanismLoginStateLoading {
 }
 
 abstract class _MechanismLoginStateLoading implements MechanismLoginState {
-  const factory _MechanismLoginStateLoading() = _$_MechanismLoginStateLoading;
+  const factory _MechanismLoginStateLoading() =
+      _$MechanismLoginStateLoadingImpl;
 }
 
 /// @nodoc
-abstract class _$$_MechanismLoginStateSuccessCopyWith<$Res> {
-  factory _$$_MechanismLoginStateSuccessCopyWith(
-          _$_MechanismLoginStateSuccess value,
-          $Res Function(_$_MechanismLoginStateSuccess) then) =
-      __$$_MechanismLoginStateSuccessCopyWithImpl<$Res>;
+abstract class _$$MechanismLoginStateSuccessImplCopyWith<$Res> {
+  factory _$$MechanismLoginStateSuccessImplCopyWith(
+          _$MechanismLoginStateSuccessImpl value,
+          $Res Function(_$MechanismLoginStateSuccessImpl) then) =
+      __$$MechanismLoginStateSuccessImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_MechanismLoginStateSuccessCopyWithImpl<$Res>
+class __$$MechanismLoginStateSuccessImplCopyWithImpl<$Res>
     extends _$MechanismLoginStateCopyWithImpl<$Res,
-        _$_MechanismLoginStateSuccess>
-    implements _$$_MechanismLoginStateSuccessCopyWith<$Res> {
-  __$$_MechanismLoginStateSuccessCopyWithImpl(
-      _$_MechanismLoginStateSuccess _value,
-      $Res Function(_$_MechanismLoginStateSuccess) _then)
+        _$MechanismLoginStateSuccessImpl>
+    implements _$$MechanismLoginStateSuccessImplCopyWith<$Res> {
+  __$$MechanismLoginStateSuccessImplCopyWithImpl(
+      _$MechanismLoginStateSuccessImpl _value,
+      $Res Function(_$MechanismLoginStateSuccessImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_MechanismLoginStateSuccess implements _MechanismLoginStateSuccess {
-  const _$_MechanismLoginStateSuccess();
+class _$MechanismLoginStateSuccessImpl implements _MechanismLoginStateSuccess {
+  const _$MechanismLoginStateSuccessImpl();
 
   @override
   String toString() {
@@ -352,10 +354,10 @@ class _$_MechanismLoginStateSuccess implements _MechanismLoginStateSuccess {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MechanismLoginStateSuccess);
+            other is _$MechanismLoginStateSuccessImpl);
   }
 
   @override
@@ -437,25 +439,28 @@ class _$_MechanismLoginStateSuccess implements _MechanismLoginStateSuccess {
 }
 
 abstract class _MechanismLoginStateSuccess implements MechanismLoginState {
-  const factory _MechanismLoginStateSuccess() = _$_MechanismLoginStateSuccess;
+  const factory _MechanismLoginStateSuccess() =
+      _$MechanismLoginStateSuccessImpl;
 }
 
 /// @nodoc
-abstract class _$$_MechanismLoginStateErrorCopyWith<$Res> {
-  factory _$$_MechanismLoginStateErrorCopyWith(
-          _$_MechanismLoginStateError value,
-          $Res Function(_$_MechanismLoginStateError) then) =
-      __$$_MechanismLoginStateErrorCopyWithImpl<$Res>;
+abstract class _$$MechanismLoginStateErrorImplCopyWith<$Res> {
+  factory _$$MechanismLoginStateErrorImplCopyWith(
+          _$MechanismLoginStateErrorImpl value,
+          $Res Function(_$MechanismLoginStateErrorImpl) then) =
+      __$$MechanismLoginStateErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MechanismType type});
 }
 
 /// @nodoc
-class __$$_MechanismLoginStateErrorCopyWithImpl<$Res>
-    extends _$MechanismLoginStateCopyWithImpl<$Res, _$_MechanismLoginStateError>
-    implements _$$_MechanismLoginStateErrorCopyWith<$Res> {
-  __$$_MechanismLoginStateErrorCopyWithImpl(_$_MechanismLoginStateError _value,
-      $Res Function(_$_MechanismLoginStateError) _then)
+class __$$MechanismLoginStateErrorImplCopyWithImpl<$Res>
+    extends _$MechanismLoginStateCopyWithImpl<$Res,
+        _$MechanismLoginStateErrorImpl>
+    implements _$$MechanismLoginStateErrorImplCopyWith<$Res> {
+  __$$MechanismLoginStateErrorImplCopyWithImpl(
+      _$MechanismLoginStateErrorImpl _value,
+      $Res Function(_$MechanismLoginStateErrorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -463,7 +468,7 @@ class __$$_MechanismLoginStateErrorCopyWithImpl<$Res>
   $Res call({
     Object? type = null,
   }) {
-    return _then(_$_MechanismLoginStateError(
+    return _then(_$MechanismLoginStateErrorImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -474,8 +479,8 @@ class __$$_MechanismLoginStateErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MechanismLoginStateError implements _MechanismLoginStateError {
-  const _$_MechanismLoginStateError({required this.type});
+class _$MechanismLoginStateErrorImpl implements _MechanismLoginStateError {
+  const _$MechanismLoginStateErrorImpl({required this.type});
 
   @override
   final MechanismType type;
@@ -486,10 +491,10 @@ class _$_MechanismLoginStateError implements _MechanismLoginStateError {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MechanismLoginStateError &&
+            other is _$MechanismLoginStateErrorImpl &&
             (identical(other.type, type) || other.type == type));
   }
 
@@ -499,9 +504,9 @@ class _$_MechanismLoginStateError implements _MechanismLoginStateError {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MechanismLoginStateErrorCopyWith<_$_MechanismLoginStateError>
-      get copyWith => __$$_MechanismLoginStateErrorCopyWithImpl<
-          _$_MechanismLoginStateError>(this, _$identity);
+  _$$MechanismLoginStateErrorImplCopyWith<_$MechanismLoginStateErrorImpl>
+      get copyWith => __$$MechanismLoginStateErrorImplCopyWithImpl<
+          _$MechanismLoginStateErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -580,10 +585,10 @@ class _$_MechanismLoginStateError implements _MechanismLoginStateError {
 
 abstract class _MechanismLoginStateError implements MechanismLoginState {
   const factory _MechanismLoginStateError({required final MechanismType type}) =
-      _$_MechanismLoginStateError;
+      _$MechanismLoginStateErrorImpl;
 
   MechanismType get type;
   @JsonKey(ignore: true)
-  _$$_MechanismLoginStateErrorCopyWith<_$_MechanismLoginStateError>
+  _$$MechanismLoginStateErrorImplCopyWith<_$MechanismLoginStateErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
