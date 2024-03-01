@@ -7,7 +7,7 @@ class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height,
+      height: MediaQuery.sizeOf(context).height,
       color: Colors.grey.withOpacity(.7),
       child: const Center(
         child: CircularProgressIndicator(
