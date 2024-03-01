@@ -1,25 +1,27 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
-import 'package:flutter_login_types/core/repository/language_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class LanguageNotifier extends StateNotifier<Locale?> {
-  LanguageNotifier(this._repository, [super.state]);
-
-  final LanguageRepository _repository;
+class LanguageNotifier extends AutoDisposeAsyncNotifier<Locale?> {
+  @override
+  FutureOr<Locale?> build() => null;
 
   Future<void> getLanguage() async {
-    final language = await _repository.getLanguage();
-    if (language != null) state = Locale(language);
+    final language = await ref.read(languageRepositoryProvider).getLanguage();
+    if (language != null) state = AsyncValue.data(Locale(language));
   }
 
   Future<void> setLanguage(String language) async {
-    await _repository.setLanguage(language);
-    state = Locale(language);
+    state = await AsyncValue.guard(() async {
+      await ref.read(languageRepositoryProvider).setLanguage(language);
+      return Locale(language);
+    });
   }
 }
 
 final languageNotifierProvider =
-    StateNotifierProvider.autoDispose<LanguageNotifier, Locale?>(
-  (ref) => LanguageNotifier(ref.read(languageRepositoryProvider)),
+    AsyncNotifierProvider.autoDispose<LanguageNotifier, Locale?>(
+  LanguageNotifier.new,
 );
