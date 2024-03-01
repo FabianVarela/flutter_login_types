@@ -1,8 +1,9 @@
 import 'package:flutter_login_types/features/simple_login/forms/simple_login_form.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SimpleLoginFormNotifier extends StateNotifier<SimpleLoginForm> {
-  SimpleLoginFormNotifier([super.state = const SimpleLoginForm()]);
+class SimpleLoginFormNotifier extends AutoDisposeNotifier<SimpleLoginForm> {
+  @override
+  SimpleLoginForm build() => const SimpleLoginForm();
 
   void onChangeEmail(String value) {
     state = state.copyWith(emailInput: EmailInputText.dirty(value));
@@ -14,6 +15,6 @@ class SimpleLoginFormNotifier extends StateNotifier<SimpleLoginForm> {
 }
 
 final loginFormNotifierProvider =
-    StateNotifierProvider.autoDispose<SimpleLoginFormNotifier, SimpleLoginForm>(
-  (ref) => SimpleLoginFormNotifier(),
+    NotifierProvider.autoDispose<SimpleLoginFormNotifier, SimpleLoginForm>(
+  SimpleLoginFormNotifier.new,
 );
