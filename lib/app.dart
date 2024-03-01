@@ -12,7 +12,9 @@ class LoginApp extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final language = ref.watch(languageNotifierProvider);
+    final language = ref.watch(
+      languageNotifierProvider.select((value) => value.value),
+    );
 
     useEffect(
       () {

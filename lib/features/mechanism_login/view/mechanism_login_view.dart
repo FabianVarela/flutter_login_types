@@ -14,8 +14,10 @@ class MechanismLoginView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final language = ref.watch(languageNotifierProvider);
     final localization = context.localizations;
+    final language = ref.watch(
+      languageNotifierProvider.select((value) => value.value),
+    );
 
     ref.listen(mechanismLoginNotifierProvider, (_, next) {
       if (next.isSuccess) {

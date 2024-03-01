@@ -36,7 +36,9 @@ class _HomePageUIState extends ConsumerState<HomeView>
   @override
   Widget build(BuildContext context) {
     if (_notification != null) print('App status notification: $_notification');
-    final language = ref.watch(languageNotifierProvider);
+    final language = ref.watch(
+      languageNotifierProvider.select((value) => value.value),
+    );
 
     return Scaffold(
       appBar: AppBar(
