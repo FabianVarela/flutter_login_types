@@ -5,10 +5,9 @@ import 'package:flutter_login_types/core/widgets/custom_button.dart';
 import 'package:flutter_login_types/core/widgets/custom_message.dart';
 import 'package:flutter_login_types/core/widgets/custom_textfield.dart';
 import 'package:flutter_login_types/core/widgets/loading.dart';
-import 'package:flutter_login_types/features/simple_login/dependency.dart';
 import 'package:flutter_login_types/features/simple_login/forms/simple_login_form.dart';
 import 'package:flutter_login_types/features/simple_login/forms/simple_login_form_notifier.dart';
-import 'package:flutter_login_types/features/simple_login/notifier/simple_login_state.dart';
+import 'package:flutter_login_types/features/simple_login/notifier/simple_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -21,12 +20,16 @@ class SimpleLoginView extends ConsumerWidget {
     final localization = context.localizations;
     final loginState = ref.watch(simpleLoginNotifierProvider);
 
-    ref.listen(simpleLoginNotifierProvider, (_, next) {
-      if (next.isSuccess) {
-        context.go('/home');
-      } else if (next.isError) {
-        CustomMessage.show(context, localization.userPasswordIncorrectMessage);
-      }
+    ref.listen(simpleLoginNotifierProvider, (_, state) {
+      state.whenOrNull(
+        data: (data) {
+          if (data != null && data) context.go('/home');
+        },
+        error: (_, __) => CustomMessage.show(
+          context,
+          localization.userPasswordIncorrectMessage,
+        ),
+      );
     });
 
     return Stack(
