@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:flutter_login_types/core/repository/language_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -17,3 +18,8 @@ class LanguageNotifier extends StateNotifier<Locale?> {
     state = Locale(language);
   }
 }
+
+final languageNotifierProvider =
+    StateNotifierProvider.autoDispose<LanguageNotifier, Locale?>(
+  (ref) => LanguageNotifier(ref.read(languageRepositoryProvider)),
+);
