@@ -30,8 +30,8 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
-		    <key>CFBundleTypeRole</key>
-		    <string>Editor</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb{your-app-id}</string>
@@ -39,7 +39,7 @@
 				<string>{your-twitter-callback-url}</string>
 				<string>{your-app-auth-scheme}</string>
                 <!--Apply for Auth0-->
-                <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+				<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 			</array>
 		</dict>
 	</array>
@@ -62,6 +62,8 @@
 	<true/>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Why is my app authenticating using face id?</string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -81,7 +83,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-    <key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
 </dict>
 </plist>
