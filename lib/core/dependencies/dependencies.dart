@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_login_types/core/client/login_client.dart';
 import 'package:flutter_login_types/core/client/preferences.dart';
-import 'package:flutter_login_types/core/notifiers/language_notifier.dart';
 import 'package:flutter_login_types/core/repository/language_repository.dart';
 import 'package:flutter_login_types/core/repository/login_repository.dart';
 import 'package:flutter_login_types/core/services/notification_service.dart';
@@ -48,8 +46,3 @@ final loginRepositoryProvider = Provider<LoginRepository>((_) {
 final notificationServiceProvider = Provider<NotificationService>((_) {
   throw UnimplementedError('You must implement NotificationService provider');
 });
-
-final languageNotifierProvider =
-    StateNotifierProvider.autoDispose<LanguageNotifier, Locale?>(
-  (ref) => LanguageNotifier(ref.read(languageRepositoryProvider)),
-);

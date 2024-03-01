@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_types/core/dependencies/dependencies.dart';
+import 'package:flutter_login_types/core/notifiers/language_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
