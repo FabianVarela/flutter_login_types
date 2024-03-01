@@ -13,36 +13,34 @@ final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
   throw UnimplementedError('You must implement SharedPreferences provider');
 });
 
-final localAuthenticationProvider = Provider<LocalAuthentication>((ref) {
-  throw UnimplementedError('You must implement LocalAuthentication provider');
-});
+final localAuthenticationProvider = Provider<LocalAuthentication>(
+  (_) => LocalAuthentication(),
+);
 
-final preferencesProvider = Provider<Preferences>((_) {
-  throw UnimplementedError('You must implement Preferences provider');
-});
+final preferencesProvider = Provider<Preferences>(
+  (ref) => Preferences(ref.watch(sharedPreferencesProvider)),
+);
 
 final localNotificationsProvider = Provider<FlutterLocalNotificationsPlugin>(
-  (_) => throw UnimplementedError(
-    'You must implement FlutterLocalNotificationsPlugin provider',
-  ),
+  (_) => FlutterLocalNotificationsPlugin(),
 );
 
 final appAuthProvider = Provider<FlutterAppAuth>(
-  (_) => throw UnimplementedError('You must implement FlutterAppAuth provider'),
+  (_) => const FlutterAppAuth(),
 );
 
-final loginClientProvider = Provider<LoginClient>((_) {
-  throw UnimplementedError('You must implement LoginClient provider');
-});
+final loginClientProvider = Provider<LoginClient>(
+  (ref) => LoginClient(ref.watch(appAuthProvider)),
+);
 
-final languageRepositoryProvider = Provider<LanguageRepository>((_) {
-  throw UnimplementedError('You must implement LanguageRepository provider');
-});
+final languageRepositoryProvider = Provider<LanguageRepository>(
+  (ref) => LanguageRepository(ref.watch(preferencesProvider)),
+);
 
-final loginRepositoryProvider = Provider<LoginRepository>((_) {
-  throw UnimplementedError('You must implement LoginRepository provider');
-});
+final loginRepositoryProvider = Provider<LoginRepository>(
+  (ref) => LoginRepository(ref.watch(loginClientProvider)),
+);
 
-final notificationServiceProvider = Provider<NotificationService>((_) {
-  throw UnimplementedError('You must implement NotificationService provider');
-});
+final notificationServiceProvider = Provider<NotificationService>(
+  (ref) => NotificationService(ref.watch(localNotificationsProvider)),
+);
