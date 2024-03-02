@@ -1,4 +1,5 @@
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:flutter_login_types/core/repository/login_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -75,3 +76,8 @@ class ThirdLoginNotifier extends StateNotifier<ThirdLoginResult> {
     }
   }
 }
+
+final thirdLoginNotifierProvider =
+    StateNotifierProvider.autoDispose<ThirdLoginNotifier, ThirdLoginResult>(
+  (ref) => ThirdLoginNotifier(ref.watch(loginRepositoryProvider)),
+);
