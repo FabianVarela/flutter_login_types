@@ -64,8 +64,8 @@ with the name `config-keys.json` on the project's root.
 
 * If you want to set the GoogleServices files
   follow [this link](https://pub.dev/packages/google_sign_in#platform-integration)
-* If not, you must set the **Google client id** on the *Info.plist file*. Also, set the *Dart Define command* setting
-  the additional run arguments below
+* If not, you must set the **Google client id** (as reverse mode) on the *Info.plist file*. Also, set the *Dart Define
+  command* setting the additional run arguments below
   ```json5
   {
     "GOOGLE_CLIENT_ID": "<YOUR_GOOGLE_CLIENT_ID>",
