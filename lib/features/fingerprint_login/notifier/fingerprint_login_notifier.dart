@@ -38,3 +38,8 @@ class LocalAuthNotifier extends StateNotifier<LocalAuthOption> {
     }
   }
 }
+
+final localAuthNotifierProvider =
+    StateNotifierProvider.autoDispose<LocalAuthNotifier, LocalAuthOption>(
+  (ref) => LocalAuthNotifier(ref.watch(localAuthenticationProvider)),
+);
