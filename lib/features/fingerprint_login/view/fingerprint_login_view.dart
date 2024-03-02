@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
 import 'package:flutter_login_types/core/widgets/custom_message.dart';
+import 'package:flutter_login_types/core/widgets/loading.dart';
 import 'package:flutter_login_types/features/fingerprint_login/notifier/fingerprint_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:go_router/go_router.dart';
@@ -13,31 +14,44 @@ class FingerPrintLoginView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final localization = context.localizations;
-    final hasBiometric = ref.watch(hasBiometricProvider);
 
-    ref.listen(localAuthNotifierProvider, (_, next) {
-      if (next == LocalAuthOption.granted) {
-        context.go('/home');
-      } else if (next == LocalAuthOption.denied) {
-        CustomMessage.show(context, localization.biometricError);
-      }
+    final hasBiometric = ref.watch(hasBiometricProvider);
+    final localAuth = ref.watch(localAuthNotifierProvider);
+
+    ref.listen(localAuthNotifierProvider, (_, state) {
+      state.whenOrNull(
+        data: (data) {
+          if (data == LocalAuthOption.granted) {
+            context.go('/home');
+          } else if (data == LocalAuthOption.denied) {
+            CustomMessage.show(context, localization.biometricError);
+          }
+        },
+      );
     });
 
     return Scaffold(
       appBar: AppBar(),
       backgroundColor: CustomColors.white,
       extendBodyBehindAppBar: true,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: hasBiometric.when(
-          data: (data) => data
-              ? const _BiometricBody()
-              : _TextMessage(message: localization.biometricNoSupportedText),
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (_, __) => _TextMessage(
-            message: localization.biometricNoSupportedText,
+      body: Stack(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: hasBiometric.when(
+              data: (data) => data
+                  ? const _BiometricBody()
+                  : _TextMessage(
+                      message: localization.biometricNoSupportedText,
+                    ),
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (_, __) => _TextMessage(
+                message: localization.biometricNoSupportedText,
+              ),
+            ),
           ),
-        ),
+          if (localAuth.isLoading) const Loading(),
+        ],
       ),
     );
   }
