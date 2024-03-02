@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
 import 'package:flutter_login_types/core/widgets/custom_message.dart';
+import 'package:flutter_login_types/core/widgets/loading.dart';
 import 'package:flutter_login_types/features/third_login/notifier/third_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:go_router/go_router.dart';
@@ -13,33 +14,44 @@ class ThirdLoginView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen(thirdLoginNotifierProvider, (_, next) {
-      if (next == ThirdLoginResult.success) {
-        context.go('/home');
-      } else {
-        _showSnackBar(context, next);
-      }
+    final thirdLogin = ref.watch(thirdLoginNotifierProvider);
+
+    ref.listen(thirdLoginNotifierProvider, (_, state) {
+      state.whenOrNull(
+        data: (data) {
+          if (data == ThirdLoginResult.success) {
+            context.go('/home');
+          } else {
+            _showSnackBar(context, data);
+          }
+        },
+      );
     });
 
     return Scaffold(
       appBar: AppBar(),
       backgroundColor: CustomColors.white,
       extendBodyBehindAppBar: true,
-      body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            _GoogleButton(),
-            SizedBox(height: 20),
-            _AppleButton(),
-            SizedBox(height: 20),
-            _FacebookButton(),
-            SizedBox(height: 20),
-            _TwitterButton(),
-          ],
-        ),
+      body: Stack(
+        children: <Widget>[
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                _GoogleButton(),
+                SizedBox(height: 20),
+                _AppleButton(),
+                SizedBox(height: 20),
+                _FacebookButton(),
+                SizedBox(height: 20),
+                _TwitterButton(),
+              ],
+            ),
+          ),
+          if (thirdLogin.isLoading) const Loading(),
+        ],
       ),
     );
   }
