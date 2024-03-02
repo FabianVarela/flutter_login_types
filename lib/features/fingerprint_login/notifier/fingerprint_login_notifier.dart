@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/services.dart';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -16,30 +18,31 @@ final listBiometricProvider = FutureProvider.autoDispose<List<BiometricType>>(
   (ref) => ref.watch(localAuthenticationProvider).getAvailableBiometrics(),
 );
 
-enum LocalAuthOption { none, loading, granted, denied }
+enum LocalAuthOption { none, granted, denied }
 
-class LocalAuthNotifier extends StateNotifier<LocalAuthOption> {
-  LocalAuthNotifier(this._localAuth, [super.state = LocalAuthOption.none]);
-
-  final LocalAuthentication _localAuth;
+class LocalAuthNotifier extends AutoDisposeAsyncNotifier<LocalAuthOption> {
+  @override
+  FutureOr<LocalAuthOption> build() => LocalAuthOption.none;
 
   Future<void> authenticate(String reason) async {
-    try {
-      state = LocalAuthOption.loading;
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() async {
+      try {
+        final authProvider = ref.read(localAuthenticationProvider);
+        final isAuthorized = await authProvider.authenticate(
+          localizedReason: reason,
+          options: const AuthenticationOptions(stickyAuth: true),
+        );
 
-      final isAuthorized = await _localAuth.authenticate(
-        localizedReason: reason,
-        options: const AuthenticationOptions(stickyAuth: true),
-      );
-
-      state = isAuthorized ? LocalAuthOption.granted : LocalAuthOption.denied;
-    } on PlatformException catch (_) {
-      state = LocalAuthOption.denied;
-    }
+        return isAuthorized ? LocalAuthOption.granted : LocalAuthOption.denied;
+      } on PlatformException catch (_) {
+        return LocalAuthOption.denied;
+      }
+    });
   }
 }
 
 final localAuthNotifierProvider =
-    StateNotifierProvider.autoDispose<LocalAuthNotifier, LocalAuthOption>(
-  (ref) => LocalAuthNotifier(ref.watch(localAuthenticationProvider)),
+    AsyncNotifierProvider.autoDispose<LocalAuthNotifier, LocalAuthOption>(
+  LocalAuthNotifier.new,
 );
