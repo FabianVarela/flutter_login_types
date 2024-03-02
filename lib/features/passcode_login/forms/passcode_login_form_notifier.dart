@@ -1,15 +1,16 @@
 import 'package:flutter_login_types/features/passcode_login/forms/passcode_login_form.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class PasscodeLoginFormNotifier extends StateNotifier<PasscodeLoginForm> {
-  PasscodeLoginFormNotifier([super.state = const PasscodeLoginForm()]);
+class PasscodeLoginFormNotifier extends AutoDisposeNotifier<PasscodeLoginForm> {
+  @override
+  PasscodeLoginForm build() => const PasscodeLoginForm();
 
   void onChangePhone(String value) {
     state = state.copyWith(phoneInput: PhoneInputText.dirty(value));
   }
 }
 
-final passcodeFormNotifierProvider = StateNotifierProvider.autoDispose<
-    PasscodeLoginFormNotifier, PasscodeLoginForm>(
-  (ref) => PasscodeLoginFormNotifier(),
+final passcodeFormNotifierProvider =
+    NotifierProvider.autoDispose<PasscodeLoginFormNotifier, PasscodeLoginForm>(
+  PasscodeLoginFormNotifier.new,
 );
