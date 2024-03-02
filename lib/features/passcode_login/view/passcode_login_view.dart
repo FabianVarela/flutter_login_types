@@ -6,10 +6,9 @@ import 'package:flutter_login_types/core/widgets/custom_button.dart';
 import 'package:flutter_login_types/core/widgets/custom_message.dart';
 import 'package:flutter_login_types/core/widgets/custom_textfield.dart';
 import 'package:flutter_login_types/core/widgets/loading.dart';
-import 'package:flutter_login_types/features/passcode_login/dependency.dart';
 import 'package:flutter_login_types/features/passcode_login/forms/passcode_login_form.dart';
 import 'package:flutter_login_types/features/passcode_login/forms/passcode_login_form_notifier.dart';
-import 'package:flutter_login_types/features/passcode_login/notifier/passcode_login_state.dart';
+import 'package:flutter_login_types/features/passcode_login/notifier/passcode_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -37,30 +36,34 @@ class PasscodeLoginView extends HookConsumerWidget {
       }
     }
 
-    ref.listen(passcodeLoginNotifierProvider, (_, next) async {
-      if (next.isSuccess) {
-        if (next.phaseSuccess == PasscodeLoginPhase.passcode) {
-          context.go('/home');
-        } else if (next.phaseSuccess == PasscodeLoginPhase.phone) {
-          pageValue.value = 1;
-          await ref.read(notificationServiceProvider).showNotification(
-                localization.notificationTitle,
-                localization.notificationMessage('0000'),
-              );
-        }
-      } else if (next.isError) {
-        final message = switch (next.phaseError) {
-          PasscodeLoginPhase.passcode => localization.passcodeIncorrect,
-          PasscodeLoginPhase.phone => localization.phoneNumberIncorrect,
-        };
-        CustomMessage.show(context, message);
-      }
+    ref.listen(passcodeLoginNotifierProvider, (_, state) {
+      state.whenOrNull(
+        data: (data) {
+          if (data == PasscodeLogin.phone) {
+            pageValue.value = 1;
+            _sendNotification(context, ref);
+          } else if (data == PasscodeLogin.passcode) {
+            context.go('/home');
+          }
+        },
+        error: (_, __) {
+          final message = switch (pageValue.value) {
+            0 => localization.phoneNumberIncorrect,
+            1 => localization.passcodeIncorrect,
+            _ => null,
+          };
+          if (message != null) CustomMessage.show(context, message);
+        },
+      );
     });
 
     return PopScope(
       canPop: pageValue.value == 0,
       onPopInvoked: (didPop) {
-        if (!didPop) pageValue.value = 0;
+        if (!didPop) {
+          pageValue.value = 0;
+          ref.read(passcodeLoginNotifierProvider.notifier).restore();
+        }
       },
       child: Scaffold(
         appBar: AppBar(),
@@ -78,6 +81,14 @@ class PasscodeLoginView extends HookConsumerWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> _sendNotification(BuildContext context, WidgetRef ref) async {
+    final notification = ref.read(notificationServiceProvider);
+    await notification.showNotification(
+      context.localizations.notificationTitle,
+      context.localizations.notificationMessage('0000'),
     );
   }
 }
