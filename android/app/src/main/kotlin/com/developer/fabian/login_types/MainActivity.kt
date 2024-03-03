@@ -1,4 +1,4 @@
-package com.developer.fabian.flutter_login_types
+package com.developer.fabian.login_types
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine
