@@ -147,12 +147,15 @@ follow [this link](https://pub.dev/packages/twitter_login#twitter-configuration)
 ### Setting Auth0
 
 * You must set the Auth0 **domain** and **client id** in the *Dart Define command* setting the additional run arguments
-  below
+  below.
+* Android only: If you set a custom scheme you have to set a *Dart Define key* with your custom scheme. 
   ```json5
   {
     // keys already exists...
     "AUTH0_DOMAIN": "<YOUR_AUTH0_DOMAIN>",
-    "AUTH0_CLIENT_ID": "<YOUR_AUTH0_CLIENT_ID>"
+    "AUTH0_CLIENT_ID": "<YOUR_AUTH0_CLIENT_ID>",
+    // Only if you have a custom scheme
+    "AUTH0_SCHEMA_AND": "<YOUR_AUTH0_SCHEMA_AND>"
   }
   ```
 
