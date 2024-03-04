@@ -147,8 +147,14 @@ class LoginClient {
     const auth0Domain = String.fromEnvironment('AUTH0_DOMAIN');
     const auth0ClientId = String.fromEnvironment('AUTH0_CLIENT_ID');
 
+    final scheme = switch (defaultTargetPlatform) {
+      TargetPlatform.android =>
+        const String.fromEnvironment('AUTH0_SCHEMA_AND'),
+      _ => null,
+    };
+
     final auth0 = Auth0(auth0Domain, auth0ClientId);
-    final credentials = await auth0.webAuthentication().login();
+    final credentials = await auth0.webAuthentication(scheme: scheme).login();
 
     return <String, dynamic>{
       'idToken': credentials.idToken,
