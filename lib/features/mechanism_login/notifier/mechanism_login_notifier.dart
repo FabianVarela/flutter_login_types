@@ -1,34 +1,52 @@
-import 'package:flutter_login_types/core/repository/login_repository.dart';
-import 'package:flutter_login_types/features/mechanism_login/notifier/mechanism_login_state.dart';
+import 'dart:async';
+
+import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class MechanismLoginNotifier extends StateNotifier<MechanismLoginState> {
-  MechanismLoginNotifier(
-    this._repository, [
-    super.state = const MechanismLoginState.initial(),
-  ]);
+class MechanismException implements Exception {
+  MechanismException({required this.message});
 
-  final LoginRepository _repository;
+  final String message;
+}
+
+enum MechanismType { none, azure, auth0 }
+
+class MechanismLoginNotifier extends AutoDisposeAsyncNotifier<MechanismType> {
+  @override
+  FutureOr<MechanismType> build() => MechanismType.none;
 
   Future<void> authenticateAzure({String? lang}) async {
-    try {
-      state = const MechanismLoginState.loading();
-      final result = await _repository.authenticateAzure(lang: lang);
-      print(result);
-      state = const MechanismLoginState.success();
-    } on Exception catch (_) {
-      state = const MechanismLoginState.error(type: MechanismType.azure);
-    }
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() async {
+      try {
+        final repository = ref.read(loginRepositoryProvider);
+        final result = await repository.authenticateAzure(lang: lang);
+        print(result);
+
+        return MechanismType.azure;
+      } on Exception catch (_) {
+        throw MechanismException(message: MechanismType.azure.name);
+      }
+    });
   }
 
   Future<void> authenticateAuth0() async {
-    try {
-      state = const MechanismLoginState.loading();
-      final result = await _repository.authenticateAuth0();
-      print(result);
-      state = const MechanismLoginState.success();
-    } on Exception catch (_) {
-      state = const MechanismLoginState.error(type: MechanismType.auth0);
-    }
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() async {
+      try {
+        final repository = ref.read(loginRepositoryProvider);
+        final result = await repository.authenticateAuth0();
+        print(result);
+
+        return MechanismType.auth0;
+      } on Exception catch (_) {
+        throw MechanismException(message: MechanismType.auth0.name);
+      }
+    });
   }
 }
+
+final mechanismLoginNotifierProvider =
+    AsyncNotifierProvider.autoDispose<MechanismLoginNotifier, MechanismType>(
+  MechanismLoginNotifier.new,
+);
