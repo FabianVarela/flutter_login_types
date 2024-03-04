@@ -9,6 +9,7 @@ environment:
 
 dependencies:
   auth0_flutter: ^1.5.0
+  collection: ^1.18.0
   flutter:
     sdk: flutter
   flutter_appauth: ^6.0.4
