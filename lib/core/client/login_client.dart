@@ -2,18 +2,19 @@ import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_login_types/core/config/app_config.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:twitter_login/twitter_login.dart';
 
 class LoginClient {
-  LoginClient(this._appAuth);
+  LoginClient(this._appConfig, this._appAuth);
 
+  final AppConfig _appConfig;
   final FlutterAppAuth _appAuth;
 
   Future<String?> authenticate(String username, String password) async {
     await Future<void>.delayed(const Duration(seconds: 3));
-
     return username == 'prueba@prueba.com' && password == 'password'
         ? 'MiToken'
         : null;
@@ -31,13 +32,12 @@ class LoginClient {
 
   Future<String?> authenticateGoogle() async {
     try {
-      final clientId = defaultTargetPlatform == TargetPlatform.iOS
-          ? const String.fromEnvironment('GOOGLE_CLIENT_ID_IOS')
-          : const String.fromEnvironment('GOOGLE_CLIENT_ID_AND');
-
       final googleSignIn = GoogleSignIn(
         scopes: ['email', 'https://www.googleapis.com/auth/contacts.readonly'],
-        clientId: clientId,
+        clientId: switch (defaultTargetPlatform) {
+          TargetPlatform.iOS => _appConfig.googleConfig.clientIdIos,
+          _ => _appConfig.googleConfig.clientIdAndroid,
+        },
       );
 
       final credential = await googleSignIn.signIn();
@@ -48,19 +48,14 @@ class LoginClient {
   }
 
   Future<String?> authenticateApple() async {
-    const clientId = String.fromEnvironment('APPLE_CLIENT_ID');
-    final redirectUri = Uri.parse(
-      const String.fromEnvironment('APPLE_REDIRECT_URI'),
-    );
-
     final credential = await SignInWithApple.getAppleIDCredential(
       scopes: <AppleIDAuthorizationScopes>[
         AppleIDAuthorizationScopes.email,
         AppleIDAuthorizationScopes.fullName,
       ],
       webAuthenticationOptions: WebAuthenticationOptions(
-        clientId: clientId,
-        redirectUri: redirectUri,
+        clientId: _appConfig.appleConfig.clientId,
+        redirectUri: Uri.parse(_appConfig.appleConfig.redirectUri),
       ),
     );
 
@@ -92,9 +87,9 @@ class LoginClient {
 
   Future<Map<String, dynamic>> authenticateTwitter() async {
     final twitterLogin = TwitterLogin(
-      apiKey: const String.fromEnvironment('TWITTER_API_KEY'),
-      apiSecretKey: const String.fromEnvironment('TWITTER_API_SECRET'),
-      redirectURI: const String.fromEnvironment('TWITTER_REDIRECT_URI'),
+      apiKey: _appConfig.twitterConfig.apiKey,
+      apiSecretKey: _appConfig.twitterConfig.apiSecret,
+      redirectURI: _appConfig.twitterConfig.redirectUri,
     );
 
     final authResult = await twitterLogin.login();
@@ -106,23 +101,19 @@ class LoginClient {
 
   Future<Map<String, dynamic>> authenticateAzure({String? lang}) async {
     try {
-      const tenantName = String.fromEnvironment('AZURE_TENANT_NAME');
-      const tenantId = String.fromEnvironment('AZURE_TENANT_ID');
-      const policyName = String.fromEnvironment('AZURE_POLICY_NAME');
-
-      const clientId = String.fromEnvironment('AZURE_CLIENT_ID');
-      const redirectURL = String.fromEnvironment('AZURE_REDIRECT_URL');
+      final tenantId = _appConfig.azureConfig.tenantId;
+      final policyName = _appConfig.azureConfig.policyName;
 
       final discoveryURL = Uri.https(
-        '$tenantName.b2clogin.com',
+        '${_appConfig.azureConfig.tenantName}.b2clogin.com',
         '/$tenantId/$policyName/v2.0/.well-known/openid-configuration',
       );
 
       final params = lang != null ? <String, String>{'lang': lang} : null;
       final result = await _appAuth.authorizeAndExchangeCode(
         AuthorizationTokenRequest(
-          clientId,
-          redirectURL,
+          _appConfig.azureConfig.clientId,
+          _appConfig.azureConfig.redirectUri,
           discoveryUrl: discoveryURL.toString(),
           scopes: <String>['openid', 'profile', 'email', 'offline_access'],
           additionalParameters: params,
@@ -144,18 +135,15 @@ class LoginClient {
   }
 
   Future<Map<String, dynamic>> authenticateAuth0() async {
-    const auth0Domain = String.fromEnvironment('AUTH0_DOMAIN');
-    const auth0ClientId = String.fromEnvironment('AUTH0_CLIENT_ID');
-
     final scheme = switch (defaultTargetPlatform) {
-      TargetPlatform.android =>
-        const String.fromEnvironment('AUTH0_SCHEMA_AND'),
+      TargetPlatform.android => _appConfig.auth0Config.scheme,
       _ => null,
     };
 
-    final auth0 = Auth0(auth0Domain, auth0ClientId);
-    final credentials = await auth0.webAuthentication(scheme: scheme).login();
+    final auth0Config = _appConfig.auth0Config;
+    final auth0 = Auth0(auth0Config.domain, auth0Config.clientId);
 
+    final credentials = await auth0.webAuthentication(scheme: scheme).login();
     return <String, dynamic>{
       'idToken': credentials.idToken,
       'accessToken': credentials.accessToken,
