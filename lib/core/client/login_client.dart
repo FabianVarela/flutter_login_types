@@ -1,4 +1,5 @@
 import 'package:auth0_flutter/auth0_flutter.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -30,9 +31,13 @@ class LoginClient {
 
   Future<String?> authenticateGoogle() async {
     try {
+      final clientId = defaultTargetPlatform == TargetPlatform.iOS
+          ? const String.fromEnvironment('GOOGLE_CLIENT_ID_IOS')
+          : const String.fromEnvironment('GOOGLE_CLIENT_ID_AND');
+
       final googleSignIn = GoogleSignIn(
         scopes: ['email', 'https://www.googleapis.com/auth/contacts.readonly'],
-        clientId: const String.fromEnvironment('GOOGLE_CLIENT_ID'),
+        clientId: clientId,
       );
 
       final credential = await googleSignIn.signIn();
@@ -63,26 +68,26 @@ class LoginClient {
   }
 
   Future<Map<String, dynamic>> authenticateFacebook() async {
-    final result = <String, dynamic>{};
+    try {
+      final result = <String, dynamic>{};
 
-    var accessToken = await FacebookAuth.instance.accessToken;
-    if (accessToken == null) {
-      final loginResult = await FacebookAuth.instance.login();
-      result['status'] = loginResult.status;
+      final accessToken = await FacebookAuth.instance.accessToken;
+      if (accessToken == null) {
+        final loginResult = await FacebookAuth.instance.login();
+        result['status'] = loginResult.status;
 
-      if (loginResult.status == LoginStatus.success) {
-        accessToken = loginResult.accessToken;
+        if (loginResult.status != LoginStatus.success) return result;
       } else {
-        return result;
+        result['status'] = LoginStatus.success;
       }
-    } else {
-      result['status'] = LoginStatus.success;
-    }
 
-    return <String, dynamic>{
-      ...result,
-      ...await FacebookAuth.instance.getUserData(),
-    };
+      return <String, dynamic>{
+        ...result,
+        ...await FacebookAuth.instance.getUserData(),
+      };
+    } catch (error) {
+      return <String, dynamic>{'status': LoginStatus.failed};
+    }
   }
 
   Future<Map<String, dynamic>> authenticateTwitter() async {
