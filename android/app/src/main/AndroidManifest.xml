@@ -14,6 +14,7 @@
         android:showWhenLocked="true"
         android:turnScreenOn="true"
         tools:targetApi="tiramisu">
+
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -57,9 +58,9 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity
+        <meta-data
             android:name="com.facebook.sdk.ClientToken"
-            android:label="@string/facebook_client_token" />
+            android:value="@string/facebook_client_token" />
 
         <!-- Set up the Sign in with Apple activity, such that it's callable from the browser-redirect -->
         <activity
