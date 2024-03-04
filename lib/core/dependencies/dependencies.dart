@@ -2,6 +2,7 @@ import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_login_types/core/client/login_client.dart';
 import 'package:flutter_login_types/core/client/preferences.dart';
+import 'package:flutter_login_types/core/config/app_config.dart';
 import 'package:flutter_login_types/core/repository/language_repository.dart';
 import 'package:flutter_login_types/core/repository/login_repository.dart';
 import 'package:flutter_login_types/core/services/notification_service.dart';
@@ -29,8 +30,13 @@ final appAuthProvider = Provider<FlutterAppAuth>(
   (_) => const FlutterAppAuth(),
 );
 
+final appConfigProvider = Provider<AppConfig>((_) => AppConfig());
+
 final loginClientProvider = Provider<LoginClient>(
-  (ref) => LoginClient(ref.watch(appAuthProvider)),
+  (ref) => LoginClient(
+    ref.watch(appConfigProvider),
+    ref.watch(appAuthProvider),
+  ),
 );
 
 final languageRepositoryProvider = Provider<LanguageRepository>(
