@@ -1,9 +1,9 @@
 PODS:
-  - AppAuth (1.6.2):
-    - AppAuth/Core (= 1.6.2)
-    - AppAuth/ExternalUserAgent (= 1.6.2)
-  - AppAuth/Core (1.6.2)
-  - AppAuth/ExternalUserAgent (1.6.2):
+  - AppAuth (1.7.2):
+    - AppAuth/Core (= 1.7.2)
+    - AppAuth/ExternalUserAgent (= 1.7.2)
+  - AppAuth/Core (1.7.2)
+  - AppAuth/ExternalUserAgent (1.7.2):
     - AppAuth/Core
   - Auth0 (2.5.0):
     - JWTDecode (~> 3.1)
@@ -24,7 +24,7 @@ PODS:
     - FBSDKCoreKit (= 16.3.1)
   - Flutter (1.0.0)
   - flutter_appauth (0.0.1):
-    - AppAuth (= 1.6.2)
+    - AppAuth (= 1.7.2)
     - Flutter
   - flutter_facebook_auth (6.0.4):
     - FBSDKLoginKit (~> 16.3.1)
@@ -120,7 +120,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/twitter_login/ios"
 
 SPEC CHECKSUMS:
-  AppAuth: 3bb1d1cd9340bd09f5ed189fb00b1cc28e1e8570
+  AppAuth: ca2458caccec349cc1e26d8d9e8fd7d22f1d01f3
   Auth0: 72f19ad566fdf57f07bf37f828afd0c1570769a5
   auth0_flutter: ae5ebf94520af57ebce16af395820b9e07abbc9f
   FBAEMKit: 6c7b5eb77c96861bb59e040842c6e55bf39512ce
@@ -128,7 +128,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit_Basics: cd7b5f5d1e8868c26706917919d058999ca672c3
   FBSDKLoginKit: 572cca0bc6c90067ef197187697cb3b584310c52
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  flutter_appauth: 0863b1f33110b410213e736aead4a6727303f509
+  flutter_appauth: c5e36e22af413d4b5b2997d61c97f7350d9bd25b
   flutter_facebook_auth: c8700ab1770f3d8e5e7456220e4f3bbcdb831454
   flutter_local_notifications: 4cde75091f6327eb8517fa068a0a5950212d2086
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
