@@ -1,15 +1,20 @@
 import 'dart:async';
 
+import 'package:auth0_flutter/auth0_flutter.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class MechanismException implements Exception {
-  MechanismException({required this.message});
+  MechanismException({required this.type, required this.error});
 
-  final String message;
+  final MechanismType type;
+  final MechanismError error;
 }
 
 enum MechanismType { none, azure, auth0 }
+
+enum MechanismError { error, cancelled }
 
 class MechanismLoginNotifier extends AutoDisposeAsyncNotifier<MechanismType> {
   @override
@@ -24,8 +29,14 @@ class MechanismLoginNotifier extends AutoDisposeAsyncNotifier<MechanismType> {
         print(result);
 
         return MechanismType.azure;
-      } on Exception catch (_) {
-        throw MechanismException(message: MechanismType.azure.name);
+      } on Exception catch (e) {
+        var error = MechanismError.error;
+        if (e is PlatformException) {
+          if (e.message?.contains('cancelled') ?? false) {
+            error = MechanismError.cancelled;
+          }
+        }
+        throw MechanismException(type: MechanismType.azure, error: error);
       }
     });
   }
@@ -39,8 +50,14 @@ class MechanismLoginNotifier extends AutoDisposeAsyncNotifier<MechanismType> {
         print(result);
 
         return MechanismType.auth0;
-      } on Exception catch (_) {
-        throw MechanismException(message: MechanismType.auth0.name);
+      } on Exception catch (e) {
+        var error = MechanismError.error;
+        if (e is WebAuthenticationException) {
+          if (e.code == 'a0.authentication_canceled') {
+            error = MechanismError.cancelled;
+          }
+        }
+        throw MechanismException(type: MechanismType.auth0, error: error);
       }
     });
   }
