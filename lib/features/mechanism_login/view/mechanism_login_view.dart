@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/notifiers/language_notifier.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
@@ -26,17 +25,7 @@ class MechanismLoginView extends HookConsumerWidget {
       state.whenOrNull(
         data: (_) => context.go('/home'),
         error: (e, _) {
-          final errorMessage = (e as MechanismException).message;
-          final mechanismType = MechanismType.values.firstWhereOrNull(
-            (item) => item.name == errorMessage,
-          );
-
-          final message = switch (mechanismType) {
-            MechanismType.azure => localization.azureLoginError,
-            MechanismType.auth0 => localization.auth0LoginError,
-            _ => null,
-          };
-          if (message != null) CustomMessage.show(context, message);
+          if (e is MechanismException) _showErrorMessage(context, e);
         },
       );
     });
@@ -78,5 +67,21 @@ class MechanismLoginView extends HookConsumerWidget {
         ],
       ),
     );
+  }
+
+  void _showErrorMessage(BuildContext context, MechanismException exception) {
+    final localization = context.localizations;
+    final message = switch (exception.type) {
+      MechanismType.azure => switch (exception.error) {
+          MechanismError.cancelled => localization.azureLoginCancelled,
+          MechanismError.error => localization.azureLoginError,
+        },
+      MechanismType.auth0 => switch (exception.error) {
+          MechanismError.cancelled => localization.auth0LoginCancelled,
+          MechanismError.error => localization.auth0LoginError,
+        },
+      _ => null,
+    };
+    if (message != null) CustomMessage.show(context, message);
   }
 }
