@@ -8,10 +8,11 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:twitter_login/twitter_login.dart';
 
 class LoginClient {
-  LoginClient(this._appConfig, this._appAuth);
+  LoginClient(this._appConfig, this._appAuth, this._auth0);
 
   final AppConfig _appConfig;
   final FlutterAppAuth _appAuth;
+  final Auth0 _auth0;
 
   Future<String?> authenticate(String username, String password) async {
     await Future<void>.delayed(const Duration(seconds: 3));
@@ -141,14 +142,11 @@ class LoginClient {
         _ => null,
       };
 
-      final auth0Config = _appConfig.auth0Config;
-      final auth0 = Auth0(auth0Config.domain, auth0Config.clientId);
-
-      final credentials = await auth0.webAuthentication(scheme: scheme).login();
+      final result = await _auth0.webAuthentication(scheme: scheme).login();
       return <String, dynamic>{
-        'idToken': credentials.idToken,
-        'accessToken': credentials.accessToken,
-        'refreshToken': credentials.refreshToken,
+        'idToken': result.idToken,
+        'accessToken': result.accessToken,
+        'refreshToken': result.refreshToken,
       };
     } catch (error) {
       rethrow;
