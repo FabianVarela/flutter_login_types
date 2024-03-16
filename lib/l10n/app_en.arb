@@ -150,9 +150,17 @@
   "@biometricError": {
     "description": "Biometric message when user is not authorized"
   },
+  "azureLoginCancelled": "Azure login, cancelled",
+  "@azureLoginCancelled": {
+    "description": "Azure login message when user cancel"
+  },
   "azureLoginError": "Error logging in with Azure",
   "@azureLoginError": {
     "description": "Azure login message when user is not authorized"
+  },
+  "auth0LoginCancelled": "Auth0 login, cancelled",
+  "@auth0LoginCancelled": {
+    "description": "Auth0 login message when user cancel"
   },
   "auth0LoginError": "Error logging in with Auth0",
   "@auth0LoginError": {
