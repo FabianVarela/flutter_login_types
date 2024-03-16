@@ -135,19 +135,23 @@ class LoginClient {
   }
 
   Future<Map<String, dynamic>> authenticateAuth0() async {
-    final scheme = switch (defaultTargetPlatform) {
-      TargetPlatform.android => _appConfig.auth0Config.scheme,
-      _ => null,
-    };
+    try {
+      final scheme = switch (defaultTargetPlatform) {
+        TargetPlatform.android => _appConfig.auth0Config.scheme,
+        _ => null,
+      };
 
-    final auth0Config = _appConfig.auth0Config;
-    final auth0 = Auth0(auth0Config.domain, auth0Config.clientId);
+      final auth0Config = _appConfig.auth0Config;
+      final auth0 = Auth0(auth0Config.domain, auth0Config.clientId);
 
-    final credentials = await auth0.webAuthentication(scheme: scheme).login();
-    return <String, dynamic>{
-      'idToken': credentials.idToken,
-      'accessToken': credentials.accessToken,
-      'refreshToken': credentials.refreshToken,
-    };
+      final credentials = await auth0.webAuthentication(scheme: scheme).login();
+      return <String, dynamic>{
+        'idToken': credentials.idToken,
+        'accessToken': credentials.accessToken,
+        'refreshToken': credentials.refreshToken,
+      };
+    } catch (error) {
+      rethrow;
+    }
   }
 }
