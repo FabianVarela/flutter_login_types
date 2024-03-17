@@ -79,8 +79,13 @@
 
         <!-- App auth section -->
         <activity
+            android:name="net.openid.appauth.AuthorizationManagementActivity"
+            android:launchMode="singleInstance"
+            tools:replace="android:launchMode" />
+        <activity
             android:name="net.openid.appauth.RedirectUriReceiverActivity"
             android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light"
             tools:node="replace">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -88,13 +93,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:host=""
-                    android:scheme="@string/app_auth_scheme" />
+                <data android:scheme="${appAuthRedirectScheme}" />
             </intent-filter>
         </activity>
     </application>
 
+    <!-- Facebook section -->
     <queries>
         <provider android:authorities="com.facebook.katana.provider.PlatformProvider" />
     </queries>

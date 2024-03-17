@@ -61,7 +61,7 @@ android {
         def auth0Scheme = xmlParserString.string.find { it.@name.equals 'auth0_scheme' }.text()
 
         manifestPlaceholders += [
-                appAuthRedirectScheme: "$appAuthScheme", auth0Domain: "$auth0Domain", auth0Scheme: "$auth0Scheme"
+                appAuthRedirectScheme: "$appAuthScheme", auth0Domain: "$auth0Domain", auth0Scheme: "$auth0Scheme",
         ]
     }
 
