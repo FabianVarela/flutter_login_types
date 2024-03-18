@@ -21,6 +21,15 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def dartEnvironmentVariables = []
+
+if (project.hasProperty('dart-defines')) {
+    dartEnvironmentVariables = project.property('dart-defines').split(',').collectEntries { entry ->
+        def pair = new String(entry.decodeBase64(), 'UTF-8').split('=')
+        [(pair.first()): pair.last()]
+    }
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
@@ -53,15 +62,10 @@ android {
 
         multiDexEnabled true
 
-        def stringsFile = android.sourceSets.main.res.sourceFiles.find { it.name.equals 'strings.xml' }
-        def xmlParserString = new XmlParser().parse(stringsFile)
-
-        def appAuthScheme = xmlParserString.string.find { it.@name.equals 'app_auth_scheme' }.text()
-        def auth0Domain = xmlParserString.string.find { it.@name.equals 'auth0_domain' }.text()
-        def auth0Scheme = xmlParserString.string.find { it.@name.equals 'auth0_scheme' }.text()
-
         manifestPlaceholders += [
-                appAuthRedirectScheme: "$appAuthScheme", auth0Domain: "$auth0Domain", auth0Scheme: "$auth0Scheme",
+                appAuthRedirectScheme: dartEnvironmentVariables.AZURE_REDIRECT_SCHEME ?: '',
+                auth0Domain          : dartEnvironmentVariables.AUTH0_DOMAIN ?: '',
+                auth0Scheme          : dartEnvironmentVariables.AUTH0_SCHEME_AND ?: '',
         ]
     }
 
