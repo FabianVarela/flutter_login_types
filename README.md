@@ -134,7 +134,8 @@ follow [this link](https://pub.dev/packages/twitter_login#twitter-configuration)
     "AZURE_TENANT_ID": "<YOUR_AZURE_TENANT_ID>",
     "AZURE_POLICY_NAME": "<YOUR_AZURE_POLICY_NAME>",
     "AZURE_CLIENT_ID": "<YOUR_AZURE_CLIENT_ID>",
-    "AZURE_REDIRECT_URL": "<YOUR_AZURE_REDIRECT_URL>"
+    "AZURE_REDIRECT_SCHEME": "<YOUR_AZURE_REDIRECT_SCHEME>",
+    "AZURE_REDIRECT_PATH": "<YOUR_AZURE_REDIRECT_PATH>"
   }
   ```
 
@@ -155,7 +156,7 @@ follow [this link](https://pub.dev/packages/twitter_login#twitter-configuration)
     "AUTH0_DOMAIN": "<YOUR_AUTH0_DOMAIN>",
     "AUTH0_CLIENT_ID": "<YOUR_AUTH0_CLIENT_ID>",
     // Only if you have a custom scheme
-    "AUTH0_SCHEMA_AND": "<YOUR_AUTH0_SCHEMA_AND>"
+    "AUTH0_SCHEME_AND": "<YOUR_AUTH0_SCHEME_AND>"
   }
   ```
 
