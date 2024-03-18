@@ -20,13 +20,14 @@ class AppConfig {
     tenantName: const String.fromEnvironment('AZURE_TENANT_NAME'),
     clientId: const String.fromEnvironment('AZURE_CLIENT_ID'),
     policyName: const String.fromEnvironment('AZURE_POLICY_NAME'),
-    redirectUri: const String.fromEnvironment('AZURE_REDIRECT_URL'),
+    redirectScheme: const String.fromEnvironment('AZURE_REDIRECT_SCHEME'),
+    redirectPath: const String.fromEnvironment('AZURE_REDIRECT_PATH'),
   );
 
   static final _auth0Config = _Auth0Config(
     domain: const String.fromEnvironment('AUTH0_DOMAIN'),
     clientId: const String.fromEnvironment('AUTH0_CLIENT_ID'),
-    scheme: const String.fromEnvironment('AUTH0_SCHEMA_AND'),
+    scheme: const String.fromEnvironment('AUTH0_SCHEME_AND'),
   );
 
   _GoogleConfig get googleConfig => _googleConfig;
@@ -72,14 +73,16 @@ class _AzureConfig {
     required this.tenantName,
     required this.clientId,
     required this.policyName,
-    required this.redirectUri,
+    required this.redirectScheme,
+    required this.redirectPath,
   });
 
   final String tenantId;
   final String tenantName;
   final String clientId;
   final String policyName;
-  final String redirectUri;
+  final String redirectScheme;
+  final String redirectPath;
 }
 
 class _Auth0Config {
