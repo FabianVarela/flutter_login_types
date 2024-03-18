@@ -67,6 +67,11 @@ android {
                 auth0Domain          : dartEnvironmentVariables.AUTH0_DOMAIN ?: '',
                 auth0Scheme          : dartEnvironmentVariables.AUTH0_SCHEME_AND ?: '',
         ]
+
+        resValue "string", "facebook_app_id", dartEnvironmentVariables.FACEBOOK_APP_ID ?: ''
+        resValue "string", "facebook_client_token", dartEnvironmentVariables.FACEBOOK_CLIENT_TOKEN ?: ''
+        resValue "string", "twitter_callback_url", dartEnvironmentVariables.TWITTER_REDIRECT_URI ?: ''
+
     }
 
     buildTypes {
