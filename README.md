@@ -95,8 +95,18 @@ follow [this link](https://pub.dev/packages/sign_in_with_apple#integration)*</fo
 
 #### Setting Facebook sign in
 
-* You must set the **app id** and the **client token**. For android, you must in
-  the ```android/src/main/res/strings.xml``` file and for iOS, you must in the ```ios/Runner/Info.plist``` file.
+* You must set the **app id** and the **client token** as the *Dart Define command* setting the additional run
+  arguments below.
+  ```json5
+  {
+    // keys already exists...
+    "FACEBOOK_APP_ID": "<YOUR_FACEBOOK_APP_ID>",
+    "FACEBOOK_CLIENT_TOKEN": "<YOUR_FACEBOOK_CLIENT_TOKEN>"
+    // More keys here...
+  }
+  ```
+
+* For iOS, you must the **app id** and the **client token** in the ```ios/Runner/Info.plist``` file.
 
 <font size="3">*These values you must get on the [Facebook Developers](https://developers.facebook.com). Also, you can
 follow [this link for Android](https://facebook.meedu.app/docs/5.x.x/android)
@@ -149,7 +159,7 @@ follow [this link](https://pub.dev/packages/twitter_login#twitter-configuration)
 
 * You must set the Auth0 **domain** and **client id** in the *Dart Define command* setting the additional run arguments
   below.
-* Android only: If you set a custom scheme you have to set a *Dart Define key* with your custom scheme. 
+* Android only: If you set a custom scheme you have to set a *Dart Define key* with your custom scheme.
   ```json5
   {
     // keys already exists...
