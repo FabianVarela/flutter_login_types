@@ -106,7 +106,8 @@ follow [this link](https://pub.dev/packages/sign_in_with_apple#integration)*</fo
   }
   ```
 
-* For iOS, you must the **app id** and the **client token** in the ```ios/Runner/Info.plist``` file.
+* For iOS, you must the **app id**, the **client token** and the **display name** in the ```ios/Runner/Info.plist```
+  file.
 
 <font size="3">*These values you must get on the [Facebook Developers](https://developers.facebook.com). Also, you can
 follow [this link for Android](https://facebook.meedu.app/docs/5.x.x/android)
@@ -125,6 +126,8 @@ and [this link for iOS](https://facebook.meedu.app/docs/5.x.x/ios)*</font>
     // More keys here...
   }
   ```
+
+* For iOS, you must the **redirect uri** as well in the ```ios/Runner/Info.plist``` file.
 
 <font size="3">*These values you must get on the [Twitter Developer](https://developer.twitter.com) or your
 apps [here](https://developer.twitter.com/en/apps/). Also, you can
@@ -148,6 +151,8 @@ follow [this link](https://pub.dev/packages/twitter_login#twitter-configuration)
     "AZURE_REDIRECT_PATH": "<YOUR_AZURE_REDIRECT_PATH>"
   }
   ```
+
+* For iOS, you must the **redirect scheme** as well, in the ```ios/Runner/Info.plist``` file.
 
 <font size="3">To get these values, you must follow these links:
 
