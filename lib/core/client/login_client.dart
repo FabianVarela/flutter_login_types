@@ -110,26 +110,27 @@ class LoginClient {
         '/$tenantId/$policyName/v2.0/.well-known/openid-configuration',
       );
 
-      final params = lang != null ? <String, String>{'lang': lang} : null;
+      final redirectFullPath = '${_appConfig.azureConfig.redirectScheme}://'
+          '${_appConfig.azureConfig.redirectPath}';
+
       final result = await _appAuth.authorizeAndExchangeCode(
         AuthorizationTokenRequest(
           _appConfig.azureConfig.clientId,
-          _appConfig.azureConfig.redirectUri,
+          redirectFullPath,
           discoveryUrl: discoveryURL.toString(),
           scopes: <String>['openid', 'profile', 'email', 'offline_access'],
-          additionalParameters: params,
+          additionalParameters: <String, String>{
+            if (lang != null) 'lang': lang,
+          },
         ),
       );
 
-      if (result != null) {
-        return <String, dynamic>{
-          'idToken': result.idToken,
-          'accessToken': result.accessToken,
-          'refreshToken': result.refreshToken,
-        };
-      }
-
-      throw Exception('Error logging in');
+      if (result == null) throw Exception('Error logging in');
+      return <String, dynamic>{
+        'idToken': result.idToken,
+        'accessToken': result.accessToken,
+        'refreshToken': result.refreshToken,
+      };
     } catch (error) {
       rethrow;
     }
