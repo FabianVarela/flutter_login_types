@@ -8,7 +8,7 @@ environment:
   flutter: 3.19.0
 
 dependencies:
-  auth0_flutter: ^1.5.0
+  auth0_flutter: ^1.6.0
   collection: ^1.18.0
   flutter:
     sdk: flutter
