@@ -12,10 +12,10 @@ dependencies:
   collection: ^1.18.0
   flutter:
     sdk: flutter
-  flutter_appauth: ^6.0.5
+  flutter_appauth: ^6.0.6
   flutter_facebook_auth: ^6.2.0
   flutter_hooks: ^0.20.5
-  flutter_local_notifications: ^17.0.0
+  flutter_local_notifications: ^17.1.0
   flutter_localizations:
     sdk: flutter
   formz: ^0.7.0
