@@ -1,50 +1,56 @@
 PODS:
-  - AppAuth (1.7.2):
-    - AppAuth/Core (= 1.7.2)
-    - AppAuth/ExternalUserAgent (= 1.7.2)
-  - AppAuth/Core (1.7.2)
-  - AppAuth/ExternalUserAgent (1.7.2):
+  - AppAuth (1.7.4):
+    - AppAuth/Core (= 1.7.4)
+    - AppAuth/ExternalUserAgent (= 1.7.4)
+  - AppAuth/Core (1.7.4)
+  - AppAuth/ExternalUserAgent (1.7.4):
     - AppAuth/Core
-  - Auth0 (2.5.0):
+  - Auth0 (2.7.2):
     - JWTDecode (~> 3.1)
     - SimpleKeychain (~> 1.1)
-  - auth0_flutter (1.5.0):
-    - Auth0 (= 2.5.0)
+  - auth0_flutter (1.7.2):
+    - Auth0 (= 2.7.2)
     - Flutter
     - FlutterMacOS
     - JWTDecode (= 3.1.0)
     - SimpleKeychain (= 1.1.0)
-  - FBAEMKit (16.3.1):
-    - FBSDKCoreKit_Basics (= 16.3.1)
-  - FBSDKCoreKit (16.3.1):
-    - FBAEMKit (= 16.3.1)
-    - FBSDKCoreKit_Basics (= 16.3.1)
-  - FBSDKCoreKit_Basics (16.3.1)
-  - FBSDKLoginKit (16.3.1):
-    - FBSDKCoreKit (= 16.3.1)
+  - FBAEMKit (17.0.1):
+    - FBSDKCoreKit_Basics (= 17.0.1)
+  - FBSDKCoreKit (17.0.1):
+    - FBAEMKit (= 17.0.1)
+    - FBSDKCoreKit_Basics (= 17.0.1)
+  - FBSDKCoreKit_Basics (17.0.1)
+  - FBSDKLoginKit (17.0.1):
+    - FBSDKCoreKit (= 17.0.1)
   - Flutter (1.0.0)
   - flutter_appauth (0.0.1):
-    - AppAuth (= 1.7.2)
+    - AppAuth (= 1.7.4)
     - Flutter
-  - flutter_facebook_auth (6.0.4):
-    - FBSDKLoginKit (~> 16.3.1)
+  - flutter_facebook_auth (6.2.0):
+    - FBSDKLoginKit (~> 17.0.0)
     - Flutter
   - flutter_local_notifications (0.0.1):
     - Flutter
   - flutter_secure_storage (6.0.0):
     - Flutter
   - google_sign_in_ios (0.0.1):
+    - AppAuth (>= 1.7.4)
     - Flutter
     - FlutterMacOS
-    - GoogleSignIn (~> 7.0)
-  - GoogleSignIn (7.0.0):
-    - AppAuth (~> 1.5)
-    - GTMAppAuth (< 3.0, >= 1.3)
-    - GTMSessionFetcher/Core (< 4.0, >= 1.1)
-  - GTMAppAuth (2.0.0):
-    - AppAuth/Core (~> 1.6)
-    - GTMSessionFetcher/Core (< 4.0, >= 1.5)
-  - GTMSessionFetcher/Core (3.3.1)
+    - GoogleSignIn (~> 7.1)
+    - GTMSessionFetcher (>= 3.4.0)
+  - GoogleSignIn (7.1.0):
+    - AppAuth (< 2.0, >= 1.7.3)
+    - GTMAppAuth (< 5.0, >= 4.1.1)
+    - GTMSessionFetcher/Core (~> 3.3)
+  - GTMAppAuth (4.1.1):
+    - AppAuth/Core (~> 1.7)
+    - GTMSessionFetcher/Core (< 4.0, >= 3.3)
+  - GTMSessionFetcher (3.4.1):
+    - GTMSessionFetcher/Full (= 3.4.1)
+  - GTMSessionFetcher/Core (3.4.1)
+  - GTMSessionFetcher/Full (3.4.1):
+    - GTMSessionFetcher/Core
   - JWTDecode (3.1.0)
   - local_auth_darwin (0.0.1):
     - Flutter
@@ -120,26 +126,26 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/twitter_login/ios"
 
 SPEC CHECKSUMS:
-  AppAuth: ca2458caccec349cc1e26d8d9e8fd7d22f1d01f3
-  Auth0: 72f19ad566fdf57f07bf37f828afd0c1570769a5
-  auth0_flutter: ae5ebf94520af57ebce16af395820b9e07abbc9f
-  FBAEMKit: 6c7b5eb77c96861bb59e040842c6e55bf39512ce
-  FBSDKCoreKit: 5e4dd478947ab1bcc887e8cfadeae0727af1a942
-  FBSDKCoreKit_Basics: cd7b5f5d1e8868c26706917919d058999ca672c3
-  FBSDKLoginKit: 572cca0bc6c90067ef197187697cb3b584310c52
+  AppAuth: 182c5b88630569df5acb672720534756c29b3358
+  Auth0: 28cb24cb19ebd51f0b07751f16d83b59f4019532
+  auth0_flutter: f085572268059bc194c7b023d7f432f5ebb72413
+  FBAEMKit: 97eaf41451b49691447df831f7f425229ae64b66
+  FBSDKCoreKit: e34084567d11cfdd4787ace2b1a0255bedf34ade
+  FBSDKCoreKit_Basics: 3d78e5fe00504e5c1aed1c48de0654c3a1565d15
+  FBSDKLoginKit: 9a581053879a1e6fc3fab8ead341c78c6a318255
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  flutter_appauth: c5e36e22af413d4b5b2997d61c97f7350d9bd25b
-  flutter_facebook_auth: c8700ab1770f3d8e5e7456220e4f3bbcdb831454
+  flutter_appauth: 1ce438877bc111c5d8f42da47729909290624886
+  flutter_facebook_auth: 66188df7905bfcaf3d6d2bd6527302c56448f04d
   flutter_local_notifications: 4cde75091f6327eb8517fa068a0a5950212d2086
-  flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
-  google_sign_in_ios: 989eea5abe94af62050782714daf920be883d4a2
-  GoogleSignIn: b232380cf495a429b8095d3178a8d5855b42e842
-  GTMAppAuth: 99fb010047ba3973b7026e45393f51f27ab965ae
-  GTMSessionFetcher: 8a1b34ad97ebe6f909fb8b9b77fba99943007556
+  flutter_secure_storage: d33dac7ae2ea08509be337e775f6b59f1ff45f12
+  google_sign_in_ios: 07375bfbf2620bc93a602c0e27160d6afc6ead38
+  GoogleSignIn: d4281ab6cf21542b1cfaff85c191f230b399d2db
+  GTMAppAuth: f69bd07d68cd3b766125f7e072c45d7340dea0de
+  GTMSessionFetcher: 8000756fc1c19d2e5697b90311f7832d2e33f6cd
   JWTDecode: 3eaab1e06b6f4dcbdd6716aff09ba4c2104ca8b7
-  local_auth_darwin: c7e464000a6a89e952235699e32b329457608d98
-  path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c
-  shared_preferences_foundation: b4c3b4cddf1c21f02770737f147a3f5da9d39695
+  local_auth_darwin: 4d56c90c2683319835a61274b57620df9c4520ab
+  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
+  shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
   SimpleKeychain: f8707c8e97b38c6a6e687b17732afc9bcef06439
   smart_auth: 4bedbc118723912d0e45a07e8ab34039c19e04f2
