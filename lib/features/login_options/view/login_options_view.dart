@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login_types/core/router/app_route_path.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
@@ -51,7 +52,7 @@ class _SimpleLoginButton extends StatelessWidget {
 
     return CustomButton(
       text: localization.signInText(localization.signInUserPassword),
-      onPress: () => context.go('/login_user_pass'),
+      onPress: () => context.push(AppRoutePath.loginOptions.userPassword.path),
       backgroundColor: CustomColors.white.withOpacity(.6),
       foregroundColor: CustomColors.darkBlue,
       icon: const Icon(Icons.login, color: CustomColors.darkBlue),
@@ -68,7 +69,7 @@ class _PasscodeButton extends StatelessWidget {
 
     return CustomButton(
       text: localization.signInText(localization.signInPasscode),
-      onPress: () => context.go('/login_passcode'),
+      onPress: () => context.push(AppRoutePath.loginOptions.passcode.path),
       backgroundColor: CustomColors.lightBlue,
       foregroundColor: CustomColors.white,
       icon: const Icon(Icons.sms_outlined, color: CustomColors.white),
@@ -85,7 +86,7 @@ class _FingerprintButton extends StatelessWidget {
 
     return CustomButton(
       text: localization.signInText(localization.signInFingerPrint),
-      onPress: () => context.go('/login_biometric'),
+      onPress: () => context.push(AppRoutePath.loginOptions.biometric.path),
       backgroundColor: CustomColors.darkPurple,
       foregroundColor: CustomColors.white,
       icon: const Icon(Icons.fingerprint_outlined, color: CustomColors.white),
@@ -102,7 +103,7 @@ class _ThirdLoginButton extends StatelessWidget {
 
     return CustomButton(
       text: localization.signInText(localization.signInThird),
-      onPress: () => context.go('/third_login'),
+      onPress: () => context.push(AppRoutePath.loginOptions.third.path),
       backgroundColor: CustomColors.darkYellow,
       foregroundColor: CustomColors.white,
       icon: const Icon(
@@ -122,7 +123,7 @@ class _MechanismLoginButton extends StatelessWidget {
 
     return CustomButton(
       text: localization.signInText(localization.signInOtherMechanism),
-      onPress: () => context.go('/mechanism_login'),
+      onPress: () => context.push(AppRoutePath.loginOptions.mechanism.path),
       backgroundColor: CustomColors.lightRed,
       foregroundColor: CustomColors.white,
       icon: const Icon(Icons.account_balance, color: CustomColors.white),
