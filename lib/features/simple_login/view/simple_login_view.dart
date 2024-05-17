@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_login_types/core/router/app_route_path.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
 import 'package:flutter_login_types/core/widgets/custom_message.dart';
@@ -23,7 +24,7 @@ class SimpleLoginView extends ConsumerWidget {
     ref.listen(simpleLoginNotifierProvider, (_, state) {
       state.whenOrNull(
         data: (data) {
-          if (data != null && data) context.go('/home');
+          if (data != null && data) context.go(AppRoutePath.home.path);
         },
         error: (_, __) => CustomMessage.show(
           context,

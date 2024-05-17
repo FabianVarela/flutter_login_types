@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login_types/core/router/app_route_path.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
 import 'package:flutter_login_types/core/widgets/custom_message.dart';
@@ -22,7 +23,7 @@ class FingerPrintLoginView extends HookConsumerWidget {
       state.whenOrNull(
         data: (data) {
           if (data == LocalAuthOption.granted) {
-            context.go('/home');
+            context.go(AppRoutePath.home.path);
           } else if (data == LocalAuthOption.denied) {
             CustomMessage.show(context, localization.biometricError);
           }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
+import 'package:flutter_login_types/core/router/app_route_path.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
 import 'package:flutter_login_types/core/widgets/custom_message.dart';
@@ -43,7 +44,7 @@ class PasscodeLoginView extends HookConsumerWidget {
             pageValue.value = 1;
             _sendNotification(context, ref);
           } else if (data == PasscodeLogin.passcode) {
-            context.go('/home');
+            context.go(AppRoutePath.home.path);
           }
         },
         error: (_, __) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/notifiers/language_notifier.dart';
+import 'package:flutter_login_types/core/router/app_route_path.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
 import 'package:flutter_login_types/core/widgets/custom_message.dart';
@@ -23,7 +24,7 @@ class MechanismLoginView extends HookConsumerWidget {
 
     ref.listen(mechanismLoginNotifierProvider, (_, state) {
       state.whenOrNull(
-        data: (_) => context.go('/home'),
+        data: (_) => context.go(AppRoutePath.home.path),
         error: (e, _) {
           if (e is MechanismException) _showErrorMessage(context, e);
         },
