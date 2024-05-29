@@ -46,7 +46,7 @@ class _HomePageUIState extends ConsumerState<HomeView>
         centerTitle: true,
       ),
       body: SizedBox(
-        width: MediaQuery.of(context).size.width,
+        width: MediaQuery.sizeOf(context).width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
