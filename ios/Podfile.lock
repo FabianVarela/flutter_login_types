@@ -26,7 +26,7 @@ PODS:
   - flutter_appauth (0.0.1):
     - AppAuth (= 1.7.4)
     - Flutter
-  - flutter_facebook_auth (6.2.0):
+  - flutter_facebook_auth (7.0.0):
     - FBSDKLoginKit (~> 17.0.0)
     - Flutter
   - flutter_local_notifications (0.0.1):
@@ -135,7 +135,7 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: 9a581053879a1e6fc3fab8ead341c78c6a318255
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_appauth: 1ce438877bc111c5d8f42da47729909290624886
-  flutter_facebook_auth: 66188df7905bfcaf3d6d2bd6527302c56448f04d
+  flutter_facebook_auth: 03d374669f8a04bd869051ca75c1daf120cb1867
   flutter_local_notifications: 4cde75091f6327eb8517fa068a0a5950212d2086
   flutter_secure_storage: d33dac7ae2ea08509be337e775f6b59f1ff45f12
   google_sign_in_ios: 07375bfbf2620bc93a602c0e27160d6afc6ead38
