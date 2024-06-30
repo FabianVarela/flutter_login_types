@@ -14,20 +14,20 @@ PODS:
     - FlutterMacOS
     - JWTDecode (= 3.1.0)
     - SimpleKeychain (= 1.1.0)
-  - FBAEMKit (17.0.1):
-    - FBSDKCoreKit_Basics (= 17.0.1)
-  - FBSDKCoreKit (17.0.1):
-    - FBAEMKit (= 17.0.1)
-    - FBSDKCoreKit_Basics (= 17.0.1)
-  - FBSDKCoreKit_Basics (17.0.1)
-  - FBSDKLoginKit (17.0.1):
-    - FBSDKCoreKit (= 17.0.1)
+  - FBAEMKit (17.0.2):
+    - FBSDKCoreKit_Basics (= 17.0.2)
+  - FBSDKCoreKit (17.0.2):
+    - FBAEMKit (= 17.0.2)
+    - FBSDKCoreKit_Basics (= 17.0.2)
+  - FBSDKCoreKit_Basics (17.0.2)
+  - FBSDKLoginKit (17.0.2):
+    - FBSDKCoreKit (= 17.0.2)
   - Flutter (1.0.0)
   - flutter_appauth (0.0.1):
     - AppAuth (= 1.7.4)
     - Flutter
-  - flutter_facebook_auth (7.0.0):
-    - FBSDKLoginKit (~> 17.0.0)
+  - flutter_facebook_auth (7.0.1):
+    - FBSDKLoginKit (~> 17.0.2)
     - Flutter
   - flutter_local_notifications (0.0.1):
     - Flutter
@@ -46,10 +46,10 @@ PODS:
   - GTMAppAuth (4.1.1):
     - AppAuth/Core (~> 1.7)
     - GTMSessionFetcher/Core (< 4.0, >= 3.3)
-  - GTMSessionFetcher (3.4.1):
-    - GTMSessionFetcher/Full (= 3.4.1)
-  - GTMSessionFetcher/Core (3.4.1)
-  - GTMSessionFetcher/Full (3.4.1):
+  - GTMSessionFetcher (3.5.0):
+    - GTMSessionFetcher/Full (= 3.5.0)
+  - GTMSessionFetcher/Core (3.5.0)
+  - GTMSessionFetcher/Full (3.5.0):
     - GTMSessionFetcher/Core
   - JWTDecode (3.1.0)
   - local_auth_darwin (0.0.1):
@@ -63,8 +63,6 @@ PODS:
   - sign_in_with_apple (0.0.1):
     - Flutter
   - SimpleKeychain (1.1.0)
-  - smart_auth (0.0.1):
-    - Flutter
   - twitter_login (0.0.1):
     - Flutter
 
@@ -80,7 +78,6 @@ DEPENDENCIES:
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
-  - smart_auth (from `.symlinks/plugins/smart_auth/ios`)
   - twitter_login (from `.symlinks/plugins/twitter_login/ios`)
 
 SPEC REPOS:
@@ -120,8 +117,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   sign_in_with_apple:
     :path: ".symlinks/plugins/sign_in_with_apple/ios"
-  smart_auth:
-    :path: ".symlinks/plugins/smart_auth/ios"
   twitter_login:
     :path: ".symlinks/plugins/twitter_login/ios"
 
@@ -129,26 +124,25 @@ SPEC CHECKSUMS:
   AppAuth: 182c5b88630569df5acb672720534756c29b3358
   Auth0: 28cb24cb19ebd51f0b07751f16d83b59f4019532
   auth0_flutter: f085572268059bc194c7b023d7f432f5ebb72413
-  FBAEMKit: 97eaf41451b49691447df831f7f425229ae64b66
-  FBSDKCoreKit: e34084567d11cfdd4787ace2b1a0255bedf34ade
-  FBSDKCoreKit_Basics: 3d78e5fe00504e5c1aed1c48de0654c3a1565d15
-  FBSDKLoginKit: 9a581053879a1e6fc3fab8ead341c78c6a318255
+  FBAEMKit: 619f96ea65427e8afca240d5b0f4703738dfdf5c
+  FBSDKCoreKit: a5f384db2e9ee84e98494fed8f983d2bd79accff
+  FBSDKCoreKit_Basics: d35c775aaf243a2d731dfae7be3a74b1987285ab
+  FBSDKLoginKit: f8ca5f7ab7c4e5b93e729d94975b0db7fcc511ed
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_appauth: 1ce438877bc111c5d8f42da47729909290624886
-  flutter_facebook_auth: 03d374669f8a04bd869051ca75c1daf120cb1867
+  flutter_facebook_auth: 4fa1dc3fa624284a5ddfdf9e4a2b7945b3835949
   flutter_local_notifications: 4cde75091f6327eb8517fa068a0a5950212d2086
   flutter_secure_storage: d33dac7ae2ea08509be337e775f6b59f1ff45f12
   google_sign_in_ios: 07375bfbf2620bc93a602c0e27160d6afc6ead38
   GoogleSignIn: d4281ab6cf21542b1cfaff85c191f230b399d2db
   GTMAppAuth: f69bd07d68cd3b766125f7e072c45d7340dea0de
-  GTMSessionFetcher: 8000756fc1c19d2e5697b90311f7832d2e33f6cd
+  GTMSessionFetcher: 5aea5ba6bd522a239e236100971f10cb71b96ab6
   JWTDecode: 3eaab1e06b6f4dcbdd6716aff09ba4c2104ca8b7
   local_auth_darwin: 4d56c90c2683319835a61274b57620df9c4520ab
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
   SimpleKeychain: f8707c8e97b38c6a6e687b17732afc9bcef06439
-  smart_auth: 4bedbc118723912d0e45a07e8ab34039c19e04f2
   twitter_login: 2794db69b7640681171b17b3c2c84ad9dfb4a57f
 
 PODFILE CHECKSUM: 9135c1618c7cf386240ce04062d5a6a8ac41d5ba
