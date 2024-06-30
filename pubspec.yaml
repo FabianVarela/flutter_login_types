@@ -13,9 +13,9 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_appauth: ^6.0.6
-  flutter_facebook_auth: ^7.0.0
+  flutter_facebook_auth: ^7.0.1
   flutter_hooks: ^0.20.5
-  flutter_local_notifications: ^17.1.2
+  flutter_local_notifications: ^17.2.1
   flutter_localizations:
     sdk: flutter
   formz: ^0.7.0
@@ -29,7 +29,7 @@ dependencies:
   local_auth: ^2.2.0
   pinput: ^5.0.0
   shared_preferences: ^2.2.3
-  sign_in_with_apple: ^6.1.0
+  sign_in_with_apple: ^6.1.1
   twitter_login: ^4.4.2
 
 dev_dependencies:
@@ -37,7 +37,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed: ^2.5.2
-  very_good_analysis: ^5.1.0
+  very_good_analysis: ^6.0.0
 
 flutter:
   uses-material-design: true
