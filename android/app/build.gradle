@@ -35,17 +35,17 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdkVersion 34
+    compileSdk 34
 
     compileOptions {
-        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
 
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        coreLibraryDesugaringEnabled true
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
 
     sourceSets {
@@ -55,6 +55,8 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.developer.fabian.login_types"
+        namespace 'com.developer.fabian.login_types'
+
         minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
@@ -71,7 +73,6 @@ android {
         resValue "string", "facebook_app_id", dartEnvironmentVariables.FACEBOOK_APP_ID ?: ''
         resValue "string", "facebook_client_token", dartEnvironmentVariables.FACEBOOK_CLIENT_TOKEN ?: ''
         resValue "string", "twitter_callback_url", dartEnvironmentVariables.TWITTER_REDIRECT_URI ?: ''
-
     }
 
     buildTypes {
