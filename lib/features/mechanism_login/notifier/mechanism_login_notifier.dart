@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:auth0_flutter/auth0_flutter.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -31,10 +31,8 @@ class MechanismLoginNotifier extends AutoDisposeAsyncNotifier<MechanismType> {
         return MechanismType.azure;
       } on Exception catch (e) {
         var error = MechanismError.error;
-        if (e is PlatformException) {
-          if (e.message?.contains('cancelled') ?? false) {
-            error = MechanismError.cancelled;
-          }
+        if (e is FlutterAppAuthUserCancelledException) {
+          error = MechanismError.cancelled;
         }
         throw MechanismException(type: MechanismType.azure, error: error);
       }

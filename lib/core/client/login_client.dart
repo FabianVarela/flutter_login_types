@@ -125,7 +125,6 @@ class LoginClient {
         ),
       );
 
-      if (result == null) throw Exception('Error logging in');
       return <String, dynamic>{
         'idToken': result.idToken,
         'accessToken': result.accessToken,
