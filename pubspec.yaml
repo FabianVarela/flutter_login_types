@@ -13,7 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_appauth: ^7.0.0
-  flutter_facebook_auth: ^7.1.0
+  flutter_facebook_auth: ^7.1.1
   flutter_hooks: ^0.20.5
   flutter_local_notifications: ^17.2.2
   flutter_localizations:
