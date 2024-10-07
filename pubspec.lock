@@ -324,10 +324,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_plugin_android_lifecycle
-      sha256: "9ee02950848f61c4129af3d6ec84a1cfc0e47931abc746b03e7a3bc3e8ff6eda"
+      sha256: "9b78450b89f059e96c9ebb355fa6b3df1d6b330436e0b885fb49594c41721398"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.22"
+    version: "2.0.23"
   flutter_riverpod:
     dependency: transitive
     description:
@@ -438,10 +438,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: b4c1cce7eda99ff729bb69d10cd7555017a0665f66ca46ee574e6a03785b389d
+      sha256: "6f1b756f6e863259a99135ff3c95026c3cdca17d10ebef2bba2261a25ddc8bbc"
       url: "https://pub.dev"
     source: hosted
-    version: "14.2.9"
+    version: "14.3.0"
   go_router_paths:
     dependency: "direct main"
     description:
@@ -478,10 +478,10 @@ packages:
     dependency: transitive
     description:
       name: google_sign_in_android
-      sha256: "1ad54110a151d3ebbfe9be5a0c2b715aeabddb079e54efd84e56c49605b5474a"
+      sha256: "1fc524675bc6e9e3728a2016c28d2abf630b080efde30fdb5e05eaf0357e1fd9"
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.31"
+    version: "6.1.32"
   google_sign_in_ios:
     dependency: transitive
     description:
@@ -614,10 +614,10 @@ packages:
     dependency: transitive
     description:
       name: local_auth_android
-      sha256: "5351c7eea8823de28e37d8b7b3e386d944b80f2a77edb91a5707fb97a41fc1b1"
+      sha256: "6763aaf8965f21822624cb2fd3c03d2a8b3791037b5efb0fe4b13e110f5afc92"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.45"
+    version: "1.0.46"
   local_auth_darwin:
     dependency: transitive
     description:
@@ -718,10 +718,10 @@ packages:
     dependency: transitive
     description:
       name: path_provider_android
-      sha256: "6f01f8e37ec30b07bc424b4deabac37cacb1bc7e2e515ad74486039918a37eb7"
+      sha256: f7544c346a0742aee1450f9e5c0f5269d7c602b9c95fdbcd9fb8f5b1df13b1cc
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.10"
+    version: "2.2.11"
   path_provider_foundation:
     dependency: transitive
     description:
@@ -830,10 +830,10 @@ packages:
     dependency: transitive
     description:
       name: shared_preferences_android
-      sha256: "480ba4345773f56acda9abf5f50bd966f581dac5d514e5fc4a18c62976bbba7e"
+      sha256: "3b9febd815c9ca29c9e3520d50ec32f49157711e143b7a4ca039eb87e8ade5ab"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.2"
+    version: "2.3.3"
   shared_preferences_foundation:
     dependency: transitive
     description:
