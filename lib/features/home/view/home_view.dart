@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/notifiers/language_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HomeView extends ConsumerStatefulWidget {
@@ -51,7 +52,7 @@ class _HomePageUIState extends ConsumerState<HomeView>
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(context.localizations.homeText),
-            const SizedBox(height: 30),
+            const Gap(30),
             DropdownButton<Locale>(
               hint: Text(context.localizations.changeLanguageTitle),
               value: language,

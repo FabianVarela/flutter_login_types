@@ -7,6 +7,7 @@ import 'package:flutter_login_types/core/widgets/custom_message.dart';
 import 'package:flutter_login_types/core/widgets/loading.dart';
 import 'package:flutter_login_types/features/mechanism_login/notifier/mechanism_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -51,7 +52,7 @@ class MechanismLoginView extends HookConsumerWidget {
                   foregroundColor: CustomColors.white,
                   icon: const Icon(Icons.window, color: CustomColors.white),
                 ),
-                const SizedBox(height: 20),
+                const Gap(20),
                 CustomButton(
                   text: localization.signInText(localization.signInAuth0),
                   onPress: () => ref

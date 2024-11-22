@@ -11,6 +11,7 @@ import 'package:flutter_login_types/features/passcode_login/forms/passcode_login
 import 'package:flutter_login_types/features/passcode_login/forms/passcode_login_form_notifier.dart';
 import 'package:flutter_login_types/features/passcode_login/notifier/passcode_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pinput/pinput.dart';
@@ -129,7 +130,7 @@ class _PhoneForm extends HookConsumerWidget {
             textAlign: TextAlign.center,
             style: const TextStyle(color: CustomColors.darkBlue, fontSize: 20),
           ),
-          const SizedBox(height: 50),
+          const Gap(50),
           CustomTextField(
             textController: controller,
             hint: localization.phoneNumberPlaceholder,
@@ -145,7 +146,7 @@ class _PhoneForm extends HookConsumerWidget {
                     ? localization.emptyValidation
                     : localization.numberValidation,
           ),
-          const SizedBox(height: 20),
+          const Gap(20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Row(
@@ -194,7 +195,7 @@ class _PasscodeForm extends HookConsumerWidget {
             textAlign: TextAlign.center,
             style: const TextStyle(color: CustomColors.darkBlue, fontSize: 20),
           ),
-          const SizedBox(height: 50),
+          const Gap(50),
           Pinput(
             controller: controller,
             onCompleted: (value) => ref

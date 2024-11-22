@@ -6,6 +6,7 @@ import 'package:flutter_login_types/core/widgets/custom_message.dart';
 import 'package:flutter_login_types/core/widgets/loading.dart';
 import 'package:flutter_login_types/features/fingerprint_login/notifier/fingerprint_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -74,7 +75,7 @@ class _BiometricBody extends ConsumerWidget {
           textAlign: TextAlign.center,
           style: const TextStyle(color: CustomColors.darkBlue, fontSize: 20),
         ),
-        const SizedBox(height: 30),
+        const Gap(30),
         biometricList.when(
           data: (data) => data.isNotEmpty
               ? CustomButton(
