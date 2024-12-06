@@ -64,12 +64,13 @@ with the name `config-keys.json` on the project's root.
 
 * If you want to set the GoogleServices files
   follow [this link](https://pub.dev/packages/google_sign_in#platform-integration)
-* If not, you must set the **Google client id** for Android and iOS, (as reverse mode for iOS) on the *Info.plist file*.
-  Also, set the *Dart Define command* setting the additional run arguments below
+* If not, you must set the **Google client id** for Android and iOS, (as reverse mode for iOS) in the *Dart Define
+  command* setting the additional run arguments below
   ```json5
   {
     "GOOGLE_CLIENT_ID_AND": "<YOUR_GOOGLE_CLIENT_ID_AND>",
     "GOOGLE_CLIENT_ID_IOS": "<YOUR_GOOGLE_CLIENT_ID_IOS>",
+    "GOOGLE_CLIENT_ID_IOS_REV": "<YOUR_GOOGLE_CLIENT_ID_IOS_IN_REVERSE>",
     // More keys here...
   }
   ```
@@ -85,7 +86,7 @@ the [Google Console](https://console.cloud.google.com/apis/dashboard?project=to-
   {
     // keys already exists...
     "APPLE_CLIENT_ID": "<YOUR_APPLE_CLIENT_ID>",
-    "APPLE_REDIRECT_URI": "<YOUR_APPLE_REDIRECT_URI>"
+    "APPLE_REDIRECT_URI": "<YOUR_APPLE_REDIRECT_URI>",
     // More keys here...
   }
   ```
@@ -101,13 +102,11 @@ follow [this link](https://pub.dev/packages/sign_in_with_apple#integration)*</fo
   {
     // keys already exists...
     "FACEBOOK_APP_ID": "<YOUR_FACEBOOK_APP_ID>",
-    "FACEBOOK_CLIENT_TOKEN": "<YOUR_FACEBOOK_CLIENT_TOKEN>"
+    "FACEBOOK_CLIENT_TOKEN": "<YOUR_FACEBOOK_CLIENT_TOKEN>",
+    "FACEBOOK_DISPLAY_NAME": "<YOUR_FACEBOOK_DISPLAY_NAME>",
     // More keys here...
   }
   ```
-
-* For iOS, you must the **app id**, the **client token** and the **display name** in the ```ios/Runner/Info.plist```
-  file.
 
 <font size="3">*These values you must get on the [Facebook Developers](https://developers.facebook.com). Also, you can
 follow [this link for Android](https://facebook.meedu.app/docs/5.x.x/android)
@@ -122,12 +121,10 @@ and [this link for iOS](https://facebook.meedu.app/docs/5.x.x/ios)*</font>
     // keys already exists...
     "TWITTER_API_KEY": "<YOUR_TWITTER_API_KEY>",
     "TWITTER_API_SECRET": "<YOUR_TWITTER_API_SECRET>",
-    "TWITTER_REDIRECT_URI": "<YOUR_TWITTER_REDIRECT_URI>"
+    "TWITTER_REDIRECT_URI": "<YOUR_TWITTER_REDIRECT_URI>",
     // More keys here...
   }
   ```
-
-* For iOS, you must the **redirect uri** as well in the ```ios/Runner/Info.plist``` file.
 
 <font size="3">*These values you must get on the [Twitter Developer](https://developer.twitter.com) or your
 apps [here](https://developer.twitter.com/en/apps/). Also, you can
@@ -148,11 +145,9 @@ follow [this link](https://pub.dev/packages/twitter_login#twitter-configuration)
     "AZURE_POLICY_NAME": "<YOUR_AZURE_POLICY_NAME>",
     "AZURE_CLIENT_ID": "<YOUR_AZURE_CLIENT_ID>",
     "AZURE_REDIRECT_SCHEME": "<YOUR_AZURE_REDIRECT_SCHEME>",
-    "AZURE_REDIRECT_PATH": "<YOUR_AZURE_REDIRECT_PATH>"
+    "AZURE_REDIRECT_PATH": "<YOUR_AZURE_REDIRECT_PATH>",
   }
   ```
-
-* For iOS, you must the **redirect scheme** as well, in the ```ios/Runner/Info.plist``` file.
 
 <font size="3">To get these values, you must follow these links:
 
@@ -171,40 +166,10 @@ follow [this link](https://pub.dev/packages/twitter_login#twitter-configuration)
     "AUTH0_DOMAIN": "<YOUR_AUTH0_DOMAIN>",
     "AUTH0_CLIENT_ID": "<YOUR_AUTH0_CLIENT_ID>",
     // Only if you have a custom scheme
-    "AUTH0_SCHEME_AND": "<YOUR_AUTH0_SCHEME_AND>"
+    "AUTH0_SCHEME_AND": "<YOUR_AUTH0_SCHEME_AND>",
   }
   ```
 
 <font size="3">You can follow this link to guide:
 
 * [Auth0 with Flutter](https://auth0.com/docs/quickstart/native/flutter/interactive)</font>
-
-------
-
-### Used packages
-
-#### Dependencies
-
-- Auth0 Flutter ([auth0_flutter](https://pub.dev/packages/auth0_flutter))
-- Flutter Facebook auth ([flutter_facebook_auth](https://pub.dev/packages/flutter_facebook_auth))
-- Flutter local notifications ([flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications))
-- Flutter app auth ([flutter_appauth](https://pub.dev/packages/flutter_appauth))
-- Formz ([formz](https://pub.dev/packages/formz))
-- Freezed annotation ([freezed_annotation](https://pub.dev/packages/freezed_annotation))
-- Go Router ([go_router](https://pub.dev/packages/go_router))
-- Google fonts ([google_fonts](https://pub.dev/packages/google_fonts))
-- Google signIn ([google_sign_in](https://pub.dev/packages/google_sign_in))
-- Hooks ([flutter_hooks](https://pub.dev/packages/flutter_hooks))
-- Intl ([intl](https://pub.dev/packages/intl))
-- Local auth ([local_auth](https://pub.dev/packages/local_auth))
-- Pinput ([pinput](https://pub.dev/packages/pinput))
-- Riverpod with Hooks ([hooks_riverpod](https://pub.dev/packages/hooks_riverpod))
-- Shared preferences ([shared_preferences](https://pub.dev/packages/shared_preferences))
-- SignIn with Apple ([sign_in_with_apple](https://pub.dev/packages/sign_in_with_apple))
-- Twitter login ([twitter_login](https://pub.dev/packages/twitter_login))
-
-#### Dev dependencies
-
-- Build runner ([build_runner](https://pub.dev/packages/build_runner))
-- Freezed ([freezed](https://pub.dev/packages/freezed))
-- Very Good Analysis ([very_good_analysis](https://pub.dev/packages/very_good_analysis))
