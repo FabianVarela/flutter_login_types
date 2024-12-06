@@ -34,10 +34,11 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb{your-app-id}</string>
-				<string>{your-google-user-content}</string>
-				<string>{your-twitter-callback-url}</string>
-				<string>{your-app-auth-scheme}</string>
+				<string>$(FACEBOOK_APP_ID_PREFIX)</string>
+				<string>$(GOOGLE_CLIENT_ID_IOS_REV)</string>
+				<string>$(TWITTER_REDIRECT_URI)</string>
+                <!--Apply for Flutter AppAuth-->
+				<string>$(AZURE_REDIRECT_SCHEME)</string>
                 <!--Apply for Auth0-->
 				<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 			</array>
@@ -46,11 +47,11 @@
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>FacebookAppID</key>
-	<string>{your-app-id}</string>
+	<string>$(FACEBOOK_APP_ID)</string>
 	<key>FacebookClientToken</key>
-	<string>{your-client-token}</string>
+	<string>$(FACEBOOK_CLIENT_TOKEN)</string>
 	<key>FacebookDisplayName</key>
-	<string>{your-app-name}</string>
+	<string>$(FACEBOOK_DISPLAY_NAME)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
