@@ -30,18 +30,16 @@ class NotificationService {
   }
 
   Future<void> showNotification(String title, String body) async {
-    const androidChannel = AndroidNotificationDetails(
-      'channel id',
-      'channel name',
-      channelDescription: 'channel description',
-      importance: Importance.max,
-      priority: Priority.high,
-      timeoutAfter: 5000,
-      styleInformation: DefaultStyleInformation(true, true),
-    );
-
     const platformChannelSpecifics = NotificationDetails(
-      android: androidChannel,
+      android: AndroidNotificationDetails(
+        'channel id',
+        'channel name',
+        channelDescription: 'channel description',
+        importance: Importance.max,
+        priority: Priority.high,
+        timeoutAfter: 5000,
+        styleInformation: DefaultStyleInformation(true, true),
+      ),
       iOS: DarwinNotificationDetails(presentSound: true),
     );
 
