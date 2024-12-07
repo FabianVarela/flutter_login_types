@@ -69,6 +69,7 @@ class _BiometricBody extends ConsumerWidget {
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Text(
           localization.biometricTitle,

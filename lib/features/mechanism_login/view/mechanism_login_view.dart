@@ -42,6 +42,7 @@ class MechanismLoginView extends HookConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 CustomButton(
                   text: localization.signInText(localization.signInAzureAd),
