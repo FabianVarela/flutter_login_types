@@ -87,9 +87,9 @@ class _TextFieldEmail extends HookConsumerWidget {
       hint: localization.emailPlaceholder,
       isRequired: true,
       requiredMessage: localization.emailRequiredMessage,
-      onChange: (value) {
-        ref.read(loginFormNotifierProvider.notifier).onChangeEmail(value);
-      },
+      onChange: (value) => ref
+          .read(loginFormNotifierProvider.notifier)
+          .onChangeEmail(value: value),
       inputType: TextInputType.emailAddress,
       action: TextInputAction.next,
       errorText: emailError == null
@@ -127,9 +127,9 @@ class _TextFieldPassword extends HookConsumerWidget {
       hint: localization.passwordPlaceholder,
       isRequired: true,
       requiredMessage: localization.passwordRequiredMessage,
-      onChange: (value) {
-        ref.read(loginFormNotifierProvider.notifier).onChangePassword(value);
-      },
+      onChange: (value) => ref
+          .read(loginFormNotifierProvider.notifier)
+          .onChangePassword(value: value),
       errorText: passwordError == null
           ? null
           : passwordError == PasswordInputValidator.empty

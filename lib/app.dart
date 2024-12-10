@@ -19,8 +19,6 @@ class LoginApp extends HookConsumerWidget {
     useEffect(
       () {
         ref.read(notificationServiceProvider).init();
-        ref.read(languageNotifierProvider.notifier).getLanguage();
-
         return null;
       },
       const [],

@@ -11,7 +11,10 @@ class SimpleLoginNotifier extends AutoDisposeAsyncNotifier<bool?> {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       final repository = ref.read(loginRepositoryProvider);
-      final token = await repository.authenticate(email, password);
+      final token = await repository.authenticate(
+        username: email,
+        password: password,
+      );
 
       if (token != null && token == 'MiToken') return true;
       throw Exception();

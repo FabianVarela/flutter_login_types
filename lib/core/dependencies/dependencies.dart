@@ -20,7 +20,9 @@ final localAuthenticationProvider = Provider<LocalAuthentication>(
 );
 
 final preferencesProvider = Provider<Preferences>(
-  (ref) => Preferences(ref.watch(sharedPreferencesProvider)),
+  (ref) => Preferences(
+    sharedPreferences: ref.watch(sharedPreferencesProvider),
+  ),
 );
 
 final localNotificationsProvider = Provider<FlutterLocalNotificationsPlugin>(
@@ -40,20 +42,22 @@ final appConfigProvider = Provider<AppConfig>((_) => AppConfig());
 
 final loginClientProvider = Provider<LoginClient>(
   (ref) => LoginClient(
-    ref.watch(appConfigProvider),
-    ref.watch(appAuthProvider),
-    ref.watch(auth0Provider),
+    appConfig: ref.watch(appConfigProvider),
+    appAuth: ref.watch(appAuthProvider),
+    auth0: ref.watch(auth0Provider),
   ),
 );
 
 final languageRepositoryProvider = Provider<LanguageRepository>(
-  (ref) => LanguageRepository(ref.watch(preferencesProvider)),
+  (ref) => LanguageRepository(preferences: ref.watch(preferencesProvider)),
 );
 
 final loginRepositoryProvider = Provider<LoginRepository>(
-  (ref) => LoginRepository(ref.watch(loginClientProvider)),
+  (ref) => LoginRepository(client: ref.watch(loginClientProvider)),
 );
 
 final notificationServiceProvider = Provider<NotificationService>(
-  (ref) => NotificationService(ref.watch(localNotificationsProvider)),
+  (ref) => NotificationService(
+    localNotifications: ref.watch(localNotificationsProvider),
+  ),
 );

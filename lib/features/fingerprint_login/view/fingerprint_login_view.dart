@@ -83,7 +83,7 @@ class _BiometricBody extends ConsumerWidget {
                   text: localization.biometricButtonText,
                   onPress: () => ref
                       .read(localAuthNotifierProvider.notifier)
-                      .authenticate(localization.biometricReason),
+                      .authenticate(reason: localization.biometricReason),
                   backgroundColor: CustomColors.darkPurple,
                   foregroundColor: CustomColors.white,
                 )

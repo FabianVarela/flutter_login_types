@@ -1,12 +1,12 @@
 import 'package:flutter_login_types/core/client/preferences.dart';
 
 class LanguageRepository {
-  LanguageRepository(this._preferences);
+  LanguageRepository({required this.preferences});
 
-  final Preferences _preferences;
+  final Preferences preferences;
 
-  Future<String?> getLanguage() => _preferences.getLanguage();
+  Future<String?> getLanguage() => preferences.getLanguage();
 
-  Future<bool> setLanguage(String language) =>
-      _preferences.setLanguage(language);
+  Future<bool> setLanguage({required String language}) =>
+      preferences.setLanguage(language: language);
 }

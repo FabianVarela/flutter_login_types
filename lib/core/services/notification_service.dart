@@ -2,20 +2,20 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationService {
-  NotificationService(this._localNotifications);
+  NotificationService({required this.localNotifications});
 
-  final FlutterLocalNotificationsPlugin _localNotifications;
+  final FlutterLocalNotificationsPlugin localNotifications;
 
   void init() {
     if (defaultTargetPlatform == TargetPlatform.iOS) {
-      _localNotifications
+      localNotifications
           .resolvePlatformSpecificImplementation<
               IOSFlutterLocalNotificationsPlugin>()
           ?.requestPermissions(badge: true, sound: true);
     }
 
     if (defaultTargetPlatform == TargetPlatform.android) {
-      _localNotifications
+      localNotifications
           .resolvePlatformSpecificImplementation<
               AndroidFlutterLocalNotificationsPlugin>()
           ?.requestNotificationsPermission();
@@ -26,10 +26,13 @@ class NotificationService {
       iOS: DarwinInitializationSettings(),
     );
 
-    _localNotifications.initialize(initSettings);
+    localNotifications.initialize(initSettings);
   }
 
-  Future<void> showNotification(String title, String body) async {
+  Future<void> showNotification({
+    required String title,
+    required String body,
+  }) async {
     const platformChannelSpecifics = NotificationDetails(
       android: AndroidNotificationDetails(
         'channel id',
@@ -43,6 +46,6 @@ class NotificationService {
       iOS: DarwinNotificationDetails(presentSound: true),
     );
 
-    await _localNotifications.show(0, title, body, platformChannelSpecifics);
+    await localNotifications.show(0, title, body, platformChannelSpecifics);
   }
 }

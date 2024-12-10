@@ -89,8 +89,8 @@ class PasscodeLoginView extends HookConsumerWidget {
   Future<void> _sendNotification(BuildContext context, WidgetRef ref) async {
     final notification = ref.read(notificationServiceProvider);
     await notification.showNotification(
-      context.localizations.notificationTitle,
-      context.localizations.notificationMessage('0000'),
+      title: context.localizations.notificationTitle,
+      body: context.localizations.notificationMessage('0000'),
     );
   }
 }
@@ -138,7 +138,7 @@ class _PhoneForm extends HookConsumerWidget {
             requiredMessage: localization.phoneNumberRequired,
             onChange: (value) => ref
                 .read(passcodeFormNotifierProvider.notifier)
-                .onChangePhone(value),
+                .onChangePhone(value: value),
             inputType: TextInputType.phone,
             errorText: phoneError == null
                 ? null
@@ -157,7 +157,7 @@ class _PhoneForm extends HookConsumerWidget {
                     onPress: isFormValid
                         ? () => ref
                             .read(passcodeLoginNotifierProvider.notifier)
-                            .verifyPhone(phoneInput.value)
+                            .verifyPhone(phoneNumber: phoneInput.value)
                         : null,
                     backgroundColor: CustomColors.lightGreen,
                     foregroundColor: CustomColors.white,
@@ -200,7 +200,7 @@ class _PasscodeForm extends HookConsumerWidget {
             controller: controller,
             onCompleted: (value) => ref
                 .read(passcodeLoginNotifierProvider.notifier)
-                .verifyCode(value),
+                .verifyCode(passcode: value),
           ),
         ],
       ),

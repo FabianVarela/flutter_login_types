@@ -11,22 +11,22 @@ class PasscodeLoginNotifier extends AutoDisposeAsyncNotifier<PasscodeLogin> {
 
   void restore() => state = const AsyncValue.data(PasscodeLogin.none);
 
-  Future<void> verifyPhone(String phoneNumber) async {
+  Future<void> verifyPhone({required String phoneNumber}) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       final repository = ref.read(loginRepositoryProvider);
-      final token = await repository.verifyPhone(phoneNumber);
+      final token = await repository.verifyPhone(phone: phoneNumber);
 
       if (token != null && token.isEmpty) return PasscodeLogin.phone;
       throw Exception();
     });
   }
 
-  Future<void> verifyCode(String passcode) async {
+  Future<void> verifyCode({required String passcode}) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       final repository = ref.read(loginRepositoryProvider);
-      final token = await repository.verifyCode(passcode);
+      final token = await repository.verifyCode(code: passcode);
 
       if (token != null && token == 'MiToken') return PasscodeLogin.passcode;
       throw Exception();

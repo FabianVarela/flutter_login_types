@@ -5,11 +5,11 @@ class SimpleLoginFormNotifier extends AutoDisposeNotifier<SimpleLoginForm> {
   @override
   SimpleLoginForm build() => const SimpleLoginForm();
 
-  void onChangeEmail(String value) {
+  void onChangeEmail({required String value}) {
     state = state.copyWith(emailInput: EmailInputText.dirty(value));
   }
 
-  void onChangePassword(String value) {
+  void onChangePassword({required String value}) {
     state = state.copyWith(passwordInput: PasswordInputText.dirty(value));
   }
 }

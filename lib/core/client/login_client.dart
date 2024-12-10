@@ -8,25 +8,32 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:twitter_login/twitter_login.dart';
 
 class LoginClient {
-  LoginClient(this._appConfig, this._appAuth, this._auth0);
+  LoginClient({
+    required this.appConfig,
+    required this.appAuth,
+    required this.auth0,
+  });
 
-  final AppConfig _appConfig;
-  final FlutterAppAuth _appAuth;
-  final Auth0 _auth0;
+  final AppConfig appConfig;
+  final FlutterAppAuth appAuth;
+  final Auth0 auth0;
 
-  Future<String?> authenticate(String username, String password) async {
+  Future<String?> authenticate({
+    required String username,
+    required String password,
+  }) async {
     await Future<void>.delayed(const Duration(seconds: 3));
     return username == 'prueba@prueba.com' && password == 'password'
         ? 'MiToken'
         : null;
   }
 
-  Future<String?> verifyPhone(String phoneNumber) async {
+  Future<String?> verifyPhone({required String phoneNumber}) async {
     await Future<void>.delayed(const Duration(seconds: 3));
     return phoneNumber == '3004567890' ? '' : null;
   }
 
-  Future<String?> verifyCode(String code) async {
+  Future<String?> verifyCode({required String code}) async {
     await Future<void>.delayed(const Duration(seconds: 3));
     return code == '0000' ? 'MiToken' : null;
   }
@@ -36,8 +43,8 @@ class LoginClient {
       final googleSignIn = GoogleSignIn(
         scopes: ['email', 'https://www.googleapis.com/auth/contacts.readonly'],
         clientId: switch (defaultTargetPlatform) {
-          TargetPlatform.iOS => _appConfig.googleConfig.clientIdIos,
-          _ => _appConfig.googleConfig.clientIdAndroid,
+          TargetPlatform.iOS => appConfig.googleConfig.clientIdIos,
+          _ => appConfig.googleConfig.clientIdAndroid,
         },
       );
 
@@ -55,8 +62,8 @@ class LoginClient {
         AppleIDAuthorizationScopes.fullName,
       ],
       webAuthenticationOptions: WebAuthenticationOptions(
-        clientId: _appConfig.appleConfig.clientId,
-        redirectUri: Uri.parse(_appConfig.appleConfig.redirectUri),
+        clientId: appConfig.appleConfig.clientId,
+        redirectUri: Uri.parse(appConfig.appleConfig.redirectUri),
       ),
     );
 
@@ -88,9 +95,9 @@ class LoginClient {
 
   Future<Map<String, dynamic>> authenticateTwitter() async {
     final twitterLogin = TwitterLogin(
-      apiKey: _appConfig.twitterConfig.apiKey,
-      apiSecretKey: _appConfig.twitterConfig.apiSecret,
-      redirectURI: _appConfig.twitterConfig.redirectUri,
+      apiKey: appConfig.twitterConfig.apiKey,
+      apiSecretKey: appConfig.twitterConfig.apiSecret,
+      redirectURI: appConfig.twitterConfig.redirectUri,
     );
 
     final authResult = await twitterLogin.login();
@@ -100,27 +107,27 @@ class LoginClient {
     };
   }
 
-  Future<Map<String, dynamic>> authenticateAzure({String? lang}) async {
+  Future<Map<String, dynamic>> authenticateAzure({String? language}) async {
     try {
-      final tenantId = _appConfig.azureConfig.tenantId;
-      final policyName = _appConfig.azureConfig.policyName;
+      final tenantId = appConfig.azureConfig.tenantId;
+      final policyName = appConfig.azureConfig.policyName;
 
       final discoveryURL = Uri.https(
-        '${_appConfig.azureConfig.tenantName}.b2clogin.com',
+        '${appConfig.azureConfig.tenantName}.b2clogin.com',
         '/$tenantId/$policyName/v2.0/.well-known/openid-configuration',
       );
 
-      final redirectFullPath = '${_appConfig.azureConfig.redirectScheme}://'
-          '${_appConfig.azureConfig.redirectPath}';
+      final redirectFullPath = '${appConfig.azureConfig.redirectScheme}://'
+          '${appConfig.azureConfig.redirectPath}';
 
-      final result = await _appAuth.authorizeAndExchangeCode(
+      final result = await appAuth.authorizeAndExchangeCode(
         AuthorizationTokenRequest(
-          _appConfig.azureConfig.clientId,
+          appConfig.azureConfig.clientId,
           redirectFullPath,
           discoveryUrl: discoveryURL.toString(),
           scopes: <String>['openid', 'profile', 'email', 'offline_access'],
           additionalParameters: <String, String>{
-            if (lang != null) 'lang': lang,
+            if (language != null) 'lang': language,
           },
         ),
       );
@@ -138,11 +145,11 @@ class LoginClient {
   Future<Map<String, dynamic>> authenticateAuth0() async {
     try {
       final scheme = switch (defaultTargetPlatform) {
-        TargetPlatform.android => _appConfig.auth0Config.scheme,
+        TargetPlatform.android => appConfig.auth0Config.scheme,
         _ => null,
       };
 
-      final result = await _auth0.webAuthentication(scheme: scheme).login();
+      final result = await auth0.webAuthentication(scheme: scheme).login();
       return <String, dynamic>{
         'idToken': result.idToken,
         'accessToken': result.accessToken,

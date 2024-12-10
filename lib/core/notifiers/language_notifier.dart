@@ -6,16 +6,16 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class LanguageNotifier extends AutoDisposeAsyncNotifier<Locale?> {
   @override
-  FutureOr<Locale?> build() => null;
-
-  Future<void> getLanguage() async {
+  FutureOr<Locale?> build() async {
     final language = await ref.read(languageRepositoryProvider).getLanguage();
-    if (language != null) state = AsyncValue.data(Locale(language));
+    if (language != null) return Locale(language);
+    return null;
   }
 
   Future<void> setLanguage(String language) async {
     state = await AsyncValue.guard(() async {
-      await ref.read(languageRepositoryProvider).setLanguage(language);
+      final repository = ref.read(languageRepositoryProvider);
+      await repository.setLanguage(language: language);
       return Locale(language);
     });
   }

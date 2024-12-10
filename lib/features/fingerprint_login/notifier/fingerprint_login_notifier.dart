@@ -24,7 +24,7 @@ class LocalAuthNotifier extends AutoDisposeAsyncNotifier<LocalAuthOption> {
   @override
   FutureOr<LocalAuthOption> build() => LocalAuthOption.none;
 
-  Future<void> authenticate(String reason) async {
+  Future<void> authenticate({required String reason}) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       try {

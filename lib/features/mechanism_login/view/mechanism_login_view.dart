@@ -48,7 +48,7 @@ class MechanismLoginView extends HookConsumerWidget {
                   text: localization.signInText(localization.signInAzureAd),
                   onPress: () => ref
                       .read(mechanismLoginNotifierProvider.notifier)
-                      .authenticateAzure(lang: language?.languageCode),
+                      .authenticateAzure(language: language?.languageCode),
                   backgroundColor: CustomColors.kingBlue,
                   foregroundColor: CustomColors.white,
                   icon: const Icon(Icons.window, color: CustomColors.white),

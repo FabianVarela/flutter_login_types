@@ -20,12 +20,12 @@ class MechanismLoginNotifier extends AutoDisposeAsyncNotifier<MechanismType> {
   @override
   FutureOr<MechanismType> build() => MechanismType.none;
 
-  Future<void> authenticateAzure({String? lang}) async {
+  Future<void> authenticateAzure({String? language}) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       try {
         final repository = ref.read(loginRepositoryProvider);
-        final result = await repository.authenticateAzure(lang: lang);
+        final result = await repository.authenticateAzure(language: language);
         print(result);
 
         return MechanismType.azure;

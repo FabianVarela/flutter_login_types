@@ -5,7 +5,7 @@ class PasscodeLoginFormNotifier extends AutoDisposeNotifier<PasscodeLoginForm> {
   @override
   PasscodeLoginForm build() => const PasscodeLoginForm();
 
-  void onChangePhone(String value) {
+  void onChangePhone({required String value}) {
     state = state.copyWith(phoneInput: PhoneInputText.dirty(value));
   }
 }
