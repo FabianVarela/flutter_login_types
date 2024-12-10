@@ -6,6 +6,7 @@ import 'package:flutter_login_types/core/config/app_config.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:twitter_login/twitter_login.dart';
+import 'package:uuid/uuid.dart';
 
 class LoginClient {
   LoginClient({
@@ -24,7 +25,7 @@ class LoginClient {
   }) async {
     await Future<void>.delayed(const Duration(seconds: 3));
     return username == 'prueba@prueba.com' && password == 'password'
-        ? 'MiToken'
+        ? const Uuid().v4()
         : null;
   }
 
@@ -35,7 +36,7 @@ class LoginClient {
 
   Future<String?> verifyCode({required String code}) async {
     await Future<void>.delayed(const Duration(seconds: 3));
-    return code == '0000' ? 'MiToken' : null;
+    return code == '0000' ? const Uuid().v4() : null;
   }
 
   Future<String?> authenticateGoogle() async {
