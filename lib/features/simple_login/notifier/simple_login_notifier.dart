@@ -7,7 +7,10 @@ class SimpleLoginNotifier extends AutoDisposeAsyncNotifier<bool?> {
   @override
   FutureOr<bool?> build() => null;
 
-  Future<void> authenticate(String email, String password) async {
+  Future<void> authenticate({
+    required String email,
+    required String password,
+  }) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       final repository = ref.read(loginRepositoryProvider);

@@ -58,7 +58,7 @@ class _HomePageUIState extends ConsumerState<HomeView>
               value: language,
               onChanged: (language) => ref
                   .read(languageNotifierProvider.notifier)
-                  .setLanguage(language!.languageCode),
+                  .setLanguage(language: language!.languageCode),
               items: <DropdownMenuItem<Locale>>[
                 for (final item in AppLocalizations.supportedLocales)
                   DropdownMenuItem(

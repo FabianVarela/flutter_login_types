@@ -12,10 +12,11 @@ class LanguageNotifier extends AutoDisposeAsyncNotifier<Locale?> {
     return null;
   }
 
-  Future<void> setLanguage(String language) async {
+  Future<void> setLanguage({required String language}) async {
     state = await AsyncValue.guard(() async {
       final repository = ref.read(languageRepositoryProvider);
       await repository.setLanguage(language: language);
+
       return Locale(language);
     });
   }

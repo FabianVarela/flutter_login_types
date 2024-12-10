@@ -167,7 +167,7 @@ class _SubmitButton extends ConsumerWidget {
               onPress: isFormValid
                   ? () => ref
                       .read(simpleLoginNotifierProvider.notifier)
-                      .authenticate(emailValue, passwordValue)
+                      .authenticate(email: emailValue, password: passwordValue)
                   : null,
               backgroundColor: CustomColors.lightGreen,
               foregroundColor: CustomColors.white,
