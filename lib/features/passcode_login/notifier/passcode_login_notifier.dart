@@ -18,11 +18,11 @@ class PasscodeLoginNotifier extends AutoDisposeAsyncNotifier<PasscodeInfo> {
   Future<void> verifyPhone({required String phoneNumber}) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      final token = await ref
+      final verified = await ref
           .read(loginRepositoryProvider)
           .verifyPhone(phone: phoneNumber);
 
-      if (token != null && token.isEmpty) {
+      if (verified != null && verified.isEmpty) {
         return (mode: PasscodeMode.phone, token: null);
       }
       throw Exception();
@@ -36,9 +36,7 @@ class PasscodeLoginNotifier extends AutoDisposeAsyncNotifier<PasscodeInfo> {
           .read(loginRepositoryProvider)
           .verifyCode(passcode: passcode);
 
-      if (token != null && token == 'MiToken') {
-        return (mode: PasscodeMode.passcode, token: token);
-      }
+      if (token != null) return (mode: PasscodeMode.passcode, token: token);
       throw Exception();
     });
   }

@@ -19,7 +19,7 @@ class SimpleLoginNotifier extends AutoDisposeAsyncNotifier<SimpleLoginInfo?> {
           .read(loginRepositoryProvider)
           .authenticate(username: email, password: password);
 
-      if (token != null && token == 'MiToken') return (token: token);
+      if (token != null) return (token: token);
       throw Exception();
     });
   }
