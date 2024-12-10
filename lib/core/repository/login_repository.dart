@@ -14,8 +14,8 @@ class LoginRepository {
   Future<String?> verifyPhone({required String phone}) =>
       client.verifyPhone(phoneNumber: phone);
 
-  Future<String?> verifyCode({required String code}) =>
-      client.verifyCode(code: code);
+  Future<String?> verifyCode({required String passcode}) =>
+      client.verifyCode(code: passcode);
 
   Future<String?> authenticateGoogle() => client.authenticateGoogle();
 
