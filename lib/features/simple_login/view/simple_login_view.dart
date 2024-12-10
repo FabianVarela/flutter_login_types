@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_login_types/core/router/app_route_path.dart';
+import 'package:flutter_login_types/core/notifiers/session_notifier.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
 import 'package:flutter_login_types/core/widgets/custom_message.dart';
@@ -11,7 +11,6 @@ import 'package:flutter_login_types/features/simple_login/forms/simple_login_for
 import 'package:flutter_login_types/features/simple_login/notifier/simple_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SimpleLoginView extends ConsumerWidget {
@@ -19,17 +18,20 @@ class SimpleLoginView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final localization = context.localizations;
     final loginState = ref.watch(simpleLoginNotifierProvider);
 
     ref.listen(simpleLoginNotifierProvider, (_, state) {
       state.whenOrNull(
         data: (data) {
-          if (data != null && data) context.go(AppRoutePath.home.path);
+          if (data != null) {
+            ref
+                .read(sessionNotifierProvider.notifier)
+                .setSession(session: data.token);
+          }
         },
         error: (_, __) => CustomMessage.show(
           context,
-          localization.userPasswordIncorrectMessage,
+          context.localizations.userPasswordIncorrectMessage,
         ),
       );
     });
@@ -145,16 +147,14 @@ class _SubmitButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final localization = context.localizations;
     final isFormValid = ref.watch(
-      loginFormNotifierProvider.select((f) => f.isValid),
+      loginFormNotifierProvider.select((form) => form.isValid),
     );
 
-    final emailValue = ref.watch(
-      loginFormNotifierProvider.select((form) => form.emailInput.value),
-    );
-    final passwordValue = ref.watch(
-      loginFormNotifierProvider.select((form) => form.passwordInput.value),
+    final (email, password) = ref.watch(
+      loginFormNotifierProvider.select(
+        (form) => (form.emailInput.value, form.passwordInput.value),
+      ),
     );
 
     return Padding(
@@ -163,11 +163,11 @@ class _SubmitButton extends ConsumerWidget {
         children: <Widget>[
           Expanded(
             child: CustomButton(
-              text: localization.signInButton,
+              text: context.localizations.signInButton,
               onPress: isFormValid
                   ? () => ref
                       .read(simpleLoginNotifierProvider.notifier)
-                      .authenticate(email: emailValue, password: passwordValue)
+                      .authenticate(email: email, password: password)
                   : null,
               backgroundColor: CustomColors.lightGreen,
               foregroundColor: CustomColors.white,

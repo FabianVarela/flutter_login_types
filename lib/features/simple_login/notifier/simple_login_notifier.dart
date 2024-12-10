@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SimpleLoginNotifier extends AutoDisposeAsyncNotifier<bool?> {
+typedef SimpleLoginInfo = ({String token});
+
+class SimpleLoginNotifier extends AutoDisposeAsyncNotifier<SimpleLoginInfo?> {
   @override
-  FutureOr<bool?> build() => null;
+  FutureOr<SimpleLoginInfo?> build() => null;
 
   Future<void> authenticate({
     required String email,
@@ -13,19 +15,17 @@ class SimpleLoginNotifier extends AutoDisposeAsyncNotifier<bool?> {
   }) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      final repository = ref.read(loginRepositoryProvider);
-      final token = await repository.authenticate(
-        username: email,
-        password: password,
-      );
+      final token = await ref
+          .read(loginRepositoryProvider)
+          .authenticate(username: email, password: password);
 
-      if (token != null && token == 'MiToken') return true;
+      if (token != null && token == 'MiToken') return (token: token);
       throw Exception();
     });
   }
 }
 
 final simpleLoginNotifierProvider =
-    AsyncNotifierProvider.autoDispose<SimpleLoginNotifier, bool?>(
+    AsyncNotifierProvider.autoDispose<SimpleLoginNotifier, SimpleLoginInfo?>(
   SimpleLoginNotifier.new,
 );
