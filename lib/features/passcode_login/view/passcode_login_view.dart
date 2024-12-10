@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
-import 'package:flutter_login_types/core/router/app_route_path.dart';
+import 'package:flutter_login_types/core/notifiers/session_notifier.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
 import 'package:flutter_login_types/core/widgets/custom_message.dart';
@@ -12,7 +12,6 @@ import 'package:flutter_login_types/features/passcode_login/forms/passcode_login
 import 'package:flutter_login_types/features/passcode_login/notifier/passcode_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pinput/pinput.dart';
 
@@ -21,8 +20,6 @@ class PasscodeLoginView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final localization = context.localizations;
-
     final pageController = usePageController();
     final pageValue = useState(0);
 
@@ -41,17 +38,19 @@ class PasscodeLoginView extends HookConsumerWidget {
     ref.listen(passcodeLoginNotifierProvider, (_, state) {
       state.whenOrNull(
         data: (data) {
-          if (data == PasscodeLogin.phone) {
+          if (data.mode == PasscodeMode.phone) {
             pageValue.value = 1;
             _sendNotification(context, ref);
-          } else if (data == PasscodeLogin.passcode) {
-            context.go(AppRoutePath.home.path);
+          } else if (data.mode == PasscodeMode.passcode) {
+            ref
+                .read(sessionNotifierProvider.notifier)
+                .setSession(session: data.token!);
           }
         },
         error: (_, __) {
           final message = switch (pageValue.value) {
-            0 => localization.phoneNumberIncorrect,
-            1 => localization.passcodeIncorrect,
+            0 => context.localizations.phoneNumberIncorrect,
+            1 => context.localizations.passcodeIncorrect,
             _ => null,
           };
           if (message != null) CustomMessage.show(context, message);
@@ -182,7 +181,6 @@ class _PasscodeForm extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final localization = context.localizations;
     final controller = useTextEditingController();
 
     return Padding(
@@ -191,7 +189,7 @@ class _PasscodeForm extends HookConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            localization.passcodeTitle,
+            context.localizations.passcodeTitle,
             textAlign: TextAlign.center,
             style: const TextStyle(color: CustomColors.darkBlue, fontSize: 20),
           ),

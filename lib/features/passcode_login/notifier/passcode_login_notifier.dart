@@ -3,21 +3,28 @@ import 'dart:async';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-enum PasscodeLogin { none, phone, passcode }
+enum PasscodeMode { none, phone, passcode }
 
-class PasscodeLoginNotifier extends AutoDisposeAsyncNotifier<PasscodeLogin> {
+typedef PasscodeInfo = ({PasscodeMode mode, String? token});
+
+class PasscodeLoginNotifier extends AutoDisposeAsyncNotifier<PasscodeInfo> {
   @override
-  FutureOr<PasscodeLogin> build() => PasscodeLogin.none;
+  FutureOr<PasscodeInfo> build() => (mode: PasscodeMode.none, token: null);
 
-  void restore() => state = const AsyncValue.data(PasscodeLogin.none);
+  void restore() {
+    state = const AsyncValue.data((mode: PasscodeMode.none, token: null));
+  }
 
   Future<void> verifyPhone({required String phoneNumber}) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      final repository = ref.read(loginRepositoryProvider);
-      final token = await repository.verifyPhone(phone: phoneNumber);
+      final token = await ref
+          .read(loginRepositoryProvider)
+          .verifyPhone(phone: phoneNumber);
 
-      if (token != null && token.isEmpty) return PasscodeLogin.phone;
+      if (token != null && token.isEmpty) {
+        return (mode: PasscodeMode.phone, token: null);
+      }
       throw Exception();
     });
   }
@@ -25,16 +32,19 @@ class PasscodeLoginNotifier extends AutoDisposeAsyncNotifier<PasscodeLogin> {
   Future<void> verifyCode({required String passcode}) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      final repository = ref.read(loginRepositoryProvider);
-      final token = await repository.verifyCode(code: passcode);
+      final token = await ref
+          .read(loginRepositoryProvider)
+          .verifyCode(passcode: passcode);
 
-      if (token != null && token == 'MiToken') return PasscodeLogin.passcode;
+      if (token != null && token == 'MiToken') {
+        return (mode: PasscodeMode.passcode, token: token);
+      }
       throw Exception();
     });
   }
 }
 
 final passcodeLoginNotifierProvider =
-    AsyncNotifierProvider.autoDispose<PasscodeLoginNotifier, PasscodeLogin>(
+    AsyncNotifierProvider.autoDispose<PasscodeLoginNotifier, PasscodeInfo>(
   PasscodeLoginNotifier.new,
 );
