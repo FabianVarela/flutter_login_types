@@ -66,21 +66,21 @@ class PasscodeLoginView extends HookConsumerWidget {
           ref.read(passcodeLoginNotifierProvider.notifier).restore();
         }
       },
-      child: Scaffold(
-        appBar: AppBar(),
-        extendBodyBehindAppBar: true,
-        resizeToAvoidBottomInset: true,
-        backgroundColor: CustomColors.white,
-        body: Stack(
-          children: <Widget>[
-            PageView(
+      child: Stack(
+        children: <Widget>[
+          Scaffold(
+            appBar: AppBar(),
+            extendBodyBehindAppBar: true,
+            resizeToAvoidBottomInset: true,
+            backgroundColor: CustomColors.white,
+            body: PageView(
               controller: pageController,
               physics: const NeverScrollableScrollPhysics(),
               children: const <Widget>[_PhoneForm(), _PasscodeForm()],
             ),
-            if (passcodeState.isLoading) const Loading(),
-          ],
-        ),
+          ),
+          if (passcodeState.isLoading) const Loading(),
+        ],
       ),
     );
   }
