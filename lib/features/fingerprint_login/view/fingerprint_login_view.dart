@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_types/core/router/app_route_path.dart';
+import 'package:flutter_login_types/core/notifiers/session_notifier.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
 import 'package:flutter_login_types/core/widgets/custom_message.dart';
@@ -7,7 +7,6 @@ import 'package:flutter_login_types/core/widgets/loading.dart';
 import 'package:flutter_login_types/features/fingerprint_login/notifier/fingerprint_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class FingerPrintLoginView extends HookConsumerWidget {
@@ -18,27 +17,29 @@ class FingerPrintLoginView extends HookConsumerWidget {
     final localization = context.localizations;
 
     final hasBiometric = ref.watch(hasBiometricProvider);
-    final localAuth = ref.watch(localAuthNotifierProvider);
+    final localAuthState = ref.watch(localAuthNotifierProvider);
 
     ref.listen(localAuthNotifierProvider, (_, state) {
       state.whenOrNull(
         data: (data) {
-          if (data == LocalAuthOption.granted) {
-            context.go(AppRoutePath.home.path);
-          } else if (data == LocalAuthOption.denied) {
+          if (data.option == LocalAuthOption.granted) {
+            ref
+                .read(sessionNotifierProvider.notifier)
+                .setSession(session: data.token!);
+          } else if (data.option == LocalAuthOption.denied) {
             CustomMessage.show(context, localization.biometricError);
           }
         },
       );
     });
 
-    return Scaffold(
-      appBar: AppBar(),
-      backgroundColor: CustomColors.white,
-      extendBodyBehindAppBar: true,
-      body: Stack(
-        children: <Widget>[
-          Padding(
+    return Stack(
+      children: <Widget>[
+        Scaffold(
+          appBar: AppBar(),
+          backgroundColor: CustomColors.white,
+          extendBodyBehindAppBar: true,
+          body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: hasBiometric.when(
               data: (data) => data
@@ -52,9 +53,9 @@ class FingerPrintLoginView extends HookConsumerWidget {
               ),
             ),
           ),
-          if (localAuth.isLoading) const Loading(),
-        ],
-      ),
+        ),
+        if (localAuthState.isLoading) const Loading(),
+      ],
     );
   }
 }

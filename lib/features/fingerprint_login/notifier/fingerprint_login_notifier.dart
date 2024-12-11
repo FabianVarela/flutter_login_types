@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:uuid/uuid.dart';
 
 final hasBiometricProvider = FutureProvider.autoDispose<bool>((ref) async {
   final localAuth = ref.watch(localAuthenticationProvider);
@@ -20,9 +21,13 @@ final listBiometricProvider = FutureProvider.autoDispose<List<BiometricType>>(
 
 enum LocalAuthOption { none, granted, denied }
 
-class LocalAuthNotifier extends AutoDisposeAsyncNotifier<LocalAuthOption> {
+typedef LocalAuthInfo = ({LocalAuthOption option, String? token});
+
+class LocalAuthNotifier extends AutoDisposeAsyncNotifier<LocalAuthInfo> {
   @override
-  FutureOr<LocalAuthOption> build() => LocalAuthOption.none;
+  FutureOr<LocalAuthInfo> build() {
+    return (option: LocalAuthOption.none, token: null);
+  }
 
   Future<void> authenticate({required String reason}) async {
     state = const AsyncValue.loading();
@@ -34,15 +39,19 @@ class LocalAuthNotifier extends AutoDisposeAsyncNotifier<LocalAuthOption> {
           options: const AuthenticationOptions(stickyAuth: true),
         );
 
-        return isAuthorized ? LocalAuthOption.granted : LocalAuthOption.denied;
+        final option = switch (isAuthorized) {
+          true => LocalAuthOption.granted,
+          _ => LocalAuthOption.denied,
+        };
+        return (option: option, token: const Uuid().v4());
       } on PlatformException catch (_) {
-        return LocalAuthOption.denied;
+        return (option: LocalAuthOption.denied, token: null);
       }
     });
   }
 }
 
 final localAuthNotifierProvider =
-    AsyncNotifierProvider.autoDispose<LocalAuthNotifier, LocalAuthOption>(
+    AsyncNotifierProvider.autoDispose<LocalAuthNotifier, LocalAuthInfo>(
   LocalAuthNotifier.new,
 );
