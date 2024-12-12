@@ -9,11 +9,11 @@ environment:
 
 dependencies:
   auth0_flutter: ^1.7.2
-  collection: ^1.18.0
+  collection: ^1.19.0
   equatable: ^2.0.7
   flutter:
     sdk: flutter
-  flutter_appauth: ^8.0.1
+  flutter_appauth: ^8.0.3
   flutter_facebook_auth: ^7.1.1
   flutter_hooks: ^0.20.5
   flutter_local_notifications: ^18.0.1
