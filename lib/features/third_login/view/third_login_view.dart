@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_types/core/router/app_route_path.dart';
+import 'package:flutter_login_types/core/notifiers/session/session_notifier.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
 import 'package:flutter_login_types/core/widgets/custom_message.dart';
@@ -7,7 +7,6 @@ import 'package:flutter_login_types/core/widgets/loading.dart';
 import 'package:flutter_login_types/features/third_login/notifier/third_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
@@ -21,22 +20,24 @@ class ThirdLoginView extends ConsumerWidget {
     ref.listen(thirdLoginNotifierProvider, (_, state) {
       state.whenOrNull(
         data: (data) {
-          if (data == ThirdLoginResult.success) {
-            context.go(AppRoutePath.home.path);
+          if (data.result == ThirdLoginResult.success) {
+            ref
+                .read(sessionNotifierProvider.notifier)
+                .setSession(session: data.token!);
           } else {
-            _showSnackBar(context, data);
+            _showSnackBar(context, data.result);
           }
         },
       );
     });
 
-    return Scaffold(
-      appBar: AppBar(),
-      backgroundColor: CustomColors.white,
-      extendBodyBehindAppBar: true,
-      body: Stack(
-        children: <Widget>[
-          const Padding(
+    return Stack(
+      children: <Widget>[
+        Scaffold(
+          appBar: AppBar(),
+          backgroundColor: CustomColors.white,
+          extendBodyBehindAppBar: true,
+          body: const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -52,9 +53,9 @@ class ThirdLoginView extends ConsumerWidget {
               ],
             ),
           ),
-          if (thirdLogin.isLoading) const Loading(),
-        ],
-      ),
+        ),
+        if (thirdLogin.isLoading) const Loading(),
+      ],
     );
   }
 

@@ -8,9 +8,13 @@ import 'package:twitter_login/twitter_login.dart';
 
 enum ThirdLoginResult { none, progress, success, cancelled, error }
 
-class ThirdLoginNotifier extends AutoDisposeAsyncNotifier<ThirdLoginResult> {
+typedef ThirdLoginInfo = ({ThirdLoginResult result, String? token});
+
+class ThirdLoginNotifier extends AutoDisposeAsyncNotifier<ThirdLoginInfo> {
   @override
-  FutureOr<ThirdLoginResult> build() => ThirdLoginResult.none;
+  FutureOr<ThirdLoginInfo> build() {
+    return (result: ThirdLoginResult.none, token: null);
+  }
 
   Future<void> authenticateGoogle() async {
     state = const AsyncValue.loading();
@@ -19,11 +23,12 @@ class ThirdLoginNotifier extends AutoDisposeAsyncNotifier<ThirdLoginResult> {
         final repository = ref.read(loginRepositoryProvider);
         final googleResult = await repository.authenticateGoogle();
 
-        return googleResult != null
+        final result = googleResult != null
             ? ThirdLoginResult.success
             : ThirdLoginResult.cancelled;
+        return (result: result, token: googleResult);
       } on Exception catch (_) {
-        return ThirdLoginResult.error;
+        return (result: ThirdLoginResult.error, token: null);
       }
     });
   }
@@ -35,16 +40,17 @@ class ThirdLoginNotifier extends AutoDisposeAsyncNotifier<ThirdLoginResult> {
         final repository = ref.read(loginRepositoryProvider);
         final appleResult = await repository.authenticateApple();
 
-        return appleResult != null
+        final result = appleResult != null
             ? ThirdLoginResult.success
             : ThirdLoginResult.error;
+        return (result: result, token: appleResult);
       } on Exception catch (e) {
         if (e is SignInWithAppleAuthorizationException) {
           if (e.code == AuthorizationErrorCode.canceled) {
-            return ThirdLoginResult.cancelled;
+            return (result: ThirdLoginResult.cancelled, token: null);
           }
         }
-        return ThirdLoginResult.error;
+        return (result: ThirdLoginResult.error, token: null);
       }
     });
   }
@@ -55,16 +61,13 @@ class ThirdLoginNotifier extends AutoDisposeAsyncNotifier<ThirdLoginResult> {
       final repository = ref.read(loginRepositoryProvider);
       final facebookResult = await repository.authenticateFacebook();
 
-      if (facebookResult.containsKey('status')) {
-        return switch (facebookResult['status'] as LoginStatus) {
-          LoginStatus.success => ThirdLoginResult.success,
-          LoginStatus.cancelled => ThirdLoginResult.cancelled,
-          LoginStatus.failed => ThirdLoginResult.error,
-          LoginStatus.operationInProgress => ThirdLoginResult.progress,
-        };
-      } else {
-        return ThirdLoginResult.error;
-      }
+      final result = switch (facebookResult['status'] as LoginStatus) {
+        LoginStatus.success => ThirdLoginResult.success,
+        LoginStatus.cancelled => ThirdLoginResult.cancelled,
+        LoginStatus.failed => ThirdLoginResult.error,
+        LoginStatus.operationInProgress => ThirdLoginResult.progress,
+      };
+      return (result: result, token: facebookResult['token'] as String?);
     });
   }
 
@@ -75,19 +78,20 @@ class ThirdLoginNotifier extends AutoDisposeAsyncNotifier<ThirdLoginResult> {
         final repository = ref.read(loginRepositoryProvider);
         final twitterResult = await repository.authenticateTwitter();
 
-        return switch (twitterResult['status'] as TwitterLoginStatus) {
+        final result = switch (twitterResult['status'] as TwitterLoginStatus) {
           TwitterLoginStatus.loggedIn => ThirdLoginResult.success,
           TwitterLoginStatus.cancelledByUser => ThirdLoginResult.cancelled,
           TwitterLoginStatus.error => ThirdLoginResult.error,
         };
+        return (result: result, token: twitterResult['token'] as String?);
       } on Exception catch (_) {
-        return ThirdLoginResult.error;
+        return (result: ThirdLoginResult.error, token: null);
       }
     });
   }
 }
 
 final thirdLoginNotifierProvider =
-    AsyncNotifierProvider.autoDispose<ThirdLoginNotifier, ThirdLoginResult>(
+    AsyncNotifierProvider.autoDispose<ThirdLoginNotifier, ThirdLoginInfo>(
   ThirdLoginNotifier.new,
 );
