@@ -10,7 +10,6 @@ import 'package:flutter_login_types/features/simple_login/forms/simple_login_for
 import 'package:flutter_login_types/features/simple_login/forms/simple_login_form_notifier.dart';
 import 'package:flutter_login_types/features/simple_login/notifier/simple_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
-import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SimpleLoginView extends ConsumerWidget {
@@ -46,12 +45,11 @@ class SimpleLoginView extends ConsumerWidget {
           body: Container(
             padding: const EdgeInsets.all(16),
             child: const Column(
+              spacing: 20,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 _TextFieldEmail(),
-                Gap(20),
                 _TextFieldPassword(),
-                Gap(20),
                 _SubmitButton(),
               ],
             ),

@@ -3,7 +3,6 @@ import 'package:flutter_login_types/core/router/app_route_path.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 class LoginOptionsView extends StatelessWidget {
@@ -25,17 +24,14 @@ class LoginOptionsView extends StatelessWidget {
       body: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
+          spacing: 20,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             _SimpleLoginButton(),
-            Gap(20),
             _PasscodeButton(),
-            Gap(20),
             _FingerprintButton(),
-            Gap(20),
             _ThirdLoginButton(),
-            Gap(20),
             _MechanismLoginButton(),
           ],
         ),

@@ -6,7 +6,6 @@ import 'package:flutter_login_types/core/widgets/custom_message.dart';
 import 'package:flutter_login_types/core/widgets/loading.dart';
 import 'package:flutter_login_types/features/third_login/notifier/third_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
-import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
@@ -40,15 +39,13 @@ class ThirdLoginView extends ConsumerWidget {
           body: const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Column(
+              spacing: 20,
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 _GoogleButton(),
-                Gap(20),
                 _AppleButton(),
-                Gap(20),
                 _FacebookButton(),
-                Gap(20),
                 _TwitterButton(),
               ],
             ),
