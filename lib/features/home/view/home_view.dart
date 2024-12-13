@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/notifiers/language_notifier.dart';
+import 'package:flutter_login_types/core/notifiers/session/session_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -45,6 +46,14 @@ class _HomePageUIState extends ConsumerState<HomeView>
       appBar: AppBar(
         title: Text(context.localizations.homeTitle),
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            onPressed: () {
+              ref.read(sessionNotifierProvider.notifier).removeSession();
+            },
+            icon: const Icon(Icons.logout_outlined),
+          ),
+        ],
       ),
       body: SizedBox(
         width: MediaQuery.sizeOf(context).width,
