@@ -73,21 +73,19 @@ class LoginClient {
 
   Future<Map<String, dynamic>> authenticateFacebook() async {
     try {
-      final result = <String, dynamic>{};
-
       final accessToken = await FacebookAuth.instance.accessToken;
       if (accessToken == null) {
         final loginResult = await FacebookAuth.instance.login();
-        result['status'] = loginResult.status;
-
-        if (loginResult.status != LoginStatus.success) return result;
-      } else {
-        result['status'] = LoginStatus.success;
+        return <String, dynamic>{
+          'status': loginResult.status,
+          if (loginResult.status == LoginStatus.success)
+            'token': loginResult.accessToken?.tokenString,
+        };
       }
 
       return <String, dynamic>{
-        ...result,
-        ...await FacebookAuth.instance.getUserData(),
+        'status': LoginStatus.success,
+        'token': accessToken.tokenString,
       };
     } catch (error) {
       return <String, dynamic>{'status': LoginStatus.failed};
