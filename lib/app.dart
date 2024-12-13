@@ -12,6 +12,7 @@ class LoginApp extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final appRouter = ref.watch(appRouterProvider);
     final language = ref.watch(
       languageNotifierProvider.select((value) => value.value),
     );
