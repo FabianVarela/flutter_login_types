@@ -1,32 +1,31 @@
 import 'dart:async';
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SessionNotifier extends AutoDisposeAsyncNotifier<String?> {
+part 'session_state.dart';
+
+class SessionNotifier extends AsyncNotifier<SessionState> {
   @override
-  FutureOr<String?> build() async {
-    return await ref.read(sessionRepositoryProvider).getSession();
+  FutureOr<SessionState> build() async {
+    final session = await ref.read(sessionRepositoryProvider).getSession();
+    return session != null
+        ? SessionStateAuthenticated(token: session)
+        : const SessionStateUnauthenticated();
   }
 
   Future<void> setSession({required String session}) async {
-    state = await AsyncValue.guard(() async {
-      final repository = ref.read(sessionRepositoryProvider);
-      await repository.setSession(session: session);
-
-      return session;
-    });
+    state = const AsyncValue.loading();
+    await ref.read(sessionRepositoryProvider).setSession(session: session);
+    state = AsyncData(SessionStateAuthenticated(token: session));
   }
 
   Future<void> removeSession() async {
-    state = await AsyncValue.guard(() async {
-      await ref.read(sessionRepositoryProvider).deleteSession();
-      return null;
-    });
+    await ref.read(sessionRepositoryProvider).deleteSession();
+    state = const AsyncData(SessionStateUnauthenticated());
   }
 }
 
 final sessionNotifierProvider =
-    AsyncNotifierProvider.autoDispose<SessionNotifier, String?>(
-  SessionNotifier.new,
-);
+    AsyncNotifierProvider<SessionNotifier, SessionState>(SessionNotifier.new);
