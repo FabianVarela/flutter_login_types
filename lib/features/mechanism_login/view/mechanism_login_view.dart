@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/notifiers/language_notifier.dart';
-import 'package:flutter_login_types/core/router/app_route_path.dart';
+import 'package:flutter_login_types/core/notifiers/session/session_notifier.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
 import 'package:flutter_login_types/core/widgets/custom_message.dart';
 import 'package:flutter_login_types/core/widgets/loading.dart';
 import 'package:flutter_login_types/features/mechanism_login/notifier/mechanism_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class MechanismLoginView extends HookConsumerWidget {
@@ -24,7 +23,13 @@ class MechanismLoginView extends HookConsumerWidget {
 
     ref.listen(mechanismLoginNotifierProvider, (_, state) {
       state.whenOrNull(
-        data: (_) => context.go(AppRoutePath.home.path),
+        data: (data) {
+          if (data.type != MechanismType.none && data.token != null) {
+            ref
+                .read(sessionNotifierProvider.notifier)
+                .setSession(session: data.token!);
+          }
+        },
         error: (e, _) {
           if (e is MechanismException) _showErrorMessage(context, e);
         },

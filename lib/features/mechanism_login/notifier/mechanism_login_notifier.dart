@@ -16,9 +16,11 @@ enum MechanismType { none, azure, auth0 }
 
 enum MechanismError { error, cancelled }
 
-class MechanismLoginNotifier extends AutoDisposeAsyncNotifier<MechanismType> {
+typedef MechanismInfo = ({MechanismType type, String? token});
+
+class MechanismLoginNotifier extends AutoDisposeAsyncNotifier<MechanismInfo> {
   @override
-  FutureOr<MechanismType> build() => MechanismType.none;
+  FutureOr<MechanismInfo> build() => (type: MechanismType.none, token: null);
 
   Future<void> authenticateAzure({String? language}) async {
     state = const AsyncValue.loading();
@@ -26,9 +28,11 @@ class MechanismLoginNotifier extends AutoDisposeAsyncNotifier<MechanismType> {
       try {
         final repository = ref.read(loginRepositoryProvider);
         final result = await repository.authenticateAzure(language: language);
-        print(result);
 
-        return MechanismType.azure;
+        return (
+          type: MechanismType.azure,
+          token: result['accessToken'] as String,
+        );
       } on Exception catch (e) {
         var error = MechanismError.error;
         if (e is FlutterAppAuthUserCancelledException) {
@@ -45,9 +49,11 @@ class MechanismLoginNotifier extends AutoDisposeAsyncNotifier<MechanismType> {
       try {
         final repository = ref.read(loginRepositoryProvider);
         final result = await repository.authenticateAuth0();
-        print(result);
 
-        return MechanismType.auth0;
+        return (
+          type: MechanismType.auth0,
+          token: result['accessToken'] as String,
+        );
       } on Exception catch (e) {
         var error = MechanismError.error;
         if (e is WebAuthenticationException) {
@@ -62,6 +68,6 @@ class MechanismLoginNotifier extends AutoDisposeAsyncNotifier<MechanismType> {
 }
 
 final mechanismLoginNotifierProvider =
-    AsyncNotifierProvider.autoDispose<MechanismLoginNotifier, MechanismType>(
+    AsyncNotifierProvider.autoDispose<MechanismLoginNotifier, MechanismInfo>(
   MechanismLoginNotifier.new,
 );
