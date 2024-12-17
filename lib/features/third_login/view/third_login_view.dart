@@ -81,7 +81,7 @@ class _GoogleButton extends ConsumerWidget {
       onPress: () {
         ref.read(thirdLoginNotifierProvider.notifier).authenticateGoogle();
       },
-      backgroundColor: CustomColors.grey.withOpacity(.4),
+      backgroundColor: CustomColors.grey.withValues(alpha: .4),
       foregroundColor: CustomColors.white,
       icon: const Icon(Icons.g_mobiledata_outlined, color: CustomColors.white),
     );

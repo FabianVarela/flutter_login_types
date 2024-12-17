@@ -85,7 +85,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 ),
               ),
               color: (_hasRequired || widget.errorText != null)
-                  ? CustomColors.lightRed.withOpacity(.3)
+                  ? CustomColors.lightRed.withValues(alpha: .3)
                   : CustomColors.lightWhite,
             ),
             child: Padding(
@@ -107,8 +107,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       ? const EdgeInsets.only(top: 16)
                       : EdgeInsets.zero,
                   border: InputBorder.none,
-                  hintStyle:
-                      TextStyle(color: CustomColors.grey.withOpacity(.7)),
+                  hintStyle: TextStyle(
+                    color: CustomColors.grey.withValues(alpha: .7),
+                  ),
                   hintText: (widget.hint != null && widget.hint!.isNotEmpty)
                       ? widget.hint
                       : '',
@@ -118,8 +119,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
                           icon: Icon(
                             Icons.remove_red_eye,
                             color: _isPasswordActive
-                                ? CustomColors.lightGreen.withOpacity(.7)
-                                : CustomColors.grey.withOpacity(.7),
+                                ? CustomColors.lightGreen.withValues(alpha: .7)
+                                : CustomColors.grey.withValues(alpha: .7),
                             size: 24,
                           ),
                           onPressed: _visiblePassword,

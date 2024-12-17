@@ -50,7 +50,7 @@ class _SimpleLoginButton extends StatelessWidget {
     return CustomButton(
       text: localization.signInText(localization.signInUserPassword),
       onPress: () => context.push(AppRoutePath.loginOptions.userPassword.path),
-      backgroundColor: CustomColors.white.withOpacity(.6),
+      backgroundColor: CustomColors.white.withValues(alpha: .6),
       foregroundColor: CustomColors.darkBlue,
       icon: const Icon(Icons.login, color: CustomColors.darkBlue),
     );
