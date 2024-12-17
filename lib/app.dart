@@ -26,7 +26,7 @@ class LoginApp extends HookConsumerWidget {
     );
 
     return MaterialApp.router(
-      routerConfig: appRouter,
+      routerConfig: appRouter.router,
       theme: ThemeData(
         primarySwatch: Colors.teal,
         textTheme: GoogleFonts.notoSansTextTheme(Theme.of(context).textTheme),

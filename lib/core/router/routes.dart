@@ -12,11 +12,12 @@ import 'package:flutter_login_types/features/third_login/view/third_login_view.d
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-GoRouter? _router;
+class AppRouter {
+  AppRouter({required this.session});
 
-final appRouterProvider = Provider<GoRouter>((ref) {
-  final session = ref.watch(sessionNotifierProvider);
-  return _router = GoRouter(
+  final SessionNotifier session;
+
+  late final GoRouter _router = GoRouter(
     initialLocation: AppRoutePath.home.goRoute,
     routes: <GoRoute>[
       GoRoute(
@@ -72,19 +73,16 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ),
     ],
     redirect: (context, state) {
-      final isAuthenticating = session.maybeMap(
-        loading: (_) => true,
-        orElse: () => false,
-      );
+      final isAuthenticating = switch (session.session) {
+        SessionStateLoading() => true,
+        _ => false,
+      };
       if (isAuthenticating) return null;
 
-      final isLoggedIn = session.maybeMap(
-        data: (data) => switch (data.value) {
-          SessionStateAuthenticated() => true,
-          _ => false,
-        },
-        orElse: () => false,
-      );
+      final isLoggedIn = switch (session.session) {
+        SessionStateAuthenticated() => true,
+        _ => false,
+      };
 
       final loginRoute = AppRoutePath.loginOptions.goRoute;
       final homeRoute = AppRoutePath.home.goRoute;
@@ -95,10 +93,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         return null;
       }
 
-      final uriMatch = _router?.configuration.findMatch(
+      final uriMatch = _router.configuration.findMatch(
         Uri.parse(state.matchedLocation),
       );
-      final routeExists = uriMatch?.matches.isNotEmpty ?? false;
+      final routeExists = uriMatch.matches.isNotEmpty;
 
       final hasLoginRoutes = state.matchedLocation.startsWith(loginRoute);
       if (isLoggedIn && routeExists) return hasLoginRoutes ? homeRoute : null;
@@ -107,4 +105,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
     },
     debugLogDiagnostics: kDebugMode,
   );
+
+  GoRouter get router => _router;
+}
+
+final appRouterProvider = Provider<AppRouter>((ref) {
+  return AppRouter(session: ref.watch(sessionNotifierProvider));
 });
