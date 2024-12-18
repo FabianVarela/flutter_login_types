@@ -87,7 +87,7 @@ class LoginClient {
         'status': LoginStatus.success,
         'token': accessToken.tokenString,
       };
-    } catch (error) {
+    } on Exception catch (_) {
       return <String, dynamic>{'status': LoginStatus.failed};
     }
   }
