@@ -4,8 +4,8 @@ description: Login with BLoC architecture
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.5.0 <4.0.0"
-  flutter: 3.24.0
+  sdk: ">=3.6.0 <4.0.0"
+  flutter: 3.27.0
 
 dependencies:
   auth0_flutter: ^1.7.2
