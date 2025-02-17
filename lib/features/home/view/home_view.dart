@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/notifiers/language_notifier.dart';
 import 'package:flutter_login_types/core/notifiers/session/session_notifier.dart';
+import 'package:flutter_login_types/l10n/generated/app_localizations.dart'
+    show AppLocalizations;
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
