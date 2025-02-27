@@ -409,10 +409,10 @@ packages:
     dependency: "direct dev"
     description:
       name: freezed
-      sha256: d2581edbd572e6e7c50eac5a9b91022a26200e08a7f5a82dcf70f070c0e2cb67
+      sha256: a3d6429368603a591ca7c1795799a247998fb213ded509070c2c59708b25df31
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "3.0.2"
   freezed_annotation:
     dependency: "direct main"
     description:
@@ -449,10 +449,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: "04539267a740931c6d4479a10d466717ca5901c6fdfd3fcda09391bbb8ebd651"
+      sha256: f02fd7d2a4dc512fec615529824fdd217fecb3a3d3de68360293a551f21634b3
       url: "https://pub.dev"
     source: hosted
-    version: "14.8.0"
+    version: "14.8.1"
   go_router_paths:
     dependency: "direct main"
     description:
@@ -1086,10 +1086,10 @@ packages:
     dependency: transitive
     description:
       name: web
-      sha256: cd3543bd5798f6ad290ea73d210f423502e71900302dde696f8bff84bf89a1cb
+      sha256: "868d88a33d8a87b18ffc05f9f030ba328ffefba92d6c127917a2ba740f9cfe4a"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "1.1.1"
   web_socket:
     dependency: transitive
     description:
