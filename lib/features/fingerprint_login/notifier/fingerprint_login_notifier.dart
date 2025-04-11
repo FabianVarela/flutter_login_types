@@ -53,5 +53,5 @@ class LocalAuthNotifier extends AutoDisposeAsyncNotifier<LocalAuthInfo> {
 
 final localAuthNotifierProvider =
     AsyncNotifierProvider.autoDispose<LocalAuthNotifier, LocalAuthInfo>(
-  LocalAuthNotifier.new,
-);
+      LocalAuthNotifier.new,
+    );

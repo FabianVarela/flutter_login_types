@@ -10,14 +10,16 @@ class NotificationService {
     if (defaultTargetPlatform == TargetPlatform.iOS) {
       localNotifications
           .resolvePlatformSpecificImplementation<
-              IOSFlutterLocalNotificationsPlugin>()
+            IOSFlutterLocalNotificationsPlugin
+          >()
           ?.requestPermissions(badge: true, sound: true);
     }
 
     if (defaultTargetPlatform == TargetPlatform.android) {
       localNotifications
           .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>()
+            AndroidFlutterLocalNotificationsPlugin
+          >()
           ?.requestNotificationsPermission();
     }
 

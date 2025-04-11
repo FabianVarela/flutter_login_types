@@ -111,13 +111,10 @@ class _PhoneForm extends HookConsumerWidget {
     );
     final phoneError = phoneInput.isNotValid ? phoneInput.error : null;
 
-    useEffect(
-      () {
-        controller.value = controller.value.copyWith(text: phoneInput.value);
-        return null;
-      },
-      const [],
-    );
+    useEffect(() {
+      controller.value = controller.value.copyWith(text: phoneInput.value);
+      return null;
+    }, const []);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -135,15 +132,17 @@ class _PhoneForm extends HookConsumerWidget {
             hint: localization.phoneNumberPlaceholder,
             isRequired: true,
             requiredMessage: localization.phoneNumberRequired,
-            onChange: (value) => ref
-                .read(passcodeFormNotifierProvider.notifier)
-                .onChangePhone(value: value),
+            onChange: (value) {
+              ref
+                  .read(passcodeFormNotifierProvider.notifier)
+                  .onChangePhone(value: value);
+            },
             inputType: TextInputType.phone,
-            errorText: phoneError == null
-                ? null
-                : phoneError == PhoneInputValidation.empty
-                    ? localization.emptyValidation
-                    : localization.numberValidation,
+            errorText: switch (phoneError) {
+              PhoneInputValidation.empty => localization.emptyValidation,
+              PhoneInputValidation.invalid => localization.numberValidation,
+              _ => null,
+            },
           ),
           const Gap(20),
           Padding(
@@ -153,11 +152,14 @@ class _PhoneForm extends HookConsumerWidget {
                 Expanded(
                   child: CustomButton(
                     text: localization.verifyButtonText,
-                    onPress: isFormValid
-                        ? () => ref
+                    onPress: switch (isFormValid) {
+                      true => () {
+                        ref
                             .read(passcodeLoginNotifierProvider.notifier)
-                            .verifyPhone(phoneNumber: phoneInput.value)
-                        : null,
+                            .verifyPhone(phoneNumber: phoneInput.value);
+                      },
+                      false => null,
+                    },
                     backgroundColor: CustomColors.lightGreen,
                     foregroundColor: CustomColors.white,
                     icon: const Icon(
@@ -196,9 +198,11 @@ class _PasscodeForm extends HookConsumerWidget {
           const Gap(50),
           Pinput(
             controller: controller,
-            onCompleted: (value) => ref
-                .read(passcodeLoginNotifierProvider.notifier)
-                .verifyCode(passcode: value),
+            onCompleted: (value) {
+              ref
+                  .read(passcodeLoginNotifierProvider.notifier)
+                  .verifyCode(passcode: value);
+            },
           ),
         ],
       ),

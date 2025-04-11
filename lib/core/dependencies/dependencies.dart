@@ -36,18 +36,14 @@ final secureStorageProvider = Provider<SecureStorage>(
 );
 
 final preferencesProvider = Provider<Preferences>(
-  (ref) => Preferences(
-    sharedPreferences: ref.watch(sharedPreferencesProvider),
-  ),
+  (ref) => Preferences(sharedPreferences: ref.watch(sharedPreferencesProvider)),
 );
 
 final localNotificationsProvider = Provider<FlutterLocalNotificationsPlugin>(
   (_) => FlutterLocalNotificationsPlugin(),
 );
 
-final appAuthProvider = Provider<FlutterAppAuth>(
-  (_) => const FlutterAppAuth(),
-);
+final appAuthProvider = Provider<FlutterAppAuth>((_) => const FlutterAppAuth());
 
 final auth0Provider = Provider<Auth0>((ref) {
   final auth0Config = ref.watch(appConfigProvider).auth0Config;

@@ -24,5 +24,5 @@ class LanguageNotifier extends AutoDisposeAsyncNotifier<Locale?> {
 
 final languageNotifierProvider =
     AsyncNotifierProvider.autoDispose<LanguageNotifier, Locale?>(
-  LanguageNotifier.new,
-);
+      LanguageNotifier.new,
+    );

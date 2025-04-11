@@ -96,20 +96,22 @@ class _AppleButton extends ConsumerWidget {
     final localization = context.localizations;
 
     return SignInWithAppleBuilder(
-      builder: (context) => CustomButton(
-        text: localization.signInText(localization.signInApple),
-        onPress: () {
-          ref.read(thirdLoginNotifierProvider.notifier).authenticateApple();
-        },
-        backgroundColor: Colors.black,
-        foregroundColor: CustomColors.white,
-        icon: const Center(
-          child: CustomPaint(
-            size: Size(22, 24),
-            painter: AppleLogoPainter(color: CustomColors.white),
+      builder: (context) {
+        return CustomButton(
+          text: localization.signInText(localization.signInApple),
+          onPress: () {
+            ref.read(thirdLoginNotifierProvider.notifier).authenticateApple();
+          },
+          backgroundColor: Colors.black,
+          foregroundColor: CustomColors.white,
+          icon: const Center(
+            child: CustomPaint(
+              size: Size(22, 24),
+              painter: AppleLogoPainter(color: CustomColors.white),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

@@ -23,9 +23,10 @@ class ThirdLoginNotifier extends AutoDisposeAsyncNotifier<ThirdLoginInfo> {
         final repository = ref.read(loginRepositoryProvider);
         final googleResult = await repository.authenticateGoogle();
 
-        final result = googleResult != null
-            ? ThirdLoginResult.success
-            : ThirdLoginResult.cancelled;
+        final result =
+            googleResult != null
+                ? ThirdLoginResult.success
+                : ThirdLoginResult.cancelled;
         return (result: result, token: googleResult);
       } on Exception catch (_) {
         return (result: ThirdLoginResult.error, token: null);
@@ -40,9 +41,10 @@ class ThirdLoginNotifier extends AutoDisposeAsyncNotifier<ThirdLoginInfo> {
         final repository = ref.read(loginRepositoryProvider);
         final appleResult = await repository.authenticateApple();
 
-        final result = appleResult != null
-            ? ThirdLoginResult.success
-            : ThirdLoginResult.error;
+        final result =
+            appleResult != null
+                ? ThirdLoginResult.success
+                : ThirdLoginResult.error;
         return (result: result, token: appleResult);
       } on Exception catch (e) {
         if (e is SignInWithAppleAuthorizationException) {
@@ -93,5 +95,5 @@ class ThirdLoginNotifier extends AutoDisposeAsyncNotifier<ThirdLoginInfo> {
 
 final thirdLoginNotifierProvider =
     AsyncNotifierProvider.autoDispose<ThirdLoginNotifier, ThirdLoginInfo>(
-  ThirdLoginNotifier.new,
-);
+      ThirdLoginNotifier.new,
+    );

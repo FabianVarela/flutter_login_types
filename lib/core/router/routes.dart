@@ -22,54 +22,68 @@ class AppRouter {
     routes: <GoRoute>[
       GoRoute(
         path: AppRoutePath.loginOptions.goRoute,
-        pageBuilder: (_, state) => ScreenPage<dynamic>(
-          key: state.pageKey,
-          child: const LoginOptionsView(),
-        ),
+        pageBuilder: (_, state) {
+          return ScreenPage<dynamic>(
+            key: state.pageKey,
+            child: const LoginOptionsView(),
+          );
+        },
         routes: <GoRoute>[
           GoRoute(
             path: AppRoutePath.loginOptions.userPassword.goRoute,
-            pageBuilder: (_, state) => ScreenPage<dynamic>(
-              key: state.pageKey,
-              child: const SimpleLoginView(),
-            ),
+            pageBuilder: (_, state) {
+              return ScreenPage<dynamic>(
+                key: state.pageKey,
+                child: const SimpleLoginView(),
+              );
+            },
           ),
           GoRoute(
             path: AppRoutePath.loginOptions.passcode.goRoute,
-            pageBuilder: (_, state) => ScreenPage<dynamic>(
-              key: state.pageKey,
-              child: const PasscodeLoginView(),
-            ),
+            pageBuilder: (_, state) {
+              return ScreenPage<dynamic>(
+                key: state.pageKey,
+                child: const PasscodeLoginView(),
+              );
+            },
           ),
           GoRoute(
             path: AppRoutePath.loginOptions.biometric.goRoute,
-            pageBuilder: (_, state) => ScreenPage<dynamic>(
-              key: state.pageKey,
-              child: const FingerPrintLoginView(),
-            ),
+            pageBuilder: (_, state) {
+              return ScreenPage<dynamic>(
+                key: state.pageKey,
+                child: const FingerPrintLoginView(),
+              );
+            },
           ),
           GoRoute(
             path: AppRoutePath.loginOptions.third.goRoute,
-            pageBuilder: (_, state) => ScreenPage<dynamic>(
-              key: state.pageKey,
-              child: const ThirdLoginView(),
-            ),
+            pageBuilder: (_, state) {
+              return ScreenPage<dynamic>(
+                key: state.pageKey,
+                child: const ThirdLoginView(),
+              );
+            },
           ),
           GoRoute(
             path: AppRoutePath.loginOptions.mechanism.goRoute,
-            pageBuilder: (_, state) => ScreenPage<dynamic>(
-              key: state.pageKey,
-              child: const MechanismLoginView(),
-            ),
+            pageBuilder: (_, state) {
+              return ScreenPage<dynamic>(
+                key: state.pageKey,
+                child: const MechanismLoginView(),
+              );
+            },
           ),
         ],
       ),
       GoRoute(
         path: AppRoutePath.home.goRoute,
-        pageBuilder: (_, state) => ScreenPage<dynamic>(
-          key: state.pageKey,
-          child: const HomeView(),
-        ),
+        pageBuilder: (_, state) {
+          return ScreenPage<dynamic>(
+            key: state.pageKey,
+            child: const HomeView(),
+          );
+        },
       ),
     ],
     redirect: (context, state) {

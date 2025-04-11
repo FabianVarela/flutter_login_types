@@ -11,9 +11,9 @@ class ScreenPage<T> extends Page<T> {
   Route<T> createRoute(BuildContext context) {
     return switch (defaultTargetPlatform) {
       TargetPlatform.iOS || TargetPlatform.macOS => CupertinoPageRoute<T>(
-          settings: this,
-          builder: (_) => child,
-        ),
+        settings: this,
+        builder: (_) => child,
+      ),
       _ => MaterialPageRoute<T>(settings: this, builder: (_) => child),
     };
   }

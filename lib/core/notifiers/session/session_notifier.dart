@@ -21,9 +21,10 @@ class SessionNotifier extends ChangeNotifier {
 
   Future<void> init() async {
     final session = await repository.getSession();
-    _session = session != null
-        ? SessionStateAuthenticated(token: session)
-        : const SessionStateUnauthenticated();
+    _session =
+        session != null
+            ? SessionStateAuthenticated(token: session)
+            : const SessionStateUnauthenticated();
 
     notifyListeners();
   }

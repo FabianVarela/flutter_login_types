@@ -70,76 +70,85 @@ class _CustomTextFieldState extends State<CustomTextField> {
   }
 
   @override
-  Widget build(BuildContext context) => Column(
-        children: <Widget>[
-          DecoratedBox(
-            decoration: BoxDecoration(
-              border: Border(
-                left: BorderSide(
-                  width: 4,
-                  color: _hasFocus
-                      ? CustomColors.lightGreen
-                      : (_hasRequired || widget.errorText != null)
-                          ? CustomColors.lightRed
-                          : CustomColors.darkBlue,
-                ),
+  Widget build(BuildContext context) {
+    final hasRequiredWithText = _hasRequired || widget.errorText != null;
+
+    return Column(
+      children: <Widget>[
+        DecoratedBox(
+          decoration: BoxDecoration(
+            border: Border(
+              left: BorderSide(
+                width: 4,
+                color: switch (_hasFocus) {
+                  true => CustomColors.lightGreen,
+                  false => switch (hasRequiredWithText) {
+                    true => CustomColors.lightRed,
+                    false => CustomColors.darkBlue,
+                  },
+                },
               ),
-              color: (_hasRequired || widget.errorText != null)
-                  ? CustomColors.lightRed.withValues(alpha: .3)
-                  : CustomColors.lightWhite,
             ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-              child: TextField(
-                controller: _textController,
-                cursorColor: CustomColors.lightGreen,
-                keyboardType: widget.inputType,
-                textInputAction: widget.action,
-                onChanged: widget.onChange,
-                obscureText: _isVisiblePassword,
-                style: const TextStyle(
-                  color: CustomColors.darkBlue,
-                  fontSize: 15,
+            color: switch (hasRequiredWithText) {
+              true => CustomColors.lightRed.withValues(alpha: .3),
+              false => CustomColors.lightWhite,
+            },
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+            child: TextField(
+              controller: _textController,
+              cursorColor: CustomColors.lightGreen,
+              keyboardType: widget.inputType,
+              textInputAction: widget.action,
+              onChanged: widget.onChange,
+              obscureText: _isVisiblePassword,
+              style: const TextStyle(
+                color: CustomColors.darkBlue,
+                fontSize: 15,
+              ),
+              focusNode: _customFocusNode,
+              decoration: InputDecoration(
+                contentPadding: switch (widget.hasPassword) {
+                  true => const EdgeInsets.only(top: 16),
+                  false => EdgeInsets.zero,
+                },
+                border: InputBorder.none,
+                hintStyle: TextStyle(
+                  color: CustomColors.grey.withValues(alpha: .7),
                 ),
-                focusNode: _customFocusNode,
-                decoration: InputDecoration(
-                  contentPadding: widget.hasPassword
-                      ? const EdgeInsets.only(top: 16)
-                      : EdgeInsets.zero,
-                  border: InputBorder.none,
-                  hintStyle: TextStyle(
-                    color: CustomColors.grey.withValues(alpha: .7),
+                hintText: ((widget.hint ?? '').isNotEmpty) ? widget.hint : '',
+                suffixIcon: switch (widget.hasPassword) {
+                  true => IconButton(
+                    padding: EdgeInsets.zero,
+                    icon: Icon(
+                      Icons.remove_red_eye,
+                      color: switch (_isPasswordActive) {
+                        true => CustomColors.lightGreen.withValues(alpha: .7),
+                        false => CustomColors.grey.withValues(alpha: .7),
+                      },
+                      size: 24,
+                    ),
+                    onPressed: _visiblePassword,
                   ),
-                  hintText: (widget.hint != null && widget.hint!.isNotEmpty)
-                      ? widget.hint
-                      : '',
-                  suffixIcon: widget.hasPassword
-                      ? IconButton(
-                          padding: EdgeInsets.zero,
-                          icon: Icon(
-                            Icons.remove_red_eye,
-                            color: _isPasswordActive
-                                ? CustomColors.lightGreen.withValues(alpha: .7)
-                                : CustomColors.grey.withValues(alpha: .7),
-                            size: 24,
-                          ),
-                          onPressed: _visiblePassword,
-                        )
-                      : null,
-                ),
+                  false => null,
+                },
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(6, 3, 0, 7),
-            child: _ErrorMessage(
-              message: _hasRequired
-                  ? widget.requiredMessage!
-                  : widget.errorText ?? '',
-            ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(6, 3, 0, 7),
+          child: _ErrorMessage(
+            message: switch (_hasRequired) {
+              true => widget.requiredMessage,
+              false => widget.errorText ?? '',
+            },
           ),
-        ],
-      );
+        ),
+      ],
+    );
+  }
 
   void _visiblePassword() {
     setState(() {
@@ -156,14 +165,13 @@ class _ErrorMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return message != null
-        ? Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              message!,
-              style: const TextStyle(color: CustomColors.lightRed),
-            ),
-          )
-        : const Offstage();
+    if (message == null) return const Offstage();
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Text(
+        message!,
+        style: const TextStyle(color: CustomColors.lightRed),
+      ),
+    );
   }
 }

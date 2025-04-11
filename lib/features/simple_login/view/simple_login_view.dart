@@ -28,10 +28,12 @@ class SimpleLoginView extends ConsumerWidget {
                 .setSession(session: data.token);
           }
         },
-        error: (_, __) => CustomMessage.show(
-          context,
-          context.localizations.userPasswordIncorrectMessage,
-        ),
+        error: (_, __) {
+          CustomMessage.show(
+            context,
+            context.localizations.userPasswordIncorrectMessage,
+          );
+        },
       );
     });
 
@@ -74,29 +76,28 @@ class _TextFieldEmail extends HookConsumerWidget {
     );
     final emailError = emailInput.isNotValid ? emailInput.error : null;
 
-    useEffect(
-      () {
-        controller.value = controller.value.copyWith(text: emailInput.value);
-        return null;
-      },
-      const [],
-    );
+    useEffect(() {
+      controller.value = controller.value.copyWith(text: emailInput.value);
+      return null;
+    }, const []);
 
     return CustomTextField(
       textController: controller,
       hint: localization.emailPlaceholder,
       isRequired: true,
       requiredMessage: localization.emailRequiredMessage,
-      onChange: (value) => ref
-          .read(loginFormNotifierProvider.notifier)
-          .onChangeEmail(value: value),
+      onChange: (value) {
+        ref
+            .read(loginFormNotifierProvider.notifier)
+            .onChangeEmail(value: value);
+      },
       inputType: TextInputType.emailAddress,
       action: TextInputAction.next,
-      errorText: emailError == null
-          ? null
-          : emailError == EmailInputValidator.empty
-              ? localization.emptyValidation
-              : localization.emailValidation,
+      errorText: switch (emailError) {
+        EmailInputValidator.empty => localization.emptyValidation,
+        EmailInputValidator.invalid => localization.emailValidation,
+        _ => null,
+      },
     );
   }
 }
@@ -114,27 +115,26 @@ class _TextFieldPassword extends HookConsumerWidget {
     );
     final passwordError = passwordInput.isNotValid ? passwordInput.error : null;
 
-    useEffect(
-      () {
-        controller.value = controller.value.copyWith(text: passwordInput.value);
-        return null;
-      },
-      const [],
-    );
+    useEffect(() {
+      controller.value = controller.value.copyWith(text: passwordInput.value);
+      return null;
+    }, const []);
 
     return CustomTextField(
       textController: controller,
       hint: localization.passwordPlaceholder,
       isRequired: true,
       requiredMessage: localization.passwordRequiredMessage,
-      onChange: (value) => ref
-          .read(loginFormNotifierProvider.notifier)
-          .onChangePassword(value: value),
-      errorText: passwordError == null
-          ? null
-          : passwordError == PasswordInputValidator.empty
-              ? localization.emptyValidation
-              : localization.passwordValidation,
+      onChange: (value) {
+        ref
+            .read(loginFormNotifierProvider.notifier)
+            .onChangePassword(value: value);
+      },
+      errorText: switch (passwordError) {
+        PasswordInputValidator.empty => localization.emptyValidation,
+        PasswordInputValidator.invalid => localization.passwordValidation,
+        _ => null,
+      },
       hasPassword: true,
     );
   }
@@ -162,11 +162,14 @@ class _SubmitButton extends ConsumerWidget {
           Expanded(
             child: CustomButton(
               text: context.localizations.signInButton,
-              onPress: isFormValid
-                  ? () => ref
+              onPress: switch (isFormValid) {
+                true => () {
+                  ref
                       .read(simpleLoginNotifierProvider.notifier)
-                      .authenticate(email: email, password: password)
-                  : null,
+                      .authenticate(email: email, password: password);
+                },
+                false => null,
+              },
               backgroundColor: CustomColors.lightGreen,
               foregroundColor: CustomColors.white,
               icon: const Icon(Icons.send, color: CustomColors.white),

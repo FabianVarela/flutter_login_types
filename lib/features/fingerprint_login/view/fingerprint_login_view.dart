@@ -42,15 +42,20 @@ class FingerPrintLoginView extends HookConsumerWidget {
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: hasBiometric.when(
-              data: (data) => data
-                  ? const _BiometricBody()
-                  : _TextMessage(
-                      message: localization.biometricNoSupportedText,
-                    ),
+              data: (data) {
+                return switch (data) {
+                  true => const _BiometricBody(),
+                  false => _TextMessage(
+                    message: localization.biometricNoSupportedText,
+                  ),
+                };
+              },
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (_, __) => _TextMessage(
-                message: localization.biometricNoSupportedText,
-              ),
+              error: (_, __) {
+                return _TextMessage(
+                  message: localization.biometricNoSupportedText,
+                );
+              },
             ),
           ),
         ),
@@ -79,20 +84,26 @@ class _BiometricBody extends ConsumerWidget {
         ),
         const Gap(30),
         biometricList.when(
-          data: (data) => data.isNotEmpty
-              ? CustomButton(
-                  text: localization.biometricButtonText,
-                  onPress: () => ref
-                      .read(localAuthNotifierProvider.notifier)
-                      .authenticate(reason: localization.biometricReason),
-                  backgroundColor: CustomColors.darkPurple,
-                  foregroundColor: CustomColors.white,
-                )
-              : _TextMessage(message: localization.biometricEnabledText),
+          data: (data) {
+            if (data.isEmpty) {
+              _TextMessage(message: localization.biometricEnabledText);
+            }
+
+            return CustomButton(
+              text: localization.biometricButtonText,
+              onPress: () {
+                ref
+                    .read(localAuthNotifierProvider.notifier)
+                    .authenticate(reason: localization.biometricReason);
+              },
+              backgroundColor: CustomColors.darkPurple,
+              foregroundColor: CustomColors.white,
+            );
+          },
           loading: () => const Center(child: CircularProgressIndicator()),
-          error: (_, __) => _TextMessage(
-            message: localization.biometricEnabledText,
-          ),
+          error: (_, __) {
+            return _TextMessage(message: localization.biometricEnabledText);
+          },
         ),
       ],
     );

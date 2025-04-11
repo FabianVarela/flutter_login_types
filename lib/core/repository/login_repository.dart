@@ -8,8 +8,7 @@ class LoginRepository {
   Future<String?> authenticate({
     required String username,
     required String password,
-  }) =>
-      client.authenticate(username: username, password: password);
+  }) => client.authenticate(username: username, password: password);
 
   Future<String?> verifyPhone({required String phone}) =>
       client.verifyPhone(phoneNumber: phone);

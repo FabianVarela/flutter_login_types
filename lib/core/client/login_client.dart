@@ -116,7 +116,8 @@ class LoginClient {
         '/$tenantId/$policyName/v2.0/.well-known/openid-configuration',
       );
 
-      final redirectFullPath = '${appConfig.azureConfig.redirectScheme}://'
+      final redirectFullPath =
+          '${appConfig.azureConfig.redirectScheme}://'
           '${appConfig.azureConfig.redirectPath}';
 
       final result = await appAuth.authorizeAndExchangeCode(

@@ -44,5 +44,5 @@ class PasscodeLoginNotifier extends AutoDisposeAsyncNotifier<PasscodeInfo> {
 
 final passcodeLoginNotifierProvider =
     AsyncNotifierProvider.autoDispose<PasscodeLoginNotifier, PasscodeInfo>(
-  PasscodeLoginNotifier.new,
-);
+      PasscodeLoginNotifier.new,
+    );

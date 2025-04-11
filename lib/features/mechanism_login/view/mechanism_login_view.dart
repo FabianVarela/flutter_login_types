@@ -51,18 +51,22 @@ class MechanismLoginView extends HookConsumerWidget {
               children: <Widget>[
                 CustomButton(
                   text: localization.signInText(localization.signInAzureAd),
-                  onPress: () => ref
-                      .read(mechanismLoginNotifierProvider.notifier)
-                      .authenticateAzure(language: language?.languageCode),
+                  onPress: () {
+                    ref
+                        .read(mechanismLoginNotifierProvider.notifier)
+                        .authenticateAzure(language: language?.languageCode);
+                  },
                   backgroundColor: CustomColors.kingBlue,
                   foregroundColor: CustomColors.white,
                   icon: const Icon(Icons.window, color: CustomColors.white),
                 ),
                 CustomButton(
                   text: localization.signInText(localization.signInAuth0),
-                  onPress: () => ref
-                      .read(mechanismLoginNotifierProvider.notifier)
-                      .authenticateAuth0(),
+                  onPress: () {
+                    ref
+                        .read(mechanismLoginNotifierProvider.notifier)
+                        .authenticateAuth0();
+                  },
                   backgroundColor: CustomColors.lightRed,
                   foregroundColor: CustomColors.white,
                   icon: const Icon(Icons.star, color: CustomColors.white),
@@ -80,13 +84,13 @@ class MechanismLoginView extends HookConsumerWidget {
     final localization = context.localizations;
     final message = switch (exception.type) {
       MechanismType.azure => switch (exception.error) {
-          MechanismError.cancelled => localization.azureLoginCancelled,
-          MechanismError.error => localization.azureLoginError,
-        },
+        MechanismError.cancelled => localization.azureLoginCancelled,
+        MechanismError.error => localization.azureLoginError,
+      },
       MechanismType.auth0 => switch (exception.error) {
-          MechanismError.cancelled => localization.auth0LoginCancelled,
-          MechanismError.error => localization.auth0LoginError,
-        },
+        MechanismError.cancelled => localization.auth0LoginCancelled,
+        MechanismError.error => localization.auth0LoginError,
+      },
       _ => null,
     };
     if (message != null) CustomMessage.show(context, message);

@@ -17,13 +17,10 @@ class LoginApp extends HookConsumerWidget {
       languageNotifierProvider.select((value) => value.value),
     );
 
-    useEffect(
-      () {
-        ref.read(notificationServiceProvider).init();
-        return null;
-      },
-      const [],
-    );
+    useEffect(() {
+      ref.read(notificationServiceProvider).init();
+      return null;
+    }, const []);
 
     return MaterialApp.router(
       routerConfig: appRouter.router,

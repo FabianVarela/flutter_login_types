@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/notifiers/language_notifier.dart';
 import 'package:flutter_login_types/core/notifiers/session/session_notifier.dart';
@@ -37,7 +38,10 @@ class _HomePageUIState extends ConsumerState<HomeView>
 
   @override
   Widget build(BuildContext context) {
-    if (_notification != null) print('App status notification: $_notification');
+    if (_notification != null) {
+      if (kDebugMode) print('App status notification: $_notification');
+    }
+
     final language = ref.watch(
       languageNotifierProvider.select((value) => value.value),
     );
@@ -65,9 +69,11 @@ class _HomePageUIState extends ConsumerState<HomeView>
             DropdownButton<Locale>(
               hint: Text(context.localizations.changeLanguageTitle),
               value: language,
-              onChanged: (language) => ref
-                  .read(languageNotifierProvider.notifier)
-                  .setLanguage(language: language!.languageCode),
+              onChanged: (language) {
+                ref
+                    .read(languageNotifierProvider.notifier)
+                    .setLanguage(language: language!.languageCode);
+              },
               items: <DropdownMenuItem<Locale>>[
                 for (final item in AppLocalizations.supportedLocales)
                   DropdownMenuItem(

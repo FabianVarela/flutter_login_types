@@ -7,32 +7,27 @@ import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<void> bootstrap(
-  FutureOr<Widget> Function() builder,
-) async {
+Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
 
-  await runZonedGuarded(
-    () async {
-      WidgetsFlutterBinding.ensureInitialized();
+  await runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
 
-      await SystemChrome.setPreferredOrientations(
-        <DeviceOrientation>[DeviceOrientation.portraitUp],
-      );
+    await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+      DeviceOrientation.portraitUp,
+    ]);
 
-      runApp(
-        ProviderScope(
-          overrides: [
-            sharedPreferencesProvider.overrideWithValue(
-              await SharedPreferences.getInstance(),
-            ),
-          ],
-          child: await builder(),
-        ),
-      );
-    },
-    (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
-  );
+    runApp(
+      ProviderScope(
+        overrides: [
+          sharedPreferencesProvider.overrideWithValue(
+            await SharedPreferences.getInstance(),
+          ),
+        ],
+        child: await builder(),
+      ),
+    );
+  }, (error, stackTrace) => log(error.toString(), stackTrace: stackTrace));
 }
