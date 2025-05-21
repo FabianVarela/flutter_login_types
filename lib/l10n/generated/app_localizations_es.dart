@@ -107,10 +107,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get biometricButtonText => 'Click para iniciar con huella';
 
   @override
-  String get biometricEnabledText => 'Debes ir a configuración y habilitar \nla huella o el Face ID';
+  String get biometricEnabledText =>
+      'Debes ir a configuración y habilitar \nla huella o el Face ID';
 
   @override
-  String get biometricNoSupportedText => 'Este dispositivo no soporta inicio de sesión mediante biometría';
+  String get biometricNoSupportedText =>
+      'Este dispositivo no soporta inicio de sesión mediante biometría';
 
   @override
   String get biometricReason => 'Coloca tu huella o cara para iniciar';
@@ -143,7 +145,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get emailValidation => 'Ingrese un correo válido';
 
   @override
-  String get passwordValidation => 'La contraseña debe ser mayor que 4 caracteres';
+  String get passwordValidation =>
+      'La contraseña debe ser mayor que 4 caracteres';
 
   @override
   String get numberValidation => 'Ingrese un número válido';

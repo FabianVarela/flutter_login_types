@@ -107,10 +107,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get biometricButtonText => 'Click to start with fingerprint';
 
   @override
-  String get biometricEnabledText => 'You must go to settings and \nenable fingerprint or face ID';
+  String get biometricEnabledText =>
+      'You must go to settings and \nenable fingerprint or face ID';
 
   @override
-  String get biometricNoSupportedText => 'This device no support sign in by fingerprint';
+  String get biometricNoSupportedText =>
+      'This device no support sign in by fingerprint';
 
   @override
   String get biometricReason => 'Set fingerprint or face id to start';
