@@ -32,7 +32,8 @@ if (project.hasProperty('dart-defines')) {
 }
 
 android {
-    compileSdk 34
+    compileSdk 35
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
@@ -86,7 +87,7 @@ flutter {
 }
 
 dependencies {
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.2'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
 
     implementation "androidx.multidex:multidex:2.0.1"
     implementation 'androidx.window:window:1.0.0'
