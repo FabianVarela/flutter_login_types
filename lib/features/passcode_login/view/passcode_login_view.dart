@@ -47,7 +47,7 @@ class PasscodeLoginView extends HookConsumerWidget {
                 .setSession(session: data.token!);
           }
         },
-        error: (_, __) {
+        error: (_, _) {
           final message = switch (pageValue.value) {
             0 => context.localizations.phoneNumberIncorrect,
             1 => context.localizations.passcodeIncorrect,

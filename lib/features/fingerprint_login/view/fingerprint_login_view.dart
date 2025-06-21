@@ -51,7 +51,7 @@ class FingerPrintLoginView extends HookConsumerWidget {
                 };
               },
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (_, __) {
+              error: (_, _) {
                 return _TextMessage(
                   message: localization.biometricNoSupportedText,
                 );
@@ -101,7 +101,7 @@ class _BiometricBody extends ConsumerWidget {
             );
           },
           loading: () => const Center(child: CircularProgressIndicator()),
-          error: (_, __) {
+          error: (_, _) {
             return _TextMessage(message: localization.biometricEnabledText);
           },
         ),

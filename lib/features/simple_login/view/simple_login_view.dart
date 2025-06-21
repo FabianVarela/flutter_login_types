@@ -28,7 +28,7 @@ class SimpleLoginView extends ConsumerWidget {
                 .setSession(session: data.token);
           }
         },
-        error: (_, __) {
+        error: (_, _) {
           CustomMessage.show(
             context,
             context.localizations.userPasswordIncorrectMessage,
