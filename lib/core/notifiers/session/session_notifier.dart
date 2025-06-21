@@ -46,6 +46,6 @@ class SessionNotifier extends ChangeNotifier {
   }
 }
 
-final sessionNotifierProvider = ChangeNotifierProvider<SessionNotifier>(
+final sessionNotifierProvider = ChangeNotifierProvider(
   (ref) => SessionNotifier(repository: ref.watch(sessionRepositoryProvider)),
 );

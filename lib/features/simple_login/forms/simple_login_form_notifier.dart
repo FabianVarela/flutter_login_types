@@ -14,7 +14,6 @@ class SimpleLoginFormNotifier extends AutoDisposeNotifier<SimpleLoginForm> {
   }
 }
 
-final loginFormNotifierProvider =
-    NotifierProvider.autoDispose<SimpleLoginFormNotifier, SimpleLoginForm>(
-      SimpleLoginFormNotifier.new,
-    );
+final loginFormNotifierProvider = NotifierProvider.autoDispose(
+  SimpleLoginFormNotifier.new,
+);

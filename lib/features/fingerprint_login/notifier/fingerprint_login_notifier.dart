@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:uuid/uuid.dart';
 
-final hasBiometricProvider = FutureProvider.autoDispose<bool>((ref) async {
+final hasBiometricProvider = FutureProvider.autoDispose((ref) async {
   final localAuth = ref.watch(localAuthenticationProvider);
 
   final canAuthBiometrics = await localAuth.canCheckBiometrics;
@@ -15,7 +15,7 @@ final hasBiometricProvider = FutureProvider.autoDispose<bool>((ref) async {
   return canAuthBiometrics || isDeviceSupported;
 });
 
-final listBiometricProvider = FutureProvider.autoDispose<List<BiometricType>>(
+final listBiometricProvider = FutureProvider.autoDispose(
   (ref) => ref.watch(localAuthenticationProvider).getAvailableBiometrics(),
 );
 
@@ -51,7 +51,6 @@ class LocalAuthNotifier extends AutoDisposeAsyncNotifier<LocalAuthInfo> {
   }
 }
 
-final localAuthNotifierProvider =
-    AsyncNotifierProvider.autoDispose<LocalAuthNotifier, LocalAuthInfo>(
-      LocalAuthNotifier.new,
-    );
+final localAuthNotifierProvider = AsyncNotifierProvider.autoDispose(
+  LocalAuthNotifier.new,
+);

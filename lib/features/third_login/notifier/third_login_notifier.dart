@@ -91,7 +91,6 @@ class ThirdLoginNotifier extends AutoDisposeAsyncNotifier<ThirdLoginInfo> {
   }
 }
 
-final thirdLoginNotifierProvider =
-    AsyncNotifierProvider.autoDispose<ThirdLoginNotifier, ThirdLoginInfo>(
-      ThirdLoginNotifier.new,
-    );
+final thirdLoginNotifierProvider = AsyncNotifierProvider.autoDispose(
+  ThirdLoginNotifier.new,
+);

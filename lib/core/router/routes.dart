@@ -123,6 +123,6 @@ class AppRouter {
   GoRouter get router => _router;
 }
 
-final appRouterProvider = Provider<AppRouter>((ref) {
+final appRouterProvider = Provider((ref) {
   return AppRouter(session: ref.watch(sessionNotifierProvider));
 });

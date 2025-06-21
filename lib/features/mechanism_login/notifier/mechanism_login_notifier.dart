@@ -67,7 +67,6 @@ class MechanismLoginNotifier extends AutoDisposeAsyncNotifier<MechanismInfo> {
   }
 }
 
-final mechanismLoginNotifierProvider =
-    AsyncNotifierProvider.autoDispose<MechanismLoginNotifier, MechanismInfo>(
-      MechanismLoginNotifier.new,
-    );
+final mechanismLoginNotifierProvider = AsyncNotifierProvider.autoDispose(
+  MechanismLoginNotifier.new,
+);

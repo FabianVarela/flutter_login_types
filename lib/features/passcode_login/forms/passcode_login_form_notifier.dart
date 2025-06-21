@@ -10,7 +10,6 @@ class PasscodeLoginFormNotifier extends AutoDisposeNotifier<PasscodeLoginForm> {
   }
 }
 
-final passcodeFormNotifierProvider =
-    NotifierProvider.autoDispose<PasscodeLoginFormNotifier, PasscodeLoginForm>(
-      PasscodeLoginFormNotifier.new,
-    );
+final passcodeFormNotifierProvider = NotifierProvider.autoDispose(
+  PasscodeLoginFormNotifier.new,
+);

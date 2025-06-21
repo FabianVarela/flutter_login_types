@@ -14,7 +14,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final flutterSecureStorageProvider = Provider<FlutterSecureStorage>((_) {
+final flutterSecureStorageProvider = Provider((_) {
   return const FlutterSecureStorage(
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
     iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
@@ -25,34 +25,32 @@ final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
   throw UnimplementedError('You must implement SharedPreferences provider');
 });
 
-final localAuthenticationProvider = Provider<LocalAuthentication>(
-  (_) => LocalAuthentication(),
-);
+final localAuthenticationProvider = Provider((_) => LocalAuthentication());
 
-final secureStorageProvider = Provider<SecureStorage>(
+final secureStorageProvider = Provider(
   (ref) => SecureStorage(
     flutterSecureStorage: ref.watch(flutterSecureStorageProvider),
   ),
 );
 
-final preferencesProvider = Provider<Preferences>(
+final preferencesProvider = Provider(
   (ref) => Preferences(sharedPreferences: ref.watch(sharedPreferencesProvider)),
 );
 
-final localNotificationsProvider = Provider<FlutterLocalNotificationsPlugin>(
+final localNotificationsProvider = Provider(
   (_) => FlutterLocalNotificationsPlugin(),
 );
 
-final appAuthProvider = Provider<FlutterAppAuth>((_) => const FlutterAppAuth());
+final appAuthProvider = Provider((_) => const FlutterAppAuth());
 
-final auth0Provider = Provider<Auth0>((ref) {
+final auth0Provider = Provider((ref) {
   final auth0Config = ref.watch(appConfigProvider).auth0Config;
   return Auth0(auth0Config.domain, auth0Config.clientId);
 });
 
-final appConfigProvider = Provider<AppConfig>((_) => AppConfig());
+final appConfigProvider = Provider((_) => AppConfig());
 
-final loginClientProvider = Provider<LoginClient>(
+final loginClientProvider = Provider(
   (ref) => LoginClient(
     appConfig: ref.watch(appConfigProvider),
     appAuth: ref.watch(appAuthProvider),
@@ -60,19 +58,19 @@ final loginClientProvider = Provider<LoginClient>(
   ),
 );
 
-final sessionRepositoryProvider = Provider<SessionRepository>((ref) {
+final sessionRepositoryProvider = Provider((ref) {
   return SessionRepository(secureStorage: ref.watch(secureStorageProvider));
 });
 
-final languageRepositoryProvider = Provider<LanguageRepository>(
+final languageRepositoryProvider = Provider(
   (ref) => LanguageRepository(preferences: ref.watch(preferencesProvider)),
 );
 
-final loginRepositoryProvider = Provider<LoginRepository>(
+final loginRepositoryProvider = Provider(
   (ref) => LoginRepository(client: ref.watch(loginClientProvider)),
 );
 
-final notificationServiceProvider = Provider<NotificationService>(
+final notificationServiceProvider = Provider(
   (ref) => NotificationService(
     localNotifications: ref.watch(localNotificationsProvider),
   ),

@@ -25,7 +25,6 @@ class SimpleLoginNotifier extends AutoDisposeAsyncNotifier<SimpleLoginInfo?> {
   }
 }
 
-final simpleLoginNotifierProvider =
-    AsyncNotifierProvider.autoDispose<SimpleLoginNotifier, SimpleLoginInfo?>(
-      SimpleLoginNotifier.new,
-    );
+final simpleLoginNotifierProvider = AsyncNotifierProvider.autoDispose(
+  SimpleLoginNotifier.new,
+);
