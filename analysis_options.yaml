@@ -10,3 +10,4 @@ linter:
     no_default_cases: false
     public_member_api_docs: false
     require_trailing_commas: false
+    specify_nonobvious_property_types: false
