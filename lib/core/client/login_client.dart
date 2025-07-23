@@ -41,17 +41,24 @@ class LoginClient {
 
   Future<String?> authenticateGoogle() async {
     try {
-      final googleSignIn = GoogleSignIn(
-        scopes: ['email', 'https://www.googleapis.com/auth/contacts.readonly'],
+      await GoogleSignIn.instance.initialize(
         clientId: switch (defaultTargetPlatform) {
           TargetPlatform.iOS => appConfig.googleConfig.clientIdIos,
           _ => appConfig.googleConfig.clientIdAndroid,
         },
       );
 
-      final credential = await googleSignIn.signIn();
-      return credential?.id;
-    } catch (error) {
+      final credential = await GoogleSignIn.instance.authenticate(
+        scopeHint: [
+          'email',
+          'https://www.googleapis.com/auth/contacts.readonly',
+        ],
+      );
+      return credential.id;
+    } on Exception catch (error) {
+      if (error is GoogleSignInException) {
+        if (error.code == GoogleSignInExceptionCode.canceled) return null;
+      }
       rethrow;
     }
   }
