@@ -84,5 +84,8 @@ app.*.symbols
 # Obfuscation related
 app.*.map.json
 
+# Generated l10n files
+lib/l10n/gen/
+
 # Dart define file
 config-keys.json
