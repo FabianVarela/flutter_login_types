@@ -13,87 +13,73 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AppRouter {
-  AppRouter({required this.session});
+  AppRouter({this.session});
 
-  final SessionNotifier session;
+  final SessionState? session;
 
   late final GoRouter _router = GoRouter(
     initialLocation: AppRoutePath.home.goRoute,
     routes: <GoRoute>[
       GoRoute(
         path: AppRoutePath.loginOptions.goRoute,
-        pageBuilder: (_, state) {
-          return ScreenPage<dynamic>(
-            key: state.pageKey,
-            child: const LoginOptionsView(),
-          );
-        },
+        pageBuilder: (_, state) => ScreenPage<dynamic>(
+          key: state.pageKey,
+          child: const LoginOptionsView(),
+        ),
         routes: <GoRoute>[
           GoRoute(
             path: AppRoutePath.loginOptions.userPassword.goRoute,
-            pageBuilder: (_, state) {
-              return ScreenPage<dynamic>(
-                key: state.pageKey,
-                child: const SimpleLoginView(),
-              );
-            },
+            pageBuilder: (_, state) => ScreenPage<dynamic>(
+              key: state.pageKey,
+              child: const SimpleLoginView(),
+            ),
           ),
           GoRoute(
             path: AppRoutePath.loginOptions.passcode.goRoute,
-            pageBuilder: (_, state) {
-              return ScreenPage<dynamic>(
-                key: state.pageKey,
-                child: const PasscodeLoginView(),
-              );
-            },
+            pageBuilder: (_, state) => ScreenPage<dynamic>(
+              key: state.pageKey,
+              child: const PasscodeLoginView(),
+            ),
           ),
           GoRoute(
             path: AppRoutePath.loginOptions.biometric.goRoute,
-            pageBuilder: (_, state) {
-              return ScreenPage<dynamic>(
-                key: state.pageKey,
-                child: const FingerPrintLoginView(),
-              );
-            },
+            pageBuilder: (_, state) => ScreenPage<dynamic>(
+              key: state.pageKey,
+              child: const FingerPrintLoginView(),
+            ),
           ),
           GoRoute(
             path: AppRoutePath.loginOptions.third.goRoute,
-            pageBuilder: (_, state) {
-              return ScreenPage<dynamic>(
-                key: state.pageKey,
-                child: const ThirdLoginView(),
-              );
-            },
+            pageBuilder: (_, state) => ScreenPage<dynamic>(
+              key: state.pageKey,
+              child: const ThirdLoginView(),
+            ),
           ),
           GoRoute(
             path: AppRoutePath.loginOptions.mechanism.goRoute,
-            pageBuilder: (_, state) {
-              return ScreenPage<dynamic>(
-                key: state.pageKey,
-                child: const MechanismLoginView(),
-              );
-            },
+            pageBuilder: (_, state) => ScreenPage<dynamic>(
+              key: state.pageKey,
+              child: const MechanismLoginView(),
+            ),
           ),
         ],
       ),
       GoRoute(
         path: AppRoutePath.home.goRoute,
-        pageBuilder: (_, state) {
-          return ScreenPage<dynamic>(
-            key: state.pageKey,
-            child: const HomeView(),
-          );
-        },
+        pageBuilder: (_, state) => ScreenPage<dynamic>(
+          key: state.pageKey,
+          child: const HomeView(),
+        ),
       ),
     ],
-    redirect: (context, state) {
-      final isAuthenticating = switch (session.session) {
+    redirect: (_, state) {
+      final isAuthenticating = switch (session) {
         SessionStateLoading() => true,
         _ => false,
       };
       if (isAuthenticating) return null;
 
-      final isLoggedIn = switch (session.session) {
+      final isLoggedIn = switch (session) {
         SessionStateAuthenticated() => true,
         _ => false,
       };
@@ -124,5 +110,5 @@ class AppRouter {
 }
 
 final appRouterProvider = Provider((ref) {
-  return AppRouter(session: ref.watch(sessionNotifierProvider));
+  return AppRouter(session: ref.watch(sessionNotifierProvider).value);
 });
