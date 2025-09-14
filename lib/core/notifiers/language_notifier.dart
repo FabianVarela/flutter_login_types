@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class LanguageNotifier extends AutoDisposeAsyncNotifier<Locale?> {
+class LanguageNotifier extends AsyncNotifier<Locale?> {
   @override
   FutureOr<Locale?> build() async {
     final language = await ref.read(languageRepositoryProvider).getLanguage();

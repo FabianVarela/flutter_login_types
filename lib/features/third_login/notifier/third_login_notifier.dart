@@ -10,7 +10,7 @@ enum ThirdLoginResult { none, progress, success, cancelled, error }
 
 typedef ThirdLoginInfo = ({ThirdLoginResult result, String? token});
 
-class ThirdLoginNotifier extends AutoDisposeAsyncNotifier<ThirdLoginInfo> {
+class ThirdLoginNotifier extends AsyncNotifier<ThirdLoginInfo> {
   @override
   FutureOr<ThirdLoginInfo> build() {
     return (result: ThirdLoginResult.none, token: null);

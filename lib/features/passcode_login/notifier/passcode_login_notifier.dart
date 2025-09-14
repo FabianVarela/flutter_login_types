@@ -7,7 +7,7 @@ enum PasscodeMode { none, phone, passcode }
 
 typedef PasscodeInfo = ({PasscodeMode mode, String? token});
 
-class PasscodeLoginNotifier extends AutoDisposeAsyncNotifier<PasscodeInfo> {
+class PasscodeLoginNotifier extends AsyncNotifier<PasscodeInfo> {
   @override
   FutureOr<PasscodeInfo> build() => (mode: PasscodeMode.none, token: null);
 

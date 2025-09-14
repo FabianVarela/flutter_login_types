@@ -18,7 +18,7 @@ enum MechanismError { error, cancelled }
 
 typedef MechanismInfo = ({MechanismType type, String? token});
 
-class MechanismLoginNotifier extends AutoDisposeAsyncNotifier<MechanismInfo> {
+class MechanismLoginNotifier extends AsyncNotifier<MechanismInfo> {
   @override
   FutureOr<MechanismInfo> build() => (type: MechanismType.none, token: null);
 

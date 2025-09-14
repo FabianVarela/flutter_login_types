@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 typedef SimpleLoginInfo = ({String token});
 
-class SimpleLoginNotifier extends AutoDisposeAsyncNotifier<SimpleLoginInfo?> {
+class SimpleLoginNotifier extends AsyncNotifier<SimpleLoginInfo?> {
   @override
   FutureOr<SimpleLoginInfo?> build() => null;
 

@@ -1,7 +1,7 @@
 import 'package:flutter_login_types/features/simple_login/forms/simple_login_form.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SimpleLoginFormNotifier extends AutoDisposeNotifier<SimpleLoginForm> {
+class SimpleLoginFormNotifier extends Notifier<SimpleLoginForm> {
   @override
   SimpleLoginForm build() => const SimpleLoginForm();
 

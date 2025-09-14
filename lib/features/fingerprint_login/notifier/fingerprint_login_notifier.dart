@@ -23,7 +23,7 @@ enum LocalAuthOption { none, granted, denied }
 
 typedef LocalAuthInfo = ({LocalAuthOption option, String? token});
 
-class LocalAuthNotifier extends AutoDisposeAsyncNotifier<LocalAuthInfo> {
+class LocalAuthNotifier extends AsyncNotifier<LocalAuthInfo> {
   @override
   FutureOr<LocalAuthInfo> build() {
     return (option: LocalAuthOption.none, token: null);
