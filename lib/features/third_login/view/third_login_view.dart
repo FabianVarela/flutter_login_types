@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/notifiers/session/session_notifier.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
@@ -20,9 +22,8 @@ class ThirdLoginView extends ConsumerWidget {
       state.whenOrNull(
         data: (data) {
           if (data.result == ThirdLoginResult.success) {
-            ref
-                .read(sessionNotifierProvider.notifier)
-                .setSession(session: data.token!);
+            final notifier = ref.read(sessionNotifierProvider.notifier);
+            unawaited(notifier.setSession(session: data.token!));
           } else {
             _showSnackBar(context, data.result);
           }
@@ -78,9 +79,9 @@ class _GoogleButton extends ConsumerWidget {
 
     return CustomButton(
       text: localization.signInText(localization.signInGoogle),
-      onPress: () {
-        ref.read(thirdLoginNotifierProvider.notifier).authenticateGoogle();
-      },
+      onPress: () => unawaited(
+        ref.read(thirdLoginNotifierProvider.notifier).authenticateGoogle(),
+      ),
       backgroundColor: CustomColors.grey.withValues(alpha: .4),
       foregroundColor: CustomColors.white,
       icon: const Icon(Icons.g_mobiledata_outlined, color: CustomColors.white),
@@ -99,9 +100,9 @@ class _AppleButton extends ConsumerWidget {
       builder: (context) {
         return CustomButton(
           text: localization.signInText(localization.signInApple),
-          onPress: () {
-            ref.read(thirdLoginNotifierProvider.notifier).authenticateApple();
-          },
+          onPress: () => unawaited(
+            ref.read(thirdLoginNotifierProvider.notifier).authenticateApple(),
+          ),
           backgroundColor: Colors.black,
           foregroundColor: CustomColors.white,
           icon: const Center(
@@ -125,9 +126,9 @@ class _FacebookButton extends ConsumerWidget {
 
     return CustomButton(
       text: localization.signInText(localization.signInFacebook),
-      onPress: () {
-        ref.read(thirdLoginNotifierProvider.notifier).authenticateFacebook();
-      },
+      onPress: () => unawaited(
+        ref.read(thirdLoginNotifierProvider.notifier).authenticateFacebook(),
+      ),
       backgroundColor: CustomColors.kingBlue,
       foregroundColor: CustomColors.white,
       icon: const Icon(Icons.face_outlined, color: CustomColors.white),
@@ -144,9 +145,9 @@ class _TwitterButton extends ConsumerWidget {
 
     return CustomButton(
       text: localization.signInText(localization.signInTwitter),
-      onPress: () {
-        ref.read(thirdLoginNotifierProvider.notifier).authenticateTwitter();
-      },
+      onPress: () => unawaited(
+        ref.read(thirdLoginNotifierProvider.notifier).authenticateTwitter(),
+      ),
       backgroundColor: CustomColors.lightKingBlue,
       foregroundColor: CustomColors.white,
       icon: const Icon(

@@ -133,9 +133,7 @@ class LoginClient {
           redirectFullPath,
           discoveryUrl: discoveryURL.toString(),
           scopes: <String>['openid', 'profile', 'email', 'offline_access'],
-          additionalParameters: <String, String>{
-            if (language != null) 'lang': language,
-          },
+          additionalParameters: <String, String>{'lang': ?language},
         ),
       );
 

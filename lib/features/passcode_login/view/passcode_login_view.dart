@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
@@ -27,10 +29,12 @@ class PasscodeLoginView extends HookConsumerWidget {
 
     if (pageController.hasClients) {
       if (pageController.page!.round() != pageValue.value) {
-        pageController.animateToPage(
-          pageValue.value,
-          curve: Curves.easeOut,
-          duration: const Duration(milliseconds: 400),
+        unawaited(
+          pageController.animateToPage(
+            pageValue.value,
+            curve: Curves.easeOut,
+            duration: const Duration(milliseconds: 400),
+          ),
         );
       }
     }
@@ -40,11 +44,10 @@ class PasscodeLoginView extends HookConsumerWidget {
         data: (data) {
           if (data.mode == PasscodeMode.phone) {
             pageValue.value = 1;
-            _sendNotification(context, ref);
+            unawaited(_sendNotification(context, ref));
           } else if (data.mode == PasscodeMode.passcode) {
-            ref
-                .read(sessionNotifierProvider.notifier)
-                .setSession(session: data.token!);
+            final notifier = ref.read(sessionNotifierProvider.notifier);
+            unawaited(notifier.setSession(session: data.token!));
           }
         },
         error: (_, _) {
@@ -153,11 +156,11 @@ class _PhoneForm extends HookConsumerWidget {
                   child: CustomButton(
                     text: localization.verifyButtonText,
                     onPress: switch (isFormValid) {
-                      true => () {
+                      true => () => unawaited(
                         ref
                             .read(passcodeLoginNotifierProvider.notifier)
-                            .verifyPhone(phoneNumber: phoneInput.value);
-                      },
+                            .verifyPhone(phoneNumber: phoneInput.value),
+                      ),
                       false => null,
                     },
                     backgroundColor: CustomColors.lightGreen,
@@ -199,9 +202,8 @@ class _PasscodeForm extends HookConsumerWidget {
           Pinput(
             controller: controller,
             onCompleted: (value) {
-              ref
-                  .read(passcodeLoginNotifierProvider.notifier)
-                  .verifyCode(passcode: value);
+              final notifier = ref.read(passcodeLoginNotifierProvider.notifier);
+              unawaited(notifier.verifyCode(passcode: value));
             },
           ),
         ],

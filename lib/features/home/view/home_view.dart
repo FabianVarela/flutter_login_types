@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/notifiers/language_notifier.dart';
@@ -52,9 +54,9 @@ class _HomePageUIState extends ConsumerState<HomeView>
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            onPressed: () {
-              ref.read(sessionNotifierProvider.notifier).removeSession();
-            },
+            onPressed: () => unawaited(
+              ref.read(sessionNotifierProvider.notifier).removeSession(),
+            ),
             icon: const Icon(Icons.logout_outlined),
           ),
         ],
@@ -70,9 +72,10 @@ class _HomePageUIState extends ConsumerState<HomeView>
               hint: Text(context.localizations.changeLanguageTitle),
               value: language,
               onChanged: (language) {
-                ref
-                    .read(languageNotifierProvider.notifier)
-                    .setLanguage(language: language!.languageCode);
+                final notifier = ref.read(languageNotifierProvider.notifier);
+                unawaited(
+                  notifier.setLanguage(language: language!.languageCode),
+                );
               },
               items: <DropdownMenuItem<Locale>>[
                 for (final item in AppLocalizations.supportedLocales)

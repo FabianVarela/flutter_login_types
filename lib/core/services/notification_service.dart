@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -8,19 +10,19 @@ class NotificationService {
 
   void init() {
     if (defaultTargetPlatform == TargetPlatform.iOS) {
-      localNotifications
+      final implementation = localNotifications
           .resolvePlatformSpecificImplementation<
             IOSFlutterLocalNotificationsPlugin
-          >()
-          ?.requestPermissions(badge: true, sound: true);
+          >();
+      unawaited(implementation?.requestPermissions(badge: true, sound: true));
     }
 
     if (defaultTargetPlatform == TargetPlatform.android) {
-      localNotifications
+      final implementation = localNotifications
           .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin
-          >()
-          ?.requestNotificationsPermission();
+          >();
+      unawaited(implementation?.requestNotificationsPermission());
     }
 
     const initSettings = InitializationSettings(
@@ -28,7 +30,7 @@ class NotificationService {
       iOS: DarwinInitializationSettings(),
     );
 
-    localNotifications.initialize(initSettings);
+    unawaited(localNotifications.initialize(initSettings));
   }
 
   Future<void> showNotification({

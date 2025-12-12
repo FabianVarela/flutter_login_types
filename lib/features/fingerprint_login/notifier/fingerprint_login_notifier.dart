@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:local_auth/local_auth.dart';
 import 'package:uuid/uuid.dart';
 
 final hasBiometricProvider = FutureProvider.autoDispose((ref) async {
@@ -36,7 +35,7 @@ class LocalAuthNotifier extends AsyncNotifier<LocalAuthInfo> {
         final authProvider = ref.read(localAuthenticationProvider);
         final isAuthorized = await authProvider.authenticate(
           localizedReason: reason,
-          options: const AuthenticationOptions(stickyAuth: true),
+          persistAcrossBackgrounding: true,
         );
 
         final option = switch (isAuthorized) {

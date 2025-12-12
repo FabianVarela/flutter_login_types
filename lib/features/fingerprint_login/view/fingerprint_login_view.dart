@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/notifiers/session/session_notifier.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
@@ -23,9 +25,8 @@ class FingerPrintLoginView extends HookConsumerWidget {
       state.whenOrNull(
         data: (data) {
           if (data.option == LocalAuthOption.granted) {
-            ref
-                .read(sessionNotifierProvider.notifier)
-                .setSession(session: data.token!);
+            final notifier = ref.read(sessionNotifierProvider.notifier);
+            unawaited(notifier.setSession(session: data.token!));
           } else if (data.option == LocalAuthOption.denied) {
             CustomMessage.show(context, localization.biometricError);
           }
@@ -92,9 +93,10 @@ class _BiometricBody extends ConsumerWidget {
             return CustomButton(
               text: localization.biometricButtonText,
               onPress: () {
-                ref
-                    .read(localAuthNotifierProvider.notifier)
-                    .authenticate(reason: localization.biometricReason);
+                final notifier = ref.read(localAuthNotifierProvider.notifier);
+                unawaited(
+                  notifier.authenticate(reason: localization.biometricReason),
+                );
               },
               backgroundColor: CustomColors.darkPurple,
               foregroundColor: CustomColors.white,

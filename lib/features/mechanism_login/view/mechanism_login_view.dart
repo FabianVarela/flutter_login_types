@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/notifiers/language_notifier.dart';
 import 'package:flutter_login_types/core/notifiers/session/session_notifier.dart';
@@ -25,9 +27,8 @@ class MechanismLoginView extends HookConsumerWidget {
       state.whenOrNull(
         data: (data) {
           if (data.type != MechanismType.none && data.token != null) {
-            ref
-                .read(sessionNotifierProvider.notifier)
-                .setSession(session: data.token!);
+            final notifier = ref.read(sessionNotifierProvider.notifier);
+            unawaited(notifier.setSession(session: data.token!));
           }
         },
         error: (e, _) {
@@ -52,9 +53,14 @@ class MechanismLoginView extends HookConsumerWidget {
                 CustomButton(
                   text: localization.signInText(localization.signInAzureAd),
                   onPress: () {
-                    ref
-                        .read(mechanismLoginNotifierProvider.notifier)
-                        .authenticateAzure(language: language?.languageCode);
+                    final notifier = ref.read(
+                      mechanismLoginNotifierProvider.notifier,
+                    );
+                    unawaited(
+                      notifier.authenticateAzure(
+                        language: language?.languageCode,
+                      ),
+                    );
                   },
                   backgroundColor: CustomColors.kingBlue,
                   foregroundColor: CustomColors.white,
@@ -63,9 +69,10 @@ class MechanismLoginView extends HookConsumerWidget {
                 CustomButton(
                   text: localization.signInText(localization.signInAuth0),
                   onPress: () {
-                    ref
-                        .read(mechanismLoginNotifierProvider.notifier)
-                        .authenticateAuth0();
+                    final notifier = ref.read(
+                      mechanismLoginNotifierProvider.notifier,
+                    );
+                    unawaited(notifier.authenticateAuth0());
                   },
                   backgroundColor: CustomColors.lightRed,
                   foregroundColor: CustomColors.white,

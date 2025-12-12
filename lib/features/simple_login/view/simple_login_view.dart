@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_login_types/core/notifiers/session/session_notifier.dart';
@@ -23,9 +25,8 @@ class SimpleLoginView extends ConsumerWidget {
       state.whenOrNull(
         data: (data) {
           if (data != null) {
-            ref
-                .read(sessionNotifierProvider.notifier)
-                .setSession(session: data.token);
+            final notifier = ref.read(sessionNotifierProvider.notifier);
+            unawaited(notifier.setSession(session: data.token));
           }
         },
         error: (_, _) {
@@ -163,11 +164,11 @@ class _SubmitButton extends ConsumerWidget {
             child: CustomButton(
               text: context.localizations.signInButton,
               onPress: switch (isFormValid) {
-                true => () {
+                true => () => unawaited(
                   ref
                       .read(simpleLoginNotifierProvider.notifier)
-                      .authenticate(email: email, password: password);
-                },
+                      .authenticate(email: email, password: password),
+                ),
                 false => null,
               },
               backgroundColor: CustomColors.lightGreen,
