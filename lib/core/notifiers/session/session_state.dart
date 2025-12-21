@@ -16,12 +16,16 @@ final class SessionStateLoading extends SessionState {
 }
 
 final class SessionStateAuthenticated extends SessionState {
-  const SessionStateAuthenticated({required this.token});
+  const SessionStateAuthenticated({
+    required this.token,
+    required this.loginType,
+  });
 
   final String token;
+  final String loginType;
 
   @override
-  List<Object?> get props => [token];
+  List<Object?> get props => [token, loginType];
 }
 
 final class SessionStateUnauthenticated extends SessionState {

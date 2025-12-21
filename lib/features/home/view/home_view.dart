@@ -44,10 +44,7 @@ class _HomePageUIState extends ConsumerState<HomeView>
       if (kDebugMode) print('App status notification: $_notification');
     }
 
-    final language = ref.watch(
-      languageNotifierProvider.select((value) => value.value),
-    );
-
+    final language = ref.watch(languageNotifierProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text(context.localizations.homeTitle),
@@ -55,7 +52,7 @@ class _HomePageUIState extends ConsumerState<HomeView>
         actions: <Widget>[
           IconButton(
             onPressed: () => unawaited(
-              ref.read(sessionNotifierProvider.notifier).removeSession(),
+              ref.read(sessionNotifierProvider.notifier).clear(),
             ),
             icon: const Icon(Icons.logout_outlined),
           ),

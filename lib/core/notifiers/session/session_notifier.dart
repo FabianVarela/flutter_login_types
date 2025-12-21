@@ -9,23 +9,40 @@ part 'session_state.dart';
 class SessionNotifier extends AsyncNotifier<SessionState> {
   @override
   FutureOr<SessionState> build() async {
-    final session = await ref.watch(sessionRepositoryProvider).getSession();
-    return session != null
-        ? SessionStateAuthenticated(token: session)
-        : const SessionStateUnauthenticated();
+    final repository = ref.watch(sessionRepositoryProvider);
+
+    final (token, loginType) = await (
+      repository.getCurrentToken(),
+      repository.getCurrentLogin(),
+    ).wait;
+
+    return switch ((token, loginType)) {
+      (final String token, final String loginType) => SessionStateAuthenticated(
+        token: token,
+        loginType: loginType,
+      ),
+      _ => const SessionStateUnauthenticated(),
+    };
   }
 
-  Future<void> setSession({required String session}) async {
+  Future<void> setSession({
+    required String token,
+    required String loginType,
+  }) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      await ref.watch(sessionRepositoryProvider).setSession(session: session);
-      return SessionStateAuthenticated(token: session);
+      final repository = ref.read(sessionRepositoryProvider);
+      await Future.wait([
+        repository.setCurrentToken(token: token),
+        repository.setCurrentLogin(loginType: loginType),
+      ]);
+      return SessionStateAuthenticated(token: token, loginType: loginType);
     });
   }
 
-  Future<void> removeSession() async {
+  Future<void> clear() async {
     state = await AsyncValue.guard(() async {
-      await ref.watch(sessionRepositoryProvider).deleteSession();
+      await ref.read(sessionRepositoryProvider).clear();
       return const SessionStateUnauthenticated();
     });
   }
