@@ -9,7 +9,6 @@ import 'package:flutter_login_types/core/widgets/custom_button.dart';
 import 'package:flutter_login_types/core/widgets/custom_message.dart';
 import 'package:flutter_login_types/core/widgets/custom_textfield.dart';
 import 'package:flutter_login_types/core/widgets/loading.dart';
-import 'package:flutter_login_types/features/passcode_login/forms/passcode_login_form.dart';
 import 'package:flutter_login_types/features/passcode_login/forms/passcode_login_form_notifier.dart';
 import 'package:flutter_login_types/features/passcode_login/notifier/passcode_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
@@ -42,10 +41,10 @@ class PasscodeLoginView extends HookConsumerWidget {
     ref.listen(passcodeLoginNotifierProvider, (_, state) {
       state.whenOrNull(
         data: (data) {
-          if (data.mode == PasscodeMode.phone) {
+          if (data.mode == .phone) {
             pageValue.value = 1;
             unawaited(_sendNotification(context, ref));
-          } else if (data.mode == PasscodeMode.passcode) {
+          } else if (data.mode == .passcode) {
             final notifier = ref.read(sessionNotifierProvider.notifier);
             unawaited(notifier.setSession(session: data.token!));
           }
@@ -120,13 +119,13 @@ class _PhoneForm extends HookConsumerWidget {
     }, const []);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: const .symmetric(horizontal: 24),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: .center,
         children: <Widget>[
           Text(
             localization.phoneNumberTitle,
-            textAlign: TextAlign.center,
+            textAlign: .center,
             style: const TextStyle(color: CustomColors.darkBlue, fontSize: 20),
           ),
           const Gap(50),
@@ -135,21 +134,19 @@ class _PhoneForm extends HookConsumerWidget {
             hint: localization.phoneNumberPlaceholder,
             isRequired: true,
             requiredMessage: localization.phoneNumberRequired,
-            onChange: (value) {
-              ref
-                  .read(passcodeFormNotifierProvider.notifier)
-                  .onChangePhone(value: value);
-            },
+            onChange: (value) => ref
+                .read(passcodeFormNotifierProvider.notifier)
+                .onChangePhone(value: value),
             inputType: TextInputType.phone,
             errorText: switch (phoneError) {
-              PhoneInputValidation.empty => localization.emptyValidation,
-              PhoneInputValidation.invalid => localization.numberValidation,
+              .empty => localization.emptyValidation,
+              .invalid => localization.numberValidation,
               _ => null,
             },
           ),
           const Gap(20),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const .symmetric(horizontal: 24),
             child: Row(
               children: <Widget>[
                 Expanded(
@@ -169,7 +166,7 @@ class _PhoneForm extends HookConsumerWidget {
                       Icons.verified_outlined,
                       color: CustomColors.white,
                     ),
-                    direction: IconDirection.right,
+                    direction: .right,
                   ),
                 ),
               ],
@@ -189,13 +186,13 @@ class _PasscodeForm extends HookConsumerWidget {
     final controller = useTextEditingController();
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: const .symmetric(horizontal: 24),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: .center,
         children: <Widget>[
           Text(
             context.localizations.passcodeTitle,
-            textAlign: TextAlign.center,
+            textAlign: .center,
             style: const TextStyle(color: CustomColors.darkBlue, fontSize: 20),
           ),
           const Gap(50),

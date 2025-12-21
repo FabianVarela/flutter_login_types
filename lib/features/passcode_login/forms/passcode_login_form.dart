@@ -10,10 +10,10 @@ class PhoneInputText extends FormzInput<String, PhoneInputValidation> {
   @override
   PhoneInputValidation? validator(String value) {
     if (isPure) return null;
-    if (value.isEmpty) return PhoneInputValidation.empty;
+    if (value.isEmpty) return .empty;
 
     final regex = RegExp(r'^([0-9]){8,12}$');
-    if (!regex.hasMatch(value)) return PhoneInputValidation.invalid;
+    if (!regex.hasMatch(value)) return .invalid;
 
     return null;
   }

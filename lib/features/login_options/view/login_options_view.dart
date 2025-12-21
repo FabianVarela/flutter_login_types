@@ -16,17 +16,17 @@ class LoginOptionsView extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           localization.signInOptionText,
-          textAlign: TextAlign.center,
+          textAlign: .center,
           style: const TextStyle(color: CustomColors.darkBlue, fontSize: 20),
         ),
       ),
       backgroundColor: CustomColors.white,
       body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: .symmetric(horizontal: 16),
         child: Column(
           spacing: 20,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: .center,
+          crossAxisAlignment: .stretch,
           children: <Widget>[
             _SimpleLoginButton(),
             _PasscodeButton(),

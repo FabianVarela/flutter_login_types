@@ -43,7 +43,7 @@ class LoginClient {
     try {
       await GoogleSignIn.instance.initialize(
         clientId: switch (defaultTargetPlatform) {
-          TargetPlatform.iOS => appConfig.googleConfig.clientIdIos,
+          .iOS => appConfig.googleConfig.clientIdIos,
           _ => appConfig.googleConfig.clientIdAndroid,
         },
       );
@@ -57,7 +57,7 @@ class LoginClient {
       return credential.id;
     } on Exception catch (error) {
       if (error is GoogleSignInException) {
-        if (error.code == GoogleSignInExceptionCode.canceled) return null;
+        if (error.code == .canceled) return null;
       }
       rethrow;
     }
@@ -65,13 +65,10 @@ class LoginClient {
 
   Future<String?> authenticateApple() async {
     final credential = await SignInWithApple.getAppleIDCredential(
-      scopes: <AppleIDAuthorizationScopes>[
-        AppleIDAuthorizationScopes.email,
-        AppleIDAuthorizationScopes.fullName,
-      ],
+      scopes: <AppleIDAuthorizationScopes>[.email, .fullName],
       webAuthenticationOptions: WebAuthenticationOptions(
         clientId: appConfig.appleConfig.clientId,
-        redirectUri: Uri.parse(appConfig.appleConfig.redirectUri),
+        redirectUri: .parse(appConfig.appleConfig.redirectUri),
       ),
     );
 
@@ -85,7 +82,7 @@ class LoginClient {
         final loginResult = await FacebookAuth.instance.login();
         return <String, dynamic>{
           'status': loginResult.status,
-          if (loginResult.status == LoginStatus.success)
+          if (loginResult.status == .success)
             'token': loginResult.accessToken?.tokenString,
         };
       }
@@ -150,7 +147,7 @@ class LoginClient {
   Future<Map<String, dynamic>> authenticateAuth0() async {
     try {
       final scheme = switch (defaultTargetPlatform) {
-        TargetPlatform.android => appConfig.auth0Config.scheme,
+        .android => appConfig.auth0Config.scheme,
         _ => null,
       };
 

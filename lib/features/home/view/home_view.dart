@@ -64,7 +64,7 @@ class _HomePageUIState extends ConsumerState<HomeView>
       body: SizedBox(
         width: MediaQuery.sizeOf(context).width,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: .center,
           children: <Widget>[
             Text(context.localizations.homeText),
             const Gap(30),
@@ -81,7 +81,12 @@ class _HomePageUIState extends ConsumerState<HomeView>
                 for (final item in AppLocalizations.supportedLocales)
                   DropdownMenuItem(
                     value: item,
-                    child: Text(_getText(item.languageCode)),
+                    child: Text(
+                      switch (item.languageCode) {
+                        'es' => context.localizations.spanishLanguage,
+                        _ => context.localizations.englishLanguage,
+                      },
+                    ),
                   ),
               ],
             ),
@@ -89,17 +94,5 @@ class _HomePageUIState extends ConsumerState<HomeView>
         ),
       ),
     );
-  }
-
-  String _getText(String lang) {
-    final localization = context.localizations;
-
-    switch (lang) {
-      case 'es':
-        return localization.spanishLanguage;
-      case 'en':
-      default:
-        return localization.englishLanguage;
-    }
   }
 }

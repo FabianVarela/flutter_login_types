@@ -62,10 +62,10 @@ class ThirdLoginNotifier extends AsyncNotifier<ThirdLoginInfo> {
       final facebookResult = await repository.authenticateFacebook();
 
       final result = switch (facebookResult['status'] as LoginStatus) {
-        LoginStatus.success => ThirdLoginResult.success,
-        LoginStatus.cancelled => ThirdLoginResult.cancelled,
-        LoginStatus.failed => ThirdLoginResult.error,
-        LoginStatus.operationInProgress => ThirdLoginResult.progress,
+        .success => ThirdLoginResult.success,
+        .cancelled => ThirdLoginResult.cancelled,
+        .failed => ThirdLoginResult.error,
+        .operationInProgress => ThirdLoginResult.progress,
       };
       return (result: result, token: facebookResult['token'] as String?);
     });
@@ -79,9 +79,9 @@ class ThirdLoginNotifier extends AsyncNotifier<ThirdLoginInfo> {
         final twitterResult = await repository.authenticateTwitter();
 
         final result = switch (twitterResult['status'] as TwitterLoginStatus) {
-          TwitterLoginStatus.loggedIn => ThirdLoginResult.success,
-          TwitterLoginStatus.cancelledByUser => ThirdLoginResult.cancelled,
-          TwitterLoginStatus.error => ThirdLoginResult.error,
+          .loggedIn => ThirdLoginResult.success,
+          .cancelledByUser => ThirdLoginResult.cancelled,
+          .error => ThirdLoginResult.error,
         };
         return (result: result, token: twitterResult['token'] as String?);
       } on Exception catch (_) {

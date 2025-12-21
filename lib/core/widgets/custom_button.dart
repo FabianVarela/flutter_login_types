@@ -10,7 +10,7 @@ class CustomButton extends StatelessWidget {
     this.backgroundColor = Colors.white,
     this.foregroundColor = Colors.black,
     this.icon,
-    this.direction = IconDirection.left,
+    this.direction = .left,
   });
 
   final String text;
@@ -25,28 +25,28 @@ class CustomButton extends StatelessWidget {
     return ElevatedButton.icon(
       style: ElevatedButton.styleFrom(
         backgroundColor: backgroundColor,
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        padding: const .symmetric(vertical: 10, horizontal: 12),
+        shape: RoundedRectangleBorder(borderRadius: .circular(8)),
       ),
       onPressed: onPress,
       iconAlignment: switch (direction) {
-        IconDirection.left => IconAlignment.start,
-        IconDirection.right => IconAlignment.end,
+        .left => .start,
+        .right => .end,
       },
       icon: Padding(
         padding: switch (direction) {
-          IconDirection.left => const EdgeInsets.only(right: 5),
-          IconDirection.right => const EdgeInsets.only(left: 5),
+          .left => const .only(right: 5),
+          .right => const .only(left: 5),
         },
         child: icon,
       ),
       label: Text(
         text,
-        textAlign: TextAlign.center,
+        textAlign: .center,
         style: TextStyle(
           fontSize: 16,
           height: 1.2,
-          fontWeight: FontWeight.bold,
+          fontWeight: .bold,
           color: foregroundColor,
         ),
       ),

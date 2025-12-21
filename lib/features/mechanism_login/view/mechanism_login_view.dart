@@ -44,11 +44,11 @@ class MechanismLoginView extends HookConsumerWidget {
           backgroundColor: CustomColors.white,
           extendBodyBehindAppBar: true,
           body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const .symmetric(horizontal: 24),
             child: Column(
               spacing: 20,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: .center,
+              crossAxisAlignment: .stretch,
               children: <Widget>[
                 CustomButton(
                   text: localization.signInText(localization.signInAzureAd),
@@ -90,13 +90,13 @@ class MechanismLoginView extends HookConsumerWidget {
   void _showErrorMessage(BuildContext context, MechanismException exception) {
     final localization = context.localizations;
     final message = switch (exception.type) {
-      MechanismType.azure => switch (exception.error) {
-        MechanismError.cancelled => localization.azureLoginCancelled,
-        MechanismError.error => localization.azureLoginError,
+      .azure => switch (exception.error) {
+        .cancelled => localization.azureLoginCancelled,
+        .error => localization.azureLoginError,
       },
-      MechanismType.auth0 => switch (exception.error) {
-        MechanismError.cancelled => localization.auth0LoginCancelled,
-        MechanismError.error => localization.auth0LoginError,
+      .auth0 => switch (exception.error) {
+        .cancelled => localization.auth0LoginCancelled,
+        .error => localization.auth0LoginError,
       },
       _ => null,
     };

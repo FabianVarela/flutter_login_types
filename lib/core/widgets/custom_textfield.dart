@@ -10,8 +10,8 @@ class CustomTextField extends StatefulWidget {
     this.errorText,
     this.isRequired = false,
     this.hasPassword = false,
-    this.inputType = TextInputType.text,
-    this.action = TextInputAction.done,
+    this.inputType = .text,
+    this.action = .done,
     this.onChange,
   });
 
@@ -95,7 +95,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             },
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+            padding: const .symmetric(horizontal: 8, vertical: 3),
             child: TextField(
               controller: _textController,
               cursorColor: CustomColors.lightGreen,
@@ -110,17 +110,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
               focusNode: _customFocusNode,
               decoration: InputDecoration(
                 contentPadding: switch (widget.hasPassword) {
-                  true => const EdgeInsets.only(top: 16),
-                  false => EdgeInsets.zero,
+                  true => const .only(top: 16),
+                  false => .zero,
                 },
-                border: InputBorder.none,
+                border: .none,
                 hintStyle: TextStyle(
                   color: CustomColors.grey.withValues(alpha: .7),
                 ),
                 hintText: ((widget.hint ?? '').isNotEmpty) ? widget.hint : '',
                 suffixIcon: switch (widget.hasPassword) {
                   true => IconButton(
-                    padding: EdgeInsets.zero,
+                    padding: .zero,
                     icon: Icon(
                       Icons.remove_red_eye,
                       color: switch (_isPasswordActive) {
@@ -138,7 +138,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(6, 3, 0, 7),
+          padding: const .fromLTRB(6, 3, 0, 7),
           child: _ErrorMessage(
             message: switch (_hasRequired) {
               true => widget.requiredMessage,
@@ -167,7 +167,7 @@ class _ErrorMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     if (message == null) return const Offstage();
     return Align(
-      alignment: Alignment.topLeft,
+      alignment: .topLeft,
       child: Text(
         message!,
         style: const TextStyle(color: CustomColors.lightRed),

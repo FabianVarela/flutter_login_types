@@ -9,7 +9,7 @@ class NotificationService {
   final FlutterLocalNotificationsPlugin localNotifications;
 
   void init() {
-    if (defaultTargetPlatform == TargetPlatform.iOS) {
+    if (defaultTargetPlatform == .iOS) {
       final implementation = localNotifications
           .resolvePlatformSpecificImplementation<
             IOSFlutterLocalNotificationsPlugin
@@ -17,7 +17,7 @@ class NotificationService {
       unawaited(implementation?.requestPermissions(badge: true, sound: true));
     }
 
-    if (defaultTargetPlatform == TargetPlatform.android) {
+    if (defaultTargetPlatform == .android) {
       final implementation = localNotifications
           .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin
@@ -42,8 +42,8 @@ class NotificationService {
         'channel id',
         'channel name',
         channelDescription: 'channel description',
-        importance: Importance.max,
-        priority: Priority.high,
+        importance: .max,
+        priority: .high,
         timeoutAfter: 5000,
         styleInformation: DefaultStyleInformation(true, true),
       ),

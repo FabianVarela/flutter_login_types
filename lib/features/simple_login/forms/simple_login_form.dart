@@ -10,12 +10,12 @@ class EmailInputText extends FormzInput<String, EmailInputValidator> {
   @override
   EmailInputValidator? validator(String value) {
     if (isPure) return null;
-    if (value.isEmpty) return EmailInputValidator.empty;
+    if (value.isEmpty) return .empty;
 
     final regex = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
     );
-    if (!regex.hasMatch(value)) return EmailInputValidator.invalid;
+    if (!regex.hasMatch(value)) return .invalid;
 
     return null;
   }

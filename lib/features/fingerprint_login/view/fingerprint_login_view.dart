@@ -24,10 +24,10 @@ class FingerPrintLoginView extends HookConsumerWidget {
     ref.listen(localAuthNotifierProvider, (_, state) {
       state.whenOrNull(
         data: (data) {
-          if (data.option == LocalAuthOption.granted) {
+          if (data.option == .granted) {
             final notifier = ref.read(sessionNotifierProvider.notifier);
             unawaited(notifier.setSession(session: data.token!));
-          } else if (data.option == LocalAuthOption.denied) {
+          } else if (data.option == .denied) {
             CustomMessage.show(context, localization.biometricError);
           }
         },
@@ -41,7 +41,7 @@ class FingerPrintLoginView extends HookConsumerWidget {
           backgroundColor: CustomColors.white,
           extendBodyBehindAppBar: true,
           body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const .symmetric(horizontal: 24),
             child: hasBiometric.when(
               data: (data) {
                 return switch (data) {
@@ -75,12 +75,12 @@ class _BiometricBody extends ConsumerWidget {
     final biometricList = ref.watch(listBiometricProvider);
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisAlignment: .center,
+      crossAxisAlignment: .stretch,
       children: <Widget>[
         Text(
           localization.biometricTitle,
-          textAlign: TextAlign.center,
+          textAlign: .center,
           style: const TextStyle(color: CustomColors.darkBlue, fontSize: 20),
         ),
         const Gap(30),
@@ -122,7 +122,7 @@ class _TextMessage extends StatelessWidget {
     return Center(
       child: Text(
         message,
-        textAlign: TextAlign.center,
+        textAlign: .center,
         style: const TextStyle(color: CustomColors.darkBlue, fontSize: 25),
       ),
     );

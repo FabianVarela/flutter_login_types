@@ -8,7 +8,6 @@ import 'package:flutter_login_types/core/widgets/custom_button.dart';
 import 'package:flutter_login_types/core/widgets/custom_message.dart';
 import 'package:flutter_login_types/core/widgets/custom_textfield.dart';
 import 'package:flutter_login_types/core/widgets/loading.dart';
-import 'package:flutter_login_types/features/simple_login/forms/simple_login_form.dart';
 import 'package:flutter_login_types/features/simple_login/forms/simple_login_form_notifier.dart';
 import 'package:flutter_login_types/features/simple_login/notifier/simple_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
@@ -46,10 +45,10 @@ class SimpleLoginView extends ConsumerWidget {
           resizeToAvoidBottomInset: true,
           backgroundColor: CustomColors.white,
           body: Container(
-            padding: const EdgeInsets.all(16),
+            padding: const .all(16),
             child: const Column(
               spacing: 20,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: .center,
               children: <Widget>[
                 _TextFieldEmail(),
                 _TextFieldPassword(),
@@ -87,16 +86,14 @@ class _TextFieldEmail extends HookConsumerWidget {
       hint: localization.emailPlaceholder,
       isRequired: true,
       requiredMessage: localization.emailRequiredMessage,
-      onChange: (value) {
-        ref
-            .read(loginFormNotifierProvider.notifier)
-            .onChangeEmail(value: value);
-      },
+      onChange: (value) => ref
+          .read(loginFormNotifierProvider.notifier)
+          .onChangeEmail(value: value),
       inputType: TextInputType.emailAddress,
       action: TextInputAction.next,
       errorText: switch (emailError) {
-        EmailInputValidator.empty => localization.emptyValidation,
-        EmailInputValidator.invalid => localization.emailValidation,
+        .empty => localization.emptyValidation,
+        .invalid => localization.emailValidation,
         _ => null,
       },
     );
@@ -126,14 +123,12 @@ class _TextFieldPassword extends HookConsumerWidget {
       hint: localization.passwordPlaceholder,
       isRequired: true,
       requiredMessage: localization.passwordRequiredMessage,
-      onChange: (value) {
-        ref
-            .read(loginFormNotifierProvider.notifier)
-            .onChangePassword(value: value);
-      },
+      onChange: (value) => ref
+          .read(loginFormNotifierProvider.notifier)
+          .onChangePassword(value: value),
       errorText: switch (passwordError) {
-        PasswordInputValidator.empty => localization.emptyValidation,
-        PasswordInputValidator.invalid => localization.passwordValidation,
+        .empty => localization.emptyValidation,
+        .invalid => localization.passwordValidation,
         _ => null,
       },
       hasPassword: true,
@@ -157,7 +152,7 @@ class _SubmitButton extends ConsumerWidget {
     );
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: const .symmetric(horizontal: 24),
       child: Row(
         children: <Widget>[
           Expanded(
@@ -174,7 +169,7 @@ class _SubmitButton extends ConsumerWidget {
               backgroundColor: CustomColors.lightGreen,
               foregroundColor: CustomColors.white,
               icon: const Icon(Icons.send, color: CustomColors.white),
-              direction: IconDirection.right,
+              direction: .right,
             ),
           ),
         ],

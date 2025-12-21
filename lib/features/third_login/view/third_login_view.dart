@@ -21,7 +21,7 @@ class ThirdLoginView extends ConsumerWidget {
     ref.listen(thirdLoginNotifierProvider, (_, state) {
       state.whenOrNull(
         data: (data) {
-          if (data.result == ThirdLoginResult.success) {
+          if (data.result == .success) {
             final notifier = ref.read(sessionNotifierProvider.notifier);
             unawaited(notifier.setSession(session: data.token!));
           } else {
@@ -38,11 +38,11 @@ class ThirdLoginView extends ConsumerWidget {
           backgroundColor: CustomColors.white,
           extendBodyBehindAppBar: true,
           body: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+            padding: .symmetric(horizontal: 16),
             child: Column(
               spacing: 20,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: .center,
+              crossAxisAlignment: .stretch,
               children: <Widget>[
                 _GoogleButton(),
                 _AppleButton(),
@@ -60,9 +60,9 @@ class ThirdLoginView extends ConsumerWidget {
   void _showSnackBar(BuildContext context, ThirdLoginResult state) {
     final localization = context.localizations;
     final message = switch (state) {
-      ThirdLoginResult.progress => localization.signInThirdInProgress,
-      ThirdLoginResult.cancelled => localization.signInThirdCancelled,
-      ThirdLoginResult.error => localization.signInThirdError,
+      .progress => localization.signInThirdInProgress,
+      .cancelled => localization.signInThirdCancelled,
+      .error => localization.signInThirdError,
       _ => null,
     };
 
@@ -97,22 +97,20 @@ class _AppleButton extends ConsumerWidget {
     final localization = context.localizations;
 
     return SignInWithAppleBuilder(
-      builder: (context) {
-        return CustomButton(
-          text: localization.signInText(localization.signInApple),
-          onPress: () => unawaited(
-            ref.read(thirdLoginNotifierProvider.notifier).authenticateApple(),
+      builder: (context) => CustomButton(
+        text: localization.signInText(localization.signInApple),
+        onPress: () => unawaited(
+          ref.read(thirdLoginNotifierProvider.notifier).authenticateApple(),
+        ),
+        backgroundColor: Colors.black,
+        foregroundColor: CustomColors.white,
+        icon: const Center(
+          child: CustomPaint(
+            size: Size(22, 24),
+            painter: AppleLogoPainter(color: CustomColors.white),
           ),
-          backgroundColor: Colors.black,
-          foregroundColor: CustomColors.white,
-          icon: const Center(
-            child: CustomPaint(
-              size: Size(22, 24),
-              painter: AppleLogoPainter(color: CustomColors.white),
-            ),
-          ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
