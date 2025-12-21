@@ -5,7 +5,7 @@ class LanguageRepository {
 
   final Preferences preferences;
 
-  Future<String?> getLanguage() => preferences.getLanguage();
+  String? getLanguage() => preferences.getLanguage();
 
   Future<bool> setLanguage({required String language}) =>
       preferences.setLanguage(language: language);

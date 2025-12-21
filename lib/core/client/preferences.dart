@@ -7,11 +7,8 @@ class Preferences {
 
   static const _languageKey = 'language';
 
-  Future<String?> getLanguage() async {
-    return sharedPreferences.getString(_languageKey);
-  }
+  String? getLanguage() => sharedPreferences.getString(_languageKey);
 
-  Future<bool> setLanguage({required String language}) async {
-    return sharedPreferences.setString(_languageKey, language);
-  }
+  Future<bool> setLanguage({required String language}) =>
+      sharedPreferences.setString(_languageKey, language);
 }
