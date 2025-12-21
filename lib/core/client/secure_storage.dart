@@ -5,17 +5,20 @@ class SecureStorage {
 
   final FlutterSecureStorage flutterSecureStorage;
 
-  static const _sessionKey = 'userSession';
+  static const _currentTokenKey = 'currentToken';
+  static const _currentLoginKey = 'currentLogin';
 
-  Future<String?> getSession() async {
-    return flutterSecureStorage.read(key: _sessionKey);
-  }
+  Future<String?> getCurrentToken() =>
+      flutterSecureStorage.read(key: _currentTokenKey);
 
-  Future<void> setSession({required String session}) async {
-    return flutterSecureStorage.write(key: _sessionKey, value: session);
-  }
+  Future<void> setCurrentToken({required String token}) =>
+      flutterSecureStorage.write(key: _currentTokenKey, value: token);
 
-  Future<void> deleteSession() async {
-    return flutterSecureStorage.delete(key: _sessionKey);
-  }
+  Future<String?> getCurrentLogin() =>
+      flutterSecureStorage.read(key: _currentLoginKey);
+
+  Future<void> setCurrentLogin({required String loginType}) =>
+      flutterSecureStorage.write(key: _currentLoginKey, value: loginType);
+
+  Future<void> clear() => flutterSecureStorage.deleteAll();
 }

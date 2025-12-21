@@ -5,12 +5,15 @@ class SessionRepository {
 
   final SecureStorage secureStorage;
 
-  Future<String?> getSession() => secureStorage.getSession();
+  Future<String?> getCurrentToken() => secureStorage.getCurrentToken();
 
-  Future<void> setSession({required String session}) =>
-      secureStorage.setSession(session: session);
+  Future<void> setCurrentToken({required String token}) =>
+      secureStorage.setCurrentToken(token: token);
 
-  Future<void> deleteSession() async {
-    return secureStorage.deleteSession();
-  }
+  Future<String?> getCurrentLogin() => secureStorage.getCurrentLogin();
+
+  Future<void> setCurrentLogin({required String loginType}) =>
+      secureStorage.setCurrentLogin(loginType: loginType);
+
+  Future<void> clear() => secureStorage.clear();
 }
