@@ -6,11 +6,11 @@ class SimpleLoginFormNotifier extends Notifier<SimpleLoginForm> {
   SimpleLoginForm build() => const SimpleLoginForm();
 
   void onChangeEmail({required String value}) {
-    state = state.copyWith(emailInput: EmailInputText.dirty(value));
+    state = state.copyWith(emailInput: .dirty(value));
   }
 
   void onChangePassword({required String value}) {
-    state = state.copyWith(passwordInput: PasswordInputText.dirty(value));
+    state = state.copyWith(passwordInput: .dirty(value));
   }
 }
 

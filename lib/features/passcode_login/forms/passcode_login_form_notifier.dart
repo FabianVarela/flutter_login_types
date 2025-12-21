@@ -6,7 +6,7 @@ class PasscodeLoginFormNotifier extends Notifier<PasscodeLoginForm> {
   PasscodeLoginForm build() => const PasscodeLoginForm();
 
   void onChangePhone({required String value}) {
-    state = state.copyWith(phoneInput: PhoneInputText.dirty(value));
+    state = state.copyWith(phoneInput: .dirty(value));
   }
 }
 
