@@ -49,12 +49,16 @@ class SessionNotifier extends AsyncNotifier<SessionState> {
 
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
+      final repository = ref.read(sessionRepositoryProvider);
+
       if (currentStateValue is SessionStateAuthenticated) {
-        final loginType = LoginType.values.byName(currentStateValue.loginType);
-        await ref.read(logoutRepositoryProvider).logout(loginType);
+        await repository.logout(
+          loginType: LoginType.values.byName(currentStateValue.loginType),
+          token: currentStateValue.token,
+        );
       }
 
-      await ref.read(sessionRepositoryProvider).clear();
+      await repository.clear();
       return const SessionStateUnauthenticated();
     });
   }
