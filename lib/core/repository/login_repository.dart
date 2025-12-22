@@ -1,34 +1,47 @@
-import 'package:flutter_login_types/core/client/login_client.dart';
+import 'package:flutter_login_types/features/mechanism_login/client/mechanism_login_client.dart';
+import 'package:flutter_login_types/features/passcode_login/client/passcode_login_client.dart';
+import 'package:flutter_login_types/features/simple_login/client/simple_login_client.dart';
+import 'package:flutter_login_types/features/third_login/client/third_party_login_client.dart';
 
 class LoginRepository {
-  LoginRepository({required this.client});
+  LoginRepository({
+    required this.simpleLoginClient,
+    required this.passcodeLoginClient,
+    required this.thirdPartyLoginClient,
+    required this.mechanismLoginClient,
+  });
 
-  final LoginClient client;
+  final SimpleLoginClient simpleLoginClient;
+  final PasscodeLoginClient passcodeLoginClient;
+  final ThirdPartyLoginClient thirdPartyLoginClient;
+  final MechanismLoginClient mechanismLoginClient;
 
   Future<String?> authenticate({
     required String username,
     required String password,
-  }) => client.authenticate(username: username, password: password);
+  }) => simpleLoginClient.authenticate(username: username, password: password);
 
   Future<String?> verifyPhone({required String phone}) =>
-      client.verifyPhone(phoneNumber: phone);
+      passcodeLoginClient.verifyPhone(phoneNumber: phone);
 
   Future<String?> verifyCode({required String passcode}) =>
-      client.verifyCode(code: passcode);
+      passcodeLoginClient.verifyCode(code: passcode);
 
-  Future<String?> authenticateGoogle() => client.authenticateGoogle();
+  Future<String?> authenticateGoogle() =>
+      thirdPartyLoginClient.authenticateGoogle();
 
-  Future<String?> authenticateApple() => client.authenticateApple();
+  Future<String?> authenticateApple() =>
+      thirdPartyLoginClient.authenticateApple();
 
   Future<Map<String, dynamic>> authenticateFacebook() =>
-      client.authenticateFacebook();
+      thirdPartyLoginClient.authenticateFacebook();
 
   Future<Map<String, dynamic>> authenticateTwitter() =>
-      client.authenticateTwitter();
+      thirdPartyLoginClient.authenticateTwitter();
 
   Future<Map<String, dynamic>> authenticateAzure({String? language}) =>
-      client.authenticateAzure(language: language);
+      mechanismLoginClient.authenticateAzure(language: language);
 
   Future<Map<String, dynamic>> authenticateAuth0() =>
-      client.authenticateAuth0();
+      mechanismLoginClient.authenticateAuth0();
 }

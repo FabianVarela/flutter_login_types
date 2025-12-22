@@ -1,7 +1,6 @@
 import 'package:auth0_flutter/auth0_flutter.dart' show Auth0;
 import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_login_types/core/client/login_client.dart';
 import 'package:flutter_login_types/core/client/preferences.dart';
 import 'package:flutter_login_types/core/client/secure_storage.dart';
 import 'package:flutter_login_types/core/config/app_config.dart';
@@ -9,6 +8,10 @@ import 'package:flutter_login_types/core/repository/language_repository.dart';
 import 'package:flutter_login_types/core/repository/login_repository.dart';
 import 'package:flutter_login_types/core/repository/session_repository.dart';
 import 'package:flutter_login_types/core/services/notification_service.dart';
+import 'package:flutter_login_types/features/mechanism_login/client/mechanism_login_client.dart';
+import 'package:flutter_login_types/features/passcode_login/client/passcode_login_client.dart';
+import 'package:flutter_login_types/features/simple_login/client/simple_login_client.dart';
+import 'package:flutter_login_types/features/third_login/client/third_party_login_client.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:local_auth/local_auth.dart';
@@ -50,8 +53,16 @@ final auth0Provider = Provider((ref) {
 
 final appConfigProvider = Provider((_) => AppConfig());
 
-final loginClientProvider = Provider(
-  (ref) => LoginClient(
+final simpleLoginClientProvider = Provider((_) => SimpleLoginClient());
+
+final passcodeLoginClientProvider = Provider((_) => PasscodeLoginClient());
+
+final thirdPartyLoginClientProvider = Provider(
+  (ref) => ThirdPartyLoginClient(appConfig: ref.watch(appConfigProvider)),
+);
+
+final mechanismLoginClientProvider = Provider(
+  (ref) => MechanismLoginClient(
     appConfig: ref.watch(appConfigProvider),
     appAuth: ref.watch(appAuthProvider),
     auth0: ref.watch(auth0Provider),
@@ -67,7 +78,12 @@ final languageRepositoryProvider = Provider(
 );
 
 final loginRepositoryProvider = Provider(
-  (ref) => LoginRepository(client: ref.watch(loginClientProvider)),
+  (ref) => LoginRepository(
+    simpleLoginClient: ref.watch(simpleLoginClientProvider),
+    passcodeLoginClient: ref.watch(passcodeLoginClientProvider),
+    thirdPartyLoginClient: ref.watch(thirdPartyLoginClientProvider),
+    mechanismLoginClient: ref.watch(mechanismLoginClientProvider),
+  ),
 );
 
 final notificationServiceProvider = Provider(
