@@ -1,10 +1,12 @@
 import 'package:auth0_flutter/auth0_flutter.dart' show Auth0;
 import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_login_types/core/client/logout_client.dart';
 import 'package:flutter_login_types/core/client/preferences.dart';
 import 'package:flutter_login_types/core/client/secure_storage.dart';
 import 'package:flutter_login_types/core/config/app_config.dart';
 import 'package:flutter_login_types/core/repository/language_repository.dart';
+import 'package:flutter_login_types/core/repository/logout_repository.dart';
 import 'package:flutter_login_types/core/repository/session_repository.dart';
 import 'package:flutter_login_types/core/services/notification_service.dart';
 import 'package:flutter_login_types/features/mechanism_login/client/mechanism_login_client.dart';
@@ -100,6 +102,17 @@ final mechanismLoginRepositoryProvider = Provider(
   (ref) => MechanismLoginRepository(
     client: ref.watch(mechanismLoginClientProvider),
   ),
+);
+
+final logoutClientProvider = Provider(
+  (ref) => LogoutClient(
+    appConfig: ref.watch(appConfigProvider),
+    auth0: ref.watch(auth0Provider),
+  ),
+);
+
+final logoutRepositoryProvider = Provider(
+  (ref) => LogoutRepository(client: ref.watch(logoutClientProvider)),
 );
 
 final notificationServiceProvider = Provider(
