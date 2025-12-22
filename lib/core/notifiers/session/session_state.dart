@@ -7,14 +7,6 @@ sealed class SessionState extends Equatable {
   List<Object?> get props => [];
 }
 
-final class SessionStateInitial extends SessionState {
-  const SessionStateInitial();
-}
-
-final class SessionStateLoading extends SessionState {
-  const SessionStateLoading();
-}
-
 final class SessionStateAuthenticated extends SessionState {
   const SessionStateAuthenticated({
     required this.token,
