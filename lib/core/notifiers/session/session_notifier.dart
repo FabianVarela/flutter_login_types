@@ -44,8 +44,16 @@ class SessionNotifier extends AsyncNotifier<SessionState> {
     });
   }
 
-  Future<void> clear() async {
+  Future<void> logout() async {
+    final currentStateValue = state.requireValue;
+
+    state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
+      if (currentStateValue is SessionStateAuthenticated) {
+        final loginType = LoginType.values.byName(currentStateValue.loginType);
+        await ref.read(logoutRepositoryProvider).logout(loginType);
+      }
+
       await ref.read(sessionRepositoryProvider).clear();
       return const SessionStateUnauthenticated();
     });

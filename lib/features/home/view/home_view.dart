@@ -52,7 +52,7 @@ class _HomePageUIState extends ConsumerState<HomeView>
         actions: <Widget>[
           IconButton(
             onPressed: () => unawaited(
-              ref.read(sessionNotifierProvider.notifier).clear(),
+              ref.read(sessionNotifierProvider.notifier).logout(),
             ),
             icon: const Icon(Icons.logout_outlined),
           ),
