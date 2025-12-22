@@ -61,7 +61,8 @@ class LogoutClient {
         ),
       );
       await appAuth.endSession(request);
-    } on Exception catch (_) {
+    } on Exception catch (e) {
+      if (kDebugMode) print('Error durante logout de Azure: $e');
       return;
     }
   }
