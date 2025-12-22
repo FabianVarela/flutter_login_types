@@ -6,7 +6,6 @@ import 'package:flutter_login_types/core/client/preferences.dart';
 import 'package:flutter_login_types/core/client/secure_storage.dart';
 import 'package:flutter_login_types/core/config/app_config.dart';
 import 'package:flutter_login_types/core/repository/language_repository.dart';
-import 'package:flutter_login_types/core/repository/logout_repository.dart';
 import 'package:flutter_login_types/core/repository/session_repository.dart';
 import 'package:flutter_login_types/core/services/notification_service.dart';
 import 'package:flutter_login_types/features/mechanism_login/client/mechanism_login_client.dart';
@@ -74,9 +73,12 @@ final mechanismLoginClientProvider = Provider(
   ),
 );
 
-final sessionRepositoryProvider = Provider((ref) {
-  return SessionRepository(secureStorage: ref.watch(secureStorageProvider));
-});
+final sessionRepositoryProvider = Provider(
+  (ref) => SessionRepository(
+    secureStorage: ref.watch(secureStorageProvider),
+    client: ref.watch(logoutClientProvider),
+  ),
+);
 
 final languageRepositoryProvider = Provider(
   (ref) => LanguageRepository(preferences: ref.watch(preferencesProvider)),
@@ -108,11 +110,8 @@ final logoutClientProvider = Provider(
   (ref) => LogoutClient(
     appConfig: ref.watch(appConfigProvider),
     auth0: ref.watch(auth0Provider),
+    appAuth: ref.watch(appAuthProvider),
   ),
-);
-
-final logoutRepositoryProvider = Provider(
-  (ref) => LogoutRepository(client: ref.watch(logoutClientProvider)),
 );
 
 final notificationServiceProvider = Provider(
