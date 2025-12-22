@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
+import 'package:flutter_login_types/core/enum/login_type.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 part 'session_state.dart';
@@ -26,17 +27,20 @@ class SessionNotifier extends AsyncNotifier<SessionState> {
   }
 
   Future<void> setSession({
-    required String token,
-    required String loginType,
+    required ({String token, LoginType loginType}) sessionArgs,
   }) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       final repository = ref.read(sessionRepositoryProvider);
       await Future.wait([
-        repository.setCurrentToken(token: token),
-        repository.setCurrentLogin(loginType: loginType),
+        repository.setCurrentToken(token: sessionArgs.token),
+        repository.setCurrentLogin(loginType: sessionArgs.loginType.name),
       ]);
-      return SessionStateAuthenticated(token: token, loginType: loginType);
+
+      return SessionStateAuthenticated(
+        token: sessionArgs.token,
+        loginType: sessionArgs.loginType.name,
+      );
     });
   }
 
