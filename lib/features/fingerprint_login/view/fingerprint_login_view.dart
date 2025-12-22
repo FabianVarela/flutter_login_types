@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_login_types/core/enum/login_type.dart';
 import 'package:flutter_login_types/core/notifiers/session/session_notifier.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
@@ -26,7 +27,9 @@ class FingerPrintLoginView extends HookConsumerWidget {
         data: (data) {
           if (data.option == .granted) {
             final notifier = ref.read(sessionNotifierProvider.notifier);
-            unawaited(notifier.setSession(session: data.token!));
+            final args = (token: data.token!, loginType: LoginType.fingerprint);
+
+            unawaited(notifier.setSession(sessionArgs: args));
           } else if (data.option == .denied) {
             CustomMessage.show(context, localization.biometricError);
           }

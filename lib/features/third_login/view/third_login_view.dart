@@ -23,7 +23,11 @@ class ThirdLoginView extends ConsumerWidget {
         data: (data) {
           if (data.result == .success) {
             final notifier = ref.read(sessionNotifierProvider.notifier);
-            unawaited(notifier.setSession(session: data.token!));
+            unawaited(
+              notifier.setSession(
+                sessionArgs: (token: data.token!, loginType: data.loginType!),
+              ),
+            );
           } else {
             _showSnackBar(context, data.result);
           }

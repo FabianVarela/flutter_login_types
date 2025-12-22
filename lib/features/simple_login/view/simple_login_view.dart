@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_login_types/core/enum/login_type.dart';
 import 'package:flutter_login_types/core/notifiers/session/session_notifier.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
@@ -25,7 +26,9 @@ class SimpleLoginView extends ConsumerWidget {
         data: (data) {
           if (data != null) {
             final notifier = ref.read(sessionNotifierProvider.notifier);
-            unawaited(notifier.setSession(session: data.token));
+            final args = (token: data.token, loginType: LoginType.simple);
+
+            unawaited(notifier.setSession(sessionArgs: args));
           }
         },
         error: (_, _) {

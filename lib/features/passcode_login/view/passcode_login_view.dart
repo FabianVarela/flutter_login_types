@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
+import 'package:flutter_login_types/core/enum/login_type.dart';
 import 'package:flutter_login_types/core/notifiers/session/session_notifier.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
@@ -46,7 +47,9 @@ class PasscodeLoginView extends HookConsumerWidget {
             unawaited(_sendNotification(context, ref));
           } else if (data.mode == .passcode) {
             final notifier = ref.read(sessionNotifierProvider.notifier);
-            unawaited(notifier.setSession(session: data.token!));
+            final args = (token: data.token!, loginType: LoginType.passcode);
+
+            unawaited(notifier.setSession(sessionArgs: args));
           }
         },
         error: (_, _) {

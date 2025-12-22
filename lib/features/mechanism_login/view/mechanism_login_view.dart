@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_login_types/core/enum/login_type.dart';
 import 'package:flutter_login_types/core/notifiers/language_notifier.dart';
 import 'package:flutter_login_types/core/notifiers/session/session_notifier.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
@@ -19,16 +20,23 @@ class MechanismLoginView extends HookConsumerWidget {
     final localization = context.localizations;
 
     final mechanismLogin = ref.watch(mechanismLoginNotifierProvider);
-    final language = ref.watch(
-      languageNotifierProvider.select((value) => value.value),
-    );
+    final language = ref.watch(languageNotifierProvider);
 
     ref.listen(mechanismLoginNotifierProvider, (_, state) {
       state.whenOrNull(
         data: (data) {
           if (data.type != MechanismType.none && data.token != null) {
             final notifier = ref.read(sessionNotifierProvider.notifier);
-            unawaited(notifier.setSession(session: data.token!));
+            final loginType = switch (data.type) {
+              .auth0 => LoginType.auth0,
+              _ => LoginType.azure,
+            };
+
+            unawaited(
+              notifier.setSession(
+                sessionArgs: (token: data.token!, loginType: loginType),
+              ),
+            );
           }
         },
         error: (e, _) {

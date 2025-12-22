@@ -2,18 +2,23 @@ import 'dart:async';
 
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
+import 'package:flutter_login_types/core/enum/login_type.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:twitter_login/twitter_login.dart';
 
 enum ThirdLoginResult { none, progress, success, cancelled, error }
 
-typedef ThirdLoginInfo = ({ThirdLoginResult result, String? token});
+typedef ThirdLoginInfo = ({
+  ThirdLoginResult result,
+  String? token,
+  LoginType? loginType,
+});
 
 class ThirdLoginNotifier extends AsyncNotifier<ThirdLoginInfo> {
   @override
   FutureOr<ThirdLoginInfo> build() {
-    return (result: ThirdLoginResult.none, token: null);
+    return (result: ThirdLoginResult.none, token: null, loginType: null);
   }
 
   Future<void> authenticateGoogle() async {
@@ -26,9 +31,11 @@ class ThirdLoginNotifier extends AsyncNotifier<ThirdLoginInfo> {
         final result = googleResult != null
             ? ThirdLoginResult.success
             : ThirdLoginResult.cancelled;
-        return (result: result, token: googleResult);
+
+        const loginType = LoginType.google;
+        return (result: result, token: googleResult, loginType: loginType);
       } on Exception catch (_) {
-        return (result: ThirdLoginResult.error, token: null);
+        return (result: ThirdLoginResult.error, token: null, loginType: null);
       }
     });
   }
@@ -43,14 +50,15 @@ class ThirdLoginNotifier extends AsyncNotifier<ThirdLoginInfo> {
         final result = appleResult != null
             ? ThirdLoginResult.success
             : ThirdLoginResult.error;
-        return (result: result, token: appleResult);
+        return (result: result, token: appleResult, loginType: LoginType.apple);
       } on Exception catch (e) {
+        var result = ThirdLoginResult.error;
         if (e is SignInWithAppleAuthorizationException) {
           if (e.code == AuthorizationErrorCode.canceled) {
-            return (result: ThirdLoginResult.cancelled, token: null);
+            result = ThirdLoginResult.cancelled;
           }
         }
-        return (result: ThirdLoginResult.error, token: null);
+        return (result: result, token: null, loginType: null);
       }
     });
   }
@@ -67,7 +75,9 @@ class ThirdLoginNotifier extends AsyncNotifier<ThirdLoginInfo> {
         .failed => ThirdLoginResult.error,
         .operationInProgress => ThirdLoginResult.progress,
       };
-      return (result: result, token: facebookResult['token'] as String?);
+
+      final token = facebookResult['token'] as String?;
+      return (result: result, token: token, loginType: LoginType.facebook);
     });
   }
 
@@ -83,9 +93,11 @@ class ThirdLoginNotifier extends AsyncNotifier<ThirdLoginInfo> {
           .cancelledByUser => ThirdLoginResult.cancelled,
           .error => ThirdLoginResult.error,
         };
-        return (result: result, token: twitterResult['token'] as String?);
+
+        final token = twitterResult['token'] as String?;
+        return (result: result, token: token, loginType: LoginType.twitter);
       } on Exception catch (_) {
-        return (result: ThirdLoginResult.error, token: null);
+        return (result: ThirdLoginResult.error, token: null, loginType: null);
       }
     });
   }
