@@ -45,7 +45,10 @@ class SessionNotifier extends AsyncNotifier<SessionState> {
   }
 
   Future<void> logout() async {
-    final currentStateValue = state.requireValue;
+    if (state.isLoading) return;
+
+    final currentStateValue = state.value;
+    if (currentStateValue == null) return;
 
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
