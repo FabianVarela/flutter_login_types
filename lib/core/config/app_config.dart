@@ -22,6 +22,7 @@ class AppConfig {
     policyName: const String.fromEnvironment('AZURE_POLICY_NAME'),
     redirectScheme: const String.fromEnvironment('AZURE_REDIRECT_SCHEME'),
     redirectPath: const String.fromEnvironment('AZURE_REDIRECT_PATH'),
+    endpointPath: const String.fromEnvironment('AZURE_ENDPOINT_URL'),
   );
 
   static final _auth0Config = _Auth0Config(
@@ -75,6 +76,7 @@ class _AzureConfig {
     required this.policyName,
     required this.redirectScheme,
     required this.redirectPath,
+    required this.endpointPath,
   });
 
   final String tenantId;
@@ -83,6 +85,7 @@ class _AzureConfig {
   final String policyName;
   final String redirectScheme;
   final String redirectPath;
+  final String endpointPath;
 }
 
 class _Auth0Config {
