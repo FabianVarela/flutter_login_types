@@ -5,13 +5,16 @@ import 'package:flutter_login_types/core/client/preferences.dart';
 import 'package:flutter_login_types/core/client/secure_storage.dart';
 import 'package:flutter_login_types/core/config/app_config.dart';
 import 'package:flutter_login_types/core/repository/language_repository.dart';
-import 'package:flutter_login_types/core/repository/login_repository.dart';
 import 'package:flutter_login_types/core/repository/session_repository.dart';
 import 'package:flutter_login_types/core/services/notification_service.dart';
 import 'package:flutter_login_types/features/mechanism_login/client/mechanism_login_client.dart';
+import 'package:flutter_login_types/features/mechanism_login/repository/mechanism_login_repository.dart';
 import 'package:flutter_login_types/features/passcode_login/client/passcode_login_client.dart';
+import 'package:flutter_login_types/features/passcode_login/repository/passcode_login_repository.dart';
 import 'package:flutter_login_types/features/simple_login/client/simple_login_client.dart';
+import 'package:flutter_login_types/features/simple_login/repository/simple_login_repository.dart';
 import 'package:flutter_login_types/features/third_login/client/third_party_login_client.dart';
+import 'package:flutter_login_types/features/third_login/repository/third_party_login_repository.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:local_auth/local_auth.dart';
@@ -77,12 +80,25 @@ final languageRepositoryProvider = Provider(
   (ref) => LanguageRepository(preferences: ref.watch(preferencesProvider)),
 );
 
-final loginRepositoryProvider = Provider(
-  (ref) => LoginRepository(
-    simpleLoginClient: ref.watch(simpleLoginClientProvider),
-    passcodeLoginClient: ref.watch(passcodeLoginClientProvider),
-    thirdPartyLoginClient: ref.watch(thirdPartyLoginClientProvider),
-    mechanismLoginClient: ref.watch(mechanismLoginClientProvider),
+final simpleLoginRepositoryProvider = Provider(
+  (ref) => SimpleLoginRepository(client: ref.watch(simpleLoginClientProvider)),
+);
+
+final passcodeLoginRepositoryProvider = Provider(
+  (ref) => PasscodeLoginRepository(
+    client: ref.watch(passcodeLoginClientProvider),
+  ),
+);
+
+final thirdPartyLoginRepositoryProvider = Provider(
+  (ref) => ThirdPartyLoginRepository(
+    client: ref.watch(thirdPartyLoginClientProvider),
+  ),
+);
+
+final mechanismLoginRepositoryProvider = Provider(
+  (ref) => MechanismLoginRepository(
+    client: ref.watch(mechanismLoginClientProvider),
   ),
 );
 

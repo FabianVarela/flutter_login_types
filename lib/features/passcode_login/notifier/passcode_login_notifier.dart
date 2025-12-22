@@ -18,9 +18,8 @@ class PasscodeLoginNotifier extends AsyncNotifier<PasscodeInfo> {
   Future<void> verifyPhone({required String phoneNumber}) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      final verified = await ref
-          .read(loginRepositoryProvider)
-          .verifyPhone(phone: phoneNumber);
+      final repository = ref.read(passcodeLoginRepositoryProvider);
+      final verified = await repository.verifyPhone(phone: phoneNumber);
 
       if (verified != null && verified.isEmpty) {
         return (mode: PasscodeMode.phone, token: null);
@@ -32,9 +31,8 @@ class PasscodeLoginNotifier extends AsyncNotifier<PasscodeInfo> {
   Future<void> verifyCode({required String passcode}) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      final token = await ref
-          .read(loginRepositoryProvider)
-          .verifyCode(passcode: passcode);
+      final repository = ref.read(passcodeLoginRepositoryProvider);
+      final token = await repository.verifyCode(passcode: passcode);
 
       if (token != null) return (mode: PasscodeMode.passcode, token: token);
       throw Exception();

@@ -25,7 +25,7 @@ class ThirdLoginNotifier extends AsyncNotifier<ThirdLoginInfo> {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       try {
-        final repository = ref.read(loginRepositoryProvider);
+        final repository = ref.read(thirdPartyLoginRepositoryProvider);
         final googleResult = await repository.authenticateGoogle();
 
         final result = googleResult != null
@@ -44,7 +44,7 @@ class ThirdLoginNotifier extends AsyncNotifier<ThirdLoginInfo> {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       try {
-        final repository = ref.read(loginRepositoryProvider);
+        final repository = ref.read(thirdPartyLoginRepositoryProvider);
         final appleResult = await repository.authenticateApple();
 
         final result = appleResult != null
@@ -66,7 +66,7 @@ class ThirdLoginNotifier extends AsyncNotifier<ThirdLoginInfo> {
   Future<void> authenticateFacebook() async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      final repository = ref.read(loginRepositoryProvider);
+      final repository = ref.read(thirdPartyLoginRepositoryProvider);
       final facebookResult = await repository.authenticateFacebook();
 
       final result = switch (facebookResult['status'] as LoginStatus) {
@@ -85,7 +85,7 @@ class ThirdLoginNotifier extends AsyncNotifier<ThirdLoginInfo> {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       try {
-        final repository = ref.read(loginRepositoryProvider);
+        final repository = ref.read(thirdPartyLoginRepositoryProvider);
         final twitterResult = await repository.authenticateTwitter();
 
         final result = switch (twitterResult['status'] as TwitterLoginStatus) {

@@ -26,7 +26,7 @@ class MechanismLoginNotifier extends AsyncNotifier<MechanismInfo> {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       try {
-        final repository = ref.read(loginRepositoryProvider);
+        final repository = ref.read(mechanismLoginRepositoryProvider);
         final result = await repository.authenticateAzure(language: language);
 
         return (
@@ -47,7 +47,7 @@ class MechanismLoginNotifier extends AsyncNotifier<MechanismInfo> {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       try {
-        final repository = ref.read(loginRepositoryProvider);
+        final repository = ref.read(mechanismLoginRepositoryProvider);
         final result = await repository.authenticateAuth0();
 
         return (

@@ -16,7 +16,7 @@ class SimpleLoginNotifier extends AsyncNotifier<SimpleLoginInfo?> {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       final token = await ref
-          .read(loginRepositoryProvider)
+          .read(simpleLoginRepositoryProvider)
           .authenticate(username: email, password: password);
 
       if (token != null) return (token: token);
