@@ -31,7 +31,7 @@ class MechanismLoginNotifier extends AsyncNotifier<MechanismInfo> {
 
         return (
           type: MechanismType.azure,
-          token: result['accessToken'] as String,
+          token: result['idToken'] as String,
         );
       } on Exception catch (e) {
         var error = MechanismError.error;

@@ -16,22 +16,20 @@ class MechanismLoginClient {
 
   Future<Map<String, dynamic>> authenticateAzure({String? language}) async {
     try {
-      final tenantId = appConfig.azureConfig.tenantId;
-      final policyName = appConfig.azureConfig.policyName;
+      final azureConfig = appConfig.azureConfig;
+
+      final tenantId = azureConfig.tenantId;
+      final policyName = azureConfig.policyName;
 
       final discoveryURL = Uri.https(
-        '${appConfig.azureConfig.tenantName}.b2clogin.com',
+        '${azureConfig.tenantName}.b2clogin.com',
         '/$tenantId/$policyName/v2.0/.well-known/openid-configuration',
       );
-
-      final redirectFullPath =
-          '${appConfig.azureConfig.redirectScheme}://'
-          '${appConfig.azureConfig.redirectPath}';
 
       final result = await appAuth.authorizeAndExchangeCode(
         AuthorizationTokenRequest(
           appConfig.azureConfig.clientId,
-          redirectFullPath,
+          '${azureConfig.redirectScheme}://${azureConfig.redirectPath}',
           discoveryUrl: discoveryURL.toString(),
           scopes: <String>['openid', 'profile', 'email', 'offline_access'],
           additionalParameters: <String, String>{'lang': ?language},
