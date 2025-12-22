@@ -73,10 +73,7 @@ class AppRouter {
       ),
     ],
     redirect: (_, state) {
-      final isAuthenticating = switch (session) {
-        SessionStateLoading() => true,
-        _ => false,
-      };
+      final isAuthenticating = session == null;
       if (isAuthenticating) return null;
 
       final isLoggedIn = switch (session) {
