@@ -13,6 +13,10 @@ class ThirdPartyLoginClient {
   Future<String?> authenticateGoogle() async {
     try {
       await GoogleSignIn.instance.initialize(
+        serverClientId: switch (defaultTargetPlatform) {
+          .android => appConfig.googleConfig.clientIdAndroid,
+          _ => null,
+        },
         clientId: switch (defaultTargetPlatform) {
           .iOS => appConfig.googleConfig.clientIdIos,
           _ => appConfig.googleConfig.clientIdAndroid,
