@@ -146,6 +146,7 @@ follow [this link](https://pub.dev/packages/twitter_login#twitter-configuration)
     "AZURE_CLIENT_ID": "<YOUR_AZURE_CLIENT_ID>",
     "AZURE_REDIRECT_SCHEME": "<YOUR_AZURE_REDIRECT_SCHEME>",
     "AZURE_REDIRECT_PATH": "<YOUR_AZURE_REDIRECT_PATH>",
+    "AZURE_ENDPOINT_URL": "<YOUR_AZURE_ENDPOINT_URL>",
   }
   ```
 
