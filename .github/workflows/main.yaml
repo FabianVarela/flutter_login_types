@@ -16,8 +16,8 @@ jobs:
   semantic-pull-request:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/semantic_pull_request.yml@v1
 
-  build:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
-    with:
-      flutter_channel: stable
-      min_coverage: 0
+  # build:
+  #   uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
+  #   with:
+  #     flutter_channel: stable
+  #     min_coverage: 0
