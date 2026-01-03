@@ -1,176 +1,487 @@
-# Flutter · Login Types
+# Flutter Login Types
 
-Create a different ways to login using Flutter Riverpod as state management and dependency injection.
+Flutter application showcasing different authentication methods using Riverpod for state management and dependency injection.
 
-------
+## Prerequisites
 
-### Flutter
+Before getting started, make sure you have the following installed:
 
-* Clone this project.
-* If you want to rename the bundles for each platform, you must do the steps below.
-    * For Android, you must rename the bundle id on ```app/build.gradle```.
-    * For iOS in XCode IDE, you select ```Runner``` and change the 'Bundle Identifier' text.
-* You must follow the instructions for setting each third login in the steps follow [this link](#setting-third-logins).
-* Run project and enjoy :smile:
+- **Flutter SDK**: >=3.10.0 <4.0.0
+- **Dart SDK**: >=3.10.0 <4.0.0
+- **IDE**: VSCode or Android Studio with Flutter extensions
+- **Platforms**:
+  - For iOS: Xcode (macOS only)
+  - For Android: Android Studio or Android SDK
 
-------
+## Initial Setup
 
-## Types of Login
+### 1. Clone the repository
 
-### User / Password
+```bash
+git clone <repository-url>
+cd flutter_login_types
+```
 
-This scenario recreates of type of conventional login (User / Password) like if you try to connect to a backend or
-database with the user information and validate if the user and password are corrects.
+### 2. Install dependencies
 
-### Passcode
+```bash
+flutter pub get
+```
 
-This scenario recreates a login type with a phone number and receives a push notification with the access code which is
-a number with 4 digits.
+### 5. Configure third-party authentication
 
-### Fingerprint / Face Id
+This project supports multiple third-party authentication providers. You need to configure each one you plan to use.
 
-This scenario recreates the local auth login with the use of fingerprint (Android, iOS) or face id (iOS).
+#### Create configuration file
 
-### Third sign in
+Create a `config-keys.json` file in the project's root directory with the following structure:
 
-This scenario recreates the authentication with third providers like Facebook, Google, Apple and Twitter.
-
-### Other mechanism
-
-This scenario recreates the authentication using different mechanism like Azure Active Directory B2C and/or Auth0,
-enabling user/password, third logins, etc.
-
-------
-
-## Setting Third logins
-
-### Setting `dart-define` file
-
-Before to start, you must create a `JSON` file to set the dart-define variables. Create the JSON file
-with the name `config-keys.json` on the project's root.
-
-```json5
+```json
 {
-  // Set your key-values here
+  "GOOGLE_CLIENT_ID_AND": "<YOUR_GOOGLE_CLIENT_ID_AND>",
+  "GOOGLE_CLIENT_ID_IOS": "<YOUR_GOOGLE_CLIENT_ID_IOS>",
+  "GOOGLE_CLIENT_ID_IOS_REV": "<YOUR_GOOGLE_CLIENT_ID_IOS_IN_REVERSE>",
+  "APPLE_CLIENT_ID": "<YOUR_APPLE_CLIENT_ID>",
+  "APPLE_REDIRECT_URI": "<YOUR_APPLE_REDIRECT_URI>",
+  "FACEBOOK_APP_ID": "<YOUR_FACEBOOK_APP_ID>",
+  "FACEBOOK_CLIENT_TOKEN": "<YOUR_FACEBOOK_CLIENT_TOKEN>",
+  "FACEBOOK_DISPLAY_NAME": "<YOUR_FACEBOOK_DISPLAY_NAME>",
+  "TWITTER_API_KEY": "<YOUR_TWITTER_API_KEY>",
+  "TWITTER_API_SECRET": "<YOUR_TWITTER_API_SECRET>",
+  "TWITTER_REDIRECT_URI": "<YOUR_TWITTER_REDIRECT_URI>",
+  "AZURE_TENANT_NAME": "<YOUR_AZURE_TENANT_NAME>",
+  "AZURE_TENANT_ID": "<YOUR_AZURE_TENANT_ID>",
+  "AZURE_POLICY_NAME": "<YOUR_AZURE_POLICY_NAME>",
+  "AZURE_CLIENT_ID": "<YOUR_AZURE_CLIENT_ID>",
+  "AZURE_REDIRECT_SCHEME": "<YOUR_AZURE_REDIRECT_SCHEME>",
+  "AZURE_REDIRECT_PATH": "<YOUR_AZURE_REDIRECT_PATH>",
+  "AZURE_ENDPOINT_URL": "<YOUR_AZURE_ENDPOINT_URL>",
+  "AUTH0_DOMAIN": "<YOUR_AUTH0_DOMAIN>",
+  "AUTH0_CLIENT_ID": "<YOUR_AUTH0_CLIENT_ID>",
+  "AUTH0_SCHEME_AND": "<YOUR_AUTH0_SCHEME_AND>"
 }
 ```
 
-* You must set the json file in the *Dart Define command*, setting in the additional run arguments below
-  ```
-  --dart-define-from-file=config-keys.json
-  ```
+**Important**: Add `config-keys.json` to `.gitignore` to avoid committing sensitive credentials.
 
-#### Setting Google sign in
+### 5. Generate localization files
 
-* If you want to set the GoogleServices files
-  follow [this link](https://pub.dev/packages/google_sign_in#platform-integration)
-* If not, you must set the **Google client id** for Android and iOS, (as reverse mode for iOS) in the *Dart Define
-  command* setting the additional run arguments below
-  ```json5
-  {
-    "GOOGLE_CLIENT_ID_AND": "<YOUR_GOOGLE_CLIENT_ID_AND>",
-    "GOOGLE_CLIENT_ID_IOS": "<YOUR_GOOGLE_CLIENT_ID_IOS>",
-    "GOOGLE_CLIENT_ID_IOS_REV": "<YOUR_GOOGLE_CLIENT_ID_IOS_IN_REVERSE>",
-    // More keys here...
-  }
-  ```
+The project supports multiple languages. Generate the localization files:
 
-<font size="3">*These values you must get on
-the [Google Console](https://console.cloud.google.com/apis/dashboard?project=to-do-app-6da92)*.</font>
+```bash
+flutter gen-l10n
+```
 
-#### Setting Apple sign in
+Translation files are located at:
+- `lib/l10n/arb/` directory
 
-* You must set the **Apple client id** and the **redirect url** as the *Dart Define command* setting the additional run
-  arguments below
-  ```json5
-  {
-    // keys already exists...
-    "APPLE_CLIENT_ID": "<YOUR_APPLE_CLIENT_ID>",
-    "APPLE_REDIRECT_URI": "<YOUR_APPLE_REDIRECT_URI>",
-    // More keys here...
-  }
-  ```
+## Development
 
-<font size="3">*These values you must get on the [Apple Developer Portal](https://developer.apple.com). Also, you can
-follow [this link](https://pub.dev/packages/sign_in_with_apple#integration)*</font>
+### Run the application
 
-#### Setting Facebook sign in
+```bash
+# Run with dart-define configuration
+flutter run --dart-define-from-file=config-keys.json
+```
 
-* You must set the **app id** and the **client token** as the *Dart Define command* setting the additional run
-  arguments below.
-  ```json5
-  {
-    // keys already exists...
-    "FACEBOOK_APP_ID": "<YOUR_FACEBOOK_APP_ID>",
-    "FACEBOOK_CLIENT_TOKEN": "<YOUR_FACEBOOK_CLIENT_TOKEN>",
-    "FACEBOOK_DISPLAY_NAME": "<YOUR_FACEBOOK_DISPLAY_NAME>",
-    // More keys here...
-  }
-  ```
+### Run on specific platform
 
-<font size="3">*These values you must get on the [Facebook Developers](https://developers.facebook.com). Also, you can
-follow [this link for Android](https://facebook.meedu.app/docs/5.x.x/android)
-and [this link for iOS](https://facebook.meedu.app/docs/5.x.x/ios)*</font>
+```bash
+# iOS
+flutter run --dart-define-from-file=config-keys.json -d iPhone
 
-#### Setting Twitter sign in
+# Android
+flutter run --dart-define-from-file=config-keys.json -d android
+```
 
-* You must set the **Twitter api key**, **Twitter api secret** and the **redirect url** in the *Dart Define command*
-  setting the additional run arguments below
-  ```json5
-  {
-    // keys already exists...
-    "TWITTER_API_KEY": "<YOUR_TWITTER_API_KEY>",
-    "TWITTER_API_SECRET": "<YOUR_TWITTER_API_SECRET>",
-    "TWITTER_REDIRECT_URI": "<YOUR_TWITTER_REDIRECT_URI>",
-    // More keys here...
-  }
-  ```
+### Build for production
 
-<font size="3">*These values you must get on the [Twitter Developer](https://developer.twitter.com) or your
-apps [here](https://developer.twitter.com/en/apps/). Also, you can
-follow [this link](https://pub.dev/packages/twitter_login#twitter-configuration)*</font>
+```bash
+# iOS
+flutter build ios --dart-define-from-file=config-keys.json
 
-------
+# Android (App Bundle)
+flutter build appbundle --dart-define-from-file=config-keys.json
 
-## Setting Auth providers
+# Android (APK)
+flutter build apk --dart-define-from-file=config-keys.json
+```
 
-### Setting Azure AD B2C
+## Project Structure
 
-* You must set the Azure **tenant name**, **tenant id**, **policy name**, **client id** and the **redirect url** in the
-  *Dart Define command* setting the additional run arguments below
-  ```json5
-  {
-    "AZURE_TENANT_NAME": "<YOUR_AZURE_TENANT_NAME>",
-    "AZURE_TENANT_ID": "<YOUR_AZURE_TENANT_ID>",
-    "AZURE_POLICY_NAME": "<YOUR_AZURE_POLICY_NAME>",
-    "AZURE_CLIENT_ID": "<YOUR_AZURE_CLIENT_ID>",
-    "AZURE_REDIRECT_SCHEME": "<YOUR_AZURE_REDIRECT_SCHEME>",
-    "AZURE_REDIRECT_PATH": "<YOUR_AZURE_REDIRECT_PATH>",
-    "AZURE_ENDPOINT_URL": "<YOUR_AZURE_ENDPOINT_URL>",
-  }
-  ```
+```
+lib/
+├── l10n/                    # Localization files
+│   ├── arb/                # .arb files for translations
+│   └── gen/                # Generated localization files
+├── core/                   # Core application infrastructure
+│   ├── client/            # HTTP client configuration
+│   ├── config/            # App configuration
+│   ├── dependencies/      # Dependency injection setup
+│   ├── enum/              # Enumerations
+│   ├── notifiers/         # State notifiers
+│   ├── repository/        # Data repositories
+│   ├── router/            # Navigation and routing
+│   ├── services/          # Business logic services
+│   ├── theme/             # App theming
+│   └── widgets/           # Shared widgets
+└── features/              # Feature modules
+    ├── fingerprint_login/ # Biometric authentication
+    ├── home/              # Home screen
+    ├── login_options/     # Login type selection
+    ├── mechanism_login/   # Azure AD B2C / Auth0
+    ├── passcode_login/    # PIN code authentication
+    ├── simple_login/      # Username/Password login
+    └── third_login/       # Social media authentication
+```
 
-<font size="3">To get these values, you must follow these links:
+## Authentication Methods
 
-* [To create the Azure B2C tenant](https://learn.microsoft.com/en-us/azure/active-directory-b2c/tutorial-create-tenant?WT.mc_id=Portal-Microsoft_AAD_B2CAdmin)
-* [To create the Azure AD B2C application](https://learn.microsoft.com/en-us/azure/healthcare-apis/register-application)
-* [To create the user flow](https://learn.microsoft.com/en-us/azure/active-directory-b2c/tutorial-create-user-flows?pivots=b2c-user-flow)</font>
+### 1. User / Password Login
 
-### Setting Auth0
+Traditional authentication using username and password credentials. This demonstrates:
+- Form validation using `formz` package
+- Secure credential handling
+- Backend integration patterns
 
-* You must set the Auth0 **domain** and **client id** in the *Dart Define command* setting the additional run arguments
-  below.
-* Android only: If you set a custom scheme you have to set a *Dart Define key* with your custom scheme.
-  ```json5
-  {
-    // keys already exists...
-    "AUTH0_DOMAIN": "<YOUR_AUTH0_DOMAIN>",
-    "AUTH0_CLIENT_ID": "<YOUR_AUTH0_CLIENT_ID>",
-    // Only if you have a custom scheme
-    "AUTH0_SCHEME_AND": "<YOUR_AUTH0_SCHEME_AND>",
-  }
-  ```
+### 2. Passcode Login
 
-<font size="3">You can follow this link to guide:
+Phone number-based authentication with 4-digit verification code. Features:
+- Phone number input validation
+- PIN code entry with `pinput` package
+- Push notification simulation for access code
 
-* [Auth0 with Flutter](https://auth0.com/docs/quickstart/native/flutter/interactive)</font>
+### 3. Fingerprint / Face ID
+
+Biometric authentication using local device capabilities:
+- Fingerprint recognition (Android, iOS)
+- Face ID (iOS)
+- Local authentication with `local_auth` package
+- Secure storage with `flutter_secure_storage`
+
+### 4. Third-Party Sign In
+
+Social media authentication supporting:
+- **Google Sign In**: OAuth 2.0 authentication
+- **Apple Sign In**: Sign in with Apple ID
+- **Facebook Login**: Facebook authentication
+- **Twitter Login**: Twitter OAuth
+
+### 5. Other Mechanisms
+
+Enterprise authentication solutions:
+- **Azure Active Directory B2C**: Microsoft identity platform
+- **Auth0**: Universal authentication platform
+
+Each mechanism supports user/password and social logins within their platforms.
+
+## Third-Party Authentication Configuration
+
+### Google Sign In
+
+**Option 1: Using GoogleService files** (Recommended)
+
+Follow the [official integration guide](https://pub.dev/packages/google_sign_in#platform-integration)
+
+**Option 2: Using dart-define configuration**
+
+Add to your `config-keys.json`:
+```json
+{
+  "GOOGLE_CLIENT_ID_AND": "<YOUR_GOOGLE_CLIENT_ID_AND>",
+  "GOOGLE_CLIENT_ID_IOS": "<YOUR_GOOGLE_CLIENT_ID_IOS>",
+  "GOOGLE_CLIENT_ID_IOS_REV": "<YOUR_GOOGLE_CLIENT_ID_IOS_IN_REVERSE>"
+}
+```
+
+Get credentials from [Google Cloud Console](https://console.cloud.google.com/apis/dashboard)
+
+### Apple Sign In
+
+Required configuration in `config-keys.json`:
+```json
+{
+  "APPLE_CLIENT_ID": "<YOUR_APPLE_CLIENT_ID>",
+  "APPLE_REDIRECT_URI": "<YOUR_APPLE_REDIRECT_URI>"
+}
+```
+
+Resources:
+- [Apple Developer Portal](https://developer.apple.com)
+- [Integration Guide](https://pub.dev/packages/sign_in_with_apple#integration)
+
+### Facebook Sign In
+
+Required configuration in `config-keys.json`:
+```json
+{
+  "FACEBOOK_APP_ID": "<YOUR_FACEBOOK_APP_ID>",
+  "FACEBOOK_CLIENT_TOKEN": "<YOUR_FACEBOOK_CLIENT_TOKEN>",
+  "FACEBOOK_DISPLAY_NAME": "<YOUR_FACEBOOK_DISPLAY_NAME>"
+}
+```
+
+Resources:
+- [Facebook Developers](https://developers.facebook.com)
+- [Android Setup](https://facebook.meedu.app/docs/5.x.x/android)
+- [iOS Setup](https://facebook.meedu.app/docs/5.x.x/ios)
+
+### Twitter Sign In
+
+Required configuration in `config-keys.json`:
+```json
+{
+  "TWITTER_API_KEY": "<YOUR_TWITTER_API_KEY>",
+  "TWITTER_API_SECRET": "<YOUR_TWITTER_API_SECRET>",
+  "TWITTER_REDIRECT_URI": "<YOUR_TWITTER_REDIRECT_URI>"
+}
+```
+
+Resources:
+- [Twitter Developer Portal](https://developer.twitter.com)
+- [Integration Guide](https://pub.dev/packages/twitter_login#twitter-configuration)
+
+### Azure AD B2C
+
+Required configuration in `config-keys.json`:
+```json
+{
+  "AZURE_TENANT_NAME": "<YOUR_AZURE_TENANT_NAME>",
+  "AZURE_TENANT_ID": "<YOUR_AZURE_TENANT_ID>",
+  "AZURE_POLICY_NAME": "<YOUR_AZURE_POLICY_NAME>",
+  "AZURE_CLIENT_ID": "<YOUR_AZURE_CLIENT_ID>",
+  "AZURE_REDIRECT_SCHEME": "<YOUR_AZURE_REDIRECT_SCHEME>",
+  "AZURE_REDIRECT_PATH": "<YOUR_AZURE_REDIRECT_PATH>",
+  "AZURE_ENDPOINT_URL": "<YOUR_AZURE_ENDPOINT_URL>"
+}
+```
+
+Resources:
+- [Create Azure B2C Tenant](https://learn.microsoft.com/en-us/azure/active-directory-b2c/tutorial-create-tenant)
+- [Register Application](https://learn.microsoft.com/en-us/azure/healthcare-apis/register-application)
+- [Create User Flows](https://learn.microsoft.com/en-us/azure/active-directory-b2c/tutorial-create-user-flows?pivots=b2c-user-flow)
+
+### Auth0
+
+Required configuration in `config-keys.json`:
+```json
+{
+  "AUTH0_DOMAIN": "<YOUR_AUTH0_DOMAIN>",
+  "AUTH0_CLIENT_ID": "<YOUR_AUTH0_CLIENT_ID>",
+  "AUTH0_SCHEME_AND": "<YOUR_AUTH0_SCHEME_AND>"
+}
+```
+
+**Note**: `AUTH0_SCHEME_AND` is only required for Android custom schemes.
+
+Resources:
+- [Auth0 Flutter Quickstart](https://auth0.com/docs/quickstart/native/flutter/interactive)
+
+## Localization (l10n)
+
+### Add new translations
+
+1. Edit the `.arb` files in `lib/l10n/arb/`
+
+2. Add new key/value pairs:
+   ```json
+   {
+     "@@locale": "en",
+     "newKey": "New translation",
+     "@newKey": {
+       "description": "Description of the new key"
+     }
+   }
+   ```
+
+3. Regenerate localization files:
+   ```bash
+   flutter gen-l10n
+   ```
+
+### Add new language
+
+1. Create a new `.arb` file in `lib/l10n/arb/`:
+   ```
+   intl_fr.arb  # For French
+   ```
+
+2. Update iOS localization in `ios/Runner/Info.plist`:
+   ```xml
+   <key>CFBundleLocalizations</key>
+   <array>
+     <string>en</string>
+     <string>es</string>
+     <string>fr</string>
+   </array>
+   ```
+
+3. Regenerate localization files
+
+## Testing
+
+### Run all tests
+
+```bash
+flutter test
+```
+
+### Run specific test file
+
+```bash
+flutter test test/path/to/test_file.dart
+```
+
+### Run tests with coverage
+
+```bash
+flutter test --coverage
+```
+
+## Code Quality
+
+### Run code analysis
+
+The project uses `very_good_analysis` to maintain code quality:
+
+```bash
+flutter analyze
+```
+
+### Format code
+
+```bash
+flutter format .
+```
+
+### Generate code (Freezed)
+
+This project uses `freezed` for code generation:
+
+```bash
+flutter pub run build_runner build --delete-conflicting-outputs
+```
+
+## Main Dependencies
+
+- **hooks_riverpod**: State management and dependency injection
+- **flutter_hooks**: React-like hooks for Flutter
+- **go_router**: Declarative routing
+- **formz**: Form validation
+- **freezed**: Code generation for data classes
+- **equatable**: Value equality
+
+### Authentication
+
+- **google_sign_in**: Google authentication
+- **sign_in_with_apple**: Apple authentication
+- **flutter_facebook_auth**: Facebook authentication
+- **twitter_login**: Twitter authentication
+- **auth0_flutter**: Auth0 integration
+- **flutter_appauth**: OAuth 2.0 and OpenID Connect
+- **local_auth**: Biometric authentication
+
+### Storage & Security
+
+- **flutter_secure_storage**: Secure key-value storage
+- **shared_preferences**: Simple key-value storage
+
+### UI Components
+
+- **google_fonts**: Google Fonts integration
+- **pinput**: PIN input widget
+- **gap**: Spacing widgets
+- **flutter_local_notifications**: Local notifications
+
+### Dev Dependencies
+
+- **build_runner**: Code generation
+- **freezed**: Immutable data classes
+- **very_good_analysis**: Strict lint rules
+
+## Troubleshooting
+
+### Error: "Flutter SDK not found"
+Verify that Flutter is installed correctly and in your PATH:
+```bash
+flutter doctor
+```
+
+### config-keys.json not found
+Ensure you have created the `config-keys.json` file in the root directory as described in the configuration section.
+
+### Google Sign In fails
+- Verify your Google Client IDs are correct
+- Check SHA-1 fingerprint is registered in Firebase Console
+- Ensure GoogleService files are properly configured
+
+### Apple Sign In not working
+- Verify Sign in with Apple capability is enabled in Xcode
+- Check Bundle Identifier matches Apple Developer Portal
+- Ensure redirect URI is correctly configured
+
+### Facebook Login errors
+- Verify Facebook App ID and Client Token
+- Check Facebook app is not in Development Mode (or test users are added)
+- Ensure iOS Info.plist and Android strings.xml are properly configured
+
+### Azure AD B2C errors
+- Verify all Azure configuration values are correct
+- Check user flow is properly configured
+- Ensure redirect URI matches your configuration
+
+### l10n generation error
+Regenerate localization files:
+```bash
+flutter gen-l10n
+```
+
+### Freezed code generation issues
+Clean and rebuild:
+```bash
+flutter clean
+flutter pub get
+flutter pub run build_runner build --delete-conflicting-outputs
+```
+
+### iOS build fails
+Clean and rebuild:
+```bash
+flutter clean
+cd ios
+pod install
+cd ..
+flutter build ios
+```
+
+### Android build fails
+Clean project:
+```bash
+flutter clean
+cd android
+./gradlew clean
+cd ..
+flutter build apk
+```
+
+## Contributing
+
+1. Create a branch from `main`
+2. Make your changes
+3. Run tests: `flutter test`
+4. Run analysis: `flutter analyze`
+5. Format code: `flutter format .`
+6. Create a Pull Request to `main`
+
+## Security Considerations
+
+- Never commit `config-keys.json` to version control
+- Use environment-specific configurations for different builds
+- Implement proper token refresh mechanisms
+- Use secure storage for sensitive data
+- Follow OAuth 2.0 best practices
+- Implement certificate pinning for production apps
+
+## License
+
+[Include license information here]
