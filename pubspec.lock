@@ -266,10 +266,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_facebook_auth
-      sha256: "902a98db4c7a24001a0835d592806c6a3d6b0c7fba2d169c11e20e14fdc74368"
+      sha256: f4652480123fa22d02c8fd3cb890246bf3358d1e9928fc5f576c3d1b0faf2acc
       url: "https://pub.dev"
     source: hosted
-    version: "7.1.2"
+    version: "7.1.5"
   flutter_facebook_auth_platform_interface:
     dependency: transitive
     description:
