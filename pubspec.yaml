@@ -26,7 +26,7 @@ dependencies:
   go_router_paths: ^0.2.2
   google_fonts: ^7.0.2
   google_sign_in: ^7.2.0
-  hooks_riverpod: ^3.0.3
+  hooks_riverpod: ^3.2.0
   intl: ^0.20.2
   local_auth: ^3.0.0
   pinput: ^6.0.1
