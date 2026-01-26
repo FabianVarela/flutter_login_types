@@ -30,14 +30,14 @@ class NotificationService {
       iOS: DarwinInitializationSettings(),
     );
 
-    unawaited(localNotifications.initialize(initSettings));
+    unawaited(localNotifications.initialize(settings: initSettings));
   }
 
   Future<void> showNotification({
     required String title,
     required String body,
   }) async {
-    const platformChannelSpecifics = NotificationDetails(
+    const notificationDetails = NotificationDetails(
       android: AndroidNotificationDetails(
         'channel id',
         'channel name',
@@ -50,6 +50,11 @@ class NotificationService {
       iOS: DarwinNotificationDetails(presentSound: true),
     );
 
-    await localNotifications.show(0, title, body, platformChannelSpecifics);
+    await localNotifications.show(
+      id: 0,
+      title: title,
+      body: body,
+      notificationDetails: notificationDetails,
+    );
   }
 }
