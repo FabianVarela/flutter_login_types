@@ -29,7 +29,7 @@ dependencies:
   google_sign_in: ^7.2.0
   hooks_riverpod: ^3.2.0
   intl: ^0.20.2
-  local_auth: ^3.0.0
+  local_auth: ^3.0.1
   pinput: ^6.0.1
   shared_preferences: ^2.5.4
   sign_in_with_apple: ^7.0.1
