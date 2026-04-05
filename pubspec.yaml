@@ -8,7 +8,7 @@ environment:
   flutter: ^3.41.0
 
 dependencies:
-  auth0_flutter: ^1.14.0
+  auth0_flutter: ^2.0.0
   collection: ^1.19.0
   equatable: ^2.0.8
   flutter:
