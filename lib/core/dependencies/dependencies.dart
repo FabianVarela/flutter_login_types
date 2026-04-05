@@ -23,7 +23,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 final flutterSecureStorageProvider = Provider((_) {
   return const FlutterSecureStorage(
-    aOptions: AndroidOptions(encryptedSharedPreferences: true),
     iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
   );
 });
