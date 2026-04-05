@@ -52,6 +52,8 @@
 	<string>$(FACEBOOK_CLIENT_TOKEN)</string>
 	<key>FacebookDisplayName</key>
 	<string>$(FACEBOOK_DISPLAY_NAME)</string>
+	<key>FacebookAdvertiserIDCollectionEnabled</key>
+	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
