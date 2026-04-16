@@ -9,11 +9,11 @@ PODS:
     - GoogleUtilities/Environment (~> 8.0)
     - GoogleUtilities/UserDefaults (~> 8.0)
     - PromisesObjC (~> 2.4)
-  - Auth0 (2.16.2):
+  - Auth0 (2.18.0):
     - JWTDecode (= 3.3.0)
     - SimpleKeychain (= 1.3.0)
-  - auth0_flutter (2.0.0):
-    - Auth0 (= 2.16.2)
+  - auth0_flutter (2.0.1):
+    - Auth0 (= 2.18.0)
     - Flutter
     - FlutterMacOS
     - JWTDecode (= 3.3.0)
@@ -136,8 +136,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AppAuth: 1c1a8afa7e12f2ec3a294d9882dfa5ab7d3cb063
   AppCheckCore: cc8fd0a3a230ddd401f326489c99990b013f0c4f
-  Auth0: f08ad1b74d49ffe806175845ef326d9a7674b34c
-  auth0_flutter: 9d89c01931d5338e367fb6881e71c3620158c64a
+  Auth0: ddc5c6c7eb17e2484fd8d50a15d99b657c36c72c
+  auth0_flutter: 5f1bebc6e073c84241a1fa8752f6eb350e77b5d3
   FBAEMKit: 56a4f5a9607957b547b6458b17a98c5bb2736367
   FBSDKCoreKit: 54f1240567e16862ab71c53c33dc347db5c524c5
   FBSDKCoreKit_Basics: eb530cd6a79030dbb11df460aafb2767bcad9028
