@@ -32,7 +32,7 @@ dependencies:
   local_auth: ^3.0.1
   pinput: ^6.0.2
   shared_preferences: ^2.5.5
-  sign_in_with_apple: ^7.0.1
+  sign_in_with_apple: ">=7.0.1 <9.0.0"
   twitter_login: ^4.4.2
   uuid: ^4.5.3
 
