@@ -8,8 +8,10 @@ environment:
   flutter: ^3.41.0
 
 dependencies:
-  auth0_flutter: ^2.0.1
+  auth0_flutter: ^2.0.2
+  base32: ^2.2.0
   collection: ^1.19.0
+  crypto: ^3.0.3
   equatable: ^2.0.8
   flutter:
     sdk: flutter
@@ -19,7 +21,7 @@ dependencies:
   flutter_local_notifications: ^21.0.0
   flutter_localizations:
     sdk: flutter
-  flutter_secure_storage: ^10.0.0
+  flutter_secure_storage: ^10.1.0
   formz: ^0.8.0
   freezed_annotation: ^3.1.0
   gap: ^3.0.1
@@ -31,8 +33,9 @@ dependencies:
   intl: ^0.20.2
   local_auth: ^3.0.1
   pinput: ^6.0.2
+  qr_flutter: ^4.1.0
   shared_preferences: ^2.5.5
-  sign_in_with_apple: ">=7.0.1 <9.0.0"
+  sign_in_with_apple: ^8.0.0
   twitter_login: ^4.4.2
   uuid: ^4.5.3
 
