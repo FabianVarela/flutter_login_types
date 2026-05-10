@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+/// Account name could be Microsoft, Google, empty etc adding userId.
 typedef QrData = ({String secret, String account});
 
 class GenerateQrNotifier extends AsyncNotifier<String> {
