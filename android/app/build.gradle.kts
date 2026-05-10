@@ -32,7 +32,7 @@ if (project.hasProperty("dart-defines")) {
 android {
     namespace = "com.developer.fabian.login_types"
     compileSdk = 36
-    ndkVersion = "27.0.12077973"
+    ndkVersion = "28.2.13676358"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -63,6 +63,7 @@ android {
 
         manifestPlaceholders += mapOf(
             "appAuthRedirectScheme" to (dartEnvironmentVariables["AZURE_REDIRECT_SCHEME"] ?: ""),
+            "msalRedirectScheme" to (dartEnvironmentVariables["MSAL_REDIRECT_SCHEME"] ?: ""),
             "auth0Domain" to (dartEnvironmentVariables["AUTH0_DOMAIN"] ?: ""),
             "auth0Scheme" to (dartEnvironmentVariables["AUTH0_SCHEME_AND"] ?: "")
         )

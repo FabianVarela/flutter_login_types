@@ -39,6 +39,7 @@
 				<string>$(TWITTER_REDIRECT_URI)</string>
                 <!--Apply for Flutter AppAuth-->
 				<string>$(AZURE_REDIRECT_SCHEME)</string>
+				<string>$(MSAL_REDIRECT_SCHEME)</string>
                 <!--Apply for Auth0-->
 				<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 			</array>
