@@ -33,6 +33,7 @@ class LoginOptionsView extends StatelessWidget {
             _FingerprintButton(),
             _ThirdLoginButton(),
             _MechanismLoginButton(),
+            _TotpOptionsButton(),
           ],
         ),
       ),
@@ -124,6 +125,23 @@ class _MechanismLoginButton extends StatelessWidget {
       backgroundColor: CustomColors.lightRed,
       foregroundColor: CustomColors.white,
       icon: const Icon(Icons.account_balance, color: CustomColors.white),
+    );
+  }
+}
+
+class _TotpOptionsButton extends StatelessWidget {
+  const _TotpOptionsButton();
+
+  @override
+  Widget build(BuildContext context) {
+    final localization = context.localizations;
+
+    return CustomButton(
+      text: localization.signInText(localization.totpLoginTitle),
+      onPress: () => context.push(AppRoutePath.loginOptions.totpOptions.path),
+      backgroundColor: CustomColors.lightGreen,
+      foregroundColor: CustomColors.white,
+      icon: const Icon(Icons.lock_clock_outlined, color: CustomColors.white),
     );
   }
 }
