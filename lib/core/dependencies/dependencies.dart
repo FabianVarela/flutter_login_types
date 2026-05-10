@@ -8,6 +8,7 @@ import 'package:flutter_login_types/core/config/app_config.dart';
 import 'package:flutter_login_types/core/repository/language_repository.dart';
 import 'package:flutter_login_types/core/repository/session_repository.dart';
 import 'package:flutter_login_types/core/services/notification_service.dart';
+import 'package:flutter_login_types/core/services/totp_core_service.dart';
 import 'package:flutter_login_types/features/mechanism_login/client/mechanism_login_client.dart';
 import 'package:flutter_login_types/features/mechanism_login/repository/mechanism_login_repository.dart';
 import 'package:flutter_login_types/features/passcode_login/client/passcode_login_client.dart';
@@ -16,6 +17,10 @@ import 'package:flutter_login_types/features/simple_login/client/simple_login_cl
 import 'package:flutter_login_types/features/simple_login/repository/simple_login_repository.dart';
 import 'package:flutter_login_types/features/third_login/client/third_party_login_client.dart';
 import 'package:flutter_login_types/features/third_login/repository/third_party_login_repository.dart';
+import 'package:flutter_login_types/features/totp_login/oauth_totp_login/client/oauth_totp_login_client.dart';
+import 'package:flutter_login_types/features/totp_login/oauth_totp_login/repository/oauth_totp_login_repository.dart';
+import 'package:flutter_login_types/features/totp_login/simple_totp_login/client/totp_login_client.dart';
+import 'package:flutter_login_types/features/totp_login/simple_totp_login/repository/totp_login_repository.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:local_auth/local_auth.dart';
@@ -102,6 +107,32 @@ final thirdPartyLoginRepositoryProvider = Provider(
 final mechanismLoginRepositoryProvider = Provider(
   (ref) => MechanismLoginRepository(
     client: ref.watch(mechanismLoginClientProvider),
+  ),
+);
+
+final totpCoreServiceProvider = Provider(
+  (ref) => TotpCoreService(
+    flutterSecureStorage: ref.watch(flutterSecureStorageProvider),
+  ),
+);
+
+final totpLoginClientProvider = Provider((_) => TotpLoginClient());
+
+final totpLoginRepositoryProvider = Provider(
+  (ref) => TotpLoginRepository(client: ref.watch(totpLoginClientProvider)),
+);
+
+final oauthTotpLoginClientProvider = Provider(
+  (ref) => OauthTotpLoginClient(
+    appConfig: ref.watch(appConfigProvider),
+    appAuth: ref.watch(appAuthProvider),
+    flutterSecureStorage: ref.watch(flutterSecureStorageProvider),
+  ),
+);
+
+final oauthTotpLoginRepositoryProvider = Provider(
+  (ref) => OauthTotpLoginRepository(
+    client: ref.watch(oauthTotpLoginClientProvider),
   ),
 );
 
