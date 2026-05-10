@@ -10,12 +10,10 @@ class TotpOptionsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = context.localizations;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          localization.totpOptionsTitle,
+          context.localizations.totpOptionsTitle,
           textAlign: .center,
           style: const TextStyle(color: CustomColors.darkBlue, fontSize: 20),
         ),
@@ -27,11 +25,7 @@ class TotpOptionsView extends StatelessWidget {
           spacing: 20,
           mainAxisAlignment: .center,
           crossAxisAlignment: .stretch,
-          children: <Widget>[
-            _SimpleTotpButton(),
-            _MsalTotpButton(),
-            _GoogleTotpButton(),
-          ],
+          children: <Widget>[_SimpleTotpButton(), _OauthTotpButton()],
         ),
       ),
     );
@@ -55,38 +49,19 @@ class _SimpleTotpButton extends StatelessWidget {
   }
 }
 
-class _MsalTotpButton extends StatelessWidget {
-  const _MsalTotpButton();
+class _OauthTotpButton extends StatelessWidget {
+  const _OauthTotpButton();
 
   @override
   Widget build(BuildContext context) {
     return CustomButton(
-      text: context.localizations.signInText(context.localizations.signInMsal),
+      text: context.localizations.signInText(context.localizations.signInOauth),
       onPress: () => context.push(
-        AppRoutePath.loginOptions.totpOptions.msal.path,
+        AppRoutePath.loginOptions.totpOptions.oauth.path,
       ),
       backgroundColor: CustomColors.kingBlue,
       foregroundColor: CustomColors.white,
       icon: const Icon(Icons.window, color: CustomColors.white),
-    );
-  }
-}
-
-class _GoogleTotpButton extends StatelessWidget {
-  const _GoogleTotpButton();
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomButton(
-      text: context.localizations.signInText(
-        context.localizations.signInGoogleTotp,
-      ),
-      onPress: () => context.push(
-        AppRoutePath.loginOptions.totpOptions.googleTotp.path,
-      ),
-      backgroundColor: CustomColors.lightKingBlue,
-      foregroundColor: CustomColors.white,
-      icon: const Icon(Icons.lock_outline, color: CustomColors.white),
     );
   }
 }
