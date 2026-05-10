@@ -64,6 +64,23 @@
       }
     }
   },
+  "signInGoogleTotp": "Google + TOTP",
+  "googleTotpSignInError": "Error al iniciar sesión con Google",
+  "signInMsal": "Microsoft Authenticator",
+  "msalLoginError": "Error al iniciar sesión con Microsoft",
+  "msalSetupDescription": "Escanea el código QR con Microsoft Authenticator para configurar la autenticación en dos pasos",
+  "totpLoginTitle": "TOTP",
+  "totpOptionsTitle": "Inicio TOTP",
+  "signInTotp": "TOTP authenticator",
+  "totpSetupTitle": "Configura el autenticador",
+  "totpSetupDescription": "Escanea el código QR con cualquier app de autenticación (Google Authenticator, Microsoft Authenticator, Authy, etc.)",
+  "totpManualEntry": "O ingresa manualmente:",
+  "totpConfirmCodeTitle": "Ingresa el código que muestra tu app",
+  "totpConfirmButton": "Confirmar",
+  "totpVerifyTitle": "Ingresa el código de verificación",
+  "totpVerifyDescription": "Ingresa el código de 6 dígitos de tu app de autenticación",
+  "totpSetupError": "Código inválido. Intenta de nuevo.",
+  "totpVerifyError": "Código inválido. Autenticación fallida.",
   "changeLanguageTitle": "Cambiar idioma",
   "englishLanguage": "Inglés",
   "spanishLanguage": "Español"

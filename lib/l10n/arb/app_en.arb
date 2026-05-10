@@ -204,6 +204,74 @@
       }
     }
   },
+  "signInGoogleTotp": "Google + TOTP",
+  "@signInGoogleTotp": {
+    "description": "Sign in with Google and TOTP second factor"
+  },
+  "googleTotpSignInError": "Error signing in with Google",
+  "@googleTotpSignInError": {
+    "description": "Error message when Google sign-in fails"
+  },
+  "signInMsal": "Microsoft Authenticator",
+  "@signInMsal": {
+    "description": "Sign in with Microsoft Authenticator text"
+  },
+  "msalLoginError": "Error logging in with Microsoft",
+  "@msalLoginError": {
+    "description": "MSAL login message when authentication fails"
+  },
+  "msalSetupDescription": "Scan the QR code with Microsoft Authenticator to set up two-factor authentication",
+  "@msalSetupDescription": {
+    "description": "MSAL TOTP setup screen description"
+  },
+  "totpLoginTitle": "TOTP",
+  "@totpLoginTitle": {
+    "description": "TOTP login button label on main options screen"
+  },
+  "totpOptionsTitle": "TOTP Login",
+  "@totpOptionsTitle": {
+    "description": "TOTP options screen app bar title"
+  },
+  "signInTotp": "TOTP authenticator",
+  "@signInTotp": {
+    "description": "Sign in with TOTP authenticator text"
+  },
+  "totpSetupTitle": "Set up authenticator",
+  "@totpSetupTitle": {
+    "description": "TOTP setup screen title"
+  },
+  "totpSetupDescription": "Scan the QR code with any authenticator app (Google Authenticator, Microsoft Authenticator, Authy, etc.)",
+  "@totpSetupDescription": {
+    "description": "TOTP setup screen description"
+  },
+  "totpManualEntry": "Or enter manually:",
+  "@totpManualEntry": {
+    "description": "Label before TOTP secret key for manual entry"
+  },
+  "totpConfirmCodeTitle": "Enter the code shown in your app",
+  "@totpConfirmCodeTitle": {
+    "description": "Label above TOTP code input during setup"
+  },
+  "totpConfirmButton": "Confirm",
+  "@totpConfirmButton": {
+    "description": "TOTP setup confirm button text"
+  },
+  "totpVerifyTitle": "Enter verification code",
+  "@totpVerifyTitle": {
+    "description": "TOTP verify screen title"
+  },
+  "totpVerifyDescription": "Enter the 6-digit code from your authenticator app",
+  "@totpVerifyDescription": {
+    "description": "TOTP verify screen description"
+  },
+  "totpSetupError": "Invalid code. Try again.",
+  "@totpSetupError": {
+    "description": "Error message when TOTP setup code is wrong"
+  },
+  "totpVerifyError": "Invalid code. Authentication failed.",
+  "@totpVerifyError": {
+    "description": "Error message when TOTP verify code is wrong"
+  },
   "changeLanguageTitle": "Change language",
   "@changeLanguageTitle": {
     "description": "Change language title"
