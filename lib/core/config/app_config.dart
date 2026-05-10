@@ -31,6 +31,12 @@ class AppConfig {
     scheme: const String.fromEnvironment('AUTH0_SCHEME_AND'),
   );
 
+  static final _msalConfig = _MsalConfig(
+    tenantId: const String.fromEnvironment('MSAL_TENANT_ID'),
+    clientId: const String.fromEnvironment('MSAL_CLIENT_ID'),
+    redirectScheme: const String.fromEnvironment('MSAL_REDIRECT_SCHEME'),
+  );
+
   _GoogleConfig get googleConfig => _googleConfig;
 
   _AppleConfig get appleConfig => _appleConfig;
@@ -40,6 +46,8 @@ class AppConfig {
   _AzureConfig get azureConfig => _azureConfig;
 
   _Auth0Config get auth0Config => _auth0Config;
+
+  _MsalConfig get msalConfig => _msalConfig;
 }
 
 class _GoogleConfig {
@@ -94,4 +102,16 @@ class _Auth0Config {
   final String domain;
   final String clientId;
   final String? scheme;
+}
+
+class _MsalConfig {
+  _MsalConfig({
+    required this.tenantId,
+    required this.clientId,
+    required this.redirectScheme,
+  });
+
+  final String tenantId;
+  final String clientId;
+  final String redirectScheme;
 }
