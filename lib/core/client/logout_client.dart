@@ -19,11 +19,11 @@ class LogoutClient {
 
   Future<void> logout({required LoginType loginType, String? token}) async {
     return switch (loginType) {
-      .simple || .passcode || .fingerprint || .apple || .twitter => _logout(),
-      .google => _logoutGoogle(),
+      .google || .googleTotp => _logoutGoogle(),
       .facebook => _logoutFacebook(),
       .azure => _logoutAzure(idToken: token),
       .auth0 => _logoutAuth0(),
+      _ => _logout(),
     };
   }
 

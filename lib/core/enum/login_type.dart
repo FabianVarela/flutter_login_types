@@ -8,4 +8,7 @@ enum LoginType {
   twitter,
   auth0,
   azure,
+  totp,
+  msalTotp,
+  googleTotp,
 }
