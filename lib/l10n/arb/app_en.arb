@@ -204,25 +204,17 @@
       }
     }
   },
-  "signInGoogleTotp": "Google + TOTP",
-  "@signInGoogleTotp": {
-    "description": "Sign in with Google and TOTP second factor"
+  "signInOauth": "Microsoft Authenticator",
+  "@signInOauth": {
+    "description": "Sign in with OAuth provider text"
   },
-  "googleTotpSignInError": "Error signing in with Google",
-  "@googleTotpSignInError": {
-    "description": "Error message when Google sign-in fails"
+  "oauthLoginError": "Error logging in with Microsoft",
+  "@oauthLoginError": {
+    "description": "OAuth login message when authentication fails"
   },
-  "signInMsal": "Microsoft Authenticator",
-  "@signInMsal": {
-    "description": "Sign in with Microsoft Authenticator text"
-  },
-  "msalLoginError": "Error logging in with Microsoft",
-  "@msalLoginError": {
-    "description": "MSAL login message when authentication fails"
-  },
-  "msalSetupDescription": "Scan the QR code with Microsoft Authenticator to set up two-factor authentication",
-  "@msalSetupDescription": {
-    "description": "MSAL TOTP setup screen description"
+  "oauthSetupDescription": "Scan the QR code with Microsoft Authenticator to set up two-factor authentication",
+  "@oauthSetupDescription": {
+    "description": "OAuth TOTP setup screen description"
   },
   "totpLoginTitle": "TOTP",
   "@totpLoginTitle": {
