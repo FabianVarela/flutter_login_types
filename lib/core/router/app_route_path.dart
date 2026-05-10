@@ -28,7 +28,5 @@ class TotpOptionsRoutePath extends Path<TotpOptionsRoutePath> {
 
   Path get totp => Path('login-totp', parent: this);
 
-  Path get msal => Path('login-msal', parent: this);
-
-  Path get googleTotp => Path('login-google-totp', parent: this);
+  Path get oauth => Path('login-oauth-totp', parent: this);
 }

@@ -9,6 +9,5 @@ enum LoginType {
   auth0,
   azure,
   totp,
-  msalTotp,
-  googleTotp,
+  oauthTotp,
 }
