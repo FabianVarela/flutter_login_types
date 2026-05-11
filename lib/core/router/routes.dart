@@ -9,6 +9,9 @@ import 'package:flutter_login_types/features/mechanism_login/view/mechanism_logi
 import 'package:flutter_login_types/features/passcode_login/view/passcode_login_view.dart';
 import 'package:flutter_login_types/features/simple_login/view/simple_login_view.dart';
 import 'package:flutter_login_types/features/third_login/view/third_login_view.dart';
+import 'package:flutter_login_types/features/totp_login/oauth_totp_login/view/oauth_totp_login_view.dart';
+import 'package:flutter_login_types/features/totp_login/simple_totp_login/view/totp_login_view.dart';
+import 'package:flutter_login_types/features/totp_login/totp_options_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -61,6 +64,29 @@ class AppRouter {
               key: state.pageKey,
               child: const MechanismLoginView(),
             ),
+          ),
+          GoRoute(
+            path: AppRoutePath.loginOptions.totpOptions.goRoute,
+            pageBuilder: (_, state) => ScreenPage<dynamic>(
+              key: state.pageKey,
+              child: const TotpOptionsView(),
+            ),
+            routes: <GoRoute>[
+              GoRoute(
+                path: AppRoutePath.loginOptions.totpOptions.totp.goRoute,
+                pageBuilder: (_, state) => ScreenPage<dynamic>(
+                  key: state.pageKey,
+                  child: const TotpLoginView(),
+                ),
+              ),
+              GoRoute(
+                path: AppRoutePath.loginOptions.totpOptions.oauth.goRoute,
+                pageBuilder: (_, state) => ScreenPage<dynamic>(
+                  key: state.pageKey,
+                  child: const OauthTotpLoginView(),
+                ),
+              ),
+            ],
           ),
         ],
       ),
