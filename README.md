@@ -1,6 +1,7 @@
 # Flutter Login Types
 
-Flutter application showcasing different authentication methods using Riverpod for state management and dependency injection.
+Flutter application showcasing different authentication methods using Riverpod for state management and dependency
+injection.
 
 ## Prerequisites
 
@@ -10,8 +11,8 @@ Before getting started, make sure you have the following installed:
 - **Dart SDK**: >=3.10.0 <4.0.0
 - **IDE**: VSCode or Android Studio with Flutter extensions
 - **Platforms**:
-  - For iOS: Xcode (macOS only)
-  - For Android: Android Studio or Android SDK
+    - For iOS: Xcode (macOS only)
+    - For Android: Android Studio or Android SDK
 
 ## Initial Setup
 
@@ -28,7 +29,7 @@ cd flutter_login_types
 flutter pub get
 ```
 
-### 5. Configure third-party authentication
+### 3. Configure third-party authentication
 
 This project supports multiple third-party authentication providers. You need to configure each one you plan to use.
 
@@ -58,13 +59,16 @@ Create a `config-keys.json` file in the project's root directory with the follow
   "AZURE_ENDPOINT_URL": "<YOUR_AZURE_ENDPOINT_URL>",
   "AUTH0_DOMAIN": "<YOUR_AUTH0_DOMAIN>",
   "AUTH0_CLIENT_ID": "<YOUR_AUTH0_CLIENT_ID>",
-  "AUTH0_SCHEME_AND": "<YOUR_AUTH0_SCHEME_AND>"
+  "AUTH0_SCHEME_AND": "<YOUR_AUTH0_SCHEME_AND>",
+  "MSAL_TENANT_ID": "<YOUR_MSAL_TENANT_ID>",
+  "MSAL_CLIENT_ID": "<YOUR_MSAL_CLIENT_ID>",
+  "MSAL_REDIRECT_SCHEME": "<YOUR_MSAL_REDIRECT_SCHEME>"
 }
 ```
 
 **Important**: Add `config-keys.json` to `.gitignore` to avoid committing sensitive credentials.
 
-### 5. Generate localization files
+### 4. Generate localization files
 
 The project supports multiple languages. Generate the localization files:
 
@@ -73,6 +77,7 @@ flutter gen-l10n
 ```
 
 Translation files are located at:
+
 - `lib/l10n/arb/` directory
 
 ## Development
@@ -132,7 +137,11 @@ lib/
     ├── mechanism_login/   # Azure AD B2C / Auth0
     ├── passcode_login/    # PIN code authentication
     ├── simple_login/      # Username/Password login
-    └── third_login/       # Social media authentication
+    ├── third_login/       # Social media authentication
+    └── totp_login/        # TOTP login variants
+        ├── oauth_totp_login/       # Microsoft (MSAL) + TOTP second factor
+        ├── simple_totp_login/      # Standalone TOTP (no identity provider)
+        └── totp_options_view.dart  # TOTP variant selection screen
 ```
 
 ## Authentication Methods
@@ -140,6 +149,7 @@ lib/
 ### 1. User / Password Login
 
 Traditional authentication using username and password credentials. This demonstrates:
+
 - Form validation using `formz` package
 - Secure credential handling
 - Backend integration patterns
@@ -147,6 +157,7 @@ Traditional authentication using username and password credentials. This demonst
 ### 2. Passcode Login
 
 Phone number-based authentication with 4-digit verification code. Features:
+
 - Phone number input validation
 - PIN code entry with `pinput` package
 - Push notification simulation for access code
@@ -154,6 +165,7 @@ Phone number-based authentication with 4-digit verification code. Features:
 ### 3. Fingerprint / Face ID
 
 Biometric authentication using local device capabilities:
+
 - Fingerprint recognition (Android, iOS)
 - Face ID (iOS)
 - Local authentication with `local_auth` package
@@ -162,6 +174,7 @@ Biometric authentication using local device capabilities:
 ### 4. Third-Party Sign In
 
 Social media authentication supporting:
+
 - **Google Sign In**: OAuth 2.0 authentication
 - **Apple Sign In**: Sign in with Apple ID
 - **Facebook Login**: Facebook authentication
@@ -170,10 +183,45 @@ Social media authentication supporting:
 ### 5. Other Mechanisms
 
 Enterprise authentication solutions:
+
 - **Azure Active Directory B2C**: Microsoft identity platform
 - **Auth0**: Universal authentication platform
 
 Each mechanism supports user/password and social logins within their platforms.
+
+### 6. TOTP (Time-based One-Time Password)
+
+Two variants grouped under the **TOTP Login** option on the main screen:
+
+#### 6.1 TOTP Authenticator (Simple)
+
+Standalone TOTP without a primary identity provider. No config keys required.
+
+**Flow:**
+
+1. App generates a secret key and displays a QR code
+2. Scan the QR code with any TOTP-compliant authenticator app — Google Authenticator, Microsoft Authenticator, Authy,
+   1Password, Bitwarden, or any other app that supports the `otpauth://` standard
+3. Enter the 6-digit code shown in the app to complete setup
+4. On subsequent logins, enter the current 6-digit code
+
+**Account details used in QR code:**
+
+- Issuer: `FlutterLoginTypes`
+- Account: `demo@flutter.dev`
+
+#### 6.2 OAuth + TOTP (Microsoft / MSAL)
+
+Microsoft Sign In as the primary factor, followed by TOTP as the second factor.
+Uses `flutter_appauth` with Azure AD. Requires `MSAL_TENANT_ID`, `MSAL_CLIENT_ID`, and `MSAL_REDIRECT_SCHEME` in
+`config-keys.json`.
+
+**Flow:**
+
+1. Authenticate with your Microsoft account via browser redirect
+2. On first login: app generates a TOTP secret, displays a QR code to scan with any TOTP-compliant app
+3. Confirm setup by entering the 6-digit code
+4. On subsequent logins: enter the current 6-digit code after Microsoft authentication
 
 ## Third-Party Authentication Configuration
 
@@ -186,6 +234,7 @@ Follow the [official integration guide](https://pub.dev/packages/google_sign_in#
 **Option 2: Using dart-define configuration**
 
 Add to your `config-keys.json`:
+
 ```json
 {
   "GOOGLE_CLIENT_ID_AND": "<YOUR_GOOGLE_CLIENT_ID_AND>",
@@ -199,6 +248,7 @@ Get credentials from [Google Cloud Console](https://console.cloud.google.com/api
 ### Apple Sign In
 
 Required configuration in `config-keys.json`:
+
 ```json
 {
   "APPLE_CLIENT_ID": "<YOUR_APPLE_CLIENT_ID>",
@@ -207,12 +257,14 @@ Required configuration in `config-keys.json`:
 ```
 
 Resources:
+
 - [Apple Developer Portal](https://developer.apple.com)
 - [Integration Guide](https://pub.dev/packages/sign_in_with_apple#integration)
 
 ### Facebook Sign In
 
 Required configuration in `config-keys.json`:
+
 ```json
 {
   "FACEBOOK_APP_ID": "<YOUR_FACEBOOK_APP_ID>",
@@ -222,6 +274,7 @@ Required configuration in `config-keys.json`:
 ```
 
 Resources:
+
 - [Facebook Developers](https://developers.facebook.com)
 - [Android Setup](https://facebook.meedu.app/docs/5.x.x/android)
 - [iOS Setup](https://facebook.meedu.app/docs/5.x.x/ios)
@@ -229,6 +282,7 @@ Resources:
 ### Twitter Sign In
 
 Required configuration in `config-keys.json`:
+
 ```json
 {
   "TWITTER_API_KEY": "<YOUR_TWITTER_API_KEY>",
@@ -238,12 +292,14 @@ Required configuration in `config-keys.json`:
 ```
 
 Resources:
+
 - [Twitter Developer Portal](https://developer.twitter.com)
 - [Integration Guide](https://pub.dev/packages/twitter_login#twitter-configuration)
 
 ### Azure AD B2C
 
 Required configuration in `config-keys.json`:
+
 ```json
 {
   "AZURE_TENANT_NAME": "<YOUR_AZURE_TENANT_NAME>",
@@ -257,6 +313,7 @@ Required configuration in `config-keys.json`:
 ```
 
 Resources:
+
 - [Create Azure B2C Tenant](https://learn.microsoft.com/en-us/azure/active-directory-b2c/tutorial-create-tenant)
 - [Register Application](https://learn.microsoft.com/en-us/azure/healthcare-apis/register-application)
 - [Create User Flows](https://learn.microsoft.com/en-us/azure/active-directory-b2c/tutorial-create-user-flows?pivots=b2c-user-flow)
@@ -264,6 +321,7 @@ Resources:
 ### Auth0
 
 Required configuration in `config-keys.json`:
+
 ```json
 {
   "AUTH0_DOMAIN": "<YOUR_AUTH0_DOMAIN>",
@@ -275,7 +333,29 @@ Required configuration in `config-keys.json`:
 **Note**: `AUTH0_SCHEME_AND` is only required for Android custom schemes.
 
 Resources:
+
 - [Auth0 Flutter Quickstart](https://auth0.com/docs/quickstart/native/flutter/interactive)
+
+### MSAL (Microsoft + TOTP)
+
+Register an app in [Azure Active Directory](https://portal.azure.com) (not B2C — use the regular Azure AD).
+
+Required configuration in `config-keys.json`:
+
+```json
+{
+  "MSAL_TENANT_ID": "<YOUR_AZURE_AD_TENANT_ID>",
+  "MSAL_CLIENT_ID": "<YOUR_AZURE_AD_APP_CLIENT_ID>",
+  "MSAL_REDIRECT_SCHEME": "<YOUR_REDIRECT_SCHEME>"
+}
+```
+
+The redirect URI registered in Azure must match: `<MSAL_REDIRECT_SCHEME>://auth`
+
+Resources:
+
+- [Register an app in Azure AD](https://learn.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app)
+- [flutter_appauth package](https://pub.dev/packages/flutter_appauth)
 
 ## Localization (l10n)
 
@@ -318,26 +398,6 @@ Resources:
 
 3. Regenerate localization files
 
-## Testing
-
-### Run all tests
-
-```bash
-flutter test
-```
-
-### Run specific test file
-
-```bash
-flutter test test/path/to/test_file.dart
-```
-
-### Run tests with coverage
-
-```bash
-flutter test --coverage
-```
-
 ## Code Quality
 
 ### Run code analysis
@@ -378,12 +438,13 @@ flutter pub run build_runner build --delete-conflicting-outputs
 - **flutter_facebook_auth**: Facebook authentication
 - **twitter_login**: Twitter authentication
 - **auth0_flutter**: Auth0 integration
-- **flutter_appauth**: OAuth 2.0 and OpenID Connect
+- **flutter_appauth**: OAuth 2.0 and OpenID Connect (used by MSAL flow)
 - **local_auth**: Biometric authentication
+- **base32** / **crypto**: TOTP secret generation and code verification
 
 ### Storage & Security
 
-- **flutter_secure_storage**: Secure key-value storage
+- **flutter_secure_storage**: Secure key-value storage (TOTP secrets stored here)
 - **shared_preferences**: Simple key-value storage
 
 ### UI Components
@@ -402,42 +463,65 @@ flutter pub run build_runner build --delete-conflicting-outputs
 ## Troubleshooting
 
 ### Error: "Flutter SDK not found"
+
 Verify that Flutter is installed correctly and in your PATH:
+
 ```bash
 flutter doctor
 ```
 
 ### config-keys.json not found
+
 Ensure you have created the `config-keys.json` file in the root directory as described in the configuration section.
 
 ### Google Sign In fails
+
 - Verify your Google Client IDs are correct
 - Check SHA-1 fingerprint is registered in Firebase Console
 - Ensure GoogleService files are properly configured
 
 ### Apple Sign In not working
+
 - Verify Sign in with Apple capability is enabled in Xcode
 - Check Bundle Identifier matches Apple Developer Portal
 - Ensure redirect URI is correctly configured
 
 ### Facebook Login errors
+
 - Verify Facebook App ID and Client Token
 - Check Facebook app is not in Development Mode (or test users are added)
 - Ensure iOS Info.plist and Android strings.xml are properly configured
 
 ### Azure AD B2C errors
+
 - Verify all Azure configuration values are correct
 - Check user flow is properly configured
 - Ensure redirect URI matches your configuration
 
+### MSAL login fails
+
+- Verify `MSAL_TENANT_ID` and `MSAL_CLIENT_ID` match the Azure AD app registration
+- Confirm redirect URI `<MSAL_REDIRECT_SCHEME>://auth/` is registered in Azure AD
+- Check the app has `openid`, `profile`, `email`, and `offline_access` permissions
+
+### TOTP code rejected
+
+- Ensure device clock is synchronized (TOTP is time-based)
+- The app accepts codes from ±30 seconds window (one step before and after)
+- If using simple TOTP after reinstalling the app, the previous secret is lost — set up again
+
 ### l10n generation error
+
 Regenerate localization files:
+
 ```bash
 flutter gen-l10n
 ```
 
 ### Freezed code generation issues
+
 Clean and rebuild:
+
 ```bash
 flutter clean
 flutter pub get
@@ -445,7 +529,9 @@ flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
 ### iOS build fails
+
 Clean and rebuild:
+
 ```bash
 flutter clean
 cd ios
@@ -455,7 +541,9 @@ flutter build ios
 ```
 
 ### Android build fails
+
 Clean project:
+
 ```bash
 flutter clean
 cd android
@@ -468,17 +556,16 @@ flutter build apk
 
 1. Create a branch from `main`
 2. Make your changes
-3. Run tests: `flutter test`
-4. Run analysis: `flutter analyze`
-5. Format code: `flutter format .`
-6. Create a Pull Request to `main`
+3. Run analysis: `flutter analyze`
+4. Format code: `flutter format .`
+5. Create a Pull Request to `main`
 
 ## Security Considerations
 
 - Never commit `config-keys.json` to version control
 - Use environment-specific configurations for different builds
 - Implement proper token refresh mechanisms
-- Use secure storage for sensitive data
+- Use secure storage for sensitive data (`flutter_secure_storage` for TOTP secrets)
 - Follow OAuth 2.0 best practices
 - Implement certificate pinning for production apps
 
