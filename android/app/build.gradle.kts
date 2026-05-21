@@ -1,11 +1,10 @@
 import java.util.Base64
 import java.util.Properties
 import java.io.FileInputStream
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("com.android.application")
-    id("kotlin-android")
-
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
@@ -31,7 +30,7 @@ if (project.hasProperty("dart-defines")) {
 
 android {
     namespace = "com.developer.fabian.login_types"
-    compileSdk = 36
+    compileSdk = 37
     ndkVersion = "28.2.13676358"
 
     compileOptions {
@@ -40,13 +39,9 @@ android {
         isCoreLibraryDesugaringEnabled = true
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
-
     sourceSets {
         getByName("main") {
-            java.srcDirs("src/main/kotlin")
+            kotlin.srcDirs("src/main/kotlin")
         }
     }
 
@@ -82,6 +77,12 @@ android {
     }
 }
 
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_17)
+    }
+}
+
 flutter {
     source = "../.."
 }
@@ -90,6 +91,6 @@ dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
 
     implementation("androidx.multidex:multidex:2.0.1")
-    implementation("androidx.window:window:1.4.0")
-    implementation("androidx.window:window-java:1.4.0")
+    implementation("androidx.window:window:1.5.1")
+    implementation("androidx.window:window-java:1.5.1")
 }
