@@ -37,18 +37,18 @@ packages:
     dependency: "direct main"
     description:
       name: auth0_flutter
-      sha256: "3760d01293e8bbd044355d0fd8605feae15f587703da705f01df9445556f31f4"
+      sha256: "3788f3ce92b9a609dc85c76316f8436d44342911bced3b95fe3db7f9ebe3135d"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "2.2.0"
   auth0_flutter_platform_interface:
     dependency: transitive
     description:
       name: auth0_flutter_platform_interface
-      sha256: "435084d60adc9333b79984ce06b53c8e9183053e92093c28bdcff749319c32ed"
+      sha256: "69ca63fd77ae1bb0c994f3041129e34dbe947882d3ce41d3ccb65db426b3e407"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "2.2.0"
   base32:
     dependency: "direct main"
     description:
