@@ -3,6 +3,9 @@ include: package:very_good_analysis/analysis_options.yaml
 analyzer:
   exclude:
     - lib/**.g.dart
+    - build/**
+    - android/**
+    - ios/**
 
 linter:
   rules:
