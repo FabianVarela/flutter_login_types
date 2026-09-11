@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/enum/login_type.dart';
 import 'package:flutter_login_types/core/notifiers/session/session_notifier.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
@@ -11,9 +10,10 @@ import 'package:flutter_login_types/features/fingerprint_login/notifier/fingerpr
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FingerPrintLoginView extends HookConsumerWidget {
-  const FingerPrintLoginView({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -70,7 +70,7 @@ class FingerPrintLoginView extends HookConsumerWidget {
 }
 
 class _BiometricBody extends ConsumerWidget {
-  const _BiometricBody();
+  const new();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -116,7 +116,7 @@ class _BiometricBody extends ConsumerWidget {
 }
 
 class _TextMessage extends StatelessWidget {
-  const _TextMessage({required this.message});
+  const new({required this.message});
 
   final String message;
 

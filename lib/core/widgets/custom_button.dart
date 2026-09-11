@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 enum IconDirection { right, left }
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({
+  const new({
     required this.text,
     super.key,
     this.onPress,

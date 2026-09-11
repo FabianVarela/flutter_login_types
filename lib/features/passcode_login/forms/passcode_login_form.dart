@@ -3,9 +3,9 @@ import 'package:formz/formz.dart';
 enum PhoneInputValidation { invalid, empty }
 
 class PhoneInputText extends FormzInput<String, PhoneInputValidation> {
-  const PhoneInputText.pure() : super.pure('');
+  const new pure() : super.pure('');
 
-  const PhoneInputText.dirty([super.value = '']) : super.dirty();
+  const new dirty([super.value = '']) : super.dirty();
 
   @override
   PhoneInputValidation? validator(String value) {
@@ -20,7 +20,7 @@ class PhoneInputText extends FormzInput<String, PhoneInputValidation> {
 }
 
 class PasscodeLoginForm with FormzMixin {
-  const PasscodeLoginForm({this.phoneInput = const PhoneInputText.pure()});
+  const new({this.phoneInput = const PhoneInputText.pure()});
 
   final PhoneInputText phoneInput;
 

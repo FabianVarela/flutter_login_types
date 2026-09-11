@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences {
-  Preferences({required this.sharedPreferences});
+  new({required this.sharedPreferences});
 
   final SharedPreferences sharedPreferences;
 

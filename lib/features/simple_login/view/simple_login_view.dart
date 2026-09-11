@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_login_types/core/enum/login_type.dart';
 import 'package:flutter_login_types/core/notifiers/session/session_notifier.dart';
@@ -13,9 +12,10 @@ import 'package:flutter_login_types/features/simple_login/forms/simple_login_for
 import 'package:flutter_login_types/features/simple_login/notifier/simple_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SimpleLoginView extends ConsumerWidget {
-  const SimpleLoginView({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -67,7 +67,7 @@ class SimpleLoginView extends ConsumerWidget {
 }
 
 class _TextFieldEmail extends HookConsumerWidget {
-  const _TextFieldEmail();
+  const new();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -104,7 +104,7 @@ class _TextFieldEmail extends HookConsumerWidget {
 }
 
 class _TextFieldPassword extends HookConsumerWidget {
-  const _TextFieldPassword();
+  const new();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -140,7 +140,7 @@ class _TextFieldPassword extends HookConsumerWidget {
 }
 
 class _SubmitButton extends ConsumerWidget {
-  const _SubmitButton();
+  const new();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

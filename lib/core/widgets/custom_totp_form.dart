@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as flutter_material;
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_login_types/core/notifiers/generate_qr_notifier.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
@@ -6,11 +6,12 @@ import 'package:flutter_login_types/core/widgets/custom_button.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:pinput/pinput.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class CustomTotpQrForm extends HookConsumerWidget {
-  const CustomTotpQrForm({
+  const new({
     required this.secret,
     required this.account,
     required this.onConfirmSetup,
@@ -98,7 +99,11 @@ class CustomTotpQrForm extends HookConsumerWidget {
             style: const TextStyle(color: CustomColors.darkBlue, fontSize: 16),
           ),
           const Gap(16),
-          Pinput(controller: controller, length: 6),
+          // TODO(FV): Remove when package will be updated
+          flutter_material.Material(
+            type: flutter_material.MaterialType.transparency,
+            child: Pinput(controller: controller, length: 6),
+          ),
           const Gap(24),
           Row(
             children: <Widget>[
@@ -128,7 +133,7 @@ class CustomTotpQrForm extends HookConsumerWidget {
 }
 
 class CustomTotpVerifyForm extends HookWidget {
-  const CustomTotpVerifyForm({required this.onCompleted, super.key});
+  const new({required this.onCompleted, super.key});
 
   final ValueSetter<String>? onCompleted;
 
@@ -161,7 +166,15 @@ class CustomTotpVerifyForm extends HookWidget {
               ),
             ],
           ),
-          Pinput(controller: controller, length: 6, onCompleted: onCompleted),
+          // TODO(FV): Remove when package will be updated
+          flutter_material.Material(
+            type: flutter_material.MaterialType.transparency,
+            child: Pinput(
+              controller: controller,
+              length: 6,
+              onCompleted: onCompleted,
+            ),
+          ),
         ],
       ),
     );

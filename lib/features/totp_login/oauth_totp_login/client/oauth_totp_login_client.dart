@@ -4,7 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:uuid/uuid.dart';
 
 class OauthTotpLoginClient {
-  OauthTotpLoginClient({
+  new({
     required this.appConfig,
     required this.appAuth,
     required this.flutterSecureStorage,
@@ -31,7 +31,7 @@ class OauthTotpLoginClient {
       return result.idToken ?? result.accessToken;
     } on FlutterAppAuthUserCancelledException {
       return null;
-    } catch (e, _) {
+    } catch (e) {
       rethrow;
     }
   }

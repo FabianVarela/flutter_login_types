@@ -1,7 +1,7 @@
 import 'package:flutter_login_types/features/mechanism_login/client/mechanism_login_client.dart';
 
 class MechanismLoginRepository {
-  MechanismLoginRepository({required this.client});
+  new({required this.client});
 
   final MechanismLoginClient client;
 

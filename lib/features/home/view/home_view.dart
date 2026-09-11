@@ -1,15 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/notifiers/language_notifier.dart';
 import 'package:flutter_login_types/core/notifiers/session/session_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 
 class HomeView extends ConsumerStatefulWidget {
-  const HomeView({super.key});
+  const new({super.key});
 
   @override
   _HomePageUIState createState() => _HomePageUIState();

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/notifiers/session/session_notifier.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
@@ -9,10 +8,11 @@ import 'package:flutter_login_types/core/widgets/loading.dart';
 import 'package:flutter_login_types/features/third_login/notifier/third_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class ThirdLoginView extends ConsumerWidget {
-  const ThirdLoginView({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -75,7 +75,7 @@ class ThirdLoginView extends ConsumerWidget {
 }
 
 class _GoogleButton extends ConsumerWidget {
-  const _GoogleButton();
+  const new();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -88,13 +88,13 @@ class _GoogleButton extends ConsumerWidget {
       ),
       backgroundColor: CustomColors.grey.withValues(alpha: .4),
       foregroundColor: CustomColors.white,
-      icon: const Icon(Icons.g_mobiledata_outlined, color: CustomColors.white),
+      icon: const Icon(Icons.g_mobiledata_rounded, color: CustomColors.white),
     );
   }
 }
 
 class _AppleButton extends ConsumerWidget {
-  const _AppleButton();
+  const new();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -120,7 +120,7 @@ class _AppleButton extends ConsumerWidget {
 }
 
 class _FacebookButton extends ConsumerWidget {
-  const _FacebookButton();
+  const new();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -139,7 +139,7 @@ class _FacebookButton extends ConsumerWidget {
 }
 
 class _TwitterButton extends ConsumerWidget {
-  const _TwitterButton();
+  const new();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

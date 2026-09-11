@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/router/app_route_path.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 class TotpOptionsView extends StatelessWidget {
-  const TotpOptionsView({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class TotpOptionsView extends StatelessWidget {
 }
 
 class _SimpleTotpButton extends StatelessWidget {
-  const _SimpleTotpButton();
+  const new();
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class _SimpleTotpButton extends StatelessWidget {
 }
 
 class _OauthTotpButton extends StatelessWidget {
-  const _OauthTotpButton();
+  const new();
 
   @override
   Widget build(BuildContext context) {

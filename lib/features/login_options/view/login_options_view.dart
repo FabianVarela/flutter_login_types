@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/router/app_route_path.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
 import 'package:flutter_login_types/core/widgets/custom_button.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 class LoginOptionsView extends StatelessWidget {
-  const LoginOptionsView({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class LoginOptionsView extends StatelessWidget {
 }
 
 class _SimpleLoginButton extends StatelessWidget {
-  const _SimpleLoginButton();
+  const new();
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class _SimpleLoginButton extends StatelessWidget {
 }
 
 class _PasscodeButton extends StatelessWidget {
-  const _PasscodeButton();
+  const new();
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class _PasscodeButton extends StatelessWidget {
 }
 
 class _FingerprintButton extends StatelessWidget {
-  const _FingerprintButton();
+  const new();
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +93,7 @@ class _FingerprintButton extends StatelessWidget {
 }
 
 class _ThirdLoginButton extends StatelessWidget {
-  const _ThirdLoginButton();
+  const new();
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +113,7 @@ class _ThirdLoginButton extends StatelessWidget {
 }
 
 class _MechanismLoginButton extends StatelessWidget {
-  const _MechanismLoginButton();
+  const new();
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +130,7 @@ class _MechanismLoginButton extends StatelessWidget {
 }
 
 class _TotpOptionsButton extends StatelessWidget {
-  const _TotpOptionsButton();
+  const new();
 
   @override
   Widget build(BuildContext context) {

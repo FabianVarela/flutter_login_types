@@ -1,7 +1,7 @@
 import 'package:flutter_login_types/features/passcode_login/client/passcode_login_client.dart';
 
 class PasscodeLoginRepository {
-  PasscodeLoginRepository({required this.client});
+  new({required this.client});
 
   final PasscodeLoginClient client;
 

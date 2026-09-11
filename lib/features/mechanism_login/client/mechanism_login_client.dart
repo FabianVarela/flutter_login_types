@@ -4,11 +4,7 @@ import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_login_types/core/config/app_config.dart';
 
 class MechanismLoginClient {
-  MechanismLoginClient({
-    required this.appConfig,
-    required this.appAuth,
-    required this.auth0,
-  });
+  new({required this.appConfig, required this.appAuth, required this.auth0});
 
   final AppConfig appConfig;
   final FlutterAppAuth appAuth;

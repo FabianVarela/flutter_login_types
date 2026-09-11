@@ -3,9 +3,9 @@ import 'package:formz/formz.dart';
 enum EmailInputValidator { invalid, empty }
 
 class EmailInputText extends FormzInput<String, EmailInputValidator> {
-  const EmailInputText.pure() : super.pure('');
+  const new pure() : super.pure('');
 
-  const EmailInputText.dirty([super.value = '']) : super.dirty();
+  const new dirty([super.value = '']) : super.dirty();
 
   @override
   EmailInputValidator? validator(String value) {
@@ -24,9 +24,9 @@ class EmailInputText extends FormzInput<String, EmailInputValidator> {
 enum PasswordInputValidator { invalid, empty }
 
 class PasswordInputText extends FormzInput<String, PasswordInputValidator> {
-  const PasswordInputText.pure() : super.pure('');
+  const new pure() : super.pure('');
 
-  const PasswordInputText.dirty([super.value = '']) : super.dirty();
+  const new dirty([super.value = '']) : super.dirty();
 
   @override
   PasswordInputValidator? validator(String value) {
@@ -42,7 +42,7 @@ class PasswordInputText extends FormzInput<String, PasswordInputValidator> {
 }
 
 class SimpleLoginForm with FormzMixin {
-  const SimpleLoginForm({
+  const new({
     this.emailInput = const EmailInputText.pure(),
     this.passwordInput = const PasswordInputText.pure(),
   });

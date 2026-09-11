@@ -8,7 +8,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 typedef QrInfo = ({String issuer, String secret, String accountName});
 
 class TotpCoreService {
-  TotpCoreService({required this.flutterSecureStorage});
+  new({required this.flutterSecureStorage});
 
   final FlutterSecureStorage flutterSecureStorage;
 

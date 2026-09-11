@@ -7,18 +7,14 @@ import 'package:flutter_login_types/core/enum/login_type.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LogoutClient {
-  LogoutClient({
-    required this.appConfig,
-    required this.auth0,
-    required this.appAuth,
-  });
+  new({required this.appConfig, required this.auth0, required this.appAuth});
 
   final AppConfig appConfig;
   final Auth0 auth0;
   final FlutterAppAuth appAuth;
 
   Future<void> logout({required LoginType loginType, String? token}) async {
-    return switch (loginType) {
+    return await switch (loginType) {
       .google => _logoutGoogle(),
       .facebook => _logoutFacebook(),
       .azure => _logoutAzure(idToken: token),

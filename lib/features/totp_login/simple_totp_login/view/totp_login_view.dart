@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_login_types/core/enum/login_type.dart';
 import 'package:flutter_login_types/core/notifiers/session/session_notifier.dart';
@@ -11,9 +10,10 @@ import 'package:flutter_login_types/core/widgets/loading.dart';
 import 'package:flutter_login_types/features/totp_login/simple_totp_login/notifier/totp_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 
 class TotpLoginView extends HookConsumerWidget {
-  const TotpLoginView({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,12 +24,10 @@ class TotpLoginView extends HookConsumerWidget {
 
     if (pageController.hasClients) {
       if (pageController.page!.round() != pageValue.value) {
-        unawaited(
-          pageController.animateToPage(
-            pageValue.value,
-            curve: Curves.easeOut,
-            duration: const Duration(milliseconds: 400),
-          ),
+        pageController.animateToPage(
+          pageValue.value,
+          curve: Curves.easeOut,
+          duration: const Duration(milliseconds: 400),
         );
       }
     }

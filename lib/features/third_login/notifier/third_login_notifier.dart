@@ -5,7 +5,7 @@ import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:flutter_login_types/core/enum/login_type.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:twitter_login/twitter_login.dart';
+import 'package:twitter_sign_in/twitter_login.dart';
 
 enum ThirdLoginResult { none, progress, success, cancelled, error }
 

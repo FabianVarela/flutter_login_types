@@ -1,7 +1,7 @@
 import 'package:flutter_login_types/features/third_login/client/third_party_login_client.dart';
 
 class ThirdPartyLoginRepository {
-  ThirdPartyLoginRepository({required this.client});
+  new({required this.client});
 
   final ThirdPartyLoginClient client;
 

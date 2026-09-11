@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as flutter_material;
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:flutter_login_types/core/enum/login_type.dart';
@@ -15,10 +15,11 @@ import 'package:flutter_login_types/features/passcode_login/notifier/passcode_lo
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:pinput/pinput.dart';
 
 class PasscodeLoginView extends HookConsumerWidget {
-  const PasscodeLoginView({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,12 +30,10 @@ class PasscodeLoginView extends HookConsumerWidget {
 
     if (pageController.hasClients) {
       if (pageController.page!.round() != pageValue.value) {
-        unawaited(
-          pageController.animateToPage(
-            pageValue.value,
-            curve: Curves.easeOut,
-            duration: const Duration(milliseconds: 400),
-          ),
+        pageController.animateToPage(
+          pageValue.value,
+          curve: Curves.easeOut,
+          duration: const Duration(milliseconds: 400),
         );
       }
     }
@@ -100,7 +99,7 @@ class PasscodeLoginView extends HookConsumerWidget {
 }
 
 class _PhoneForm extends HookConsumerWidget {
-  const _PhoneForm();
+  const new();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -182,7 +181,7 @@ class _PhoneForm extends HookConsumerWidget {
 }
 
 class _PasscodeForm extends HookConsumerWidget {
-  const _PasscodeForm();
+  const new();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -199,12 +198,18 @@ class _PasscodeForm extends HookConsumerWidget {
             style: const TextStyle(color: CustomColors.darkBlue, fontSize: 20),
           ),
           const Gap(50),
-          Pinput(
-            controller: controller,
-            onCompleted: (value) {
-              final notifier = ref.read(passcodeLoginNotifierProvider.notifier);
-              unawaited(notifier.verifyCode(passcode: value));
-            },
+          // TODO(FV): Remove when package will be updated
+          flutter_material.Material(
+            type: flutter_material.MaterialType.transparency,
+            child: Pinput(
+              controller: controller,
+              onCompleted: (value) {
+                final notifier = ref.read(
+                  passcodeLoginNotifierProvider.notifier,
+                );
+                unawaited(notifier.verifyCode(passcode: value));
+              },
+            ),
           ),
         ],
       ),

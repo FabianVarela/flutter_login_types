@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/enum/login_type.dart';
 import 'package:flutter_login_types/core/notifiers/language_notifier.dart';
 import 'package:flutter_login_types/core/notifiers/session/session_notifier.dart';
@@ -11,9 +10,10 @@ import 'package:flutter_login_types/core/widgets/loading.dart';
 import 'package:flutter_login_types/features/mechanism_login/notifier/mechanism_login_notifier.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 
 class MechanismLoginView extends HookConsumerWidget {
-  const MechanismLoginView({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

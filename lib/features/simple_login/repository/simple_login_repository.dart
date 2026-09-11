@@ -1,7 +1,7 @@
 import 'package:flutter_login_types/features/simple_login/client/simple_login_client.dart';
 
 class SimpleLoginRepository {
-  SimpleLoginRepository({required this.client});
+  new({required this.client});
 
   final SimpleLoginClient client;
 

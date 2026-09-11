@@ -6,7 +6,7 @@ import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class MechanismException implements Exception {
-  MechanismException({required this.type, required this.error});
+  new({required this.type, required this.error});
 
   final MechanismType type;
   final MechanismError error;

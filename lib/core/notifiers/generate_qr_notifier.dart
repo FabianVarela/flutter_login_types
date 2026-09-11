@@ -7,7 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 typedef QrData = ({String secret, String account});
 
 class GenerateQrNotifier extends AsyncNotifier<String> {
-  GenerateQrNotifier(this.data);
+  new(this.data);
 
   final QrData data;
 

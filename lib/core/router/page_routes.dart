@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ScreenPage<T> extends Page<T> {
-  const ScreenPage({required super.key, required this.child});
+  const new({required super.key, required this.child});
 
   final Widget child;
 

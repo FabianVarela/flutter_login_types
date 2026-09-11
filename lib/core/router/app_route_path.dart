@@ -7,7 +7,7 @@ class AppRoutePath {
 }
 
 class LoginOptionsRoutePath extends Path<LoginOptionsRoutePath> {
-  LoginOptionsRoutePath() : super('welcome');
+  new() : super('welcome');
 
   Path get userPassword => Path('login-user-password', parent: this);
 
@@ -23,8 +23,7 @@ class LoginOptionsRoutePath extends Path<LoginOptionsRoutePath> {
 }
 
 class TotpOptionsRoutePath extends Path<TotpOptionsRoutePath> {
-  TotpOptionsRoutePath({required Path parent})
-    : super('totp-options', parent: parent);
+  new({required Path parent}) : super('totp-options', parent: parent);
 
   Path get totp => Path('login-totp', parent: this);
 

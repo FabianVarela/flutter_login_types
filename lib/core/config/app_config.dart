@@ -12,6 +12,7 @@ class AppConfig {
   static final _twitterConfig = _TwitterConfig(
     apiKey: const String.fromEnvironment('TWITTER_API_KEY'),
     apiSecret: const String.fromEnvironment('TWITTER_API_SECRET'),
+    clientId: const String.fromEnvironment('TWITTER_CLIENT_ID'),
     redirectUri: const String.fromEnvironment('TWITTER_REDIRECT_URI'),
   );
 
@@ -51,33 +52,35 @@ class AppConfig {
 }
 
 class _GoogleConfig {
-  _GoogleConfig({required this.clientIdAndroid, required this.clientIdIos});
+  new({required this.clientIdAndroid, required this.clientIdIos});
 
   final String clientIdAndroid;
   final String clientIdIos;
 }
 
 class _AppleConfig {
-  _AppleConfig({required this.clientId, required this.redirectUri});
+  new({required this.clientId, required this.redirectUri});
 
   final String clientId;
   final String redirectUri;
 }
 
 class _TwitterConfig {
-  _TwitterConfig({
+  new({
     required this.apiKey,
     required this.apiSecret,
+    required this.clientId,
     required this.redirectUri,
   });
 
   final String apiKey;
   final String apiSecret;
+  final String clientId;
   final String redirectUri;
 }
 
 class _AzureConfig {
-  _AzureConfig({
+  new({
     required this.tenantId,
     required this.tenantName,
     required this.clientId,
@@ -97,7 +100,7 @@ class _AzureConfig {
 }
 
 class _Auth0Config {
-  _Auth0Config({required this.domain, required this.clientId, this.scheme});
+  new({required this.domain, required this.clientId, this.scheme});
 
   final String domain;
   final String clientId;
@@ -105,7 +108,7 @@ class _Auth0Config {
 }
 
 class _MsalConfig {
-  _MsalConfig({
+  new({
     required this.tenantId,
     required this.clientId,
     required this.redirectScheme,

@@ -3,10 +3,10 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_login_types/core/config/app_config.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:twitter_login/twitter_login.dart';
+import 'package:twitter_sign_in/twitter_login.dart';
 
 class ThirdPartyLoginClient {
-  ThirdPartyLoginClient({required this.appConfig});
+  new({required this.appConfig});
 
   final AppConfig appConfig;
 
@@ -78,7 +78,9 @@ class ThirdPartyLoginClient {
       redirectURI: appConfig.twitterConfig.redirectUri,
     );
 
-    final authResult = await twitterLogin.login();
+    final authResult = await twitterLogin.loginV2(
+      clientId: appConfig.twitterConfig.clientId,
+    );
     return <String, dynamic>{
       'status': authResult.status,
       'token': authResult.authToken,

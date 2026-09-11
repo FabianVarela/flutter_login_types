@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
+import 'package:material_ui/material_ui.dart';
 
 class CustomTextField extends StatefulWidget {
-  const CustomTextField({
+  const new({
     super.key,
     this.textController,
     this.hint,
@@ -159,7 +159,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
 }
 
 class _ErrorMessage extends StatelessWidget {
-  const _ErrorMessage({this.message});
+  const new({this.message});
 
   final String? message;
 
