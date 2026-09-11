@@ -1,69 +1,22 @@
 PODS:
-  - Auth0 (2.18.0):
-    - JWTDecode (= 3.3.0)
-    - SimpleKeychain (= 1.3.0)
-  - auth0_flutter (2.1.0):
-    - Auth0 (= 2.18.0)
-    - Flutter
-    - FlutterMacOS
-    - JWTDecode (= 3.3.0)
-    - SimpleKeychain (= 1.3.0)
-  - FBAEMKit (18.0.2):
-    - FBSDKCoreKit_Basics (= 18.0.2)
-  - FBSDKCoreKit (18.0.2):
-    - FBAEMKit (= 18.0.2)
-    - FBSDKCoreKit_Basics (= 18.0.2)
-  - FBSDKCoreKit_Basics (18.0.2)
-  - FBSDKLoginKit (18.0.2):
-    - FBSDKCoreKit (= 18.0.2)
   - Flutter (1.0.0)
-  - flutter_facebook_auth (7.1.5):
-    - FBSDKLoginKit (= 18.0.2)
-    - Flutter
-  - JWTDecode (3.3.0)
-  - SimpleKeychain (1.3.0)
-  - twitter_login (0.0.1):
+  - twitter_sign_in (5.7.1):
     - Flutter
 
 DEPENDENCIES:
-  - auth0_flutter (from `.symlinks/plugins/auth0_flutter/darwin`)
   - Flutter (from `Flutter`)
-  - flutter_facebook_auth (from `.symlinks/plugins/flutter_facebook_auth/ios`)
-  - twitter_login (from `.symlinks/plugins/twitter_login/ios`)
-
-SPEC REPOS:
-  trunk:
-    - Auth0
-    - FBAEMKit
-    - FBSDKCoreKit
-    - FBSDKCoreKit_Basics
-    - FBSDKLoginKit
-    - JWTDecode
-    - SimpleKeychain
+  - twitter_sign_in (from `.symlinks/plugins/twitter_sign_in/ios`)
 
 EXTERNAL SOURCES:
-  auth0_flutter:
-    :path: ".symlinks/plugins/auth0_flutter/darwin"
   Flutter:
     :path: Flutter
-  flutter_facebook_auth:
-    :path: ".symlinks/plugins/flutter_facebook_auth/ios"
-  twitter_login:
-    :path: ".symlinks/plugins/twitter_login/ios"
+  twitter_sign_in:
+    :path: ".symlinks/plugins/twitter_sign_in/ios"
 
 SPEC CHECKSUMS:
-  Auth0: ddc5c6c7eb17e2484fd8d50a15d99b657c36c72c
-  auth0_flutter: cf21b4525158f9d1136d0b08b429e8815a8229fa
-  FBAEMKit: 56a4f5a9607957b547b6458b17a98c5bb2736367
-  FBSDKCoreKit: 54f1240567e16862ab71c53c33dc347db5c524c5
-  FBSDKCoreKit_Basics: eb530cd6a79030dbb11df460aafb2767bcad9028
-  FBSDKLoginKit: 6a70798793e499335a98fab1a758d7da34af196e
-  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
-  flutter_facebook_auth: 08ab1a6be157d7fce8348b881787e7608f763267
-  JWTDecode: 1ca6f765844457d0dd8690436860fecee788f631
-  SimpleKeychain: 9c0f3ca8458fed74e01db864d181c5cbe278603e
-  twitter_login: 2794db69b7640681171b17b3c2c84ad9dfb4a57f
+  Flutter: 71a624a5bc0c04062bf19101d501e466baf2fb47
+  twitter_sign_in: 5500502bcd714c0530e8c9a07785ff726410467d
 
-PODFILE CHECKSUM: c1495c1af56f66c49355ac3bbcfac8ea71c8e95c
+PODFILE CHECKSUM: 666192747c7dbaf036e8f6e4d402e816f115e2b8
 
 COCOAPODS: 1.16.2

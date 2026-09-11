@@ -39,6 +39,10 @@ android {
         isCoreLibraryDesugaringEnabled = true
     }
 
+    buildFeatures {
+        resValues = true
+    }
+
     sourceSets {
         getByName("main") {
             kotlin.srcDirs("src/main/kotlin")
