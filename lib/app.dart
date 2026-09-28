@@ -3,6 +3,7 @@ import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:flutter_login_types/core/notifiers/language_notifier.dart';
 import 'package:flutter_login_types/core/router/routes.dart';
 import 'package:flutter_login_types/l10n/l10n.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -23,8 +24,7 @@ class LoginApp extends HookConsumerWidget {
       routerConfig: appRouter.router,
       theme: ThemeData(
         primarySwatch: Colors.teal,
-        // TODO(FV): Fix material_ui support in package
-        //textTheme: GoogleFonts.notoSansTextTheme(Theme.of(context).textTheme),
+        textTheme: GoogleFonts.notoSansTextTheme(Theme.of(context).textTheme),
         appBarTheme: const AppBarTheme(
           elevation: 0,
           backgroundColor: Colors.transparent,
