@@ -149,10 +149,10 @@ packages:
     dependency: transitive
     description:
       name: code_assets
-      sha256: cfd4f5f575a49c5f10ca856e9846073f1e6c3ee94912377eea5f6cefc5272941
+      sha256: "828110d598123b5ea96c00c9f3c72105bf79f8ee36c20a39b26209ade421ec57"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.0"
+    version: "2.1.0"
   collection:
     dependency: "direct main"
     description:
@@ -181,10 +181,10 @@ packages:
     dependency: "direct main"
     description:
       name: cupertino_ui
-      sha256: c6747018d37d32feeeb858a1d7043831cb541460ebe1a890a995cdb8df8ea5a5
+      sha256: c23816577a1280cff409e989541767887011f8f1d8c1863a794ed308af46f2a9
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "1.1.1"
   dart_style:
     dependency: transitive
     description:
@@ -399,10 +399,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_secure_storage_platform_interface
-      sha256: "4bc033841169d07f690d46d89dbc3f5305b6562820822445384c82e0866e2719"
+      sha256: "64951127f001f546891c86f414972bf49ef2c4c8a4c92c65f5790cc0c9100045"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.1"
   flutter_secure_storage_web:
     dependency: transitive
     description:
@@ -441,10 +441,10 @@ packages:
     dependency: "direct dev"
     description:
       name: freezed
-      sha256: "541a82723c84298f3ca46a6c2186935aa21ad529ad1f1423d67af18040494f51"
+      sha256: "3af98c92d7d4dd182ea1393193e69a840fcbaee1f66f1158bd20504e5f3f6f4f"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.1"
+    version: "4.0.2"
   freezed_annotation:
     dependency: "direct main"
     description:
@@ -521,10 +521,10 @@ packages:
     dependency: transitive
     description:
       name: google_sign_in_ios
-      sha256: "50ab85d3a732227807bb871a5df0dfaa09005f24b00b6f775f500c7b62b12d7e"
+      sha256: c2154d2849310a0286aab2e35e3bee585f2034afdf8ac364c4d7b3638e4c40b6
       url: "https://pub.dev"
     source: hosted
-    version: "6.3.3"
+    version: "6.3.5"
   google_sign_in_platform_interface:
     dependency: transitive
     description:
@@ -681,10 +681,10 @@ packages:
     dependency: transitive
     description:
       name: local_auth_android
-      sha256: "2de619ed7196c136ec4579539c0446668e794afeec1e1815786a3158a478d04b"
+      sha256: "76c389998fe95cff4352644776ab5775f24ddd58f179dbf3df1b9c268cbbadc4"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.10"
+    version: "2.2.0"
   local_auth_darwin:
     dependency: transitive
     description:
@@ -737,10 +737,10 @@ packages:
     dependency: "direct main"
     description:
       name: material_ui
-      sha256: fbfb53cab6c4629438feeade5f3d305f72944bc9d9f25786b19106d32b80ec45
+      sha256: "134ab2f0843545c4e661e4ba2753fe1bcf0753cb690d5a9ee4870638a40411e9"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.0"
+    version: "1.4.0"
   meta:
     dependency: transitive
     description:
@@ -833,10 +833,10 @@ packages:
     dependency: transitive
     description:
       name: petitparser
-      sha256: "91bd59303e9f769f108f8df05e371341b15d59e995e6806aefab827b58336675"
+      sha256: "2f1564aadb14215e478563b5406cb80729d022158c01dc50c96013c2f7eb4790"
       url: "https://pub.dev"
     source: hosted
-    version: "7.0.2"
+    version: "7.1.0"
   pinput:
     dependency: "direct main"
     description:
@@ -1126,10 +1126,10 @@ packages:
     dependency: transitive
     description:
       name: vector_math
-      sha256: f36f9f3be64c6198714492bb455c11056e33e2f85d9a0b676a48301e44fdcf47
+      sha256: "92b9910f66ed1057fd4da7b040ae7c74cafacf885bdc81be496928d5049b032d"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.2"
+    version: "2.4.3"
   very_good_analysis:
     dependency: "direct dev"
     description:
@@ -1198,10 +1198,10 @@ packages:
     dependency: transitive
     description:
       name: xml
-      sha256: "67f0aff7be013d107995e9b75bf4e7f2c3ef2dfdb2c8e68024bba0a7fd5756a4"
+      sha256: "0fe8cc98946def31cbcbc8734aa4067031e6f65ea3a78a508060bfed2200bfeb"
       url: "https://pub.dev"
     source: hosted
-    version: "7.0.1"
+    version: "7.1.0"
   yaml:
     dependency: transitive
     description:
