@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart' as flutter_material;
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_login_types/core/dependencies/dependencies.dart';
 import 'package:flutter_login_types/core/enum/login_type.dart';
@@ -198,18 +197,12 @@ class _PasscodeForm extends HookConsumerWidget {
             style: const TextStyle(color: CustomColors.darkBlue, fontSize: 20),
           ),
           const Gap(50),
-          // TODO(FV): Remove when package will be updated
-          flutter_material.Material(
-            type: flutter_material.MaterialType.transparency,
-            child: Pinput(
-              controller: controller,
-              onCompleted: (value) {
-                final notifier = ref.read(
-                  passcodeLoginNotifierProvider.notifier,
-                );
-                unawaited(notifier.verifyCode(passcode: value));
-              },
-            ),
+          Pinput(
+            controller: controller,
+            onCompleted: (value) {
+              final notifier = ref.read(passcodeLoginNotifierProvider.notifier);
+              unawaited(notifier.verifyCode(passcode: value));
+            },
           ),
         ],
       ),

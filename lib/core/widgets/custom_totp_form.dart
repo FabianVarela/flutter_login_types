@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart' as flutter_material;
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_login_types/core/notifiers/generate_qr_notifier.dart';
 import 'package:flutter_login_types/core/theme/colors.dart';
@@ -99,11 +98,7 @@ class CustomTotpQrForm extends HookConsumerWidget {
             style: const TextStyle(color: CustomColors.darkBlue, fontSize: 16),
           ),
           const Gap(16),
-          // TODO(FV): Remove when package will be updated
-          flutter_material.Material(
-            type: flutter_material.MaterialType.transparency,
-            child: Pinput(controller: controller, length: 6),
-          ),
+          Pinput(controller: controller, length: 6),
           const Gap(24),
           Row(
             children: <Widget>[
@@ -166,15 +161,7 @@ class CustomTotpVerifyForm extends HookWidget {
               ),
             ],
           ),
-          // TODO(FV): Remove when package will be updated
-          flutter_material.Material(
-            type: flutter_material.MaterialType.transparency,
-            child: Pinput(
-              controller: controller,
-              length: 6,
-              onCompleted: onCompleted,
-            ),
-          ),
+          Pinput(controller: controller, length: 6, onCompleted: onCompleted),
         ],
       ),
     );
