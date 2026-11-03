@@ -16,7 +16,7 @@ dependencies:
   equatable: ^3.0.0
   flutter:
     sdk: flutter
-  flutter_appauth: ^12.1.0
+  flutter_appauth: ">=12.1.0 <14.0.0"
   flutter_facebook_auth: ^7.2.0
   flutter_hooks: ^0.21.3+1
   flutter_local_notifications: ^22.3.2
