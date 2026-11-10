@@ -17,23 +17,23 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_appauth: ^13.0.0
-  flutter_facebook_auth: ^7.3.2
+  flutter_facebook_auth: ^7.3.3
   flutter_hooks: ^0.21.4
   flutter_local_notifications: ^23.0.0
   flutter_localizations:
     sdk: flutter
-  flutter_secure_storage: ">=10.3.4 <12.0.0"
+  flutter_secure_storage: ^11.2.0
   formz: ^0.8.1
   freezed_annotation: ^3.1.0
   gap: ^3.1.0
-  go_router: ^18.1.3
+  go_router: ^18.1.4
   go_router_paths: ^0.2.2
   google_fonts: ^9.0.0
   google_sign_in: ^7.2.0
   hooks_riverpod: ^3.5.0
   intl: ^0.20.2
   local_auth: ^3.0.2
-  material_ui: ^1.10.0
+  material_ui: ^1.11.0
   pinput: ^7.0.0
   qr_flutter: ^4.1.0
   shared_preferences: ^2.5.6
