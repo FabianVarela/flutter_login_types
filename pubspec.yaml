@@ -22,7 +22,7 @@ dependencies:
   flutter_local_notifications: ^23.0.0
   flutter_localizations:
     sdk: flutter
-  flutter_secure_storage: ^10.3.4
+  flutter_secure_storage: ">=10.3.4 <12.0.0"
   formz: ^0.8.1
   freezed_annotation: ^3.1.0
   gap: ^3.1.0
