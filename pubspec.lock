@@ -314,10 +314,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_local_notifications
-      sha256: e99e9c6078d1359ba131b2c1eb8d68837170836a01bf2cea3cf2fa13e62ac2ac
+      sha256: fac349e7361f80591a0cedff03548f807282c9faee9fc6192763166e5f81def2
       url: "https://pub.dev"
     source: hosted
-    version: "23.0.0"
+    version: "23.0.2"
   flutter_local_notifications_linux:
     dependency: transitive
     description:
@@ -346,10 +346,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_local_notifications_windows
-      sha256: c2d6efe9ba585d5f560d8b329131f00fe745834848e6221b22d1f62e0f0b16e2
+      sha256: "8e80ac29433c71e267493b397457e3a8430c5c1d9c76bb58a6971c016cdba3d7"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.0"
+    version: "4.0.1"
   flutter_localizations:
     dependency: "direct main"
     description: flutter
@@ -513,10 +513,10 @@ packages:
     dependency: transitive
     description:
       name: google_sign_in_android
-      sha256: "312e74b3e839896ff30ed98310da4cc24dbfa19ad060b1612f7718d5afa66480"
+      sha256: af51a005b7c3c3f54cb5e7d04dd5db96f081e6f92b36468c60d14726a047f918
       url: "https://pub.dev"
     source: hosted
-    version: "7.2.18"
+    version: "7.2.19"
   google_sign_in_ios:
     dependency: transitive
     description:
@@ -761,10 +761,10 @@ packages:
     dependency: transitive
     description:
       name: objective_c
-      sha256: "322d5f1f0680534acaf557c5d68e97b40c3800ee5e15b63dcacc3c31504674c2"
+      sha256: c965d264fd4b0b4dd402dce9d049b70656bf98d3ca108b9bc55d2544ceadbe5e
       url: "https://pub.dev"
     source: hosted
-    version: "9.6.3"
+    version: "9.6.4"
   package_config:
     dependency: transitive
     description:
@@ -929,18 +929,18 @@ packages:
     dependency: transitive
     description:
       name: shared_preferences_android
-      sha256: "33b38b07d9ac7d16aff0426c61418752fd3e7a8c7dc8be786c875d6ce673b002"
+      sha256: "137dedccacb394b8f470d6c9b435ffc3d33faaa6ce2949c4f54a61007d64396d"
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.4"
+    version: "2.5.5"
   shared_preferences_foundation:
     dependency: transitive
     description:
       name: shared_preferences_foundation
-      sha256: "4e396ac6f8751ab7d2d6e27f22f32c8350b07006028d534f5221503382f1fa69"
+      sha256: "89435cb71ecb1ad1bf29ef73a381f871a06f433d4182b7e2ba7243b02b2c544b"
       url: "https://pub.dev"
     source: hosted
-    version: "2.6.1"
+    version: "2.6.2"
   shared_preferences_linux:
     dependency: transitive
     description:
@@ -1086,10 +1086,10 @@ packages:
     dependency: transitive
     description:
       name: test_api
-      sha256: "2a122cbe059f8b610d3a5415f42e255b6c17b1f21eee1d960f31080237fb4f11"
+      sha256: "0a10344e901e5b2e63819567951cb6a06673ed6b84f40462188ff5a0c41f371f"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.12"
+    version: "0.7.14"
   timezone:
     dependency: transitive
     description:
@@ -1211,5 +1211,5 @@ packages:
     source: hosted
     version: "3.1.4"
 sdks:
-  dart: ">=3.13.0 <4.0.0"
-  flutter: ">=3.47.0 <4.0.0"
+  dart: ">=3.14.0 <4.0.0"
+  flutter: ">=3.50.0 <4.0.0"

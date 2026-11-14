@@ -4,8 +4,8 @@ description: Login with BLoC architecture
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.13.0
-  flutter: ^3.47.0
+  sdk: ^3.14.0
+  flutter: ^3.50.0
 
 dependencies:
   auth0_flutter: ^3.2.0
@@ -19,7 +19,7 @@ dependencies:
   flutter_appauth: ^13.0.0
   flutter_facebook_auth: ^7.3.3
   flutter_hooks: ^0.21.4
-  flutter_local_notifications: ^23.0.0
+  flutter_local_notifications: ^23.0.2
   flutter_localizations:
     sdk: flutter
   flutter_secure_storage: ^11.2.0
